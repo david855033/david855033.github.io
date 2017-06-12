@@ -150,7 +150,7 @@ var app = new Vue({
         OnBWChange:function(){
             if(this.bw && typeof this.bw ==="string")
             {
-                var matchValue = this.bw.toString().match(/[1-9]\d*[.]?\d*[gG]?/);
+                var matchValue = this.bw.toString().match(/\d*[.]?\d*[gG]?/);
                 this.bw=matchValue||"";
                 this.isBwInGram=this.checkLastChar(this.bw.toString(),"g");
             }
