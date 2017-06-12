@@ -22,10 +22,16 @@ function Render(){
 function makeStyle(){
     for(var i = 0 ; i < DataSource.length;i++ )
     {
-        var data=DataSource[i].indication = data=DataSource[i].indication.replace("[","<span class='emphasize'>");
-        var data=DataSource[i].indication = data=DataSource[i].indication.replace("]","</span>");
-        var data=DataSource[i].drugName = data=DataSource[i].drugName.replace("(","<span class='subtittle'>(");
-        var data=DataSource[i].drugName = data=DataSource[i].drugName.replace(")",")</span>");
+        if( DataSource[i].indication )
+        {
+            DataSource[i].indication = DataSource[i].indication.replace("[","<span class='emphasize'>");
+            DataSource[i].indication = DataSource[i].indication.replace("]","</span>");
+        }
+        if( DataSource[i].drugName)
+        {
+            DataSource[i].drugName = DataSource[i].drugName.replace("(","<span class='subtittle'>(");
+            DataSource[i].drugName = DataSource[i].drugName.replace(")",")</span>");
+        }
     }
 }
 
@@ -135,7 +141,7 @@ var app = new Vue({
         OnAgeChange:function(){
             if(this.age && typeof this.age ==="string")
             {
-                var matchValue = this.age.toString().match(/\d+[dD]?/);
+                var matchValue = this.age.toString().match(/[1-9]\d*[dD]?/);
                 this.age=matchValue||"";
                 this.isAgeInDay=this.checkLastChar(this.age.toString(),"d");
             }
@@ -144,7 +150,7 @@ var app = new Vue({
         OnBWChange:function(){
             if(this.bw && typeof this.bw ==="string")
             {
-                var matchValue = this.bw.toString().match(/\d+[.]?\d*[gG]?/);
+                var matchValue = this.bw.toString().match(/[1-9]\d*[.]?\d*[gG]?/);
                 this.bw=matchValue||"";
                 this.isBwInGram=this.checkLastChar(this.bw.toString(),"g");
             }

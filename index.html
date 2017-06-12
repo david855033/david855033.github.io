@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script type="text/javascript" src="vue@2.3.js"></script>
     <script type="text/javascript" src="jquery-3.2.1.js"></script>
-    <script type="text/javascript" src="jquery.sticky.js"></script>
     <link rel=stylesheet type="text/css" href="style.css">
     <script type="text/javascript" src="data.js"></script>
 </head>
@@ -51,7 +50,7 @@
                     </div>
                 </div>
                 <div class="bot">
-                    <div class="info" v-if="item.info">{{item.info}}</div>
+                    <div class="info" v-if="item.info" v-html="item.info"></div>
                     <div class="ref">{{item.reference}}</div>
                 </div>
             </div>

@@ -6,7 +6,7 @@ body{
 #header{
     top:0px;
     left:0px;
-    background: rgb(220,220,220);
+    background: rgb(130,180,255);
     box-shadow: 3px 3px 5px #AAAAAA;
     width:100%;
     position:fixed;
@@ -118,9 +118,16 @@ body{
 .info
 {
     clear:both;
-    padding: 10px;
-    text-align: center;
+    padding-top:  10px;
+    padding-bottom:  10px;
 }
+
+.info li{
+    float: left;
+    padding-right: 100px;
+    color: rgb(100,100,100);
+}
+
 .ref
 {
     text-align: right;

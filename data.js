@@ -2,6 +2,34 @@
 var DataSource = 
 [
     { 
+        drugName: 'Albumin<br>(Plasbumin 25%)',
+        indication:"Supplement",
+            content:[
+                {
+                    dosage:"1g/kg/dose",equation:"[bw*4*0.5*50]ml albumin in NS [bw*4*0.5*50]ml<br>keep 4 hours"
+                }                
+            ],
+        reference:"2017.6.12",
+        height: 150
+    },
+    { 
+        drugName: 'Aminophylline<br>(IV)',
+        indication:"Prematurity<br>Apnea",
+            content:[
+                {
+                    description:"Loading",
+                    dosage:"5-8mg/kg/dose",equation:"[bw*5*0.1]-[bw*8*0.1] mg st"
+                },
+                {
+                    description:"Maintain",
+                    dosage:"2-6mg/kg/dose q8-12h",equation:"[bw*2*0.1]-[bw*6*0.1] mg q8-12h"
+                }
+            ],
+        reference:"2017.6.12",
+        info: "<li>滴注時間>30分鐘",
+        height: 150
+    },
+    { 
         drugName: 'Ampicillin<br>(Ampolin)',
         indication:"Neonate<br>Infection",
             content:[
@@ -32,7 +60,7 @@ var DataSource =
                 },
                 {
                     description: ">7天 ≧2000g",
-                    dosage:"200mg/kg/day q6h",equation:"[bw*50*1*100] mg q6h",
+                    dosage:"200mg/kg/day q6h",equation:"[bw*50*1] mg q6h",
                     ageLimitL:"8d", bwLimitL:2 
                 },
                 
@@ -58,6 +86,19 @@ var DataSource =
             ],
         reference:"2017.6.12",
         ageLimitU:"30d",
+        height: 150
+    },
+    { 
+        drugName: 'Augmentin<br>(Soonmelt)',
+        indication:"Infection",
+            content:[
+                {
+                    description: "",
+                    dosage:"36mg/kg/dose q8h",equation:"[bw*36*1] mg q8h",
+                    ageLimitU:"14d"
+                }
+            ],
+        reference:"2017.6.12",
         height: 150
     },
      { 
