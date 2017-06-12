@@ -129,16 +129,15 @@ body{
 }
 .info
 {
-    clear:both;
     padding-top:  5px;
     padding-bottom:  5px;
 }
 
 .info li{
     float: left;
-    padding-right: 50px;
-    color: rgb(100,100,100);
+    color: rgb(100,10 0,100);
     font-size: 0.7em;
+    white-space: nowrap;
 }
 
 .ref
@@ -158,6 +157,7 @@ body{
 {
     font-size: 0.7em;
     font-weight: 300;
+    white-space: nowrap;
 }
 .maxDose{
      color: red
