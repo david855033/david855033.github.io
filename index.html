@@ -19,7 +19,7 @@
             <span v-if="!isAgeInDay">y/o</span>
             </div>
             <div>
-                Body Weight: <input type="text"  v-model="bw" width="100px" @keyup="OnBWChange">
+                BW: <input type="text"  v-model="bw" width="100px" @keyup="OnBWChange">
                 <span v-if="!isBwInGram">kg</span>
             </div>
             </form>
@@ -33,7 +33,7 @@
         </div>
         <div v-for="item in drugList" v-if="checkAgeAndBW(item)">
             <div class="container">
-                <div class="top"  :style="{height: item.height+'px'}">
+                <div class="top">   <!--:style="{height: item.height+'px'}"-->
                     <div class="left">
                         <div class="drugName" v-html="item.drugName">
                         </div>
@@ -42,7 +42,7 @@
                         <div class="indication" v-html="item.indication"></div>
                     </div>
                     <div class="right">
-                        <div class="row" v-bind:class="[checkAgeAndBW(ind)?'active':'inactive']" v-for="ind in item.content" >
+                        <div class="row" v-if="checkAgeAndBW(ind)" v-bind:class="[checkAgeAndBW(ind)?'active':'inactive']" v-for="ind in item.content" >
                             <div class="description" v-html="ind.description"></div>
                             <div class="dosage" v-html="ind.dosage"></div>
                             <div class="calculated" v-if="!bw==0&&checkAgeAndBW(ind)" v-html="ind.calculated"></div>

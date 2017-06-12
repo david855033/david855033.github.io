@@ -18,11 +18,11 @@ var DataSource =
             content:[
                 {
                     description:"Loading",
-                    dosage:"5-8mg/kg/dose",equation:"[bw*5*0.1]-[bw*8*0.1] mg st"
+                    dosage:"5-8mg/kg/dose",equation:"[bw*5*0.1]-[bw*8*0.1]mg st"
                 },
                 {
                     description:"Maintain",
-                    dosage:"2-6mg/kg/dose q8-12h",equation:"[bw*2*0.1]-[bw*6*0.1] mg q8-12h"
+                    dosage:"2-6mg/kg/dose q8-12h",equation:"[bw*2*0.1]-[bw*6*0.1]mg q8-12h"
                 }
             ],
         reference:"2017.6.12",
@@ -35,32 +35,32 @@ var DataSource =
             content:[
                 {
                     description: "≦14天 <1000g",
-                    dosage:"200mg/kg/day q12h",equation:"[bw*100*1] mg q12h",
+                    dosage:"200mg/kg/day q12h",equation:"[bw*100*1]mg q12h",
                     ageLimitU:"14d", bwLimitU:1
                 },
                 {
                     description: ">14天 <1000g",
-                    dosage:"200mg/kg/day q8h",equation:"[bw*66.7*1] mg q8h",
+                    dosage:"200mg/kg/day q8h",equation:"[bw*66.7*1]mg q8h",
                     ageLimitL:"15d", bwLimitU:1
                 },
                 {
                     description: "≦7天 1000g-2000g",
-                    dosage:"200mg/kg/day q12h",equation:"[bw*100*1] mg q12h",
+                    dosage:"200mg/kg/day q12h",equation:"[bw*100*1]mg q12h",
                     ageLimitU:"7d", bwLimitL:1 , bwLimitU:2
                 },
                 {
                     description: ">7天 1000g-2000g",
-                    dosage:"200mg/kg/day q8h",equation:"[bw*66.7*1] mg q8h",
+                    dosage:"200mg/kg/day q8h",equation:"[bw*66.7*1]mg q8h",
                     ageLimitL:"8d", bwLimitL:1 , bwLimitU:2
                 },
                 {
                     description: "≦7天 ≧2000g",
-                    dosage:"200mg/kg/day q8h",equation:"[bw*66.7*1] mg q8h",
+                    dosage:"200mg/kg/day q8h",equation:"[bw*66.7*1]mg q8h",
                     ageLimitU:"7d", bwLimitL:2 
                 },
                 {
                     description: ">7天 ≧2000g",
-                    dosage:"200mg/kg/day q6h",equation:"[bw*50*1] mg q6h",
+                    dosage:"200mg/kg/day q6h",equation:"[bw*50*1]mg q6h",
                     ageLimitL:"8d", bwLimitL:2 
                 },
                 
@@ -75,12 +75,12 @@ var DataSource =
             content:[
                 {
                     description: "≦14天",
-                    dosage:"300mg/kg/day q6h<br>300mg/kg/day q8h",equation:"[bw*75*1] mg q6h<br>[bw*100*1] mg q8h",
+                    dosage:"300mg/kg/day q6-8h",equation:"[bw*75*1]mg q6h or [bw*100*1]mg q8h",
                     ageLimitU:"14d"
                 },
                 {
                     description: ">14天",
-                    dosage:"300mg/kg/day q6h",equation:"[bw*75*1] mg q6h",
+                    dosage:"300mg/kg/day q6h",equation:"[bw*75*1]mg q6h",
                     ageLimitL:"15d"
                 }
             ],
@@ -94,7 +94,7 @@ var DataSource =
             content:[
                 {
                     description: "",
-                    dosage:"36mg/kg/dose q8h",equation:"[bw*36*1] mg q8h",
+                    dosage:"36mg/kg/dose q8h",equation:"[bw*36*1]mg q8h",
                     ageLimitU:"14d"
                 }
             ],
@@ -107,22 +107,22 @@ var DataSource =
             content:[
                 {
                     description: "≦14天 ≦1000g",
-                    dosage:"100mg piperacillin/kg/day q12h", equation:"[bw*0.05625*0.00225] g q12h",
+                    dosage:"100mg piperacillin/kg/day q12h", equation:"[bw*0.05625*0.00225]g q12h",
                     ageLimitU:"14d", bwLimitU:1
                 },
                 {
                     description: ">14天 ≦1000g",
-                    dosage:"100mg piperacillin/kg/day q8h", equation:"[bw*0.0375*0.00225] g q8h",
+                    dosage:"100mg piperacillin/kg/day q8h", equation:"[bw*0.0375*0.00225]g q8h",
                     ageLimitL:"15d", bwLimitU:1
                 },
                 {
                     description: "≦7天 ≧1000g",
-                     dosage:"100mg piperacillin/kg/day q12h", equation:"[bw*0.05625*0.00225] g q12h",
+                     dosage:"100mg piperacillin/kg/day q12h", equation:"[bw*0.05625*0.00225]g q12h",
                     ageLimitU:"7d", bwLimitL:1
                 },
                 {
                     description: ">7天 ≧1000g",
-                   dosage:"100mg piperacillin/kg/day q8h", equation:"[bw*0.0375*0.00225] g q8h",
+                   dosage:"100mg piperacillin/kg/day q8h", equation:"[bw*0.0375*0.00225]g q8h",
                     ageLimitL:"8d", bwLimitL:1
                 }     
             ],
@@ -136,7 +136,7 @@ var DataSource =
         indication:"Infant<br>Infection",
             content:[
                 {
-                    dosage:"80mg piperacillin/kg/day q6h", equation:"[bw*0.0225*0.00225] g q6h"
+                    dosage:"80mg piperacillin/kg/day q6h", equation:"[bw*0.0225*0.00225]g q6h"
                 }
             ],
         reference:"2017.6.12",
