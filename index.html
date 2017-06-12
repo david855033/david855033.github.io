@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript" src="vue@2.3.js"></script>
+    <script type="text/javascript" src="jquery-3.2.1.js"></script>
+    <script type="text/javascript" src="jquery.sticky.js"></script>
+    <link rel=stylesheet type="text/css" href="style.css">
+    <script type="text/javascript" src="data.js"></script>
+</head>
+
+<body onload="Render()">
+    <div id="app">
+        <div id="header">
+            <form action="#">
+            <div>
+                Age: <input type="text" v-model="age" width="100px" @keyup="OnAgeChange">
+            <span v-if="!isAgeInDay">y/o</span>
+            </div>
+            <div>
+                Body Weight: <input type="text"  v-model="bw" width="100px" @keyup="OnBWChange">
+                <span v-if="!isBwInGram">kg</span>
+            </div>
+            </form>
+        </div>
+        <div id="headspacer"></div>
+        <div v-if="testmode">
+            <br> current age={{age}}, current bw = {{bw}} <br>
+            age in day = {{isAgeInDay}},{{ageInDay}}<br>
+            bw in gram = {{isBwInGram}}, bwForCal = {{bwForCalculation}}
+            <br><br>
+        </div>
+        <div v-for="item in drugList" v-if="checkAgeAndBW(item)">
+            <div class="container">
+                <div class="top"  :style="{height: item.height+'px'}">
+                    <div class="left">
+                        <div class="drugName" v-html="item.drugName">
+                        </div>
+                    </div>
+                    <div class="mid">
+                        <div class="indication" v-html="item.indication"></div>
+                    </div>
+                    <div class="right">
+                        <div class="row" v-bind:class="[checkAgeAndBW(ind)?'active':'inactive']" v-for="ind in item.content" >
+                            <div class="description" v-html="ind.description"></div>
+                            <div class="dosage" v-html="ind.dosage"></div>
+                            <div class="calculated" v-if="!bw==0&&checkAgeAndBW(ind)" v-html="ind.calculated"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bot">
+                    <div class="info" v-if="item.info">{{item.info}}</div>
+                    <div class="ref">{{item.reference}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript" src="action.js"></script>
+</html>
