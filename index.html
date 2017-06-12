@@ -15,11 +15,11 @@
         <div id="header">
             <form action="#">
             <div>
-                Age: <input type="text" v-model="age" width="100px" @keyup="OnAgeChange">
-            <span v-if="!isAgeInDay">y/o</span>
+                age: <input type="text" class="age" v-model="age" width="100px" @keyup="OnAgeChange">
+            <span v-if="!isAgeInDay">y</span>
             </div>
             <div>
-                BW: <input type="text"  v-model="bw" width="100px" @keyup="OnBWChange">
+                bw: <input type="text" class="bw"  v-model="bw" width="100px" @keyup="OnBWChange">
                 <span v-if="!isBwInGram">kg</span>
             </div>
             </form>

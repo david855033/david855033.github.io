@@ -16,18 +16,25 @@ body{
     overflow: hidden;
 }
 #header>form{
-   padding: 5px;
+   padding: 2px;
    font-size: 1em;
 }
 #header>form div{
-    float:left;
-    margin-right: 30px;
+    display: inline-block;
+    margin-right: 10px;
     margin-bottom: 10px; 
 }
-#header>form input{
+
+.age{
+   width: 40px;
+}
+
+.bw{
    width: 60px;
+}
+#header>form input{
    font-size: 1em;
-    text-align: center;
+   text-align: center;
 }
 
 #headspacer{
