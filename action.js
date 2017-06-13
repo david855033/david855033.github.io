@@ -82,7 +82,7 @@ $(function(){
             return false;
         }
     });
-    $('body').click(function(){
+    $('#app').click(function(){
         if(app.isMenuOnTop) app.isMenuShowed=false;
     });
     $(".menuButton").click(function(){
