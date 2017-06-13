@@ -21,9 +21,9 @@ body{
     height: 40px;
     width: 40px;
     background: rgba(0,0,0,0.1);
-    position: fixed;
     text-align: center;
     line-height: 40px;
+    float: left;
 }
 
 .menu{
