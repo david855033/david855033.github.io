@@ -51,7 +51,7 @@
                     searchText = {{searchText}}, searchText_checked = {{searchText_checked}}
                     <br><br>
                 </div>
-
+               
                 <div v-for="item in drugList" v-if="checkAgeAndBW(item)&&checkSearchText(item)">
                     <div class="container">
                         <div class="top">   <!--:style="{height: item.height+'px'}"-->
@@ -76,6 +76,7 @@
                         </div>
                     </div>
                 </div>
+               
                 <br>
                 <div class="disclaim">資料僅供研究參考用，本站不對任何因使用或倚賴本網站所提供資訊造成的損失負責</div>
                 <div class="disclaim">Authors:台北榮總 羅宇成 蔡宛蓉</div>

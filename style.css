@@ -236,3 +236,15 @@ body{
     color: rgba(0,0,0,0.5);
     padding: 2px;
 }
+
+.list-complete-item {
+  transition: all 1s;
+}
+.list-complete-enter, .list-complete-leave-to
+/* .list-complete-leave-active for <2.1.8 */ {
+  opacity: 0;
+  transform: translateX(30px);
+}
+.list-complete-leave-active {
+  position: fixed;
+}

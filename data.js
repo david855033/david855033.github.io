@@ -140,15 +140,34 @@ var DataSource =
     },
     { 
         drugName: 'Claforan<br>(Cefotaxime)',
+        indication:"Neonate<br>Meningitis",
+            content:[ 
+                {
+                    description: "≦7天 ≧2000g",
+                    dosage:"150mg/kg/day q8-q12h",equation:"[bw*50*1]mg q8h-[bw*75*1]mg q12h",
+                    ageLimitU:"7d"
+                },
+                {
+                    description: ">7天 ≧2000g",
+                    dosage:"200mg/kg/day q6-8h",equation:"[bw*50*1]mg q8h",
+                    ageLimitL:"8d"
+                }
+            ],
+        reference:"2017.6.13"
+        ,ageLimitU:"30d",bwLimitL:2
+        ,tag:"抗生素"
+    },
+    { 
+        drugName: 'Claforan<br>(Cefotaxime)',
         indication:"Infant<br>Infection",
             content:[ 
                 {
                     description: "Infant",
-                    dosage:"200mg/kg/day q6-8h",equation:"[bw*50*1]mg q6h<br>[bw*66.7*1]mg q8h"
+                    dosage:"200mg/kg/day q6h",equation:"[bw*50*1]mg q6h"
                 }
             ],
         reference:"2017.6.13"
-        ,ageLimitL:"31d"
+        ,ageLimitL:"31d", ageLimitU:"365d"
         ,tag:"抗生素"
     },
     { 
