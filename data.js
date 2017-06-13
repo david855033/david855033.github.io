@@ -21,7 +21,7 @@ var DataSource =
                     dosage:"5-8mg/kg/dose",equation:"[bw*5*0.1]-[bw*8*0.1]mg st"
                 },
                 {
-                    description:"Maintain",
+                    description:"Maintenance",
                     dosage:"2-6mg/kg/dose q8-12h",equation:"[bw*2*0.1]-[bw*6*0.1]mg q8-12h"
                 }
             ],
@@ -160,7 +160,7 @@ var DataSource =
         ageLimitU:"30d"
         ,tag:"抗生素"
     },
-     { 
+    { 
         drugName: 'Tazocin<br>(Piperacillin 2g<br>Tazobactam 0.25g)',
         indication:"Infant<br>Infection",
             content:[
@@ -171,6 +171,40 @@ var DataSource =
             ],
         reference:"2017.6.12",
         ageLimitL:"31d", ageLimitU:"365d"
+        ,tag:"抗生素"
+    },
+    { 
+        drugName: 'Targocid<br>(Teicoplanin)',
+        indication:"Newborn<br>Infection",
+            content:[
+                {
+                    description: "Loading",
+                    dosage:"16mg/kg/dose on day 1", equation:"[bw*16*0.1]mg on day 1",
+                },
+                {
+                    description: "Maintenance",
+                    dosage:"8mg/kg/day qd", equation:"[bw*8*0.1]mg qd"
+                }
+            ],
+        reference:"2017.6.14",
+        ageLimitU:"30d"
+        ,tag:"抗生素"
+    },
+    { 
+        drugName: 'Targocid<br>(Teicoplanin)',
+        indication:"Infant<br>Infection",
+            content:[
+                {
+                    description: "Loading",
+                    dosage:"10mg/kg/dose q12h for 3 doses", equation:"[bw*10*0.1]mg q12h for 3 doses",
+                },
+                {
+                    description: "Maintenance",
+                    dosage:"10mg/kg/day qd", equation:"[bw*10*0.1]mg qd"
+                }
+            ],
+        reference:"2017.6.14",
+        ageLimitL:"31d"
         ,tag:"抗生素"
     },
     { 

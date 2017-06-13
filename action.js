@@ -261,6 +261,13 @@ var app = new Vue({
             if(item.tag&&item.tag.toLowerCase().indexOf(this.searchText_checked.toLowerCase())>=0){
                 return true;
             }
+        },
+        onSearchClear:function(){
+            if(this.searchText!='')
+            {
+                this.searchText='';
+                this.onSearchTextChange()
+            }
         }
     }
 });
