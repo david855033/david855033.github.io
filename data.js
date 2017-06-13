@@ -139,6 +139,19 @@ var DataSource =
         ,tag:"抗生素"
     },
     { 
+        drugName: 'Claforan<br>(Cefotaxime)',
+        indication:"Infant<br>Infection",
+            content:[ 
+                {
+                    description: "Infant",
+                    dosage:"200mg/kg/day q6-8h",equation:"[bw*50*1]mg q6h<br>[bw*66.7*1]mg q8h"
+                }
+            ],
+        reference:"2017.6.13"
+        ,ageLimitL:"31d"
+        ,tag:"抗生素"
+    },
+    { 
         drugName: 'Tazocin<br>(Piperacillin 2g<br>Tazobactam 0.25g)',
         indication:"Neonate<br>Infection",
             content:[
@@ -172,6 +185,7 @@ var DataSource =
         indication:"Infant<br>Infection",
             content:[
                 {
+                    description: "Infant",
                     dosage:"80mg piperacillin/kg/day q6h", equation:"[bw*0.0225*0.00225]g q6h"
                 }
             ],
