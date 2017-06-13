@@ -126,7 +126,7 @@ body{
     font-weight: 600;
 }
 .drugName{
-    font-size: 1em;
+    font-size: 0.9em;
     font-weight: 600;
     margin-top: 8px;
     margin-bottom: 8px;
@@ -146,8 +146,8 @@ body{
 
 .row{
     background: rgba(0,150,255,0.1);
-    margin-top: 8px;
-    margin-bottom: 8px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 .row>div
 {
@@ -161,12 +161,14 @@ body{
     white-space: nowrap;
     font-weight: 600;
     background: rgba(0,150,255,0.3);
+    font-size: 0.9em;
 }
 .dosage
 {
     width:100%;
     white-space: nowrap;
     padding: 2px;
+    font-size: 0.9em;
 }
 .calculated
 {
@@ -174,6 +176,7 @@ body{
     overflow: hidden;
     white-space: nowrap;
     font-weight: 600;
+    font-size: 0.9em;
 }
 
 .inactive
