@@ -101,45 +101,6 @@ var DataSource =
     },
     { 
         drugName: 'Claforan<br>(Cefotaxime)',
-        indication:"Neonate<br>Infection",
-            content:[ 
-                {
-                    description: "≦14天 ≦1000g",
-                    dosage:"50mg/kg/dose q12h",equation:"[bw*50*1]mg q12h",
-                    ageLimitU:"14d",bwLimitU:1
-                },
-                {
-                    description: ">14天 ≦1000g",
-                    dosage:"50mg/kg/dose q8h",equation:"[bw*50*1]mg q8h",
-                    ageLimitL:"15d",bwLimitU:1
-                },
-                {
-                    description: "≦7天 1000g-2000g",
-                    dosage:"50mg/kg/dose q12h",equation:"[bw*50*1]mg q12h",
-                    ageLimitU:"7d",bwLimitL:1,bwLimitU:2
-                },
-                {
-                    description: ">7天 1000g-2000g",
-                    dosage:"50mg/kg/dose q8h",equation:"[bw*50*1]mg q8h",
-                    ageLimitL:"8d",bwLimitL:1,bwLimitU:2
-                },
-                {
-                    description: "≦7天 ≧2000g",
-                    dosage:"50mg/kg/dose q12h",equation:"[bw*50*1]mg q12h",
-                    ageLimitU:"7d",bwLimitL:2
-                },
-                {
-                    description: ">7天 ≧2000g",
-                    dosage:"50mg/kg/dose q8h",equation:"[bw*50*1]mg q8h",
-                    ageLimitL:"8d",bwLimitL:2
-                },
-            ],
-        reference:"2017.6.13"
-        ,ageLimitU:"30d"
-        ,tag:"抗生素"
-    },
-    { 
-        drugName: 'Claforan<br>(Cefotaxime)',
         indication:"Neonate<br>Meningitis",
             content:[ 
                 {
@@ -210,6 +171,94 @@ var DataSource =
             ],
         reference:"2017.6.12",
         ageLimitL:"31d", ageLimitU:"365d"
+        ,tag:"抗生素"
+    },
+    { 
+        drugName: 'Claforan<br>(Cefotaxime)',
+        indication:"Neonate<br>Infection",
+            content:[ 
+                {
+                    description: "≦14天 ≦1000g",
+                    dosage:"50mg/kg/dose q12h",equation:"[bw*50*1]mg q12h",
+                    ageLimitU:"14d",bwLimitU:1
+                },
+                {
+                    description: ">14天 ≦1000g",
+                    dosage:"50mg/kg/dose q8h",equation:"[bw*50*1]mg q8h",
+                    ageLimitL:"15d",bwLimitU:1
+                },
+                {
+                    description: "≦7天 1000g-2000g",
+                    dosage:"50mg/kg/dose q12h",equation:"[bw*50*1]mg q12h",
+                    ageLimitU:"7d",bwLimitL:1,bwLimitU:2
+                },
+                {
+                    description: ">7天 1000g-2000g",
+                    dosage:"50mg/kg/dose q8h",equation:"[bw*50*1]mg q8h",
+                    ageLimitL:"8d",bwLimitL:1,bwLimitU:2
+                },
+                {
+                    description: "≦7天 ≧2000g",
+                    dosage:"50mg/kg/dose q12h",equation:"[bw*50*1]mg q12h",
+                    ageLimitU:"7d",bwLimitL:2
+                },
+                {
+                    description: ">7天 ≧2000g",
+                    dosage:"50mg/kg/dose q8h",equation:"[bw*50*1]mg q8h",
+                    ageLimitL:"8d",bwLimitL:2
+                },
+            ],
+        reference:"2017.6.13"
+        ,ageLimitU:"30d"
+        ,tag:"抗生素"
+    },
+    { 
+        drugName: 'Vancomycin',
+        indication:"Neonate<br>Infection",
+            content:[ 
+                {
+                    description: "≦1200g",
+                    dosage:"15mg/kg/dose qd",equation:"[bw*15*0.1]mg qd",
+                    bwLimitU:1.2
+                },
+                {
+                    description: "≦7天 1200g-2000g",
+                    dosage:"10mg/kg/dose q12h",equation:"[bw*10*0.1]mg q12h",
+                    ageLimitU:"7d",bwLimitL:1.2,bwLimitU:2
+                },
+                {
+                    description: "≦7天 ≧2000g",
+                    dosage:"10mg/kg/dose q8h",equation:"[bw*10*0.1]mg q8h",
+                    ageLimitU:"7d",bwLimitL:2
+                },
+                {
+                    description: ">7天 1200g-2000g",
+                    dosage:"10mg/kg/dose q8h",equation:"[bw*10*0.1]mg q8h",
+                    ageLimitL:"8d",bwLimitL:1.2,bwLimitU:2
+                },
+                {
+                    description: ">7天 ≧2000g",
+                    dosage:"10mg/kg/dose q6h",equation:"[bw*10*0.1]mg q6h",
+                    ageLimitL:"8d",bwLimitL:2
+                },
+            ],
+        reference:"2017.6.13"
+        ,info:"<li>使用時要考慮腎功能<li>5th dose前抽Trouph level<li>一般: 10-15mcg/ml，Meningitis: 15-20mcg/ml"
+        ,ageLimitU:"30d"
+        ,tag:"抗生素"
+    },
+    { 
+        drugName: 'Vancomycin',
+        indication:"Infant<br>Infection",
+            content:[ 
+                {
+                    description: "Infant",
+                    dosage:"40-60mg/kg/day",equation:"[bw*10*0.1]-[bw*15*0.1]mg q6h"
+                }
+            ],
+        reference:"2017.6.13"
+        ,info:"<li>使用時要考慮腎功能<li>5th dose前抽Trouph level<li>一般: 10-15mcg/ml，Meningitis: 15-20mcg/ml"
+        ,ageLimitL:"31d"
         ,tag:"抗生素"
     }
 ]

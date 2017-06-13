@@ -95,7 +95,7 @@ body{
 
 #headspacer{
     width:100%;
-    height: 30px;
+    height: 35px;
 }
 .container{
     background: white;
@@ -206,6 +206,7 @@ body{
     color: rgb(100,10 0,100);
     font-size: 0.7em;
     white-space: nowrap;
+    margin-left: 5px;
 }
 
 .ref

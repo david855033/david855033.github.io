@@ -5,7 +5,9 @@ function Render(){
     app.bw="";
     app.drugList.length=0;
     makeStyle();
-    DataSource.sort(function(a,b){return a.drugName>b.drugName});
+     DataSource.sort(function(a,b){
+         return a.drugName.toLowerCase().localeCompare(b.drugName.toLowerCase())}
+         );
     for(var i = 0 ; i < DataSource.length;i++ )
     {
         var data=DataSource[i];
