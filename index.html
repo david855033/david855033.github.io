@@ -14,13 +14,13 @@
     <div id="app">
         <div id="header">
             <div class="menuButton" v-show="isMenuOnTop" v-on:click="isMenuShowed=!isMenuShowed">▽ </div>
-            <form id="ageForm">
+            <form id="ageForm" action="#">
                 <div>
                     age: <input type="text" class="age" v-model="age" width="100px" @keyup="OnAgeChange" onchange="app.onAgeValueChange()">
                 <span v-if="!isAgeInDay">y</span>
                 </div>
             </form>
-            <form>
+            <form action="#">
                 <div>
                     bw: <input type="text" class="bw"  v-model="bw" width="100px" @keyup="OnBWChange" onchange="app.onBWValueChange()">
                     <span v-if="!isBwInGram">kg</span>
