@@ -39,7 +39,8 @@ function makeStyle(){
 var app = new Vue({
     el: '#app',
     data: {
-        testmode:false,
+        testmode:true,
+        isMenuShowed:true,
         drugList:[],
         age:0,
         bw:0,
@@ -52,7 +53,7 @@ var app = new Vue({
                 return this.bw.toString().match(/\d+[.]?\d*/)/1000;
             }else
             {
-                return this.bw;
+                return this.bw[0];
             }
         },
         ageInDay:function(){
@@ -61,7 +62,7 @@ var app = new Vue({
                 return this.getDay(this.age);
             }else
             {
-                return this.age*365;
+                return this.age*365[0];
             }
         }
     },
@@ -120,8 +121,7 @@ var app = new Vue({
                             var split = equation.split('*');
                             var multipier=split[1]?split[1]:1;
                             var max=split[3]?split[3]:-1;
-                            var bw=this.bwForCalculation.toString();
-
+                            var bw=this.bwForCalculation;
                             var result=bw*multipier;
                             var isMax=false;
                             if(max>0&&result>max) {result=max; isMax=true;}
