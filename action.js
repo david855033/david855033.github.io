@@ -5,6 +5,7 @@ function Render(){
     app.bw="";
     app.drugList.length=0;
     makeStyle();
+    DataSource.sort(function(a,b){return a.drugName>b.drugName});
     for(var i = 0 ; i < DataSource.length;i++ )
     {
         var data=DataSource[i];
