@@ -14,6 +14,7 @@ body{
     height: 40px;
     text-align: center;
     overflow: hidden;
+    white-space : nowrap; 
 }
 
 
@@ -50,22 +51,24 @@ body{
 #header>form{
    padding: 2px;
    font-size: 1em;
-   display: inline-block;
    line-height: 40px;
+   display: inline-block;
 }
 #header>form div{
-    margin-right: 10px;
-    margin-bottom: 10px; 
+    margin-right: 5px;
+    margin-bottom: 5px; 
 }
 .ageForm{
     margin-left: 40px;
 }
 .age{
    width: 40px;
+   line-height: 20px;
 }
 
 .bw{
-   width: 60px;
+   width: 55px;
+   line-height: 20px;
 }
 #header>form input{
    font-size: 1em;
