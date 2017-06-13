@@ -243,18 +243,19 @@ var app = new Vue({
         },
         onSearchTextChange: function(){
             this.searchText_checked= this.searchText;
+            window.scrollTo(0,0);
         },
         checkSearchText: function(item){
             if(!this.searchText_checked)  {
                 return true;
             } 
-            if(item.drugName.toLowerCase().indexOf(this.searchText.toLowerCase())>=0){
+            if(item.drugName.toLowerCase().indexOf(this.searchText_checked.toLowerCase())>=0){
                 return true;
             }
-            if(item.indication.toLowerCase().indexOf(this.searchText.toLowerCase())>=0){
+            if(item.indication.toLowerCase().indexOf(this.searchText_checked.toLowerCase())>=0){
                 return true;
             }
-            if(item.tag&&item.tag.toLowerCase().indexOf(this.searchText.toLowerCase())>=0){
+            if(item.tag&&item.tag.toLowerCase().indexOf(this.searchText_checked.toLowerCase())>=0){
                 return true;
             }
         }
