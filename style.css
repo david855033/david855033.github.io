@@ -120,7 +120,7 @@ body{
 }
 
 .left{
-    width: 35%;
+    width: 30%;
     text-align: center;
     font-size: 1em;
     font-weight: 600;
@@ -140,7 +140,7 @@ body{
 }
 
 .right{
-    width: 63%;
+    width: 68%;
     font-size: 0.8em;
 }
 
