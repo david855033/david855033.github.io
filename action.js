@@ -81,7 +81,7 @@ $(function(){
 var app = new Vue({
     el: '#app',
     data: {
-        testmode:false,
+        testmode:true,
         realTimeRender:true,
         isMenuShowed:true,
         isMenuOnTop:false,

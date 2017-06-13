@@ -21,7 +21,7 @@ body{
     height: 40px;
     width: 40px;
     background: rgba(0,0,0,0.1);
-    position:fixed;
+    position: fixed;
     text-align: center;
     line-height: 40px;
 }
@@ -57,7 +57,9 @@ body{
     margin-right: 10px;
     margin-bottom: 10px; 
 }
-
+.ageForm{
+    margin-left: 40px;
+}
 .age{
    width: 40px;
 }
