@@ -81,7 +81,7 @@ $(function(){
 var app = new Vue({
     el: '#app',
     data: {
-        testmode:true,
+        testmode:false,
         realTimeRender:true,
         isMenuShowed:true,
         isMenuOnTop:false,
@@ -114,10 +114,12 @@ var app = new Vue({
     },
     methods:{
         checkAgeAndBW:function (input){
-            var bwCheck =!app.bw || (!input.bwLimitL || this.bwForCalculation >= input.bwLimitL)&&
+            var bwCheck = !this.bw_checked||
+                (!input.bwLimitL || this.bwForCalculation >= input.bwLimitL)&&
                 (!input.bwLimitU || this.bwForCalculation <= input.bwLimitU);
+            
             var ageCheckL;
-            if(!input.ageLimitL || !app.age){
+            if(!input.ageLimitL||!this.age_checked){
                 ageCheckL=true;
             }else
             {
@@ -132,7 +134,7 @@ var app = new Vue({
             }
 
             var ageCheckU;
-            if(!input.ageLimitU || !app.age){
+            if(!input.ageLimitU||!this.age_checked){
                 ageCheckU=true;
             }else
             {
@@ -145,8 +147,6 @@ var app = new Vue({
                 }
                 ageCheckU= this.ageInDay<=ageLimitUinDay;
             }
-
-            
             return bwCheck && ageCheckL&&ageCheckU;
         },
         calculateDose:function(){
@@ -187,7 +187,6 @@ var app = new Vue({
             {
                 var matchValue = this.age.toString().match(/[1-9]\d*[dD]?/);
                 this.age=matchValue||"";
-                this.isAgeInDay=this.checkLastChar(this.age.toString(),"d");
                 if(this.realTimeRender) {this.onAgeValueChange();}
             }
         },
@@ -196,7 +195,6 @@ var app = new Vue({
             {
                 var matchValue = this.bw.toString().match(/\d*[.]?\d*[gG]?/);
                 this.bw=matchValue||"";
-                this.isBwInGram=this.checkLastChar(this.bw.toString(),"g");
                 if(this.realTimeRender) {this.onBWValueChange();}
             }
         },
@@ -211,11 +209,13 @@ var app = new Vue({
             return parseInt(input.toString().match(/\d+[.]?\d*/));
         },
         onAgeValueChange: function (){
-            this.age_checked=this.age;
+            this.age_checked=this.age?this.age:0;
+            this.isAgeInDay=this.checkLastChar(this.age_checked.toString(),"d");
             this.calculateDose();
         },
         onBWValueChange: function (){
-             this.bw_checked=this.bw;
+             this.bw_checked=this.bw?this.bw:0;
+             this.isBwInGram=this.checkLastChar(this.bw_checked.toString(),"g");
              this.calculateDose();
         }
     }
