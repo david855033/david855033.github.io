@@ -1,8 +1,5 @@
 'use strict'
 
-
-
-
 function Render(){
     app.age="";
     app.bw="";
@@ -13,8 +10,6 @@ function Render(){
         var data=DataSource[i];
         app.drugList.push(data);
     }
-    
-   
 }
 
 function makeStyle(){
@@ -34,7 +29,7 @@ function makeStyle(){
 }
 
 
-$( window ).resize(function() {
+$(window).resize(function() {
   var bodyWidth=$("body").width();
   if(bodyWidth<900){
       if(!app.isMenuOnTop)
@@ -78,6 +73,15 @@ $(function(){
     app.realTimeRender=!isMobile;
 });
 
+$(function(){
+    $(".search").keypress(function(e){
+        if(e.keyCode==13){
+            app.onSearchTextChange();
+            return false;
+        }
+    });
+});
+
 var app = new Vue({
     el: '#app',
     data: {
@@ -91,8 +95,12 @@ var app = new Vue({
         age_checked:0,
         bw_checked:0,
         isAgeInDay:false,
-        isBwInGram:false
-    },computed:{
+        isBwInGram:false,
+        searchText:"",
+        searchList:["抗生素","輸液","急救","呼吸道"],
+        searchText_checked:""
+    },
+    computed:{
         bwForCalculation:function(){
             if(this.isBwInGram)
             {
@@ -117,7 +125,6 @@ var app = new Vue({
             var bwCheck = !this.bw_checked||
                 (!input.bwLimitL || this.bwForCalculation >= input.bwLimitL)&&
                 (!input.bwLimitU || this.bwForCalculation <= input.bwLimitU);
-            
             var ageCheckL;
             if(!input.ageLimitL||!this.age_checked){
                 ageCheckL=true;
@@ -217,6 +224,14 @@ var app = new Vue({
              this.bw_checked=this.bw?this.bw:0;
              this.isBwInGram=this.checkLastChar(this.bw_checked.toString(),"g");
              this.calculateDose();
+        },
+        onSearchTextChange: function(){
+            this.searchText_checked= this.searchText;
+        },
+        checkSearchText: function(){
+            if(!this.searchText_checked)  {
+                return true;
+            } 
         }
     }
 });

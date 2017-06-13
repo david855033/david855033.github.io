@@ -38,6 +38,24 @@ body{
     box-shadow: 3px 3px 5px #AAAAAA;
     border-right-color: black;
     border-right-width: 5px;
+    text-align: center;
+}
+.menu ul
+{
+    text-align: left;
+}
+.menu ul li:hover
+{
+    background: lightblue;
+}
+
+#searchForm{
+    margin-top:5px;
+    white-space : nowrap; 
+}
+.search{
+    width: 120px;
+    text-align: center;
 }
 
 .content{
@@ -59,11 +77,11 @@ body{
     margin-bottom: 5px; 
 }
 .ageForm{
-    margin-left: 40px;
+    margin-left: 18px;
 }
 .age{
    width: 40px;
-   line-height: 20px;
+   line-height: 18px;
 }
 
 .bw{
@@ -200,5 +218,5 @@ body{
     white-space: nowrap;
 }
 .maxDose{
-     color: red
+   background: yellow;
 }
