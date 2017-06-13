@@ -237,14 +237,5 @@ body{
     padding: 2px;
 }
 
-.list-complete-item {
-  transition: all 1s;
-}
-.list-complete-enter, .list-complete-leave-to
-/* .list-complete-leave-active for <2.1.8 */ {
-  opacity: 0;
-  transform: translateX(30px);
-}
-.list-complete-leave-active {
-  position: fixed;
-}
+select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"]
+{ font-size: 16px; }
