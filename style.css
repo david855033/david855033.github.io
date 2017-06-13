@@ -6,12 +6,12 @@ body{
 #header{
     top:0px;
     left:0px;
-    background: rgb(130,180,255);
+    background: rgb(130,180,200);
     box-shadow: 3px 3px 5px #AAAAAA;
     width:100%;
     position:fixed;
     z-index:100;
-    height: 40px;
+    height: 45px;
     text-align: center;
     overflow: hidden;
     white-space : nowrap; 
@@ -30,8 +30,8 @@ body{
 .menu{
     width: 200px;
     height: 100%;
-    background:rgb(240,240,240);
-    top: 40px;
+    background:rgb(210,220,230);
+    top: 45px;
     left: 0px;
     position: fixed;
     z-index:101;
@@ -50,7 +50,7 @@ body{
 }
 
 #searchForm{
-    margin-top:5px;
+    margin-top:10px;
     white-space : nowrap; 
 }
 .search{
