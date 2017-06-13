@@ -34,12 +34,12 @@ var DataSource =
         indication:"Neonate<br>Infection",
             content:[
                 {
-                    description: "≦14天 <1000g",
+                    description: "≦14天 ≦1000g",
                     dosage:"200mg/kg/day q12h",equation:"[bw*100*1]mg q12h",
                     ageLimitU:"14d", bwLimitU:1
                 },
                 {
-                    description: ">14天 <1000g",
+                    description: ">14天 ≦1000g",
                     dosage:"200mg/kg/day q8h",equation:"[bw*66.7*1]mg q8h",
                     ageLimitL:"15d", bwLimitU:1
                 },
@@ -94,13 +94,51 @@ var DataSource =
                 {
                     description: "",
                     dosage:"36mg/kg/dose q8h",equation:"[bw*36*1]mg q8h",
-                    ageLimitU:"14d"
                 }
             ],
         reference:"2017.6.12"
         ,tag:"抗生素"
     },
-     { 
+    { 
+        drugName: 'Claforan<br>(Cefotaxime)',
+        indication:"Neonate<br>Infection",
+            content:[ 
+                {
+                    description: "≦14天 ≦1000g",
+                    dosage:"50mg/kg/dose q12h",equation:"[bw*50*1]mg q12h",
+                    ageLimitU:"14d",bwLimitU:1
+                },
+                {
+                    description: ">14天 ≦1000g",
+                    dosage:"50mg/kg/dose q8h",equation:"[bw*50*1]mg q8h",
+                    ageLimitL:"15d",bwLimitU:1
+                },
+                {
+                    description: "≦7天 1000g-2000g",
+                    dosage:"50mg/kg/dose q12h",equation:"[bw*50*1]mg q12h",
+                    ageLimitU:"7d",bwLimitL:1,bwLimitU:2
+                },
+                {
+                    description: ">7天 1000g-2000g",
+                    dosage:"50mg/kg/dose q8h",equation:"[bw*50*1]mg q8h",
+                    ageLimitL:"8d",bwLimitL:1,bwLimitU:2
+                },
+                {
+                    description: "≦7天 ≧2000g",
+                    dosage:"50mg/kg/dose q12h",equation:"[bw*50*1]mg q12h",
+                    ageLimitU:"7d",bwLimitL:2
+                },
+                {
+                    description: ">7天 ≧2000g",
+                    dosage:"50mg/kg/dose q8h",equation:"[bw*50*1]mg q8h",
+                    ageLimitL:"8d",bwLimitL:2
+                },
+            ],
+        reference:"2017.6.13"
+        ,ageLimitU:"30d"
+        ,tag:"抗生素"
+    },
+    { 
         drugName: 'Tazocin<br>(Piperacillin 2g<br>Tazobactam 0.25g)',
         indication:"Neonate<br>Infection",
             content:[
@@ -129,7 +167,6 @@ var DataSource =
         ageLimitU:"30d"
         ,tag:"抗生素"
     },
-    
      { 
         drugName: 'Tazocin<br>(Piperacillin 2g<br>Tazobactam 0.25g)',
         indication:"Infant<br>Infection",

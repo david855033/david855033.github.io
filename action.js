@@ -201,22 +201,6 @@ var app = new Vue({
                 }
             }
         },
-        OnAgeChange:function(){
-            if(this.age && typeof this.age ==="string")
-            {
-                var matchValue = this.age.toString().match(/[1-9]\d*[dD]?/);
-                this.age=matchValue||"";
-                if(this.realTimeRender) {this.onAgeValueChange();}
-            }
-        },
-        OnBWChange:function(){
-            if(this.bw && typeof this.bw ==="string")
-            {
-                var matchValue = this.bw.toString().match(/\d*[.]?\d*[gG]?/);
-                this.bw=matchValue||"";
-                if(this.realTimeRender) {this.onBWValueChange();}
-            }
-        },
         checkLastChar:function(s,c){
             if(s && typeof s === "string"){
                 s=s.toLowerCase();
@@ -227,10 +211,26 @@ var app = new Vue({
         getDay:function(input){
             return parseInt(input.toString().match(/\d+[.]?\d*/));
         },
+        OnAgeChange:function(){
+            if(this.age && typeof this.age ==="string")
+            {
+                var matchValue = this.age.toString().match(/[1-9]\d*[dD]?/);
+                this.age=matchValue||"";
+            }
+            if(this.realTimeRender) {this.onAgeValueChange();}
+        },
         onAgeValueChange: function (){
             this.age_checked=this.age?this.age:0;
             this.isAgeInDay=this.checkLastChar(this.age_checked.toString(),"d");
             this.calculateDose();
+        },
+        OnBWChange:function(){
+            if(this.bw && typeof this.bw ==="string")
+            {
+                var matchValue = this.bw.toString().match(/\d*[.]?\d*[gG]?/);
+                this.bw=matchValue||"";
+            }
+            if(this.realTimeRender) {this.onBWValueChange();}
         },
         onBWValueChange: function (){
              this.bw_checked=this.bw?this.bw:0;
