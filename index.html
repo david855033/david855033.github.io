@@ -16,13 +16,13 @@
             <div class="menuButton" v-show="isMenuOnTop" v-on:click="isMenuShowed=!isMenuShowed">▽ </div>
             <form action="#">
             <div>
-                age: <input type="text" class="age" v-model="age" width="100px" @keyup="OnAgeChange">
+                age: <input type="text" class="age" v-model="age" width="100px" @keyup="OnAgeChange" onchange="app.onAgeValueChange()">
             <span v-if="!isAgeInDay">y</span>
             </div>
             </form>
             <form>
             <div>
-                bw: <input type="text" class="bw"  v-model="bw" width="100px" @keyup="OnBWChange">
+                bw: <input type="text" class="bw"  v-model="bw" width="100px" @keyup="OnBWChange" onchange="app.onBWValueChange()">
                 <span v-if="!isBwInGram">kg</span>
             </div>
             </form>
@@ -35,7 +35,8 @@
 
             <div class="content" v-bind:class="{'content-menuShowed':isMenuShowed&&!isMenuOnTop}">
                 <div v-if="testmode">
-                    <br> current age={{age}}, current bw = {{bw}} <br>
+                    <br> current age = {{age}}, current bw = {{bw}} <br>
+                    age_checked = {{age_checked}}, bw_checked = {{bw_checked}} <br>
                     age in day = {{isAgeInDay}}, ageInDay={{ageInDay}}<br>
                     bw in gram = {{isBwInGram}}, bwForCal = {{bwForCalculation}}
                     <br><br>
