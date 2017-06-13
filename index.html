@@ -58,10 +58,10 @@
                             <div class="left">
                                 <div class="drugName" v-html="item.drugName">
                                 </div>
+                                <div class="indication" v-html="item.indication">
+                                </div>
                             </div>
-                            <div class="mid">
-                                <div class="indication" v-html="item.indication"></div>
-                            </div>
+                            
                             <div class="right">
                                 <div class="row" v-if="checkAgeAndBW(ind)" v-bind:class="[checkAgeAndBW(ind)?'active':'inactive']" v-for="ind in item.content" >
                                     <div class="description" v-html="ind.description"></div>

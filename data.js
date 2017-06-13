@@ -71,7 +71,7 @@ var DataSource =
     },
     { 
         drugName: 'Ampicillin<br>(Ampolin)',
-        indication:"Neonate<br>[Meningitis]",
+        indication:"Neonate<br>Meningitis",
             content:[
                 {
                     description: "≦14天",

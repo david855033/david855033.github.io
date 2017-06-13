@@ -120,27 +120,34 @@ body{
 }
 
 .left{
-    width: 28%;
+    width: 35%;
     text-align: center;
     font-size: 1em;
     font-weight: 600;
 }
-
-.mid{
-    width: 20%;
+.drugName{
+    font-size: 1em;
+    font-weight: 600;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+.indication{
     text-align: center;
     font-size: 0.8em;
-    font-weight: 400;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: blue;
 }
+
 .right{
-    width: 50%;
+    width: 63%;
     font-size: 0.8em;
 }
 
 .row{
     background: rgba(0,150,255,0.1);
     margin-top: 8px;
-    margin-bottom: 2px;
+    margin-bottom: 8px;
 }
 .row>div
 {
