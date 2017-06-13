@@ -144,12 +144,12 @@ var DataSource =
             content:[ 
                 {
                     description: "≦7天 ≧2000g",
-                    dosage:"150mg/kg/day q8-q12h",equation:"[bw*50*1]mg q8h-[bw*75*1]mg q12h",
+                    dosage:"150mg/kg/day q8-q12h",equation:"[bw*50*1]mg q8h<br>[bw*75*1]mg q12h",
                     ageLimitU:"7d"
                 },
                 {
                     description: ">7天 ≧2000g",
-                    dosage:"200mg/kg/day q6-8h",equation:"[bw*50*1]mg q8h",
+                    dosage:"200mg/kg/day q6-8h",equation:"[bw*50*1]mg q6h<br>[bw*66.7*1]mg q8h",
                     ageLimitL:"8d"
                 }
             ],
