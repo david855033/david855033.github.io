@@ -36,11 +36,30 @@ function makeStyle(){
 }
 
 
+$( window ).resize(function() {
+  console.log($("body").width());
+  if($("body").width()<900){
+      if(!app.isMenuOnTop)
+      {
+        app.isMenuOnTop=true;
+        app.isMenuShowed=false;
+      }
+  }else
+  {
+      if(app.isMenuOnTop)
+      {
+            app.isMenuOnTop=false;
+            app.isMenuShowed=true;
+      }
+  }
+});
+
 var app = new Vue({
     el: '#app',
     data: {
         testmode:true,
         isMenuShowed:true,
+        isMenuOnTop:false,
         drugList:[],
         age:0,
         bw:0,

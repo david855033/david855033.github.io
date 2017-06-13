@@ -33,7 +33,7 @@
             <div class="menu" v-show="isMenuShowed" >
             </div>
 
-            <div class="content" v-bind:class="{'content-menuShowed':isMenuShowed}">
+            <div class="content" v-bind:class="{'content-menuShowed':isMenuShowed&&!isMenuOnTop}">
                 <div v-if="testmode">
                     <br> current age={{age}}, current bw = {{bw}} <br>
                     age in day = {{isAgeInDay}}, ageInDay={{ageInDay}}<br>
