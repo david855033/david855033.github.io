@@ -77,15 +77,26 @@ $(function(){
     $(".search").keypress(function(e){
         if(e.keyCode==13){
             app.onSearchTextChange();
+            if(app.isMenuOnTop) app.isMenuShowed=false;
             return false;
         }
+    });
+    $('body').click(function(){
+        if(app.isMenuOnTop) app.isMenuShowed=false;
+    });
+    $(".menuButton").click(function(){
+        $("#searchText").focus();
+        return false;
+    });
+    $(".search").click(function(){
+        return false;
     });
 });
 
 var app = new Vue({
     el: '#app',
     data: {
-        testmode:true,
+        testmode:false,
         realTimeRender:true,
         isMenuShowed:true,
         isMenuOnTop:false,
@@ -225,13 +236,27 @@ var app = new Vue({
              this.isBwInGram=this.checkLastChar(this.bw_checked.toString(),"g");
              this.calculateDose();
         },
+        onSearchKeyUp: function(){
+             if(this.realTimeRender) {
+                  this.searchText_checked = this.searchText;
+             }
+        },
         onSearchTextChange: function(){
             this.searchText_checked= this.searchText;
         },
-        checkSearchText: function(){
+        checkSearchText: function(item){
             if(!this.searchText_checked)  {
                 return true;
             } 
+            if(item.drugName.toLowerCase().indexOf(this.searchText.toLowerCase())>=0){
+                return true;
+            }
+            if(item.indication.toLowerCase().indexOf(this.searchText.toLowerCase())>=0){
+                return true;
+            }
+            if(item.tag&&item.tag.toLowerCase().indexOf(this.searchText.toLowerCase())>=0){
+                return true;
+            }
         }
     }
 });

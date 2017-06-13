@@ -10,6 +10,7 @@ var DataSource =
                 }                
             ],
         reference:"2017.6.12"
+         ,tag:"輸液"
     },
     { 
         drugName: 'Aminophylline<br>(IV)',
@@ -26,6 +27,7 @@ var DataSource =
             ],
         reference:"2017.6.12",
         info: "<li>滴注時間>30分鐘"
+        ,tag:"呼吸道"
     },
     { 
         drugName: 'Ampicillin<br>(Ampolin)',
@@ -65,6 +67,7 @@ var DataSource =
             ],
         reference:"2017.6.12",
         ageLimitU:"30d"
+        ,tag:"抗生素"
     },
     { 
         drugName: 'Ampicillin<br>(Ampolin)',
@@ -95,6 +98,7 @@ var DataSource =
                 }
             ],
         reference:"2017.6.12"
+        ,tag:"抗生素"
     },
      { 
         drugName: 'Tazocin<br>(Piperacillin 2g<br>Tazobactam 0.25g)',
@@ -123,6 +127,7 @@ var DataSource =
             ],
         reference:"2017.6.12",
         ageLimitU:"30d"
+        ,tag:"抗生素"
     },
     
      { 
@@ -135,5 +140,6 @@ var DataSource =
             ],
         reference:"2017.6.12",
         ageLimitL:"31d", ageLimitU:"365d"
+        ,tag:"抗生素"
     }
 ]

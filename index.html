@@ -32,7 +32,7 @@
 
             <div class="menu" v-show="isMenuShowed">
                 <form id="searchForm" action="javascript:void(0);">
-                    <input type="text" id="searchText" class="search" placeholder="Search"　v-model="searchText" onchange="app.onSearchTextChange()">
+                    <input type="text" id="searchText" class="search" placeholder="Search"　v-model="searchText"  @keyup="onSearchKeyUp" onchange="app.onSearchTextChange()">
                     <button @click="searchText='';onSearchTextChange()">x</button>
                 </form>
                 <ul>
