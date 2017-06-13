@@ -230,3 +230,9 @@ body{
 .maxDose{
    background: yellow;
 }
+.disclaim{
+    font-size: 0.6em;
+    text-align: center;
+    color: rgba(0,0,0,0.5);
+    padding: 2px;
+}
