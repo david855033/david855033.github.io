@@ -20,36 +20,38 @@ body{
 .menuButton{
     height: 40px;
     width: 40px;
-    background: blue;
+    background: rgba(0,0,0,0.1);
     position:fixed;
     text-align: center;
+    line-height: 40px;
 }
 
 .menu{
     width: 200px;
     height: 100%;
-    background: lightblue;
+    background:rgb(240,240,240);
     top: 40px;
     left: 0px;
     position: fixed;
     z-index:101;
     box-shadow: 3px 3px 5px #AAAAAA;
+    border-right-color: black;
+    border-right-width: 5px;
 }
 
 .content{
     position: absolute;
-    width: 97%;
 }
 
 .content-menuShowed{
     left: 220px;
-    width: 76%;
 }
 
 #header>form{
    padding: 2px;
    font-size: 1em;
    display: inline-block;
+   line-height: 40px;
 }
 #header>form div{
     margin-right: 10px;

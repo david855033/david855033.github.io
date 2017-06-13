@@ -9,8 +9,7 @@ var DataSource =
                     dosage:"1g/kg/dose",equation:"[bw*4*0.5*50]ml albumin in NS [bw*4*0.5*50]ml<br>keep 4 hours"
                 }                
             ],
-        reference:"2017.6.12",
-        height: 150
+        reference:"2017.6.12"
     },
     { 
         drugName: 'Aminophylline<br>(IV)',
@@ -26,8 +25,7 @@ var DataSource =
                 }
             ],
         reference:"2017.6.12",
-        info: "<li>滴注時間>30分鐘",
-        height: 150
+        info: "<li>滴注時間>30分鐘"
     },
     { 
         drugName: 'Ampicillin<br>(Ampolin)',
@@ -66,8 +64,7 @@ var DataSource =
                 
             ],
         reference:"2017.6.12",
-        ageLimitU:"30d",
-        height: 350
+        ageLimitU:"30d"
     },
     { 
         drugName: 'Ampicillin<br>(Ampolin)',
@@ -85,8 +82,7 @@ var DataSource =
                 }
             ],
         reference:"2017.6.12",
-        ageLimitU:"30d",
-        height: 150
+        ageLimitU:"30d"
     },
     { 
         drugName: 'Augmentin<br>(Soonmelt)',
@@ -98,8 +94,7 @@ var DataSource =
                     ageLimitU:"14d"
                 }
             ],
-        reference:"2017.6.12",
-        height: 150
+        reference:"2017.6.12"
     },
      { 
         drugName: 'Tazocin<br>(Piperacillin 2g<br>Tazobactam 0.25g)',
@@ -127,8 +122,7 @@ var DataSource =
                 }     
             ],
         reference:"2017.6.12",
-        ageLimitU:"30d",
-        height: 300
+        ageLimitU:"30d"
     },
     
      { 
@@ -140,7 +134,6 @@ var DataSource =
                 }
             ],
         reference:"2017.6.12",
-        ageLimitL:"31d", ageLimitU:"365d",
-        height: 180
+        ageLimitL:"31d", ageLimitU:"365d"
     }
 ]

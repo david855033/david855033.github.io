@@ -37,27 +37,43 @@ function makeStyle(){
 
 
 $( window ).resize(function() {
-  console.log($("body").width());
-  if($("body").width()<900){
+  var bodyWidth=$("body").width();
+  if(bodyWidth<900){
       if(!app.isMenuOnTop)
       {
         app.isMenuOnTop=true;
         app.isMenuShowed=false;
       }
+    $(".content").width(bodyWidth);
   }else
   {
       if(app.isMenuOnTop)
       {
             app.isMenuOnTop=false;
             app.isMenuShowed=true;
+            
       }
+      $(".content").width(bodyWidth-220);
+  }
+});
+$(function() {
+  var bodyWidth=$("body").width();
+  if(bodyWidth<900){
+    app.isMenuOnTop=true;
+    app.isMenuShowed=false;
+   $(".content").width(bodyWidth);
+  }else
+  {
+    app.isMenuOnTop=false;
+    app.isMenuShowed=true;
+    $(".content").width(bodyWidth-220);
   }
 });
 
 var app = new Vue({
     el: '#app',
     data: {
-        testmode:true,
+        testmode:false,
         isMenuShowed:true,
         isMenuOnTop:false,
         drugList:[],

@@ -13,7 +13,7 @@
 <body onload="Render()">
     <div id="app">
         <div id="header">
-            <div class="menuButton" v-on:click="isMenuShowed=!isMenuShowed"> </div>
+            <div class="menuButton" v-show="isMenuOnTop" v-on:click="isMenuShowed=!isMenuShowed">▽ </div>
             <form action="#">
             <div>
                 age: <input type="text" class="age" v-model="age" width="100px" @keyup="OnAgeChange">
