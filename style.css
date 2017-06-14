@@ -277,7 +277,18 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 .list-move {
     transition: transform 0.5s;
 }
-
+.list-leave{
+    opacity: 0;
+    transition: transform 0s;
+}
+.list-leave-active{
+    opacity: 0;
+    transition: transform 0s;
+}
+.list-leave-to{
+    opacity: 0;
+    transition: transform 0s;
+}
 .list-enter{
     opacity: 0;
     transition: transform 0.5s;
