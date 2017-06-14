@@ -39,7 +39,7 @@
                         <button @click="onSearchClear()">x</button>
                     </form>
                     <ul>
-                        <li v-for="item in searchList" @click="searchText=item;isMenuShowed=isMenuOnTop?false:true;onSearchTextChange()">{{item}}</span></li>
+                        <li v-for="item in searchList" @click="searchText=item;isMenuShowed=isMenuOnTop?false:true;onSearchTextChange()"><span>{{item}}</span></li>
                     </ul>
                 </div>
             </transition>

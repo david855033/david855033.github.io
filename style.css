@@ -54,6 +54,12 @@ body{
 {
     text-align: left;
 }
+.menu ul li
+{
+    transition: all 0.5s;
+    cursor: pointer;
+}
+
 .menu ul li:hover
 {
     background: lightblue;
@@ -112,8 +118,18 @@ body{
     box-shadow: 3px 3px 5px #AAAAAA;
     margin-top: 10px; 
     margin-bottom: 10px;  
-    padding-top:10px; 
+    padding-top:10px;     
 }
+.container, .menuButton, .clearButton{
+    -webkit-transition-duration: 0.3s; /* Safari */
+    transition-duration: 0.3s;
+}
+.container:active, .menuButton:active, .clearButton:active{
+    background: rgba(200,200,200,0.5);
+}
+
+
+
 .top
 {
     margin:2px;
