@@ -6,11 +6,12 @@ var DataSource =
         indication:"Supplement",
             content:[
                 {
-                    dosage:"1g/kg/dose",equation:"[bw*4*0.5*50]ml albumin in NS [bw*4*0.5*50]ml<br>keep 4 hours"
+                    description:"Albumin Supplement",
+                    dosage:"1g/kg/dose keep 4 hours",equation:"[bw*4*0.5*50]ml albumin in NS [bw*4*0.5*50]ml<br>keep 4 hours"
                 }                
             ],
         reference:"2017.6.12"
-         ,tag:"輸液"
+        ,tag:"輸液"
     },
     { 
         drugName: 'Aminophylline<br>(IV)',
@@ -186,6 +187,7 @@ var DataSource =
         reference:"2017.6.14"
         ,tag:"麻醉"
     },
+    
     { 
         drugName: 'Tazocin<br>(Piperacillin 2g<br>Tazobactam 0.25g)',
         indication:"Neonate<br>Infection",

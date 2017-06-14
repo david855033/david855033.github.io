@@ -258,8 +258,24 @@ var app = new Vue({
             if(item.indication.toLowerCase().indexOf(this.searchText_checked.toLowerCase())>=0){
                 return true;
             }
-            if(item.tag&&item.tag.toLowerCase().indexOf(this.searchText_checked.toLowerCase())>=0){
-                return true;
+            if(item.tag){
+                if(typeof item.tag === 'string')
+                {
+                    if(item.tag.toLowerCase()==this.searchText_checked.toLowerCase())
+                    {
+                        return true;
+                    }
+                }
+                else
+                {
+                    for(var i = 0; i < item.tag.length ; i++)
+                    {
+                        if(item.tag[i].toLowerCase()==this.searchText_checked.toLowerCase())
+                        {
+                            return true;
+                        }
+                    }
+               }
             }
         },
         onSearchClear:function(){
