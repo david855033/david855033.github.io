@@ -294,7 +294,7 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
     transition: transform 0.5s;
 }
 .list-enter-active{
-    opacity: 0;
+    opacity: 1;
     transition: transform 0.5s;
 }
 .list-enter-to{
