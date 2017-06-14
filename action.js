@@ -46,8 +46,7 @@ $(window).resize(function() {
       if(app.isMenuOnTop)
       {
             app.isMenuOnTop=false;
-            app.isMenuShowed=true;
-            
+            app.isMenuShowed=true;     
       }
       $(".content").width(bodyWidth-220);
   }
@@ -85,7 +84,9 @@ $(function(){
         }
     });
     $('#app').click(function(){
-        if(app.isMenuOnTop) app.isMenuShowed=false;
+        if(app.isMenuOnTop){
+            app.isMenuShowed=false;
+        }
     });
     $(".menuButton").click(function(){
         $("#searchText").focus();
@@ -94,6 +95,17 @@ $(function(){
     $(".search").click(function(){
         return false;
     });
+    $(".clearButton").click(function(){
+        return false;
+    });
+    $(document).keyup(function(e){
+        if (e.keyCode===27) {
+            if(app.isMenuOnTop){
+                app.isMenuShowed=false;
+            }
+            app.clearButton();
+        }
+    });
 });
 
 var app = new Vue({
@@ -101,7 +113,7 @@ var app = new Vue({
     data: {
         testmode:false,
         realTimeRender:true,
-        isMenuShowed:true,
+        isMenuShowed:false,
         isMenuOnTop:false,
         drugList:[],
         age:0,
@@ -284,6 +296,22 @@ var app = new Vue({
                 this.searchText='';
                 this.onSearchTextChange()
             }
+        },
+        onContainerClick:function(s){
+            if(this.isMenuOnTop&&this.isMenuShowed){
+                this.isMenuShowed=false;
+            }else
+            {
+                this.searchText=s.match(/[^<]*/)[0];
+                this.onSearchTextChange()
+            }
+        },
+        clearButton:function(){
+            this.onSearchClear();
+            this.age="";
+            this.onBWValueChange();
+            this.bw="";
+            this.onAgeValueChange();
         }
     }
 });

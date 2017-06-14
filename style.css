@@ -27,6 +27,16 @@ body{
     float: left;
 }
 
+.clearButton{
+    height: 45px;
+    width: 40px;
+    background: rgb(220,150,150);
+    text-align: center;
+    line-height: 40px;
+    float: right;
+    font-size: 0.8em;
+}
+
 .menu{
     width: 200px;
     height: 100%;
@@ -240,3 +250,10 @@ body{
 
 select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"]
 { font-size: 16px; }
+
+.menu-enter-active, .menu-leave-active {
+  transition: opacity .5s
+}
+.menu-enter, .menu-leave-to  {
+  opacity: 0
+}

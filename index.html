@@ -27,20 +27,21 @@
                     <span v-if="!isBwInGram">kg</span>
                 </div>
             </form>
+            <div class="clearButton" @click="clearButton()">X</div>
         </div>
         <div id="headspacer"></div>
         <div class="wraper">
-
-            <div class="menu" v-show="isMenuShowed">
-                <form id="searchForm" action="javascript:void(0);">
-                    <input type="text" id="searchText" class="search" placeholder="Search"　v-model="searchText"  @keyup="onSearchKeyUp" onchange="app.onSearchTextChange()">
-                    <button @click="onSearchClear()">x</button>
-                </form>
-                <ul>
-                    <li v-for="item in searchList" @click="searchText=item;isMenuShowed=isMenuOnTop?false:true;onSearchTextChange()">{{item}}</span></li>
-                </ul>
-            </div>
-
+            <transition name="menu">    
+                <div class="menu" v-show="isMenuShowed">
+                    <form id="searchForm" action="javascript:void(0);">
+                        <input type="text" id="searchText" class="search" placeholder="Search"　v-model="searchText"  @keyup="onSearchKeyUp" onchange="app.onSearchTextChange()">
+                        <button @click="onSearchClear()">x</button>
+                    </form>
+                    <ul>
+                        <li v-for="item in searchList" @click="searchText=item;isMenuShowed=isMenuOnTop?false:true;onSearchTextChange()">{{item}}</span></li>
+                    </ul>
+                </div>
+            </transition>
             <div class="content" v-bind:class="{'content-menuShowed':isMenuShowed&&!isMenuOnTop}">
                 <div v-if="testmode">
                     <br>!!test mode!!<br>
@@ -54,7 +55,7 @@
                 </div>
                
                 <div v-for="item in drugList" v-if="checkAgeAndBW(item)&&checkSearchText(item)">
-                    <div class="container">
+                    <div class="container" @click="onContainerClick(item.drugName)">
                         <div class="top">   <!--:style="{height: item.height+'px'}"-->
                             <div class="left">
                                 <div class="drugName" v-html="item.drugName">
