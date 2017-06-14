@@ -171,6 +171,48 @@ var DataSource =
         ,ageLimitL:"31d", ageLimitU:"365d"
         ,tag:"抗生素"
     },
+    {
+        drugName: 'Cefazolin',
+        indication:"Neonate<br>Infection",
+            content:[ 
+                {
+                    description: "≦7天 ≦2000g",
+                    dosage:"25mg/kg/dose q12h",equation:"[bw*25*1]mg q12h"
+                    ,ageLimitU:"7d",bwLimitU:2
+                },
+                {
+                    description: "≦7天 ≧2000g",
+                    dosage:"50mg/kg/dose q12h",equation:"[bw*50*1]mg q12h"
+                    ,ageLimitU:"7d",bwLimitL:2
+                },
+                {
+                    description: ">7天 ≦2000g",
+                    dosage:"25mg/kg/dose q8h",equation:"[bw*25*1]mg q8h"
+                    ,ageLimitL:"8d",bwLimitU:2
+                },
+                {
+                    description: ">7天 ≧2000g",
+                    dosage:"50mg/kg/dose q8h",equation:"[bw*50*1]mg q8h"
+                    ,ageLimitL:"8d",bwLimitL:2
+                }
+            ],
+        reference:"2017.6.14"
+        ,ageLimitU:"30d"
+        ,tag:"抗生素"
+    },
+     { 
+        drugName: 'Chloral hydrate<br>(10%)',
+        indication:"Sedation",
+            content:[ 
+                {
+                    description: "Loading, PO or RC",
+                    dosage:"0.5ml/kg/dose",equation:"[bw*0.5*0.1]ml in NS [bw*0.5*0.1]ml st"
+                }
+            ],
+        reference:"2017.6.14"
+        ,info:"<li>可能prolong QT"
+        ,tag:"麻醉"
+    },
     { 
         drugName: 'Dormicum<br>(Midazolam)',
         indication:"Sedation",
