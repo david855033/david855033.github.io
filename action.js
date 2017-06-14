@@ -108,6 +108,17 @@ $(function(){
     });
 });
 
+function changeContent() {
+    var oldHeight = div.height();
+    texts.push(div.text());
+    div.text(texts.shift());
+    var newHeight = div.height();
+    div.height(oldHeight);
+    div.animate({height: newHeight}, 'fast', function() {
+        div.height('auto');
+    });
+}
+
 var app = new Vue({
     el: '#app',
     data: {
