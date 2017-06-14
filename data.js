@@ -101,6 +101,45 @@ var DataSource =
     },
     { 
         drugName: 'Claforan<br>(Cefotaxime)',
+        indication:"Neonate<br>Infection",
+            content:[ 
+                {
+                    description: "≦14天 ≦1000g",
+                    dosage:"50mg/kg/dose q12h",equation:"[bw*50*1]mg q12h",
+                    ageLimitU:"14d",bwLimitU:1
+                },
+                {
+                    description: ">14天 ≦1000g",
+                    dosage:"50mg/kg/dose q8h",equation:"[bw*50*1]mg q8h",
+                    ageLimitL:"15d",bwLimitU:1
+                },
+                {
+                    description: "≦7天 1000g-2000g",
+                    dosage:"50mg/kg/dose q12h",equation:"[bw*50*1]mg q12h",
+                    ageLimitU:"7d",bwLimitL:1,bwLimitU:2
+                },
+                {
+                    description: ">7天 1000g-2000g",
+                    dosage:"50mg/kg/dose q8h",equation:"[bw*50*1]mg q8h",
+                    ageLimitL:"8d",bwLimitL:1,bwLimitU:2
+                },
+                {
+                    description: "≦7天 ≧2000g",
+                    dosage:"50mg/kg/dose q12h",equation:"[bw*50*1]mg q12h",
+                    ageLimitU:"7d",bwLimitL:2
+                },
+                {
+                    description: ">7天 ≧2000g",
+                    dosage:"50mg/kg/dose q8h",equation:"[bw*50*1]mg q8h",
+                    ageLimitL:"8d",bwLimitL:2
+                },
+            ],
+        reference:"2017.6.13"
+        ,ageLimitU:"30d"
+        ,tag:"抗生素"
+    },
+    { 
+        drugName: 'Claforan<br>(Cefotaxime)',
         indication:"Neonate<br>Meningitis",
             content:[ 
                 {
@@ -130,6 +169,22 @@ var DataSource =
         reference:"2017.6.13"
         ,ageLimitL:"31d", ageLimitU:"365d"
         ,tag:"抗生素"
+    },
+    { 
+        drugName: 'Dormicum<br>(Midazolam)',
+        indication:"Sedation",
+            content:[ 
+                {
+                    description: "Loading",
+                    dosage:"0.05-0.3mg/kg/dose st",equation:"[bw*0.05*0.1]-[bw*0.3*0.1]ml st"
+                },
+                {
+                    description: "Maintenance",
+                    dosage:"0.05-0.3mg/kg/hr cont",equation:"pure dormicum pump<br>[bw*0.05*0.1]-[bw*0.3*0.1]ml/hr"
+                }
+            ],
+        reference:"2017.6.14"
+        ,tag:"麻醉"
     },
     { 
         drugName: 'Tazocin<br>(Piperacillin 2g<br>Tazobactam 0.25g)',
@@ -205,45 +260,6 @@ var DataSource =
             ],
         reference:"2017.6.14",
         ageLimitL:"31d"
-        ,tag:"抗生素"
-    },
-    { 
-        drugName: 'Claforan<br>(Cefotaxime)',
-        indication:"Neonate<br>Infection",
-            content:[ 
-                {
-                    description: "≦14天 ≦1000g",
-                    dosage:"50mg/kg/dose q12h",equation:"[bw*50*1]mg q12h",
-                    ageLimitU:"14d",bwLimitU:1
-                },
-                {
-                    description: ">14天 ≦1000g",
-                    dosage:"50mg/kg/dose q8h",equation:"[bw*50*1]mg q8h",
-                    ageLimitL:"15d",bwLimitU:1
-                },
-                {
-                    description: "≦7天 1000g-2000g",
-                    dosage:"50mg/kg/dose q12h",equation:"[bw*50*1]mg q12h",
-                    ageLimitU:"7d",bwLimitL:1,bwLimitU:2
-                },
-                {
-                    description: ">7天 1000g-2000g",
-                    dosage:"50mg/kg/dose q8h",equation:"[bw*50*1]mg q8h",
-                    ageLimitL:"8d",bwLimitL:1,bwLimitU:2
-                },
-                {
-                    description: "≦7天 ≧2000g",
-                    dosage:"50mg/kg/dose q12h",equation:"[bw*50*1]mg q12h",
-                    ageLimitU:"7d",bwLimitL:2
-                },
-                {
-                    description: ">7天 ≧2000g",
-                    dosage:"50mg/kg/dose q8h",equation:"[bw*50*1]mg q8h",
-                    ageLimitL:"8d",bwLimitL:2
-                },
-            ],
-        reference:"2017.6.13"
-        ,ageLimitU:"30d"
         ,tag:"抗生素"
     },
     { 

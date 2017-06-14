@@ -111,7 +111,7 @@ var app = new Vue({
         isAgeInDay:false,
         isBwInGram:false,
         searchText:"",
-        searchList:["抗生素","輸液","急救","呼吸道"],
+        searchList:["抗生素","輸液","麻醉","呼吸道"],
         searchText_checked:""
     },
     computed:{
