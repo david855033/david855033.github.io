@@ -257,6 +257,14 @@ body{
 .maxDose{
    background: yellow;
 }
+
+.guide{
+    font-size: 0.8em;
+    text-align: center;
+    color: rgba(0,0,0,0.9);
+    padding: 2px;
+    font-weight: 600;
+}
 .disclaim{
     font-size: 0.6em;
     text-align: center;
