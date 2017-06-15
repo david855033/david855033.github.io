@@ -89,7 +89,7 @@ $(function(){
         }
     });
     $(".menuButton").click(function(){
-        $("#searchText").focus();
+        if(realTimeRender){ $("#searchText").focus(); }
         return false;
     });
     $(".search").click(function(){
@@ -121,6 +121,7 @@ var app = new Vue({
         age_checked:0,
         bw_checked:0,
         showCaculated:false,
+        showGuide:true,
         isAgeInDay:false,
         isBwInGram:false,
         searchText:"",
