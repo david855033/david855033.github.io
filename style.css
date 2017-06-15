@@ -53,7 +53,7 @@ body{
 
 .menu{
     width: 200px;
-    background: rgb(185,195,195);
+    background: rgb(225,235,235);
     top: 45px;
     left: 0px;
     position: fixed;
@@ -61,7 +61,6 @@ body{
     box-shadow: 3px 3px 5px #AAAAAA;
     text-align: center;
     border-bottom-right-radius: 3px;
-    border-top-right-radius: 3px;
 }
 .menu ul
 {
