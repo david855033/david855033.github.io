@@ -89,7 +89,7 @@ $(function(){
         }
     });
     $(".menuButton").click(function(){
-        if(realTimeRender){ $("#searchText").focus(); }
+        if(app.realTimeRender){ $("#searchText").focus(); }
         return false;
     });
     $(".search").click(function(){
