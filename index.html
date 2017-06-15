@@ -43,6 +43,7 @@
                     </ul>
                 </div>
             </transition>
+            <div class="guide">輸入"X"d表示"X"天大，"X"g表示"X"克重</div>
             <div class="content" v-bind:class="{'content-menuShowed':isMenuShowed&&!isMenuOnTop}">
                 <div v-if="testmode">
                     <br>!!test mode!!<br>
@@ -69,7 +70,7 @@
                                     <div class="row" v-if="checkAgeAndBW(ind)" v-bind:class="[checkAgeAndBW(ind)?'active':'inactive']" v-for="ind in item.content" >
                                         <div class="description" v-html="ind.description"></div>
                                         <div class="dosage" v-html="ind.dosage"></div>
-                                        <div class="calculated" v-if="!bw==0&&checkAgeAndBW(ind)" v-html="ind.calculated"></div>
+                                        <div class="calculated" v-if="showCaculated" v-html="ind.calculated"></div>
                                     </div>
                                 </div>
                             </div>
@@ -81,7 +82,7 @@
                     </div>
                </transition-group>
                
-                <div class="guide">輸入"X"d表示"X"天大，"X"g表示"X"克重</div>
+                
                 <br>
                 <div class="disclaim">僅供研究參考用，作者不對任何因<br>使用本網站資訊所造成的損失負責</div>
                 <div class="disclaim">Authors:台北榮總 羅宇成 蔡宛蓉</div>

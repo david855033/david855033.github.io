@@ -5,7 +5,7 @@ function Render(){
     app.bw="";
     app.drugList.length=0;
     makeStyle();
-     DataSource.sort(function(a,b){
+    DataSource.sort(function(a,b){
          return a.drugName.toLowerCase().localeCompare(b.drugName.toLowerCase())}
          );
     for(var i = 0 ; i < DataSource.length;i++ )
@@ -108,21 +108,10 @@ $(function(){
     });
 });
 
-function changeContent() {
-    var oldHeight = div.height();
-    texts.push(div.text());
-    div.text(texts.shift());
-    var newHeight = div.height();
-    div.height(oldHeight);
-    div.animate({height: newHeight}, 'fast', function() {
-        div.height('auto');
-    });
-}
-
 var app = new Vue({
     el: '#app',
     data: {
-        testmode:false,
+        testmode:true,
         realTimeRender:true,
         isMenuShowed:false,
         isMenuOnTop:false,
@@ -131,6 +120,7 @@ var app = new Vue({
         bw:0,
         age_checked:0,
         bw_checked:0,
+        showCaculated:false,
         isAgeInDay:false,
         isBwInGram:false,
         searchText:"",
@@ -224,7 +214,7 @@ var app = new Vue({
                         thisDrug.content[j].calculated=prestring;
                     }
                 }
-            }
+            };
         },
         checkLastChar:function(s,c){
             if(s && typeof s === "string"){
@@ -252,15 +242,24 @@ var app = new Vue({
         OnBWChange:function(){
             if(this.bw && typeof this.bw ==="string")
             {
-                var matchValue = this.bw.toString().match(/\d*[.]?\d*[gG]?/);
+                var matchValue = this.bw.toString().match(/\d+[.]?\d*[gG]?/);
                 this.bw=matchValue||"";
             }
-            if(this.realTimeRender) {this.onBWValueChange();}
+            if(this.realTimeRender) {
+                this.onBWValueChange();
+            }
         },
         onBWValueChange: function (){
              this.bw_checked=this.bw?this.bw:0;
              this.isBwInGram=this.checkLastChar(this.bw_checked.toString(),"g");
              this.calculateDose();
+             if( this.bw!=0 && this.bw == this.bw_checked)
+            {
+                this.showCaculated=true;
+            }else
+            {
+                this.showCaculated=false;
+            }
         },
         onSearchKeyUp: function(){
              if(this.realTimeRender) {
