@@ -89,13 +89,15 @@ $(function(){
         }
     });
     $(".menuButton").click(function(){
-        if(app.realTimeRender){ $("#searchText").focus(); }
+        if(app.realTimeRender){ 
+            $("#searchText").focus(); 
+        }
         return false;
     });
     $(".search").click(function(){
         return false;
     });
-    $(".clearButton").click(function(){
+    $(".menu").click(function(){
         return false;
     });
     $(document).keyup(function(e){
