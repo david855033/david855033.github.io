@@ -59,9 +59,9 @@ body{
     position: fixed;
     z-index:101;
     box-shadow: 3px 3px 5px #AAAAAA;
-    border-right-color: black;
-    border-right-width: 5px;
     text-align: center;
+    border-bottom-right-radius: 3px;
+    border-top-right-radius: 3px;
 }
 .menu ul
 {
