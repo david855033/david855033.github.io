@@ -111,7 +111,7 @@ $(function(){
 var app = new Vue({
     el: '#app',
     data: {
-        testmode:true,
+        testmode:false,
         realTimeRender:true,
         isMenuShowed:false,
         isMenuOnTop:false,
