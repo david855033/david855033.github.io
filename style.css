@@ -16,7 +16,21 @@ body{
     overflow: hidden;
     white-space : nowrap; 
 }
-
+.guide{
+    font-size: 0.8em;
+    text-align: center;
+    color: rgba(0,0,0,0.5);
+    font-weight: 600;
+    margin-top:5px;
+    max-height: 15px;
+}
+.guideAni-enter-active, .guideAni-leave-active {
+    transition: all 0.2s;
+}
+.guideAni-enter, .guideAni-leave-to /* .fade-leave-active in <2.1.8 */ {
+    max-height: 0px;
+    opacity: 0px;
+}
 
 .menuButton{
     height: 45px;
@@ -258,15 +272,7 @@ body{
    background: yellow;
 }
 
-.guide{
-    font-size: 0.8em;
-    text-align: center;
-    color: rgba(0,0,0,0.9);
-    padding: 2px;
-    font-weight: 600;
-    margin-top:2px;
-    margin-bottom:2px;
-}
+
 .disclaim{
     font-size: 0.6em;
     text-align: center;
@@ -292,3 +298,4 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
     height: 0px;
     overflow: hidden;
 }
+

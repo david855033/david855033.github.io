@@ -106,6 +106,12 @@ $(function(){
             app.clearButton();
         }
     });
+    $(".age").dblclick(function(){
+        app.showGuide=true;
+    });
+    $(".bw").dblclick(function(){
+        app.showGuide=true;
+    });
 });
 
 var app = new Vue({

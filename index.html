@@ -31,6 +31,9 @@
             <div class="clearButton" @click="clearButton()">X</div>
         </div>
         <div id="headspacer"></div>
+        <transition name="guideAni" key="guide">
+            <div class="guide" v-if="showGuide" @click="showGuide=false">輸入"X"d表示"X"天大，"X"g表示"X"克重</div>
+        </transition>
         <div class="wraper">
             <transition name="menu">    
                 <div class="menu" v-show="isMenuShowed">
@@ -43,7 +46,6 @@
                     </ul>
                 </div>
             </transition>
-            <div class="guide" v-if="showGuide">輸入"X"d表示"X"天大，"X"g表示"X"克重</div>
             <div class="content" v-bind:class="{'content-menuShowed':isMenuShowed&&!isMenuOnTop}">
                 <div v-if="testmode">
                     <br>!!test mode!!<br>
