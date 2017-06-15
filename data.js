@@ -229,7 +229,19 @@ var DataSource =
         reference:"2017.6.14"
         ,tag:"麻醉"
     },
-    
+    { 
+        drugName: 'Heparin',
+        indication:"NICU<br>Keep Line",
+            content:[ 
+                {
+                    description: "A-Line/UA",
+                    dosage:"NS:Heparin = 1ml:2U<br>keep 0.2-0.4ml/hr",equation:""
+                }
+            ],
+        reference:"2017.6.11"
+        ,info:"<li>大寶若回沖可考慮0.5ml/hr"
+        ,tag:"輸液"
+    },
     { 
         drugName: 'Tazocin<br>(Piperacillin 2g<br>Tazobactam 0.25g)',
         indication:"Neonate<br>Infection",
