@@ -140,8 +140,10 @@ body{
 .container:active, .menuButton:active, .clearButton:active{
     background: rgba(200,200,200,0.5);
 }
-
-
+.container-focused{
+    background: rgb(235,245,250);
+    border: 2px solid black;
+}
 
 .top
 {
