@@ -88,7 +88,7 @@ $(function(){
             app.isMenuShowed=false;
         }
     });
-    $(".menuButton").click(function(){
+    $(".menuButton").mousedown(function(){
         if(app.realTimeRender){ 
             $("#searchText").focus(); 
         }
