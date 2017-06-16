@@ -54,12 +54,13 @@
                     age_checked = {{age_checked}}, bw_checked = {{bw_checked}} <br>
                     age in day = {{isAgeInDay}}, ageInDay={{ageInDay}}<br>
                     bw in gram = {{isBwInGram}}, bwForCal = {{bwForCalculation}}<br>
-                    searchText = {{searchText}}, searchText_checked = {{searchText_checked}}
+                    searchText = {{searchText}}, searchText_checked = {{searchText_checked}}<br>
+                    focused = {{focused}}
                     <br><br>
                 </div>
                <transition-group name="list" tag="div">
                     <div v-for="item in drugList" v-if="checkAgeAndBW(item)&&checkSearchText(item)" v-bind:key="item">
-                        <div class="container" @click="onContainerClick(item.drugName)">
+                        <div class="container" @click="onContainerClick(item.drugName)" v-bind:class="[item.drugName==focused?'container-focused':'']">
                             <div class="top">   <!--:style="{height: item.height+'px'}"-->
                                 <div class="left">
                                     <div class="drugName" v-html="item.drugName">
@@ -84,8 +85,7 @@
                     </div>
                </transition-group>
                
-                
-                <br>
+                <div class="disclaim">此應用程式為開發中版本</div>
                 <div class="disclaim">僅供研究參考用，作者不對任何因<br>使用本網站資訊所造成的損失負責</div>
                 <div class="disclaim">Authors:台北榮總 羅宇成 蔡宛蓉</div>
                 <div class="disclaim">Contact: david855033@gmail.com</div>

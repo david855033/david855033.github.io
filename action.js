@@ -83,7 +83,7 @@ $(function(){
             return false;
         }
     });
-    $('#app').click(function(){
+    $('#app').mousedown(function(){
         if(app.isMenuOnTop){
             app.isMenuShowed=false;
         }
@@ -94,10 +94,10 @@ $(function(){
         }
         return false;
     });
-    $(".search").click(function(){
+    $(".search").mousedown(function(){
         return false;
     });
-    $(".menu").click(function(){
+    $(".menu").mousedown(function(){
         return false;
     });
     $(document).keyup(function(e){
@@ -134,7 +134,8 @@ var app = new Vue({
         isBwInGram:false,
         searchText:"",
         searchList:["抗生素","輸液","麻醉","呼吸道"],
-        searchText_checked:""
+        searchText_checked:"",
+        focused:"",
     },
     computed:{
         bwForCalculation:function(){
@@ -321,16 +322,21 @@ var app = new Vue({
                 this.isMenuShowed=false;
             }else
             {
-                this.searchText=s.match(/[^<]*/)[0];
-                this.onSearchTextChange()
+                if(this.focused==s)
+                {
+                    this.focused="";
+                }else{
+                    this.focused=s;
+                }
             }
         },
         clearButton:function(){
             this.onSearchClear();
             this.age="";
-            this.onBWValueChange();
             this.bw="";
             this.onAgeValueChange();
+            this.onBWValueChange();
+            this.focused="";
         }
     }
 });

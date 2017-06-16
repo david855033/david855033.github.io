@@ -16,21 +16,10 @@ body{
     overflow: hidden;
     white-space : nowrap; 
 }
-.guide{
-    font-size: 0.8em;
-    text-align: center;
-    color: rgba(0,0,0,0.5);
-    font-weight: 600;
-    margin-top:5px;
-    max-height: 15px;
+textarea:focus, input:focus{
+    outline: none;
 }
-.guideAni-enter-active, .guideAni-leave-active {
-    transition: all 0.2s;
-}
-.guideAni-enter, .guideAni-leave-to /* .fade-leave-active in <2.1.8 */ {
-    max-height: 0px;
-    opacity: 0px;
-}
+
 
 .menuButton{
     height: 45px;
@@ -84,6 +73,7 @@ body{
 .search{
     width: 120px;
     text-align: center;
+    border-radius: 10px;
 }
 
 .content{
@@ -110,11 +100,13 @@ body{
 .age{
    width: 55px;
    line-height: 18px;
+   border-radius: 5px;
 }
 
 .bw{
    width: 55px;
-   line-height: 20px;
+   line-height: 18px;
+   border-radius: 5px;
 }
 #header>form input{
    font-size: 1em;
@@ -125,6 +117,23 @@ body{
     width:100%;
     height: 35px;
 }
+
+.guide{
+    font-size: 0.8em;
+    text-align: center;
+    color: rgba(0,0,0,0.5);
+    font-weight: 600;
+    margin-top:5px;
+    max-height: 15px;
+}
+.guideAni-enter-active, .guideAni-leave-active {
+    transition: all 0.2s;
+}
+.guideAni-enter, .guideAni-leave-to /* .fade-leave-active in <2.1.8 */ {
+    max-height: 0px;
+    opacity: 0px;
+}
+
 .container{
     background: white;
     box-shadow: 3px 3px 5px #AAAAAA;
@@ -137,11 +146,17 @@ body{
     -webkit-transition-duration: 0.1s; /* Safari */
     transition-duration: 0.1s;
 }
-.container:active, .menuButton:active, .clearButton:active{
-    background: rgba(200,200,200,0.5);
+.menuButton:active, .clearButton:active{
+    background: rgba(200,200,200,1);
+}
+.container:active{
+    background: rgb(235,245,250);
 }
 
-
+.container-focused{
+    background: rgb(235,245,250);
+    border: 2px solid black;
+}
 
 .top
 {
