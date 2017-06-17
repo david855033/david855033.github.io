@@ -38,7 +38,7 @@ textarea:focus, input:focus{
     text-align: center;
     line-height: 40px;
     float: left;
-    font-size: 10px;
+    font-size: 20px;
 }
 
 .menu{
@@ -54,7 +54,7 @@ textarea:focus, input:focus{
 }
 
 .menu-enter-active {
-  transition: all 0.25s 
+  transition: all 0.15s 
 }
  .menu-leave-active{
     transition: all 0.1s 
