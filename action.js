@@ -292,11 +292,11 @@ var app = new Vue({
         },
         onSearchKeyUp: function(){
              if(this.realTimeRender) {
-                  this.searchText_checked = this.searchText;
+                  this.searchText_checked = this.searchText.trim();
              }
         },
         onSearchTextChange: function(){
-            this.searchText_checked= this.searchText;
+            this.searchText_checked= this.searchText.trim();
             window.scrollTo(0,0);
         },
         checkSearchText: function(item){
