@@ -1,0 +1,14 @@
+.drugContent{
+    margin-top:25px;
+}
+
+.drugContent input{
+    display: block;
+}
+
+
+.indicationContent
+{
+    margin-left:25px;
+    margin-top:10px;
+}

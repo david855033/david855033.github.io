@@ -27,8 +27,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
-app.use('/manage/vghtpe/getjson',getjson('vghtpe'));
-app.use('/manage/vghtpe/postjson',postjson('vghtpe'));
+app.get('/manage/vghtpe/getjson',getjson('vghtpe'));
+app.post('/manage/vghtpe/postjson',postjson('vghtpe'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

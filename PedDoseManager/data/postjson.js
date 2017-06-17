@@ -7,7 +7,7 @@ var postjson = function(dataset){
         var path =__dirname+"/"+dataset+"2.js";
         console.log('write data set: '+dataset);
         console.log(path);
-        var toWrite=JSON.stringify(req.params);
+        var toWrite= JSON.stringify(req.body);
         console.log("to write: "+toWrite);
         fs.writeFile(path,toWrite,function(err,data){
             console.log('write!');

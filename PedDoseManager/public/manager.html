@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>Ped Dose Manager</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script type="text/javascript" src="./javascripts/vue@2.3.js"></script>
     <script type="text/javascript" src="./javascripts/jquery-3.2.1.js"></script>
+    <link rel=stylesheet type="text/css" href="./stylesheets/manager.css">
 </head>
 <body>
     <div id="app">
@@ -14,10 +16,20 @@
         <form action="javascript:void(0)">
             <input type="text" v-model="dataset"></input>
             <button @click="getjson">get</button>
+            <button @click="postjson">post</button>
         </form>
+        <br>
         <div id="result">
-            <div v-for="item in drugList">
-                {{item.drugName}};
+            <div v-for="item in drugList" class="drugContent">
+                 <form action="javascript:void(0)">
+                     <input v-model="item.drugName">
+                     <input v-model="item.indication">
+                            <div v-for="row in item.content" class="indicationContent">
+                                <input v-model="row.description">
+                                <input v-model="row.dosage">
+                                <input v-model="row.equation">
+                            </div>
+                 </form>
             </div>
         </div>
     </div>
