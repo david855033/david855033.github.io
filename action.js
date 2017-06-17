@@ -138,11 +138,11 @@ $(function(){
 var app = new Vue({
     el: '#app',
     data: {
+        drugList:[],
         testmode:false,
         realTimeRender:true,
         isMenuShowed:false,
         isMenuOnTop:false,
-        drugList:[],
         age:0,
         bw:0,
         age_checked:0,
