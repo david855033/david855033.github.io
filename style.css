@@ -89,6 +89,7 @@ textarea:focus, input:focus{
 .li-focused
 {
     border-right: 4px solid rgb(50,80,200) !important;
+    background: rgba(50,80,255,0.1)
 }
 
 #searchForm{
