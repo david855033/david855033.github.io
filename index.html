@@ -19,7 +19,7 @@
             <form id="ageForm" action="javascript:void(0);">
                 <div>
                     <input type="text" placeholder="Age" class="age" v-model="age" width="100px" @keyup="OnAgeChange" onchange="app.onAgeValueChange()">
-                <span v-if="!isAgeInDay">y/o</span>
+                <span v-if="!isAgeInDay">y</span>
                 </div>
             </form>
             <form action="javascript:void(0);">
@@ -37,16 +37,19 @@
         <div class="wraper">
             <transition name="menu">    
                 <div class="menu" v-show="isMenuShowed">
-                    <form id="searchForm" action="javascript:void(0);">
-                        <input type="text" id="searchText" class="search" placeholder="Search"　v-model="searchText"  @keyup="onSearchKeyUp" onchange="app.onSearchTextChange()">
-                        <button class="clearSearch" @click="onSearchClear()">x</button>
-                    </form>
+                    <div class="searchWrap">
+                        <form id="searchForm" action="javascript:void(0);">
+                            <input type="text" id="searchText" class="search" placeholder="Search"　v-model="searchText"  @keyup="onSearchKeyUp" onchange="app.onSearchTextChange()">
+                        </form>
+                        <div class="clearSearch" @click="onSearchClear()">x</div>
+                        <div class="clearboth"></div>
+                    </div>
                     <ul>
                         <li v-for="item in searchList" v-bind:class="[item==searchText?'li-focused':'']" @click="isMenuShowed=!(searchText==item&&isMenuOnTop);searchText=item;onSearchTextChange();focusSearchBox;"><span>{{item}}</span></li>
                     </ul>
                 </div>
             </transition>
-            <div class="content" v-bind:class="{'content-menuShowed':isMenuShowed&&!isMenuOnTop}">
+            <!--
                 <div v-if="testmode">
                     <br>!!test mode!!<br>
                     real time render = {{realTimeRender}}<br>
@@ -58,7 +61,10 @@
                     focused = {{focused}}
                     <br><br>
                 </div>
+            -->
+            <div class="content" v-bind:class="{'content-menuShowed':isMenuShowed&&!isMenuOnTop}">
                <transition-group name="list" tag="div">
+                  
                     <div v-for="item in drugList" v-if="checkAgeAndBW(item)&&checkSearchText(item)" v-bind:key="item">
                         <div class="container" @click="onContainerClick(item.drugName)" v-bind:class="[item.drugName==focused?'container-focused':'']">
                             <div class="top">   <!--:style="{height: item.height+'px'}"-->

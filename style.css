@@ -1,8 +1,9 @@
 body{
     background: rgb(200,200,200);
-    font-family: Microsoft JhengHei, Arial,sans-serif;
+    font-family: "Microsoft JhengHei", Arial,sans-serif;
     font-size: 1em;
 }
+input{font-family:inherit;}
 #header{
     top:0px;
     left:0px;
@@ -29,8 +30,11 @@ textarea:focus, input:focus{
     line-height: 40px;
     float: right;
     font-size: 25px;
+    transition: 0.3s;
 }
-
+.menuButton:hover{
+     background: rgba(0,0,0,0.3);
+}
 .clearButton{
     height: 45px;
     width: 40px;
@@ -39,8 +43,11 @@ textarea:focus, input:focus{
     line-height: 40px;
     float: left;
     font-size: 20px;
+    transition: 0.3s;
 }
-
+.clearButton:hover{
+    background: rgb(215,135,135);
+}
 .menu{
     width: 150px;
     background: rgb(215,225,225);
@@ -91,24 +98,59 @@ textarea:focus, input:focus{
     border-right: 4px solid rgb(50,80,200) !important;
     background: rgba(50,80,255,0.1)
 }
-
+.searchWrap{
+    margin-top: 5px;
+    width:100%;
+    text-align: center;
+    height: 30px;
+    overflow: hidden;
+}
 #searchForm{
-    margin-top:10px;
+    height: 100%;
     white-space : nowrap; 
     text-align: center;
+    display: inline-block;
 }
+
 .search{
    width: 80px;
    font-size: 16px;
    text-align: center;
    line-height: 18px;
+   height: 20px;
    border-radius: 5px;
+   border: 1px solid rgb(120,120,120);
+   vertical-align:top;
+   box-sizing: content-box;
 }
 .clearSearch{
      border-radius: 5px;
      line-height: 18px;
-     transform: translateY(-2px);
+     height: 22px;
+     width: 22px;
+     border: 1px solid rgb(120,120,120);
+     display: inline-block;
+     box-sizing: content-box;
+      background: white;
+      vertical-align:top;
 }
+.clearboth
+{
+    clear: both;
+}
+input:hover{
+      border: 1px solid rgb(50,50,150) !important;
+      background: rgb(245,245,255) !important;
+}
+
+.clearSearch:hover{
+      border: 1px solid rgb(50,50,200) !important;
+     background: rgb(245,245,255) !important;
+ }
+.clearSearch:active{
+     border: 1px solid rgb(50,50,200) !important;
+     background: rgb(225,225,245) !important;
+ }
 .content{
     position: absolute;
     left: 5px;
@@ -132,11 +174,13 @@ textarea:focus, input:focus{
     margin-left: 18px;
 }
 #header>form input{
-   font-size: 16px;
-   text-align: center;
+    font-size: 16px;
+    text-align: center;
     width: 55px;
-   line-height: 18px;
-   border-radius: 5px;
+    line-height: 18px;
+    border-radius: 5px;
+    border: 1px solid rgb(120,120,120);
+    height: 20px;
 }
 
 #headspacer{
@@ -181,7 +225,7 @@ textarea:focus, input:focus{
 
 .container-focused{
     background: rgb(255,255,245);
-    outline: 2px solid black;
+    outline: 1px solid black;
 }
 
 .top

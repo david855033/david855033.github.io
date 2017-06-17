@@ -48,7 +48,7 @@ $(window).resize(function() {
             app.isMenuOnTop=false;
             app.isMenuShowed=true;     
       }
-      $(".content").width(bodyWidth-150);
+      $(".content").width(bodyWidth-160);
   }
 });
 $(function() {
@@ -61,7 +61,7 @@ $(function() {
   {
     app.isMenuOnTop=false;
     app.isMenuShowed=true;
-    $(".content").width(bodyWidth-150);
+    $(".content").width(bodyWidth-160);
   }
 });
 $(function(){
