@@ -110,10 +110,13 @@ $(function(){
                 app.isMenuShowed=false;
             }
             app.clearButton();
-        }else if  (e.keyCode===13) {
-            app.onSearchTextChange();
-            if(app.isMenuOnTop) app.isMenuShowed=false;
-            return false;
+        }else if(e.keyCode==13) {
+            if(app.isMenuShowed)
+            {
+                app.onSearchTextChange();
+                if(app.isMenuOnTop) app.isMenuShowed=false;
+                return false;
+            }
         }
     });
     $(".age").dblclick(function(){
