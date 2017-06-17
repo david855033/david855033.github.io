@@ -95,9 +95,10 @@ textarea:focus, input:focus{
 #searchForm{
     margin-top:10px;
     white-space : nowrap; 
+    text-align: center;
 }
 .search{
-   width: 100px;
+   width: 80px;
    font-size: 16px;
    text-align: center;
    line-height: 18px;

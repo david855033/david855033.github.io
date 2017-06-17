@@ -76,10 +76,14 @@ $(function(){
 });
 
 $(function(){
-    $(".search").keypress(function(e){
+    $(".search").keyup(function(e){
         if(e.keyCode==13){
             app.onSearchTextChange();
             if(app.isMenuOnTop) app.isMenuShowed=false;
+            return false;
+        }else if(e.keyCode==27){
+            app.searchText="";
+            $("#searchText").blur();
             return false;
         }
     });
@@ -98,6 +102,7 @@ $(function(){
         $("#searchText").focus();
         return false;
     });
+   
     $(".search").mousedown(function(){
         return false;
     });
@@ -121,11 +126,14 @@ $(function(){
     });
     $(".age").dblclick(function(){
         app.showGuide=true;
+        return false;
     });
     $(".bw").dblclick(function(){
         app.showGuide=true;
+        return false;
     });
 });
+
 
 var app = new Vue({
     el: '#app',
@@ -354,6 +362,7 @@ var app = new Vue({
             this.onAgeValueChange();
             this.onBWValueChange();
             this.focused="";
-        }
+        },
+        focusSearchBox:function(){$('#searchText').focus();}
     }
 });
