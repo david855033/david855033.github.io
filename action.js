@@ -34,7 +34,7 @@ function makeStyle(){
 
 $(window).resize(function() {
   var bodyWidth=$("body").width();
-  if(bodyWidth<900){
+  if(bodyWidth<600){
       if(!app.isMenuOnTop)
       {
         app.isMenuOnTop=true;
@@ -48,12 +48,12 @@ $(window).resize(function() {
             app.isMenuOnTop=false;
             app.isMenuShowed=true;     
       }
-      $(".content").width(bodyWidth-220);
+      $(".content").width(bodyWidth-165);
   }
 });
 $(function() {
   var bodyWidth=$("body").width();
-  if(bodyWidth<900){
+  if(bodyWidth<600){
     app.isMenuOnTop=true;
     app.isMenuShowed=false;
    $(".content").width(bodyWidth);
@@ -61,7 +61,7 @@ $(function() {
   {
     app.isMenuOnTop=false;
     app.isMenuShowed=true;
-    $(".content").width(bodyWidth-220);
+    $(".content").width(bodyWidth-165);
   }
 });
 $(function(){
@@ -94,6 +94,10 @@ $(function(){
         }
         return false;
     });
+    $("#searchText").mousedown(function(){
+        $("#searchText").focus();
+        return false;
+    });
     $(".search").mousedown(function(){
         return false;
     });
@@ -106,6 +110,10 @@ $(function(){
                 app.isMenuShowed=false;
             }
             app.clearButton();
+        }else if  (e.keyCode===13) {
+            app.onSearchTextChange();
+            if(app.isMenuOnTop) app.isMenuShowed=false;
+            return false;
         }
     });
     $(".age").dblclick(function(){
@@ -315,6 +323,12 @@ var app = new Vue({
             {
                 this.searchText='';
                 this.onSearchTextChange()
+            }else
+            {
+                if(this.isMenuOnTop)
+                {
+                    this.isMenuShowed=false;
+                }
             }
         },
         onContainerClick:function(s){

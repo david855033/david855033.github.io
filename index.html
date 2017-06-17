@@ -39,10 +39,10 @@
                 <div class="menu" v-show="isMenuShowed">
                     <form id="searchForm" action="javascript:void(0);">
                         <input type="text" id="searchText" class="search" placeholder="Search"　v-model="searchText"  @keyup="onSearchKeyUp" onchange="app.onSearchTextChange()">
-                        <button @click="onSearchClear()">x</button>
+                        <button class="clearSearch" @click="onSearchClear()">x</button>
                     </form>
                     <ul>
-                        <li v-for="item in searchList" @click="searchText=item;isMenuShowed=isMenuOnTop?false:true;onSearchTextChange()"><span>{{item}}</span></li>
+                        <li v-for="item in searchList" v-bind:class="[item==searchText?'li-focused':'']" @click="isMenuShowed=!(searchText==item&&isMenuOnTop);searchText=item;onSearchTextChange()"><span>{{item}}</span></li>
                     </ul>
                 </div>
             </transition>
@@ -73,7 +73,7 @@
                                     <div class="row" v-if="checkAgeAndBW(ind)" v-bind:class="[checkAgeAndBW(ind)?'active':'inactive']" v-for="ind in item.content" >
                                         <div class="description" v-html="ind.description"></div>
                                         <div class="dosage" v-html="ind.dosage"></div>
-                                        <div class="calculated" v-if="showCaculated" v-html="ind.calculated"></div>
+                                        <div class="calculated" v-if="showCaculated&&ind.calculated" v-html="ind.calculated"></div>
                                     </div>
                                 </div>
                             </div>
