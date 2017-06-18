@@ -21,25 +21,72 @@
         <br>
         <div id="result">
             <div v-for="item in drugList" class="drugContent">
-                 <form action="javascript:void(0)" class="block">
-                    <textarea v-model="item.drugName" class="block"> </textarea>
-                    <textarea v-model="item.indication" class="block"> </textarea>
-                    <input v-model="item.ageLimitL" class="block">
-                    <input v-model="item.bwLimitU" class="block">
-                    <input v-model="item.ageLimitL" class="block">
-                    <input v-model="item.bwLimitU" class="block">
-                            <div v-for="row in item.content" class="indicationContent">
-                                <input v-model="row.description" class="block">
-                                <input v-model="row.dosage" class="block">
-                                <textarea v-model="row.equation" class="block"></textarea>
-                                <input v-model="row.ageLimitL" class="block">
-                                <input v-model="row.bwLimitU" class="block">
-                                <input v-model="row.ageLimitL" class="block">
-                                <input v-model="row.bwLimitU" class="block">
+                <div class="title">Drug</div>                
+                 <form action="javascript:void(0)">
+                    <div class="field">
+                        <div> Drug Name:</div>
+                        <textarea v-model="item.drugName"> </textarea>
+                    </div>
+                    <div class="field">
+                        <div> Indication:</div>
+                        <textarea v-model="item.indication"> </textarea>
+                    </div>
+                    <div class="field">
+                        <div>Age Limit:</div>
+                        <div class="limitContainer">
+                            <input v-model="item.ageLimitL">
+                            ~
+                            <input v-model="item.ageLimitU">
+                        </div>
+                     </div>
+                    <div class="field">
+                        <div>BW Limit:</div>
+                        <div class="limitContainer">
+                            <input v-model="item.bwLimitL">
+                            ~
+                            <input v-model="item.bwLimitU">
+                        </div>
+                    </div>
+                       <div class="field">
+                        <div> Information:</div>
+                        <textarea v-model="item.info"> </textarea>
+                    </div>
+                    <div class="field">
+                        <div> Reference:</div>
+                        <textarea v-model="item.reference"> </textarea>
+                    </div>
+                    <div class="field">
+                        <div> Tag:</div>
+                        <input v-model="item.tag"> 
+                    </div>
+                    <div class="row">
+                        <div v-for="row in item.content" class="doseContainer">
+                            <div class="doseTitle">Doses</div>
+                            <div class="dosefield">
+                                <div class="doseContainer-title">Description</div>
+                                <input class="input" v-model="row.description">
                             </div>
-                    <textarea v-model="item.info" class="block"></textarea>
-                    <textarea v-model="item.reference" class="block"></textarea>
-                    <input v-model="item.tag" class="block">
+                            <div>
+                                <div class="doseContainer-title">Dosage</div>
+                                <input class="input" v-model="row.dosage">
+                            </div>
+                            <div>
+                                <div class="doseContainer-title">Equation</div>
+                                <textarea class="input" v-model="row.equation"></textarea>
+                            </div>
+                                <div class="doseContainer-title">Age Limit</div>
+                            <div class="limitContainer">
+                                <input v-model="row.ageLimitL">~
+                                <input v-model="row.ageLimitU">
+                            </div>
+                                <div class="doseContainer-title">BW Limit</div>
+                                <div class="limitContainer">
+                                    <input v-model="row.bwLimitL">~
+                                    <input v-model="row.bwLimitU">
+                                </div>
+                        </div>
+                    </div>
+                 
                  </form>
             </div>
         </div>

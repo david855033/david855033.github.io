@@ -40,6 +40,10 @@ function makeStyle(){
                 DataSource[i].info += "<li>" + element;
             }, this);
         }
+        if(DataSource[i].tag)
+        {
+            DataSource[i].tag=DataSource[i].tag.split(',');
+        }
     }
 }
 

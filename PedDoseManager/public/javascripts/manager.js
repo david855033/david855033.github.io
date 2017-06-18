@@ -26,7 +26,26 @@ var app=new Vue({
                     {
                         data[i].info=data[i].info.replaceAll("<li>","\n").trim();
                     }
-
+                    if(data[i].content)
+                    {   
+                        for(var j = 0; j<data[i].content.length;j++)
+                        {
+                            if(data[i].content[j].description)
+                            {
+                                data[i].content[j].description=data[i].content[j].description.replaceAll("<br>","\n");
+                            }
+                            if(data[i].content[j].dosage)
+                            {
+                                data[i].content[j].dosage=data[i].content[j].dosage.replaceAll("<br>","\n");
+                            }
+                            if(data[i].content[j].equation)
+                            {
+                                data[i].content[j].equation=data[i].content[j].equation.replaceAll("<br>","\n");
+                            }
+                        }
+                    }
+                    //--convert old styles
+                    
                     vueInstance.drugList.push(data[i]);
                 }
             });
