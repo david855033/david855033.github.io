@@ -27,7 +27,7 @@ var DataSource =
                 }
             ],
         reference:"2017.6.12",
-        info: "<li>滴注時間>30分鐘"
+        info: "滴注時間>30分鐘"
         ,tag:"呼吸道"
     },
     { 
@@ -210,7 +210,7 @@ var DataSource =
                 }
             ],
         reference:"2017.6.14"
-        ,info:"<li>可能prolong QT"
+        ,info:"可能prolong QT"
         ,tag:"麻醉"
     },
     { 
@@ -239,7 +239,7 @@ var DataSource =
                 }
             ],
         reference:"2017.6.11"
-        ,info:"<li>大寶若回沖可考慮0.5ml/hr"
+        ,info:"大寶若回沖可考慮0.5ml/hr"
         ,tag:"輸液"
     },
     { 
@@ -349,7 +349,7 @@ var DataSource =
                 },
             ],
         reference:"2017.6.13"
-        ,info:"<li>使用時要考慮腎功能<li>5th dose前抽Trouph level<li>一般: 10-15mcg/ml，Meningitis: 15-20mcg/ml"
+        ,info:"使用時要考慮腎功能\n5th dose前抽Trouph level\n一般: 10-15mcg/ml，Meningitis: 15-20mcg/ml"
         ,ageLimitU:"30d"
         ,tag:"抗生素"
     },
@@ -363,7 +363,7 @@ var DataSource =
                 }
             ],
         reference:"2017.6.13"
-        ,info:"<li>使用時要考慮腎功能<li>5th dose前抽Trouph level<li>一般: 10-15mcg/ml，Meningitis: 15-20mcg/ml"
+        ,info:"使用時要考慮腎功能\n5th dose前抽Trouph level\n一般: 10-15mcg/ml，Meningitis: 15-20mcg/ml"
         ,ageLimitL:"31d"
         ,tag:"抗生素"
     }

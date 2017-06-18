@@ -19,6 +19,14 @@ var app=new Vue({
             $.get("http://localhost:3000/manage/"+this.dataset+"/getjson",function(data){
                 for(var i = 0 ; i <data.length;i++)
                 {
+                    //convert old styles
+                    data[i].drugName=data[i].drugName.replaceAll("<br>","\n");
+                    data[i].indication=data[i].indication.replaceAll("<br>","\n");
+                    if(data[i].info)
+                    {
+                        data[i].info=data[i].info.replaceAll("<li>","\n").trim();
+                    }
+
                     vueInstance.drugList.push(data[i]);
                 }
             });
@@ -35,5 +43,13 @@ var app=new Vue({
                 dataType: "json"
             });
         }
+    },
+    mounted:function(){
+        this.getjson();
     }
 });
+
+String.prototype.replaceAll = function(search, replacement) {
+    var target = this;
+    return target.split(search).join(replacement);
+};

@@ -1,4 +1,8 @@
-'use strict'
+'use strict';
+String.prototype.replaceAll = function(search, replacement) {
+    var target = this;
+    return target.split(search).join(replacement);
+};
 
 function Render(){
     app.age="";
@@ -20,13 +24,21 @@ function makeStyle(){
     {
         if( DataSource[i].indication )
         {
-            DataSource[i].indication = DataSource[i].indication.replace("[","<span class='emphasize'>");
-            DataSource[i].indication = DataSource[i].indication.replace("]","</span>");
+            DataSource[i].indication = DataSource[i].indication.replaceAll("[","<span class='emphasize'>");
+            DataSource[i].indication = DataSource[i].indication.replaceAll("]","</span>");
         }
         if( DataSource[i].drugName)
         {
-            DataSource[i].drugName = DataSource[i].drugName.replace("(","<span class='subtittle'>(");
-            DataSource[i].drugName = DataSource[i].drugName.replace(")",")</span>");
+            DataSource[i].drugName = DataSource[i].drugName.replaceAll("(","<span class='subtittle'>(");
+            DataSource[i].drugName = DataSource[i].drugName.replaceAll(")",")</span>");
+        }
+        if(DataSource[i].info)
+        {
+            var InfoArray = DataSource[i].info.split('\n');
+            DataSource[i].info="";
+            InfoArray.forEach(function(element) {
+                DataSource[i].info += "<li>" + element;
+            }, this);
         }
     }
 }

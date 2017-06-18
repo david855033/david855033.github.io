@@ -1,8 +1,9 @@
 .drugContent{
     margin-top:25px;
+    width: 80%;
 }
 
-.drugContent input{
+.drugContent .block{
     display: block;
 }
 
