@@ -266,10 +266,10 @@ input:hover{
 }
 
 .row{
-    background: rgb(245,245,255);
+    background: rgb(248,250,255);
     margin-top: 10px;
     margin-bottom: 10px;
-    outline: 0.5px solid lightblue;
+    outline: 0.5px solid rgb(220,220,220);
     overflow: hidden;
 }
 .row>div
@@ -299,7 +299,7 @@ input:hover{
     white-space: nowrap;
     font-weight: 600;
     font-size: 1.2em;
-    background: rgb(255,255,225);
+    background: rgb(255,255,180);
     padding: 8px;
     line-height: 1.1em;
     text-align: left;
