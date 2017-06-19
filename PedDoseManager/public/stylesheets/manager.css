@@ -7,10 +7,7 @@ textarea {
 textarea, input {
     font-size: 80%!important;
 }
-.h-divider{
-    margin-top:5px;
-    margin-bottom:20px;
-    height:1px;
-    width:100%;
-    border-top:1px solid grey;
+.panel-heading>button
+{
+    float: right;
 }

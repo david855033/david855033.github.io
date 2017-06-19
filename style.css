@@ -1,7 +1,6 @@
 body{
     background: rgb(200,200,200);
-    font-family: "Microsoft JhengHei", Arial,sans-serif;
-    font-size: 1em;
+    font-family: "Microsoft JhengHei","Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 input{font-family:inherit;}
 #header{
@@ -267,15 +266,14 @@ input:hover{
 }
 
 .row{
-    background: rgba(0,150,255,0.1);
+    background: rgb(245,245,255);
     margin-top: 10px;
     margin-bottom: 10px;
-    outline: 0.5px solid grey;
+    outline: 0.5px solid lightblue;
     overflow: hidden;
 }
 .row>div
 {
-    
     padding-left: 5px;
     overflow: hidden;
 }
@@ -284,15 +282,14 @@ input:hover{
     width:100%;
     white-space: nowrap;
     font-weight: 600;
-   
     font-size: 0.9em;
-    padding: 2px;
+    padding: 4px;
 }
 .dosage
 {
     width:100%;
     white-space: nowrap;
-    padding: 2px;
+    padding: 4px;
     font-size: 0.9em;
 }
 .calculated
@@ -301,10 +298,11 @@ input:hover{
     overflow: hidden;
     white-space: nowrap;
     font-weight: 600;
-    font-size: 1.1em;
-    background: rgb(255,235,180);
-    padding: 4px;
+    font-size: 1.2em;
+    background: rgb(255,255,225);
+    padding: 8px;
     line-height: 1.1em;
+    text-align: left;
 }
 
 .inactive
@@ -377,3 +375,40 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
     overflow: hidden;
 }
 
+span.q
+{
+    padding: .1em .6em .1em;
+    font-size: 50%;
+    font-weight: 700;
+    line-height: 1em;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .1em;
+    border-radius: 5px;
+}
+span.q4h{
+    background-color: hsl(-60, 64%, 58%);
+    color: #fff;
+}
+span.q6h{
+    background-color: hsl(0, 60%, 60%);
+    color: #fff;
+}
+span.q8h{
+    background-color: hsl(100, 64%, 30%);
+    color: #fff;
+}
+
+span.q12h{
+    background-color: hsl(200, 80%, 30%);
+    color: #fff;
+}
+span.qd{
+    background-color: hsl(270, 64%, 60%);
+    color: #fff;
+}
+span.st{
+   background-color: hsl(180, 64%, 0%);
+    color: #fff;
+}

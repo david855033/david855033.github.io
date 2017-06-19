@@ -276,11 +276,13 @@ function makeStyle(){
         {
             DataSource[i].indication = DataSource[i].indication.replaceAll("[","<span class='emphasize'>");
             DataSource[i].indication = DataSource[i].indication.replaceAll("]","</span>");
+             DataSource[i].indication = DataSource[i].indication.replaceAll("\n","<br>");
         }
         if( DataSource[i].drugName)
         {
             DataSource[i].drugName = DataSource[i].drugName.replaceAll("(","<span class='subtittle'>(");
             DataSource[i].drugName = DataSource[i].drugName.replaceAll(")",")</span>");
+            DataSource[i].drugName = DataSource[i].drugName.replaceAll("\n","<br>");
         }
         if(DataSource[i].info)
         {
@@ -290,9 +292,32 @@ function makeStyle(){
                 DataSource[i].info += "<li>" + element;
             }, this);
         }
+        if(DataSource[i].reference)
+        {
+            DataSource[i].reference = DataSource[i].reference.replaceAll("\n","<br>");
+        }
         if(DataSource[i].tag)
         {
             DataSource[i].tag=DataSource[i].tag.split(',');
+        }
+        if(DataSource[i].content)
+        {
+            for(var j=0; j<DataSource[i].content.length;j++)
+            {
+                var current = DataSource[i].content[j];
+                current.dosage = current.dosage.replaceAll("\n","<br>");
+                current.dosage = current.dosage.replaceAll("q6-8h","q6h-q8h");
+                current.dosage = current.dosage.replaceAll("q8-12h","q8h-q12h");
+                current.dosage = current.dosage.replaceAll("q8-q12h","q8h-q12h");
+
+                current.dosage = current.dosage.replaceAll("q4h","<span class='q q4h'>q4h</span>");
+                current.dosage = current.dosage.replaceAll("q6h","<span class='q q6h'>q6h</span>");
+                current.dosage = current.dosage.replaceAll("q8h","<span class='q q8h'>q8h</span>");
+                current.dosage = current.dosage.replaceAll("q12h","<span class='q q12h'>q12h</span>");
+                current.dosage = current.dosage.replaceAll("qd","<span class='q qd'>qd</span>");
+                current.dosage = current.dosage.replaceAll("st","<span class='q st'>st</span>");
+                current.equation = current.equation.replaceAll("\n","<br>");
+            }
         }
     }
 }
