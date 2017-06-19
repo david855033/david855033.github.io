@@ -3,30 +3,40 @@
 <head>
     <title>Ped Dose Manager</title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>Document</title>
     <script type="text/javascript" src="./javascripts/vue@2.3.js"></script>
     <script type="text/javascript" src="./javascripts/jquery-3.2.1.js"></script>
     <link rel=stylesheet type="text/css" href="./stylesheets/manager.css">
+    <link rel=stylesheet type="text/css" href="./bootstrap/css/bootstrap.css">
+    
+    <script type="text/javascript" src="./bootstrap/js/bootstrap.js"></script>
+
 </head>
 <body>
-    <div id="app">
-        This is manager <br>
-        <form action="javascript:void(0)">
-            <input type="text" v-model="dataset"></input>
-            <button @click="getjson">get</button>
-            <button @click="postjson">post</button>
+    <div id="app" class="container-fluid">
+        <div class=row> 
+            <div class="col-sm-12"> This is manager </div>
+        </div>
+        <form action="javascript:void(0)" class="form-inline">
+            <div class="form-group">
+                <label for="dataset">Dataset:</label>
+                <input type="text" id="dataset" class="form-control" v-model="dataset"></input>
+            </div>
+            <button type="submit" class="btn btn-default" @click="getjson">get</button>
+            <button type="submit" class="btn btn-default" @click="postjson">post</button>
         </form>
-        <br>
+        
         <div id="result">
-            <div v-for="item in drugList" class="drugContent">
-                <div class="title">Drug</div>                
-                 <form action="javascript:void(0)">
-                    <div class="field">
+            <div v-for="item in drugList">
+                <h3>Drug</h3>                
+                 <form action="javascript:void(0)" class="form-inline">
+                    <div>
                         <div> Drug Name:</div>
-                        <textarea v-model="item.drugName"> </textarea>
+                        <textarea v-model="item.drugName" class="form-control" > </textarea>
                     </div>
+                    
                     <div class="field">
                         <div> Indication:</div>
                         <textarea v-model="item.indication"> </textarea>
