@@ -378,7 +378,7 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 span.q
 {
     padding: .1em .6em .1em;
-    font-size: 50%;
+    font-size: 0.8em;
     font-weight: 700;
     line-height: 1em;
     text-align: center;
@@ -388,27 +388,27 @@ span.q
     border-radius: 5px;
 }
 span.q4h{
-    background-color: hsl(-60, 64%, 58%);
+    background-color: hsla(-60, 64%, 58%,0.8);
     color: #fff;
 }
 span.q6h{
-    background-color: hsl(0, 60%, 60%);
+    background-color: hsla(0, 60%, 60%,0.8);
     color: #fff;
 }
 span.q8h{
-    background-color: hsl(100, 64%, 30%);
+    background-color: hsla(100, 64%, 30%,0.8);
     color: #fff;
 }
 
 span.q12h{
-    background-color: hsl(200, 80%, 30%);
+    background-color: hsla(200, 80%, 30%,0.8);
     color: #fff;
 }
 span.qd{
-    background-color: hsl(270, 64%, 60%);
+    background-color: hsla(270, 64%, 60%,0.8);
     color: #fff;
 }
 span.st{
-   background-color: hsl(180, 64%, 0%);
+   background-color: hsla(180, 64%, 0%,0.8);
     color: #fff;
 }
