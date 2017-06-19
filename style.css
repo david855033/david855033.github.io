@@ -57,7 +57,8 @@ textarea:focus, input:focus{
     z-index:101;
     box-shadow: 3px 3px 5px #AAAAAA;
     text-align: center;
-    border-bottom-right-radius: 3px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
 }
 
 .menu-enter-active {

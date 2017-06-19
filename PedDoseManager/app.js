@@ -10,6 +10,7 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var getjson = require('./data/getjson');
 var postjson = require('./data/postjson');
+var makestable = require('./data/makestable');
 
 var app = express();
 
@@ -29,6 +30,7 @@ app.use('/', index);
 app.use('/users', users);
 app.get('/manage/vghtpe/getjson',getjson('vghtpe'));
 app.post('/manage/vghtpe/postjson',postjson('vghtpe'));
+app.get('/manage/vghtpe/makestable',makestable('vghtpe'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

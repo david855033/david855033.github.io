@@ -2,7 +2,6 @@
 
 
 
-
 var app=new Vue({
     el: '#app',
     data:{
@@ -61,6 +60,21 @@ var app=new Vue({
                 contentType: "application/json; charset=utf-8",
                 dataType: "json"
             });
+        },makestable:function()
+        {
+            console.log("makestable: "+this.dataset);
+            $.get( "http://localhost:3000/manage/"+this.dataset+"/makestable", function( data ) {
+                console.log(data);
+            });
+        },createNewDosage:function(index)
+        {
+            console.log(index);
+            this.drugList[index].content.push(
+                    {});
+        },insertMedication:function(index)
+        {
+            console.log(index);
+            this.drugList.splice(index+1,0,{ });
         }
     },
     mounted:function(){

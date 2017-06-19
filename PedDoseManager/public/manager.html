@@ -1,106 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Ped Dose Manager</title>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>Document</title>
     <script type="text/javascript" src="./javascripts/vue@2.3.js"></script>
     <script type="text/javascript" src="./javascripts/jquery-3.2.1.js"></script>
-    <link rel=stylesheet type="text/css" href="./stylesheets/manager.css">
-    <link rel=stylesheet type="text/css" href="./bootstrap/css/bootstrap.css">
-    
-    <script type="text/javascript" src="./bootstrap/js/bootstrap.js"></script>
-
+    <link rel="stylesheet" href="./stylesheets/manager.css">
+    <link rel="stylesheet" href="./bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="./bootstrap/css/bootstrap-theme.css">
+    <script type="text/javascript" src="./bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <div id="app" class="container-fluid">
-        <div class=row> 
-            <div class="col-sm-12"> This is manager </div>
-        </div>
-        <form action="javascript:void(0)" class="form-inline">
-            <div class="form-group">
-                <label for="dataset">Dataset:</label>
-                <input type="text" id="dataset" class="form-control" v-model="dataset"></input>
+    <div id="app">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <h2>Ped Dose Manager</h2>
+                </div>
             </div>
-            <button type="submit" class="btn btn-default" @click="getjson">get</button>
-            <button type="submit" class="btn btn-default" @click="postjson">post</button>
-        </form>
-        
-        <div id="result">
-            <div v-for="item in drugList">
-                <h3>Drug</h3>                
-                 <form action="javascript:void(0)" class="form-inline">
-                    <div>
-                        <div> Drug Name:</div>
-                        <textarea v-model="item.drugName" class="form-control" > </textarea>
+            
+            <div class="row">
+                <div class="col-sm-12 form-inline">
+                    <label for="dataset">Dataset:</label>
+                    <div class="input-group">
+                        <input type="text" id="dataset" class="form-control" v-model="dataset"></input>
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-info" @click="getjson">get</button>
+                            <button type="button" class="btn btn-warning" @click="postjson">post</button>
+                            <button type="button" class="btn btn-danger" @click="makestable">Publish</button>
+                        </span>
                     </div>
-                    
-                    <div class="field">
-                        <div> Indication:</div>
-                        <textarea v-model="item.indication"> </textarea>
-                    </div>
-                    <div class="field">
-                        <div>Age Limit:</div>
-                        <div class="limitContainer">
-                            <input v-model="item.ageLimitL">
-                            ~
-                            <input v-model="item.ageLimitU">
-                        </div>
-                     </div>
-                    <div class="field">
-                        <div>BW Limit:</div>
-                        <div class="limitContainer">
-                            <input v-model="item.bwLimitL">
-                            ~
-                            <input v-model="item.bwLimitU">
-                        </div>
-                    </div>
-                       <div class="field">
-                        <div> Information:</div>
-                        <textarea v-model="item.info"> </textarea>
-                    </div>
-                    <div class="field">
-                        <div> Reference:</div>
-                        <textarea v-model="item.reference"> </textarea>
-                    </div>
-                    <div class="field">
-                        <div> Tag:</div>
-                        <input v-model="item.tag"> 
-                    </div>
-                    <div class="row">
-                        <div v-for="row in item.content" class="doseContainer">
-                            <div class="doseTitle">Doses</div>
-                            <div class="dosefield">
-                                <div class="doseContainer-title">Description</div>
-                                <input class="input" v-model="row.description">
-                            </div>
-                            <div>
-                                <div class="doseContainer-title">Dosage</div>
-                                <input class="input" v-model="row.dosage">
-                            </div>
-                            <div>
-                                <div class="doseContainer-title">Equation</div>
-                                <textarea class="input" v-model="row.equation"></textarea>
-                            </div>
-                                <div class="doseContainer-title">Age Limit</div>
-                            <div class="limitContainer">
-                                <input v-model="row.ageLimitL">~
-                                <input v-model="row.ageLimitU">
-                            </div>
-                                <div class="doseContainer-title">BW Limit</div>
-                                <div class="limitContainer">
-                                    <input v-model="row.bwLimitL">~
-                                    <input v-model="row.bwLimitU">
+                </div>
+            </div>
+            <br>
+             <div v-for="(item, index) in drugList">
+                 <div class="panel panel-primary">
+                    <div class="panel-heading">Medication-{{index+1}}</div>
+                        <form class="form-horizontal panel-body">
+                            <div class="form-group row">
+                                <label for="drugName" class="control-label col-sm-1 text-right">Drug Name:</label>
+                                <div class="col-sm-4">
+                                    <textarea id="drugName" v-model="item.drugName" class="form-control" > </textarea>
                                 </div>
-                        </div>
+                                <label for="Indication" class="control-label col-sm-1 text-right">Indication:</label>
+                                <div class="col-sm-4">
+                                    <textarea id="Indication" v-model="item.indication" class="form-control" > </textarea>
+                                </div>
+                            </div>
+                              <div class="form-group row">
+                                <label for="Info" class="control-label col-sm-1 text-right">Information:</label>
+                                <div class="col-sm-4">
+                                    <textarea id="Info" v-model="item.info" class="form-control" > </textarea>
+                                </div>
+                                <label for="ref" class="control-label col-sm-1 text-right">Reference:</label>
+                                <div class="col-sm-4">
+                                    <textarea id="ref" v-model="item.reference" class="form-control" > </textarea>
+                                </div>
+                            </div>    
+                            <div class="form-group row">
+                                 <label for="tag" class="control-label col-sm-1 text-right">Tag:</label>
+                                 <div class="col-sm-4">
+                                    <input id="tag" v-model="item.tag" class="form-control"> 
+                                 </div>
+                                 <label for="age" class="control-label  col-sm-1 text-right ">Age:</label>
+                                 <div class="col-sm-1">
+                                    <input id="age" v-model="item.ageLimitL" class="form-control">
+                                 </div>
+                                 <div class="col-sm-1">
+                                    <input v-model="item.ageLimitU" class="form-control">
+                                 </div>
+                                <div class="col-sm-1">
+                                    <select class="form-control">
+                                        <option></option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
+                                </div>
+                                
+                                 <label for="bw" class="control-label  col-sm-1 text-right ">BW:</label>
+                                 <div class="col-sm-1">
+                                    <input id="bw" v-model="item.bwLimitL" class="form-control">
+                                </div>
+                                <div class="col-sm-1">
+                                    <input v-model="item.bwLimitU" class="form-control">
+                                 </div>
+                            </div>
+                        </form>
                     </div>
-                 
-                 </form>
+                    <div v-for="(row,rowindex) in item.content" class="leftOffSet">
+                        <div class="panel panel-success">
+                            <div class="panel-heading">Dosage-{{rowindex+1}}</div>
+                                <form class="form-horizontal panel-body" action="javascript:void(0)">
+                                    <div class="form-group row">
+                                        <label for="age" class="control-label  col-sm-1 text-right ">Age:</label>
+                                        <div class="col-sm-1">
+                                            <input id="age" v-model="row.ageLimitL" class="form-control">
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <input v-model="row.ageLimitU" class="form-control">
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <select class="form-control selectpicker">
+                                                <option></option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                            </select>
+                                        </div>
+                                        <label for="bw" class="control-label  col-sm-1 text-right ">BW:</label>
+                                        <div class="col-sm-1">
+                                            <input id="bw" v-model="row.bwLimitL" class="form-control">
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <input v-model="row.bwLimitU" class="form-control">
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <button class="btn btn-warning">Convert<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>
+                                        </div>
+                                        <label for="description" class="control-label col-sm-1">Description:</label>
+                                        <div class="col-sm-3">
+                                            <input id="description" v-model="row.description" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="Dosage" class="control-label col-sm-1">Dosage:</label>
+                                        <div class="col-sm-3">
+                                            <textarea id="Dosage" v-model="row.dosage" class="form-control" ></textarea>
+                                        </div>
+                                        <label for="Equation" class="control-label col-sm-1">Equation:</label>
+                                        <div class="col-sm-3">
+                                            <textarea id="Equation" v-model="row.equation" class="form-control" ></textarea>
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <button class="btn btn-secondary">Calculate<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <textarea id="Calculated" v-model="row.calculated" class="form-control" ></textarea>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>    
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4"></div>
+                            <div class="col-sm-2 text-center">
+                                <button class="btn btn-success" @click="createNewDosage(index)">Create New Dosage</button>
+                            </div>
+                            <div class="col-sm-2 text-center">
+                                <button class="btn btn-primary" @click="insertMedication(index)">Insert Medication</button>
+                            </div>
+                            <div class="col-sm-4"></div>
+                        </div>
+                        <br><br><br><br>
+                    </div>
             </div>
         </div>
-    </div>
 </body>
 <script type="text/javascript" src="./javascripts/manager.js"></script>
 </html>
+   

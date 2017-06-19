@@ -9,7 +9,7 @@
     <script type="text/javascript" src="vue@2.3.js"></script>
     <script type="text/javascript" src="jquery-3.2.1.js"></script>
     <link rel=stylesheet type="text/css" href="style.css">
-    <script type="text/javascript" src="data.js"></script>
+    <script type="text/javascript" src="./PedDoseManager/data/vghtpe_stable.js"></script>
 </head>
 
 <body onload="Render()">
@@ -49,25 +49,13 @@
                     </ul>
                 </div>
             </transition>
-            <!--
-                <div v-if="testmode">
-                    <br>!!test mode!!<br>
-                    real time render = {{realTimeRender}}<br>
-                    current age = {{age}}, current bw = {{bw}} <br>
-                    age_checked = {{age_checked}}, bw_checked = {{bw_checked}} <br>
-                    age in day = {{isAgeInDay}}, ageInDay={{ageInDay}}<br>
-                    bw in gram = {{isBwInGram}}, bwForCal = {{bwForCalculation}}<br>
-                    searchText = {{searchText}}, searchText_checked = {{searchText_checked}}<br>
-                    focused = {{focused}}
-                    <br><br>
-                </div>
-            -->
+            
             <div class="content" v-bind:class="{'content-menuShowed':isMenuShowed&&!isMenuOnTop}">
                <transition-group name="list" tag="div">
                   
                     <div v-for="item in drugList" v-if="checkAgeAndBW(item)&&checkSearchText(item)" v-bind:key="item">
                         <div class="container" @click="onContainerClick(item.drugName)" v-bind:class="[item.drugName==focused?'container-focused':'']">
-                            <div class="top">   <!--:style="{height: item.height+'px'}"-->
+                            <div class="top">  
                                 <div class="left">
                                     <div class="drugName" v-html="item.drugName">
                                     </div>
@@ -101,6 +89,5 @@
     </div>
     
 </body>
-
-<script type="text/javascript" src="action.js"></script>
+<script type="text/javascript" src="vueVM.js"></script>
 </html>
