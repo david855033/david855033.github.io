@@ -150,7 +150,7 @@ var app=new Vue({
             if(bwLimitU&&bwLimitU<=4)
             {
                 bwLimitU=bwLimitU*1000+"g";
-            }else{bwLimitL+="kg";}
+            }else{bwLimitU+="kg";}
 
             if(row.bwLimitL&&row.bwLimitU)
             {
@@ -279,7 +279,6 @@ var app=new Vue({
                     var result=bw_checked*multipier;
                     var isMax=false;
                     if(max>0&&result>max) {result=max; isMax=true;}
-
                     var digi = equation.split('*')[2]?equation.split('*')[2]:1;
                     result = parseFloat(Math.round(result/digi)*digi).toFixed(3)*1;
                     if(isMax) {

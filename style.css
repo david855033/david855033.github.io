@@ -428,6 +428,11 @@ span.iv
 }
 span.po
 {   
-    background-color: hsla(40, 90%, 40%,0.5);
+    background-color: hsla(350, 90%, 40%,0.5);
+    color: #fff;
+}
+span.rc
+{   
+    background-color: hsla(50, 90%, 20%,0.5);
     color: #fff;
 }
