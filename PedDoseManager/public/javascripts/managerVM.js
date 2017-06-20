@@ -19,10 +19,10 @@ var app=new Vue({
             {name:"≦14天",ageLimitL:"",ageLimitU:"14d"},
             {name:"≧15天",ageLimitL:"15d",ageLimitU:""},
             {name:"≦30天(Neonate)",ageLimitL:"",ageLimitU:"30d"},
-            {name:"≧31天",ageLimitL:"31d",ageLimitU:""},
             {name:"8-14天",ageLimitL:"8d",ageLimitU:"14d"},
             {name:"14-30天",ageLimitL:"14d",ageLimitU:"30d"},
-            {name:"Infant",ageLimitL:"30d",ageLimitU:"365d"}
+            {name:"Infant",ageLimitL:"30d",ageLimitU:"365d"},
+            {name:"Infant, Child, Adult",ageLimitL:"30d",ageLimitU:""}
         ],
     },
     computed:{
@@ -118,13 +118,14 @@ var app=new Vue({
             this.drugList.splice(index,1);
         },copyDrug:function(index)
         {
-            this.drugList.splice(index+1,0,this.drugList[index]);
+            this.drugList.splice(index+1,0,JSON.parse(JSON.stringify(this.drugList[index])));
+
         },deleteDose:function(index,rowindex)
         {
             this.drugList[index].content.splice(rowindex,1);
         },copyDose:function(index,rowindex)
         {
-            this.drugList[index].content.splice(rowindex+1,0,this.drugList[index].content[rowindex]);
+            this.drugList[index].content.splice(rowindex+1,0,JSON.parse(JSON.stringify(this.drugList[index].content[rowindex])));
         }, convertLimit:function(row)
         {
             var result="";
@@ -149,7 +150,6 @@ var app=new Vue({
             {
                 result = "≦"+bwLimitU;
             }
-
             var ageLimitL=row.ageLimitL;
             var ageLimitU=row.ageLimitU;
             if(ageLimitL)
@@ -185,6 +185,7 @@ var app=new Vue({
                 result += "≦"+ageLimitU;
             }
             result=result.trim();
+            
             if(result){
                 row.description=result;
             }
@@ -252,6 +253,7 @@ var app=new Vue({
         },calculateDoseThisDose:function(thisDose)
         {
             var prestring=thisDose.equation;
+            if(!prestring){ return;}
             var match=prestring.match(/[\[].*?[\]]/g);
             if(match)
             {

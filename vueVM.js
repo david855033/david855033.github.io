@@ -32,7 +32,7 @@ var app = new Vue({
                 return this.bw_checked.toString().match(/\d+[.]?\d*/)/1000;
             }else
             {
-                return this.bw_checked[0];
+                return this.bw_checked;
             }
         },
         ageInDay:function(){
@@ -41,7 +41,7 @@ var app = new Vue({
                 return this.getDay(this.age_checked);
             }else
             {
-                return this.age_checked*365[0];
+                return this.age_checked*365;
             }
         }
     },
@@ -306,6 +306,16 @@ function makeStyle(){
             for(var j=0; j<DataSource[i].content.length;j++)
             {
                 var current = DataSource[i].content[j];
+
+                current.equation = current.equation.replaceAll("\n","<br>");
+                current.equation = current.equation.replaceAll("q6-","q6h-");
+                current.equation = current.equation.replaceAll("q8-","q8h-");
+                current.equation = current.equation.replaceAll("q12-","q12h");
+                current.equation = current.equation.replaceAll("-6h","-q6h");
+                current.equation = current.equation.replaceAll("-8h","-q8h");
+                current.equation = current.equation.replaceAll("-12h","-q12h");
+                current.equation = current.equation.replaceAll("--","-");
+
                 current.dosage = current.dosage.replaceAll("\n","<br>");
                 current.dosage = current.dosage.replaceAll("q6-","q6h-");
                 current.dosage = current.dosage.replaceAll("q8-","q8h-");

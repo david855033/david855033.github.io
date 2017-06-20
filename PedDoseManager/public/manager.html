@@ -127,8 +127,8 @@
                             <div class="panel-heading">({{rowindex+1}}) <strong>{{row.description}}</strong>
                                 <button class="btn btn-danger btn-xs" @click="deleteDose(index,rowindex)">delete</button>
                                 <button class="btn btn-info btn-xs" @click="copyDose(index,rowindex)">copy</button>
-                                <button class="btn btn-warning btn-xs" v-if="rowindex!=(item.content.length-1)" @click="down(index,rowindex)">down</button>
-                                <button class="btn btn-success btn-xs" v-if="rowindex!=0"  @click="up(index,rowindex)">up</button>
+                                <button class="btn btn-warning btn-xs" v-if="rowindex!=(item.content.length-1)" @click="down(index,rowindex)"> <span class="glyphicon glyphicon-arrow-down"></span></button>
+                                <button class="btn btn-success btn-xs" v-if="rowindex!=0"  @click="up(index,rowindex)"> <span class="glyphicon glyphicon-arrow-up"></span></button>
                             </div>
                                 <form class="form-horizontal panel-body" action="javascript:void(0)">
                                     <div class="form-group row">
