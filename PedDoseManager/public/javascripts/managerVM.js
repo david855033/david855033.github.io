@@ -120,11 +120,14 @@ var app=new Vue({
             });
         },createNewDosage:function(index)
         {
-            this.drugList[index].content.push(
-                    {});
-        },insertMedication:function(index)
+            this.drugList[index].content.push({});
+        },insertMedication:function(i)
         {
-            this.drugList.splice(index+1,0,{ });
+            var drugList=this.drugList;
+            if(drugList)
+            {
+                this.drugList.splice(i+1,0,{content:[]});
+            }
         },deleteDrug:function(index)
         {
             this.drugList.splice(index,1);
