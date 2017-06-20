@@ -282,6 +282,8 @@ function makeStyle(){
             DataSource[i].drugName = DataSource[i].drugName.replaceAll("(","<span class='subtittle'>(");
             DataSource[i].drugName = DataSource[i].drugName.replaceAll(")",")</span>");
             DataSource[i].drugName = DataSource[i].drugName.replaceAll("\n","<br>");
+            DataSource[i].drugName = DataSource[i].drugName.replaceAll(" IV"," <span class='r iv'>IV</span>");
+            DataSource[i].drugName = DataSource[i].drugName.replaceAll(" PO"," <span class='r po'>IV</span>");
         }
         if(DataSource[i].info)
         {

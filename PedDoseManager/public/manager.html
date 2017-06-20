@@ -70,23 +70,23 @@
                     </div>
                         <form class="form-horizontal panel-body">
                             <div class="form-group row">
-                                <label for="drugName" class="control-label col-sm-1 text-right">Drug Name:</label>
+                                <label for="drugName" class="control-label col-sm-1 text-right" >Drug Name:</label>
                                 <div class="col-sm-4">
-                                    <textarea id="drugName" v-model="item.drugName" class="form-control" > </textarea>
+                                    <textarea id="drugName" v-model="item.drugName" class="form-control" rows="3" > </textarea>
                                 </div>
-                                <label for="Indication" class="control-label col-sm-1 text-right">Indication:</label>
+                                <label for="Indication" class="control-label col-sm-1 text-right" >Indication:</label>
                                 <div class="col-sm-4">
-                                    <textarea id="Indication" v-model="item.indication" class="form-control" > </textarea>
+                                    <textarea id="Indication" v-model="item.indication" class="form-control" rows="3"> </textarea>
                                 </div>
                             </div>
                               <div class="form-group row">
-                                <label for="Info" class="control-label col-sm-1 text-right">Information:</label>
+                                <label for="Info" class="control-label col-sm-1 text-right" >Information:</label>
                                 <div class="col-sm-4">
-                                    <textarea id="Info" v-model="item.info" class="form-control" > </textarea>
+                                    <textarea id="Info" v-model="item.info" class="form-control" rows="3"> </textarea>
                                 </div>
                                 <label for="ref" class="control-label col-sm-1 text-right">Reference:</label>
                                 <div class="col-sm-4">
-                                    <textarea id="ref" v-model="item.reference" class="form-control" > </textarea>
+                                    <textarea id="ref" v-model="item.reference" class="form-control"  rows="3"> </textarea>
                                 </div>
                             </div>    
                             <div class="form-group row">
@@ -103,18 +103,14 @@
                                  </div>
                                  <label for="age" class="control-label  col-sm-1 text-right ">Age Range:</label>
                                  <div class="col-sm-1">
-                                    <input id="age" v-model="item.ageLimitL" class="form-control">
+                                    <input id="age" v-model="item.ageLimitL" class="form-control" @input="checkAge(item)">
                                  </div>
                                  <div class="col-sm-1">
-                                    <input v-model="item.ageLimitU" class="form-control">
+                                    <input v-model="item.ageLimitU" class="form-control"  @input="checkAge(item)">
                                  </div>
                                 <div class="col-sm-1">
-                                    <select class="form-control">
-                                        <option></option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
+                                    <select class="form-control" v-model="item.ageRange" @change="setAge(item)">
+                                        <option v-for="age in ageRange">{{age.name}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -144,18 +140,14 @@
                                         </div>
                                         <label for="age" class="control-label  col-sm-1 text-right ">Age Range:</label>
                                         <div class="col-sm-1">
-                                            <input id="age" v-model="row.ageLimitL" class="form-control">
+                                            <input id="age" v-model="row.ageLimitL" class="form-control" @input="checkAge(row)">
                                         </div>
                                         <div class="col-sm-1">
-                                            <input v-model="row.ageLimitU" class="form-control">
+                                            <input v-model="row.ageLimitU" class="form-control"  @input="checkAge(row)">
                                         </div>
                                         <div class="col-sm-1">
-                                            <select class="form-control selectpicker">
-                                                <option></option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
+                                             <select class="form-control" v-model="row.ageRange" @change="setAge(row)">
+                                                <option v-for="age in ageRange">{{age.name}}</option>
                                             </select>
                                         </div>
                                     </div>

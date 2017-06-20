@@ -11,7 +11,19 @@ var app=new Vue({
         searchText:"",
         searchTextInput:"",
         bw_checked:0,
-        searchList:[]
+        searchList:[],
+        ageRange:[
+            {name:"",ageLimitL:"",ageLimitU:""},
+            {name:"≦7天",ageLimitL:"",ageLimitU:"7d"},
+            {name:"≧8天",ageLimitL:"8d",ageLimitU:""},
+            {name:"≦14天",ageLimitL:"",ageLimitU:"14d"},
+            {name:"≧15天",ageLimitL:"15d",ageLimitU:""},
+            {name:"≦30天(Neonate)",ageLimitL:"",ageLimitU:"30d"},
+            {name:"≧31天",ageLimitL:"31d",ageLimitU:""},
+            {name:"8-14天",ageLimitL:"8d",ageLimitU:"14d"},
+            {name:"14-30天",ageLimitL:"14d",ageLimitU:"30d"},
+            {name:"Infant",ageLimitL:"30d",ageLimitU:"365d"}
+        ],
     },
     computed:{
         bwForCalculation:function(){
@@ -65,7 +77,14 @@ var app=new Vue({
                         }
                     }
                     //--convert old styles
-                    
+                    vueInstance.checkAge(data[i]);
+                    if(data[i].content)
+                    {   
+                        for(var j = 0; j<data[i].content.length;j++)
+                        {
+                            vueInstance.checkAge(data[i].content[j]);
+                        }
+                    }
                     vueInstance.drugList.push(data[i]);
                     vueInstance.calculateDose();
                 }
@@ -166,7 +185,9 @@ var app=new Vue({
                 result += "≦"+ageLimitU;
             }
             result=result.trim();
-            row.description=result;
+            if(result){
+                row.description=result;
+            }
         },
         sort:function()
         {
@@ -253,6 +274,32 @@ var app=new Vue({
                     prestring=prestring.replace(match[k],result);
                 }
                 thisDose.calculated=prestring;
+            }
+        },
+        checkAge:function(item){
+            var ageRange= this.ageRange;
+            for(var i = 0 ; i <ageRange.length; i++)
+            {
+                item.ageLimitL=item.ageLimitL?item.ageLimitL:"";
+                item.ageLimitU=item.ageLimitU?item.ageLimitU:"";
+                if(item.ageLimitL==ageRange[i].ageLimitL&&item.ageLimitU==ageRange[i].ageLimitU)
+                {
+                    item.ageRange=ageRange[i].name;
+                    return;
+                }
+            }
+            item.ageRange= "";
+        },
+        setAge:function(item){
+            var ageRange= this.ageRange;
+            for(var i = 0 ; i <ageRange.length; i++)
+            {
+                if(ageRange[i].name==item.ageRange)
+                {
+                    item.ageLimitL=ageRange[i].ageLimitL;
+                    item.ageLimitU=ageRange[i].ageLimitU;
+                    break;
+                }
             }
         }
     },
