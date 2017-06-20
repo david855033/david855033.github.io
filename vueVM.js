@@ -101,7 +101,6 @@ var app = new Vue({
                             var result=bw_checked*multipier;
                             var isMax=false;
                             if(max>0&&result>max) {result=max; isMax=true;}
-
                             var digi = equation.split('*')[2]?equation.split('*')[2]:1;
                             result = parseFloat(Math.round(result/digi)*digi).toFixed(3)*1;
                             if(isMax) {
@@ -316,6 +315,7 @@ function makeStyle(){
                 current.dosage = current.dosage.replaceAll("q12h","<span class='q q12h'>q12h</span>");
                 current.dosage = current.dosage.replaceAll("qd","<span class='q qd'>qd</span>");
                 current.dosage = current.dosage.replaceAll("st","<span class='q st'>st</span>");
+                current.dosage = current.dosage.replaceAll("cont","<span class='q cont'>cont</span>");
                 current.equation = current.equation.replaceAll("\n","<br>");
             }
         }

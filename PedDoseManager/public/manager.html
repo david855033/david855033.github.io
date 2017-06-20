@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="./bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="./bootstrap/css/bootstrap-theme.css">
     <script type="text/javascript" src="./bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./javascripts/lodash.js"></script>
 </head>
 <body>
     <div id="app">
@@ -22,7 +23,7 @@
             </div>
             
             <div class="row">
-                <div class="col-sm-12 form-inline">
+                <div class="col-sm-4 form-inline">
                     <label for="dataset">Dataset:</label>
                     <div class="input-group">
                         <input type="text" id="dataset" class="form-control" v-model="dataset"></input>
@@ -33,13 +34,39 @@
                         </span>
                     </div>
                 </div>
+                <div class="col-sm-2">
+                    <button type="button" id="sort" class="btn btn-success" @click="sort">sort</button>
+                </div>
+                <div class="col-sm-2">
+                    <div class="input-group">
+                        <input type="text" id="search" class="form-control" v-model="searchTextInput" placeholder="Search"></input>
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" @click="searchTextInput='';searchText=''">Clear</button>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                     <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" @click="makeSearchList">Tag
+                        <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                            <li v-for="tag in searchList">
+                                <a href="#" @click="searchTextInput=tag;searchText=tag">{{tag}}</a>
+                            </li>
+                        </ul>
+                </div>
+                <div class="col-sm-1">
+                    <div class="input-group">
+                        <input type="text" id="bw" class="form-control" v-model="bw_checked" placeholder="BW" @input="calculateDose"></input>
+                    </div>
+                </div>
+             
             </div>
             <br>
-             <div v-for="(item, index) in drugList">
+             <div v-for="(item, index) in drugList" v-if="checkSearchText(item)">
                  <div class="panel panel-primary">
-                    <div class="panel-heading">Medication-{{index+1}}
-                        <button class="btn btn-danger btn-xs">delete</button>
-                        <button class="btn btn-info btn-xs">copy</button>
+                    <div class="panel-heading">#{{index+1}}-<strong>{{item.drugName}}</strong>
+                        <button class="btn btn-danger btn-xs" @click="deleteDrug(index)">delete</button>
+                        <button class="btn btn-info btn-xs" @click="copyDrug(index)">copy</button>
                     </div>
                         <form class="form-horizontal panel-body">
                             <div class="form-group row">
@@ -95,12 +122,19 @@
                     </div>
                     <div v-for="(row,rowindex) in item.content" class="leftOffSet">
                         <div class="panel panel-success">
-                            <div class="panel-heading">Dosage-{{rowindex+1}}
-                                 <button class="btn btn-danger btn-xs">delete</button>
-                                <button class="btn btn-info btn-xs">copy</button>
+                            <div class="panel-heading">({{rowindex+1}}) <strong>{{row.description}}</strong>
+                                 <button class="btn btn-danger btn-xs" @click="deleteDose(index,rowindex)">delete</button>
+                                <button class="btn btn-info btn-xs" @click="copyDose(index,rowindex)">copy</button>
                             </div>
                                 <form class="form-horizontal panel-body" action="javascript:void(0)">
                                     <div class="form-group row">
+                                        <label for="description" class="control-label col-sm-1">Description:</label>
+                                        <div class="col-sm-3">
+                                            <input id="description" v-model="row.description" class="form-control">
+                                        </div>
+                                         <div class="col-sm-1">
+                                            <button class="btn btn-default" @click="convertLimit(row)"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Convert</button>
+                                        </div>
                                         <label for="bw" class="control-label  col-sm-1 text-right ">BW Range:</label>
                                         <div class="col-sm-1">
                                             <input id="bw" v-model="row.bwLimitL" class="form-control">
@@ -124,13 +158,6 @@
                                                 <option>5</option>
                                             </select>
                                         </div>
-                                        <div class="col-sm-1">
-                                            <button class="btn btn-default">Convert<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>
-                                        </div>
-                                        <label for="description" class="control-label col-sm-1">Description:</label>
-                                        <div class="col-sm-3">
-                                            <input id="description" v-model="row.description" class="form-control">
-                                        </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="Dosage" class="control-label col-sm-1">Dosage:</label>
@@ -139,13 +166,11 @@
                                         </div>
                                         <label for="Equation" class="control-label col-sm-1">Equation:</label>
                                         <div class="col-sm-3">
-                                            <textarea id="Equation" v-model="row.equation" class="form-control" ></textarea>
+                                            <textarea id="Equation" v-model="row.equation" class="form-control" @input="calculateDoseThisDose(row)"></textarea>
                                         </div>
-                                        <div class="col-sm-1">
-                                            <button class="btn btn-default">Calculate<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>
-                                        </div>
+                                        <label for="Calculated" class="control-label col-sm-1">Calculated:</label>
                                         <div class="col-sm-3">
-                                            <textarea id="Calculated" v-model="row.calculated" class="form-control" ></textarea>
+                                            <textarea id="Calculated" v-model="row.calculated" class="form-control"></textarea>
                                         </div>
                                     </div>
                                 </form>
@@ -166,6 +191,6 @@
             </div>
         </div>
 </body>
-<script type="text/javascript" src="./javascripts/manager.js"></script>
+<script type="text/javascript" src="./javascripts/managerVM.js"></script>
 </html>
    
