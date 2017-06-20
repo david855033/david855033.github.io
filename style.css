@@ -360,7 +360,7 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 { font-size: 16px; }
 
 .list-move{
-    transition: all 0.5s ease;
+    transition: all 0.3s ease;
 }
 
 .list-leave-active{

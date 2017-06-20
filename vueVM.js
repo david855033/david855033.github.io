@@ -207,14 +207,15 @@ var app = new Vue({
             if(this.searchText!='')
             {
                 this.searchText='';
-                this.onSearchTextChange()
             }else
             {
                 if(this.isMenuOnTop)
                 {
                     this.isMenuShowed=false;
+                    return;
                 }
             }
+            this.onSearchTextChange()
         },
         onContainerClick:function(s){
             if(this.isMenuOnTop&&this.isMenuShowed){
@@ -437,6 +438,7 @@ $(function(){
                 app.isMenuShowed=false;
             }
             app.clearButton();
+            return false;
         }else if(e.keyCode==13) {
             if(app.isMenuShowed)
             {
