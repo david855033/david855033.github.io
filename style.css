@@ -270,7 +270,6 @@ input:hover{
     margin-top: 10px;
     margin-bottom: 10px;
     outline: 0.5px solid rgb(220,220,220);
-    overflow: hidden;
 }
 .row>div
 {
@@ -279,24 +278,18 @@ input:hover{
 }
 .description
 {
-    width:100%;
-    white-space: nowrap;
     font-weight: 600;
     font-size: 0.9em;
     padding: 4px;
 }
 .dosage
 {
-    width:100%;
-    white-space: nowrap;
     padding: 4px;
     font-size: 0.9em;
 }
 .calculated
 {
-    width:100%;
     overflow: hidden;
-    white-space: nowrap;
     font-weight: 600;
     font-size: 1.2em;
     background: rgb(255,255,180);
