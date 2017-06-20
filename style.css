@@ -401,6 +401,23 @@ span.qd{
     background-color: hsla(270, 64%, 60%,0.8);
     color: #fff;
 }
+span.qod{
+    background-color: hsla(320, 80%, 40%,0.6);
+    color: #fff;
+}
+span.qw{
+   background-color: hsla(20, 100%, 45%,0.8);
+    color: #fff;
+}
+span.biw{
+   background-color: hsla(40, 100%, 45%,0.8);
+    color: #fff;
+}
+span.tiw{
+   background-color: hsla(60, 100%, 45%,0.8);
+    color: #fff;
+}
+
 span.st{
    background-color: hsla(180, 64%, 0%,0.8);
     color: #fff;

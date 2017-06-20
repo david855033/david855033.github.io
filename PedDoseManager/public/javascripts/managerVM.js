@@ -120,13 +120,21 @@ var app=new Vue({
             });
         },createNewDosage:function(index)
         {
-            this.drugList[index].content.push({});
+            this.drugList[index].content.push({ageRange:"",description:"",dosage:"",equation:""});
         },insertMedication:function(i)
         {
             var drugList=this.drugList;
             if(drugList)
-            {
-                this.drugList.splice(i+1,0,{content:[]});
+            {   
+                this.drugList.splice(i+1,0,{
+                    drugName:"",
+                    indication:"",
+                    info:"",
+                    reference:"",
+                    tag:"",
+                    content:[],
+                    ageRange:""
+                });
             }
         },deleteDrug:function(index)
         {
@@ -202,7 +210,7 @@ var app=new Vue({
             result=result.trim();
             
             if(result){
-                row.description=result;
+                row.description+=result;
             }
         },
         sort:function()
@@ -308,6 +316,7 @@ var app=new Vue({
         },
         setAge:function(item){
             var ageRange= this.ageRange;
+            if(!item.ageRange){item.ageRange="";}
             for(var i = 0 ; i <ageRange.length; i++)
             {
                 if(ageRange[i].name==item.ageRange)

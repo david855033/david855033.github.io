@@ -341,8 +341,12 @@ function makeStyle(){
                 current.dosage = current.dosage.replaceAll("q8h","<span class='q q8h'>q8h</span>");
                 current.dosage = current.dosage.replaceAll("q12h","<span class='q q12h'>q12h</span>");
                 current.dosage = current.dosage.replaceAll("qd","<span class='q qd'>qd</span>");
+                current.dosage = current.dosage.replaceAll("qod","<span class='q qod'>qod</span>");
                 current.dosage = current.dosage.replaceAll("st","<span class='q st'>st</span>");
                 current.dosage = current.dosage.replaceAll("cont","<span class='q cont'>cont</span>");
+                current.dosage = current.dosage.replaceAll("qw","<span class='q qw'>qw</span>");
+                current.dosage = current.dosage.replaceAll("biw","<span class='q biw'>biw</span>");
+                current.dosage = current.dosage.replaceAll("tiw","<span class='q tiw'>tiw</span>");
                 current.equation = current.equation.replaceAll("\n","<br>");
             }
         }
