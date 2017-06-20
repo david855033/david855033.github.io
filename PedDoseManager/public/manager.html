@@ -67,7 +67,14 @@
                                  <div class="col-sm-4">
                                     <input id="tag" v-model="item.tag" class="form-control"> 
                                  </div>
-                                 <label for="age" class="control-label  col-sm-1 text-right ">Age:</label>
+                                 <label for="bw" class="control-label  col-sm-1 text-right ">BW Range:</label>
+                                 <div class="col-sm-1">
+                                    <input id="bw" v-model="item.bwLimitL" class="form-control">
+                                </div>
+                                <div class="col-sm-1">
+                                    <input v-model="item.bwLimitU" class="form-control">
+                                 </div>
+                                 <label for="age" class="control-label  col-sm-1 text-right ">Age Range:</label>
                                  <div class="col-sm-1">
                                     <input id="age" v-model="item.ageLimitL" class="form-control">
                                  </div>
@@ -83,14 +90,6 @@
                                         <option>5</option>
                                     </select>
                                 </div>
-                                
-                                 <label for="bw" class="control-label  col-sm-1 text-right ">BW:</label>
-                                 <div class="col-sm-1">
-                                    <input id="bw" v-model="item.bwLimitL" class="form-control">
-                                </div>
-                                <div class="col-sm-1">
-                                    <input v-model="item.bwLimitU" class="form-control">
-                                 </div>
                             </div>
                         </form>
                     </div>
@@ -102,7 +101,14 @@
                             </div>
                                 <form class="form-horizontal panel-body" action="javascript:void(0)">
                                     <div class="form-group row">
-                                        <label for="age" class="control-label  col-sm-1 text-right ">Age:</label>
+                                        <label for="bw" class="control-label  col-sm-1 text-right ">BW Range:</label>
+                                        <div class="col-sm-1">
+                                            <input id="bw" v-model="row.bwLimitL" class="form-control">
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <input v-model="row.bwLimitU" class="form-control">
+                                        </div>
+                                        <label for="age" class="control-label  col-sm-1 text-right ">Age Range:</label>
                                         <div class="col-sm-1">
                                             <input id="age" v-model="row.ageLimitL" class="form-control">
                                         </div>
@@ -118,15 +124,8 @@
                                                 <option>5</option>
                                             </select>
                                         </div>
-                                        <label for="bw" class="control-label  col-sm-1 text-right ">BW:</label>
                                         <div class="col-sm-1">
-                                            <input id="bw" v-model="row.bwLimitL" class="form-control">
-                                        </div>
-                                        <div class="col-sm-1">
-                                            <input v-model="row.bwLimitU" class="form-control">
-                                        </div>
-                                        <div class="col-sm-1">
-                                            <button class="btn btn-warning">Convert<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>
+                                            <button class="btn btn-default">Convert<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>
                                         </div>
                                         <label for="description" class="control-label col-sm-1">Description:</label>
                                         <div class="col-sm-3">
@@ -143,7 +142,7 @@
                                             <textarea id="Equation" v-model="row.equation" class="form-control" ></textarea>
                                         </div>
                                         <div class="col-sm-1">
-                                            <button class="btn btn-secondary">Calculate<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>
+                                            <button class="btn btn-default">Calculate<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>
                                         </div>
                                         <div class="col-sm-3">
                                             <textarea id="Calculated" v-model="row.calculated" class="form-control" ></textarea>

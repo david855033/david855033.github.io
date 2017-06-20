@@ -24,7 +24,7 @@ textarea:focus, input:focus{
 .menuButton{
     height: 45px;
     width: 40px;
-    background: rgba(0,0,0,0.1);
+    background: rgba(70,120,150,0.8);
     text-align: center;
     line-height: 40px;
     float: right;
@@ -49,7 +49,7 @@ textarea:focus, input:focus{
 }
 .menu{
     width: 150px;
-    background: rgb(215,225,225);
+    background: rgb(205,215,225);
     top: 45px;
     right: 0px;
     position: fixed;
