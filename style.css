@@ -352,7 +352,7 @@ input:hover{
     white-space: nowrap;
 }
 .maxDose{
-   background: yellow;
+   background: pink;
 }
 
 
@@ -430,11 +430,11 @@ span.r
 }
 span.iv
 {   
-    background-color: hsla(200, 70%, 50%,0.3);
+    background-color: hsla(200, 70%, 50%,0.4);
     color: #fff;
 }
 span.po
 {   
-    background-color: hsla(100, 70%, 50%,0.3);
+    background-color: hsla(40, 90%, 40%,0.5);
     color: #fff;
 }

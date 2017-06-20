@@ -22,7 +22,8 @@ var app=new Vue({
             {name:"8-14天",ageLimitL:"8d",ageLimitU:"14d"},
             {name:"14-30天",ageLimitL:"14d",ageLimitU:"30d"},
             {name:"Infant",ageLimitL:"30d",ageLimitU:"365d"},
-            {name:"Infant, Child, Adult",ageLimitL:"30d",ageLimitU:""}
+            {name:"Infant, Child, Adult",ageLimitL:"30d",ageLimitU:""},
+            {name:"Child",ageLimitL:"1",ageLimitU:""}
         ],
     },
     computed:{
@@ -94,6 +95,17 @@ var app=new Vue({
         {
             console.log("postjson: "+this.dataset);
             var vueInstance=this;
+            for(var i = 0 ; i <data.length;i++)
+            {
+                vueInstance.drugList[i].index=i;
+                if(vueInstance.drugList[i].content)
+                {   
+                    for(var j = 0; j<vueInstance.drugList[i].content.length;j++)
+                    {
+                        delete vueInstance.drugList[i].content[j].calculated;
+                    }
+                }
+            }
             $.ajax({
                 type: "POST",
                 url: "http://localhost:3000/manage/"+this.dataset+"/postjson",
@@ -304,12 +316,10 @@ var app=new Vue({
                 }
             }
         },
-        up:function(index,rowindex){
-            var list= this.drugList[index].content;
+        up:function(list,rowindex){
             list.splice(rowindex-1, 2, list[rowindex], list[rowindex-1] );
         },
-        down:function(index,rowindex){
-             var list= this.drugList[index].content;
+        down:function(list,rowindex){
             list.splice(rowindex, 2, list[rowindex+1], list[rowindex] );
         }
     },

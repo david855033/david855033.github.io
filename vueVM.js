@@ -100,7 +100,10 @@ var app = new Vue({
                             var bw_checked=this.bwForCalculation;
                             var result=bw_checked*multipier;
                             var isMax=false;
-                            if(max>0&&result>max) {result=max; isMax=true;}
+                            if(max>0&&result>max) {
+                                result=max;
+                                isMax=true;
+                            }
                             var digi = equation.split('*')[2]?equation.split('*')[2]:1;
                             result = parseFloat(Math.round(result/digi)*digi).toFixed(3)*1;
                             if(isMax) {
@@ -135,6 +138,9 @@ var app = new Vue({
             this.age_checked=this.age?this.age:0;
             this.isAgeInDay=this.checkLastChar(this.age_checked.toString(),"d");
             this.calculateDose();
+        },
+        onMenuButtonClick:function(){
+            this.isMenuShowed=!this.isMenuShowed;
         },
         OnBWChange:function(){
             if(this.bw && typeof this.bw ==="string")
@@ -258,7 +264,8 @@ function Render(){
     app.drugList.length=0;
     makeStyle();
     DataSource.sort(function(a,b){
-         return a.drugName.toLowerCase().localeCompare(b.drugName.toLowerCase())}
+        return a.index-b.index;
+    }
     );
     for(var i = 0 ; i < DataSource.length;i++ )
     {
@@ -283,7 +290,7 @@ function makeStyle(){
             DataSource[i].drugName = DataSource[i].drugName.replaceAll(")",")</span>");
             DataSource[i].drugName = DataSource[i].drugName.replaceAll("\n","<br>");
             DataSource[i].drugName = DataSource[i].drugName.replaceAll(" IV"," <span class='r iv'>IV</span>");
-            DataSource[i].drugName = DataSource[i].drugName.replaceAll(" PO"," <span class='r po'>IV</span>");
+            DataSource[i].drugName = DataSource[i].drugName.replaceAll(" PO"," <span class='r po'>PO</span>");
         }
         if(DataSource[i].info)
         {
@@ -428,6 +435,21 @@ $(function(){
                 app.onSearchTextChange();
                 if(app.isMenuOnTop) app.isMenuShowed=false;
                 return false;
+            }
+        }else
+        {
+            if(!$(".bw").is(":focus")&&
+            !$(".age").is(":focus")&&
+            !e.ctrlKey&&!(e.keyCode==17))
+            {
+                if(app.isMenuOnTop)
+                {
+                    app.isMenuShowed=true;
+                }
+                if(!$("#searchText").is(":focus"))
+                {
+                    $("#searchText").focus();
+                }
             }
         }
     });

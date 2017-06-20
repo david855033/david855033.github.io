@@ -15,16 +15,16 @@
 <body onload="Render()">
     <div id="app">
         <div id="header">
-            <div class="menuButton" v-show="isMenuOnTop" v-on:click="isMenuShowed=!isMenuShowed">▽ </div>
+            <div class="menuButton" v-show="isMenuOnTop" @click="onMenuButtonClick();focusSearchBox();">▽ </div>
             <form id="ageForm" action="javascript:void(0);">
                 <div>
-                    <input type="text" placeholder="Age" class="age" v-model="age" width="100px" @keyup="OnAgeChange" onchange="app.onAgeValueChange()">
+                    <input type="text" placeholder="Age" class="age" id="age" v-model="age" width="100px" @keyup="OnAgeChange" onchange="app.onAgeValueChange()">
                 <span v-if="!isAgeInDay">y</span>
                 </div>
             </form>
             <form action="javascript:void(0);">
                 <div>
-                    <input type="text" placeholder="BW" class="bw"  v-model="bw" width="100px" @keyup="OnBWChange" onchange="app.onBWValueChange()">
+                    <input type="text" placeholder="BW" class="bw" id="bw" v-model="bw" width="100px" @keyup="OnBWChange" onchange="app.onBWValueChange()">
                     <span v-if="!isBwInGram">kg</span>
                 </div>
             </form>
@@ -45,7 +45,7 @@
                         <div class="clearboth"></div>
                     </div>
                     <ul>
-                        <li v-for="item in searchList" v-bind:class="[item==searchText?'li-focused':'']" @click="isMenuShowed=!(searchText==item&&isMenuOnTop);searchText=item;onSearchTextChange();focusSearchBox;"><span>{{item}}</span></li>
+                        <li v-for="item in searchList" v-bind:class="[item==searchText?'li-focused':'']" @click="isMenuShowed=!(searchText==item&&isMenuOnTop);searchText=item;onSearchTextChange();focusSearchBox();"><span>{{item}}</span></li>
                     </ul>
                 </div>
             </transition>
