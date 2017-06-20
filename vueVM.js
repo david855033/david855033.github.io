@@ -111,8 +111,8 @@ var app = new Vue({
                             }
                             prestring=prestring.replace(match[k],result);
                         }
-                        thisDrug.content[j].calculated=prestring;
                     }
+                    thisDrug.content[j].calculated=prestring;
                 }
             };
         },
@@ -453,6 +453,7 @@ $(function(){
                 if(!$("#searchText").is(":focus"))
                 {
                     $("#searchText").focus();
+                    app.searchText+=e.key;
                 }
             }
         }
