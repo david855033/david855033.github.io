@@ -45,7 +45,7 @@
                         <div class="clearboth"></div>
                     </div>
                     <ul>
-                        <li v-for="item in searchList" v-bind:class="[item==searchText?'li-focused':'']" @click="isMenuShowed=!(searchText==item&&isMenuOnTop);searchText=item;onSearchTextChange();focusSearchBox();"><span>{{item}}</span></li>
+                        <li v-for="item in searchList" v-bind:class="[item==searchText?'li-focused':'']" @click="isMenuShowed=!(searchText==item&&isMenuOnTop);searchText=item;onSearchTextChange();if(!realTimeRender){focusSearchBox();}"><span>{{item}}</span></li>
                     </ul>
                 </div>
             </transition>
