@@ -95,7 +95,7 @@ var app=new Vue({
         {
             console.log("postjson: "+this.dataset);
             var vueInstance=this;
-            for(var i = 0 ; i <data.length;i++)
+            for(var i = 0 ; i <vueInstance.drugList.length;i++)
             {
                 vueInstance.drugList[i].index=i;
                 if(vueInstance.drugList[i].content)
