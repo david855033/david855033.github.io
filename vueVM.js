@@ -307,9 +307,13 @@ function makeStyle(){
             {
                 var current = DataSource[i].content[j];
                 current.dosage = current.dosage.replaceAll("\n","<br>");
-                current.dosage = current.dosage.replaceAll("q6-8h","q6h-q8h");
-                current.dosage = current.dosage.replaceAll("q8-12h","q8h-q12h");
-                current.dosage = current.dosage.replaceAll("q8-q12h","q8h-q12h");
+                current.dosage = current.dosage.replaceAll("q6-","q6h-");
+                current.dosage = current.dosage.replaceAll("q8-","q8h-");
+                current.dosage = current.dosage.replaceAll("q12-","q12h");
+                current.dosage = current.dosage.replaceAll("-6h","-q6h");
+                current.dosage = current.dosage.replaceAll("-8h","-q8h");
+                current.dosage = current.dosage.replaceAll("-12h","-q12h");
+                current.dosage = current.dosage.replaceAll("--","-");
 
                 current.dosage = current.dosage.replaceAll("q4h","<span class='q q4h'>q4h</span>");
                 current.dosage = current.dosage.replaceAll("q6h","<span class='q q6h'>q6h</span>");

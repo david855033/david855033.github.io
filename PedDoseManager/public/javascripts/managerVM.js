@@ -301,6 +301,14 @@ var app=new Vue({
                     break;
                 }
             }
+        },
+        up:function(index,rowindex){
+            var list= this.drugList[index].content;
+            list.splice(rowindex-1, 2, list[rowindex], list[rowindex-1] );
+        },
+        down:function(index,rowindex){
+             var list= this.drugList[index].content;
+            list.splice(rowindex, 2, list[rowindex+1], list[rowindex] );
         }
     },
     watch:{

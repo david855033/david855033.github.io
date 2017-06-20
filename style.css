@@ -418,9 +418,9 @@ span.cont{
 }
 span.r
 {   
-    padding: 0em .3em;
+    padding: 0em .2em;
     font-size: 0.5em;
-    font-weight: 700;
+    font-weight: 600;
     line-height: 1em;
     text-align: center;
     white-space: nowrap;
@@ -430,11 +430,11 @@ span.r
 }
 span.iv
 {   
-    background-color: hsla(200, 70%, 50%,0.4);
+    background-color: hsla(200, 70%, 50%,0.3);
     color: #fff;
 }
 span.po
 {   
-    background-color: hsla(100, 70%, 50%,0.4);
+    background-color: hsla(100, 70%, 50%,0.3);
     color: #fff;
 }
