@@ -240,6 +240,9 @@ var app = new Vue({
         focusSearchBox:function(){
             $('#searchText').focus();
         },
+        blurSearchBox:function(){
+            $('#searchText').blur();
+        },
         makeSearchList:function(){
             for(var i = 0; i < this.drugList.length;i++)
             {
