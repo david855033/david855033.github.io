@@ -18,13 +18,13 @@
             <div class="menuButton" v-show="isMenuOnTop" @click="onMenuButtonClick();focusSearchBox();">▽ </div>
             <form id="ageForm" action="javascript:void(0);">
                 <div>
-                    <input type="text" placeholder="Age" class="age" id="age" v-model="age" width="100px" @keyup="OnAgeChange" onchange="app.onAgeValueChange()">
+                    <input type="text" placeholder="Age" class="age" id="age" v-model="age" width="100px" @keyup="OnAgeChange" onchange="app.onAgeValueChange()" autocomplete="off">
                 <span v-if="!isAgeInDay">y</span>
                 </div>
             </form>
             <form action="javascript:void(0);">
                 <div>
-                    <input type="text" placeholder="BW" class="bw" id="bw" v-model="bw" width="100px" @keyup="OnBWChange" onchange="app.onBWValueChange()">
+                    <input type="text" placeholder="BW" class="bw" id="bw" v-model="bw" width="100px" @keyup="OnBWChange" onchange="app.onBWValueChange()" autocomplete="off">
                     <span v-if="!isBwInGram">kg</span>
                 </div>
             </form>
@@ -39,7 +39,7 @@
                 <div class="menu" v-show="isMenuShowed">
                     <div class="searchWrap">
                         <form id="searchForm" action="javascript:void(0);">
-                            <input type="text" id="searchText" class="search" placeholder="Search"　v-model="searchText"  @keyup="onSearchKeyUp" onchange="app.onSearchTextChange()">
+                            <input type="text" id="searchText" class="search" placeholder="Search"　v-model="searchText"  @keyup="onSearchKeyUp" onchange="app.onSearchTextChange()" autocomplete="off">
                         </form>
                         <div class="clearSearch" @click="onSearchClear()">x</div>
                         <div class="clearboth"></div>
