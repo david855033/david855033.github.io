@@ -241,7 +241,7 @@ var app = new Vue({
             $('#searchText').focus();
         },
         blurSearchBox:function(){
-            $('#searchText').blur();
+            $('#searchText').focusout();
         },
         makeSearchList:function(){
             for(var i = 0; i < this.drugList.length;i++)
