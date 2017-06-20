@@ -224,7 +224,7 @@ input:hover{
 }
 
 .container-focused{
-    background: rgb(255,255,245);
+    box-shadow: 8px 8px 13px #333333;
     outline: 1px solid black;
 }
 

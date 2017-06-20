@@ -53,8 +53,8 @@
             <div class="content" v-bind:class="{'content-menuShowed':isMenuShowed&&!isMenuOnTop}">
                <transition-group name="list" tag="div">
                   
-                    <div v-for="item in drugList" v-if="checkAgeAndBW(item)&&checkSearchText(item)" v-bind:key="item">
-                        <div class="container" @click="onContainerClick(item.drugName)" v-bind:class="[item.drugName==focused?'container-focused':'']">
+                    <div v-for="(item,index) in drugList" v-if="checkAgeAndBW(item)&&checkSearchText(item)" v-bind:key="item">
+                        <div v-bind:id="['d'+index]" class="container" @click="onContainerClick(item.drugName)" v-bind:class="[item.drugName==focused?'container-focused':'']">
                             <div class="top">  
                                 <div class="left">
                                     <div class="drugName" v-html="item.drugName">
