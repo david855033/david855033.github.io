@@ -312,9 +312,10 @@ input:hover{
     padding: 2px;
 }
 .adjustDrop{
-    overflow: hidden;
+    position: relative;
     text-align: center;
-    background: rgb(255,255,180);
+    font-size: 0.5em;
+    background: rgb(255,255,180);    
 }
 .adjust>button
 {
@@ -441,7 +442,9 @@ button.minus span:after {
 .maxDose{
    background: pink;
 }
-
+span.adjusted{
+   text-decoration: underline;
+}
 
 .disclaim{
     font-size: 0.6em;

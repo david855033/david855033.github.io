@@ -116,6 +116,10 @@ var app = new Vue({
                     if(isMax) {
                         result = "<span class='maxDose'>"+result+"</span>";
                     }
+                    if(row.adjustAmount&&row.adjustAmount!=1)
+                    {
+                        result="<span class='adjusted'>"+result+"</span>";
+                    }
                     prestring=prestring.replace(match[k],result);
                 }
             }
@@ -128,9 +132,13 @@ var app = new Vue({
                     if(row.adjustAmount)
                     {
                         equation= (equation*row.adjustAmount).toFixed(0);
+                        if(row.adjustAmount!=1)
+                        {
+                            equation= "<span class='adjusted'>"+equation+"</span>";
+                        }
                     }
-                    var result = equation;
-                    prestring=prestring.replace(match[k],result);
+                    
+                    prestring=prestring.replace(match[k],equation);
                 }
             }
             row.calculated=prestring;
