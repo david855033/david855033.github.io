@@ -104,19 +104,25 @@ var app = new Vue({
                     var multipier=split[1]?split[1]:1;
                     var max=split[3]?split[3]:-1;
                     var bw_checked=this.bwForCalculation;
+                    var isDivider = false;
+                    if(split[0]&&split[0]=="1/bw")
+                    {
+                        bw_checked=1/bw_checked;
+                        isDivider=true;
+                    }
                     var result=bw_checked*multipier;
-                    if(row.adjustAmount) {result*=row.adjustAmount;}
+                    if(row.adjustAmount&&!isDivider) {result*=row.adjustAmount;}
                     var isMax=false;
                     if(max>0&&result>max) {
                         result=max;
                         isMax=true;
                     }
-                    var digi = equation.split('*')[2]?equation.split('*')[2]:1;
+                    var digi = split[2]?split[2]:1;
                     result = parseFloat(Math.round(result/digi)*digi).toFixed(3)*1;
                     if(isMax) {
                         result = "<span class='maxDose'>"+result+"</span>";
                     }
-                    if(row.adjustAmount&&row.adjustAmount!=1)
+                    if(row.adjustAmount&&row.adjustAmount!=1&&!isDivider)
                     {
                         result="<span class='adjusted'>"+result+"</span>";
                     }

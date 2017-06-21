@@ -289,13 +289,17 @@ var app=new Vue({
                     var multipier=split[1]?split[1]:1;
                     var max=split[3]?split[3]:-1;
                     var bw_checked=this.bwForCalculation;
+                    if(split[0]&&split[0]=="1/bw")
+                    {
+                        bw_checked=1/bw_checked;
+                    }
                     var result=bw_checked*multipier;
                     var isMax=false;
                     if(max>0&&result>max) {
                         result=max;
                         isMax=true;
                     }
-                    var digi = equation.split('*')[2]?equation.split('*')[2]:1;
+                    var digi = splt[2]?split[2]:1;
                     result = parseFloat(Math.round(result/digi)*digi).toFixed(3)*1;
                     if(isMax) {
                         result = "<span class='maxDose'>"+result+"</span>";
