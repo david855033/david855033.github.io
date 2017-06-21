@@ -25,10 +25,11 @@ textarea:focus, input:focus{
     height: 45px;
     width: 40px;
     background: rgba(70,120,150,0.8);
+    color: hsla(0,0%,0%,0.4);
     text-align: center;
     line-height: 40px;
     float: right;
-    font-size: 25px;
+    font-size: 30px;
     transition: 0.3s;
 }
 .menuButton:hover{
@@ -38,10 +39,11 @@ textarea:focus, input:focus{
     height: 45px;
     width: 40px;
     background: rgb(235,150,150);
+    color: hsla(0,0%,0%,0.4);
     text-align: center;
     line-height: 40px;
     float: left;
-    font-size: 20px;
+    font-size: 30px;
     transition: 0.3s;
 }
 .clearButton:hover{
@@ -442,7 +444,7 @@ button.minus span:after {
     white-space: nowrap;
 }
 .maxDose{
-   background: pink;
+  background-color: pink;
 }
 span.adjusted{
    text-decoration: underline;

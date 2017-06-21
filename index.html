@@ -15,7 +15,7 @@
 <body onload="Render()">
     <div id="app">
         <div id="header">
-            <div class="menuButton" v-show="isMenuOnTop" @click="onMenuButtonClick();focusSearchBox();">▽ </div>
+            <div class="menuButton" v-show="isMenuOnTop" @click="onMenuButtonClick();focusSearchBox();">&#8801;</div>
             <form id="ageForm" action="javascript:void(0);">
                 <div>
                     <input type="text" placeholder="Age" class="age" id="age" v-model="age" width="100px" @keyup="OnAgeChange" onchange="app.onAgeValueChange()" autocomplete="off">
@@ -28,7 +28,7 @@
                     <span v-if="!isBwInGram">kg</span>
                 </div>
             </form>
-            <div class="clearButton" @click="clearButton()">X</div>
+            <div class="clearButton" @click="clearButton()">&#215;</div>
         </div>
         <div id="headspacer"></div>
         <transition name="guideAni" key="guide">
