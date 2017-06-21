@@ -544,7 +544,15 @@ $(function(){
             !$(".age").is(":focus")&&
             !e.ctrlKey&&!(e.keyCode==17))
             {
-                if(app.isMenuOnTop)
+                if(e.keyCode>=48&&e.keyCode<=57&&!$("#searchText").is(":focus")){
+                     $(".bw").focus();
+                    if(e.key.length==1)
+                    {
+                        app.bw=e.key;
+                    }
+                    return false;
+                }
+                else if(app.isMenuOnTop)
                 {
                     app.isMenuShowed=true;
                 }
@@ -555,6 +563,7 @@ $(function(){
                     {
                         app.searchText+=e.key;
                     }
+                    return false;
                 }
             }
         }
