@@ -310,12 +310,14 @@ input:hover{
     text-align: center;
     background: rgb(255,255,180);
     padding: 2px;
+    height: 20px;
 }
 .adjustDrop{
     position: relative;
     text-align: center;
     font-size: 0.5em;
-    background: rgb(255,255,180);    
+    background: rgb(255,255,180);
+    height: 15px;
 }
 .adjust>button
 {
@@ -340,10 +342,10 @@ button span {
   cursor: pointer;
   display: inline-block;
   position: relative;
-  transition: 0.5s;
+  transition: 0.3s;
 }
 button:hover span {
-  padding-right: 40px;
+  padding-right: 25px;
 }
 button span:after {
   position: absolute;
@@ -464,6 +466,9 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
     max-height: 0px;
     overflow: hidden;
 }
+
+
+
 
 span.q
 {
