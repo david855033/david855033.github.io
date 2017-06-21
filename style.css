@@ -52,11 +52,11 @@ textarea:focus, input:focus{
 .menu{
     width: 150px;
     background: rgb(205,215,225);
-    top: 45px;
+    top: 55px;
     right: 0px;
     position: fixed;
     z-index:101;
-    box-shadow: 3px 3px 5px #AAAAAA;
+    box-shadow: 5px 5px 5px #777777;
     text-align: center;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
