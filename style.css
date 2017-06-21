@@ -336,7 +336,20 @@ input:hover{
 }
 .emphasize
 {
-    background: lightpink;
+    background: hsla(220,70%,25%,1);
+    color: white;
+    font-size: 1em;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+    padding-left: 0.4em;
+    padding-right: 0.4em;
+    line-height: 30px;
+    font-weight: 600;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
 }
 .subtittle
 {
@@ -377,7 +390,6 @@ span.q
     text-align: center;
     white-space: nowrap;
     vertical-align: baseline;
-    border-radius: .1em;
     border-radius: 5px;
 }
 span.q4h{

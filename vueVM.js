@@ -29,19 +29,19 @@ var app = new Vue({
         bwForCalculation:function(){
             if(this.isBwInGram)
             {
-                return this.bw_checked.toString().match(/\d+[.]?\d*/)/1000;
+                return Number(this.bw_checked.toString().match(/\d+[.]?\d*/)/1000);
             }else
             {
-                return this.bw_checked;
+                return Number(this.bw_checked);
             }
         },
         ageInDay:function(){
             if(this.isAgeInDay)
             {
-                return this.getDay(this.age_checked);
+                return Number(this.getDay(this.age_checked));
             }else
             {
-                return this.age_checked*365;
+                return Number(this.age_checked*365);
             }
         }
     },
@@ -286,7 +286,7 @@ function makeStyle(){
         {
             DataSource[i].indication = DataSource[i].indication.replaceAll("[","<span class='emphasize'>");
             DataSource[i].indication = DataSource[i].indication.replaceAll("]","</span>");
-             DataSource[i].indication = DataSource[i].indication.replaceAll("\n","<br>");
+            DataSource[i].indication = DataSource[i].indication.replaceAll("\n","<br>");
         }
         if( DataSource[i].drugName)
         {
@@ -327,6 +327,7 @@ function makeStyle(){
                 current.equation = current.equation.replaceAll("-8h","-q8h");
                 current.equation = current.equation.replaceAll("-12h","-q12h");
                 current.equation = current.equation.replaceAll("--","-");
+                current.equation = current.equation.replaceAll("\n","<br>");
 
                 current.dosage = current.dosage.replaceAll("\n","<br>");
                 current.dosage = current.dosage.replaceAll("q6-","q6h-");
@@ -348,7 +349,11 @@ function makeStyle(){
                 current.dosage = current.dosage.replaceAll("qw","<span class='q qw'>qw</span>");
                 current.dosage = current.dosage.replaceAll("biw","<span class='q biw'>biw</span>");
                 current.dosage = current.dosage.replaceAll("tiw","<span class='q tiw'>tiw</span>");
-                current.equation = current.equation.replaceAll("\n","<br>");
+
+                current.dosage = current.dosage.replaceAll("[","<span class='emphasize'>");
+                current.dosage = current.dosage.replaceAll("]","</span>");
+                current.equation = current.equation.replaceAll("{","<span class='emphasize'>");
+                current.equation = current.equation.replaceAll("}","</span>");
             }
         }
     }
