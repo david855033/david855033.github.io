@@ -311,6 +311,11 @@ input:hover{
     background: rgb(255,255,180);
     padding: 2px;
 }
+.adjustDrop{
+    overflow: hidden;
+    text-align: center;
+    background: rgb(255,255,180);
+}
 .adjust>button
 {
     border: none;
@@ -337,7 +342,7 @@ button span {
   transition: 0.5s;
 }
 button:hover span {
-  padding-right: 30px;
+  padding-right: 40px;
 }
 button span:after {
   position: absolute;

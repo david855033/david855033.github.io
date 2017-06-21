@@ -134,7 +134,6 @@ var app = new Vue({
                 }
             }
             row.calculated=prestring;
-            console.log(prestring);
         },
         checkLastChar:function(s,c){
             if(s && typeof s === "string"){
@@ -173,10 +172,10 @@ var app = new Vue({
             }
         },
         onBWValueChange: function (){
-             this.bw_checked=this.bw?this.bw:0;
-             this.isBwInGram=this.checkLastChar(this.bw_checked.toString(),"g");
-             this.calculateDose();
-             if( this.bw!=0 && this.bw == this.bw_checked)
+            this.bw_checked=this.bw?this.bw:0;
+            this.isBwInGram=this.checkLastChar(this.bw_checked.toString(),"g");
+            this.calculateDose();
+            if( this.bw!=0 && this.bw == this.bw_checked)
             {
                 this.showCaculated=true;
             }else
@@ -278,7 +277,7 @@ var app = new Vue({
                 }
             }
         },
-        adjustIncrease: function(row){
+        adjustIncrease: function(row,index,rowindex){
             if(!row.adjustAmount) row.adjustAmount=1;
             if(row.adjustAmount<1&&row.adjustAmount>0)
             {
@@ -294,8 +293,10 @@ var app = new Vue({
             }
             row.adjustAmount= Number(row.adjustAmount.toFixed(1));
             this.calculateDoseRow(row);
+            var element=$('#d'+index+'i'+rowindex);
+            element.html(row.calculated);
         },
-        adjustDecrease: function(row){
+        adjustDecrease: function(row,index,rowindex){
             if(!row.adjustAmount) row.adjustAmount=1;
             if(row.adjustAmount<=1&&row.adjustAmount>0.2)
             {
@@ -311,10 +312,26 @@ var app = new Vue({
             }
             row.adjustAmount=Number(row.adjustAmount.toFixed(1));
             this.calculateDoseRow(row);
+            var element=$('#d'+index+'i'+rowindex);
+            element.html(row.calculated);
         },
-        adjustReset: function(row){
+        adjustReset: function(row,index,rowindex){
             row.adjustAmount=1;
             this.calculateDoseRow(row);
+            var element=$('#d'+index+'i'+rowindex);
+            element.html(row.calculated);
+        },
+        toggleAdjust:function(row)
+        {
+            if(!row.adjustable) {
+                return;
+            }
+            if(!row.showAdjust){
+                row.showAdjust=true;
+            }
+            else{
+                row.showAdjust=false;
+            }
         }
     }
 });
@@ -376,7 +393,7 @@ function makeStyle(){
             for(var j=0; j<DataSource[i].content.length;j++)
             {
                 var current = DataSource[i].content[j];
-
+                current.showAdjust=false;
                 current.equation = current.equation.replaceAll("\n","<br>");
                 current.equation = current.equation.replaceAll("q6-","q6h-");
                 current.equation = current.equation.replaceAll("q8-","q8h-");

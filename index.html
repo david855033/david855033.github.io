@@ -64,15 +64,16 @@
                                 </div>
                                 
                                 <div class="right">
-                                    <div class="row" v-if="checkAgeAndBW(ind)" v-bind:class="[checkAgeAndBW(ind)?'active':'inactive']" v-for="ind in item.content" >
+                                    <div class="row" v-if="checkAgeAndBW(ind)" v-bind:class="[checkAgeAndBW(ind)?'active':'inactive']" v-for="(ind,rowindex) in item.content" >
                                         <div class="description" v-html="ind.description"></div>
                                         <div class="dosage" v-html="ind.dosage"></div>
-                                        <div class="calculated" :class="{withadjust:ind.adjustable}" v-if="showCaculated&&ind.calculated" v-html="ind.calculated">
+                                        <div v-bind:id="['d'+index+'i'+rowindex]" class="calculated" :class="{withadjust:ind.adjustable}" v-if="showCaculated&&ind.calculated" v-html="ind.calculated" @click="toggleAdjust(ind)">
                                         </div>
-                                        <div class="adjust" v-if="ind.adjustable&&showCaculated&&ind.calculated">
-                                            <button class="plus" @click="adjustIncrease(ind)"><span>▲</span></button>
-                                            <button class="minus" @click="adjustDecrease(ind)"><span>▼</span></button>
-                                            <button class="reset"@click="adjustReset(ind)"><span>◉</span></button>
+                                        <div class="adjustDrop" v-if="!ind.showAdjust&&ind.adjustable&&showCaculated&&ind.calculated" @click="toggleAdjust(ind)">...</div>
+                                        <div class="adjust" v-if="ind.showAdjust&&showCaculated&&ind.calculated">
+                                            <button class="plus" @click="adjustIncrease(ind,index,rowindex)"><span>▲</span></button>
+                                            <button class="minus" @click="adjustDecrease(ind,index,rowindex)"><span>▼</span></button>
+                                            <button class="reset" @click="adjustReset(ind,index,rowindex)"><span>◉</span></button>
                                         </div>
                                     </div>
                                 </div>
