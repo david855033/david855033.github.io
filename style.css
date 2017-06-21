@@ -330,7 +330,7 @@ input:hover{
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 10px;
+    font-size: 16px;
     margin-left: 0.5%;
     margin-right: 0.5%;
     background: rgb(255,255,180);
@@ -341,6 +341,7 @@ input:hover{
     border-radius: 5px;
 }
 button span {
+  font-size: 10px;
   cursor: pointer;
   display: inline-block;
   position: relative;
@@ -371,7 +372,6 @@ button.reset span:after {
 button.plus:hover
 {
     background: HSL(130,90%,80%);
-    
 }
 button.plus span:after {
   content: 'incrs';
