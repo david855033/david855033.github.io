@@ -46,7 +46,7 @@
                             </span>
                         </div>
                     </div>
-                    <div class="col-sm-2">
+                    <div class="col-sm-1">
                         <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" @click="makeSearchList">Tag
                             <span class="caret"></span></button>
                             <ul class="dropdown-menu">
@@ -54,6 +54,9 @@
                                     <a href="#" @click="searchTextInput=tag;searchText=tag">{{tag}}</a>
                                 </li>
                             </ul>
+                    </div>
+                    <div class="col-sm-1">
+                        <label><input type="checkbox" v-model="showDosage">show dosage</label>
                     </div>
                     <div class="col-sm-1 text-right">
                         BW for Calc
@@ -124,7 +127,7 @@
                             </div>
                         </form>
                     </div>
-                    <div v-for="(row,rowindex) in item.content" class="leftOffSet">
+                    <div v-if="showDosage" v-for="(row,rowindex) in item.content" class="leftOffSet">
                         <div class="panel panel-success">
                             <div class="panel-heading">({{rowindex+1}}) <strong>{{row.description}}</strong>
                                 <button class="btn btn-danger btn-xs" @click="deleteDose(index,rowindex)">delete</button>

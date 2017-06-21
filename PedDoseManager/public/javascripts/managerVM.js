@@ -12,6 +12,7 @@ var app=new Vue({
         searchTextInput:"",
         bw_checked:0,
         searchList:[],
+        showDosage:true,
         ageRange:[
             {name:"",ageLimitL:"",ageLimitU:""},
             {name:"≦7天",ageLimitL:"",ageLimitU:"7d"},
