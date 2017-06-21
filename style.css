@@ -444,6 +444,20 @@ button.minus span:after {
 .maxDose{
   background-color: pink;
 }
+.warning{
+    background: yellow;
+    color: black;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+    padding-left: 0.4em;
+    padding-right: 0.4em;
+    margin-top:5px;
+    margin-bottom:5px;
+    font-weight: 600;
+    border-radius: 5px;
+    text-align: center;
+    vertical-align: middle;
+}
 span.adjusted{
    text-decoration: underline;
 }

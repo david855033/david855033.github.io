@@ -372,6 +372,11 @@ function makeStyle(){
             DataSource[i].indication = DataSource[i].indication.replaceAll("]","</span>");
             DataSource[i].indication = DataSource[i].indication.replaceAll("\n","<br>");
         }
+        if( DataSource[i].info )
+        {
+            DataSource[i].info = DataSource[i].info.replaceAll("[","<span class='warning'>");
+            DataSource[i].info = DataSource[i].info.replaceAll("]","</span>");
+        }
         if( DataSource[i].drugName)
         {
             DataSource[i].drugName = DataSource[i].drugName.replaceAll("(","<span class='subtittle'>(");
