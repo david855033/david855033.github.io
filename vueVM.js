@@ -464,7 +464,10 @@ $(function(){
                 if(!$("#searchText").is(":focus"))
                 {
                     $("#searchText").focus();
-                    app.searchText+=e.key;
+                    if(e.key.length==1)
+                    {
+                        app.searchText+=e.key;
+                    }
                 }
             }
         }
