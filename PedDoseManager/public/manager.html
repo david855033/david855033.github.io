@@ -168,12 +168,18 @@
                                         </div>
                                         <label for="Equation" class="control-label col-sm-1">Equation:</label>
                                         <div class="col-sm-3">
-                                            <textarea id="Equation" v-model="row.equation" class="form-control" @input="calculateDoseThisDose(row)"></textarea>
+                                            <textarea id="Equation" v-model="row.equation" class="form-control" @input="calculateDoseRow(row)"></textarea>
                                         </div>
                                         <label for="Calculated" class="control-label col-sm-1">Calculated:</label>
-                                        <div class="col-sm-3">
+                                        <div class="col-sm-2">
                                             <textarea id="Calculated" v-model="row.calculated" class="form-control" readonly></textarea>
                                         </div>
+                                        <div class="col-sm-1">
+                                            <label>
+                                                <input type="checkbox" class="btn btn-default" v-model="row.adjustable">可調總量
+                                            </label>
+                                        </div>
+                                       
                                     </div>
                                 </form>
                             </div>    

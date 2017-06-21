@@ -212,15 +212,19 @@ input:hover{
     padding-top:10px; 
     border-radius: 3px;
 }
-.container, .menuButton, .clearButton{
+.menuButton, .clearButton{
     -webkit-transition-duration: 0.1s; /* Safari */
     transition-duration: 0.1s;
 }
 .menuButton:active, .clearButton:active{
     background: rgba(200,200,200,1);
 }
-.container:active{
-    background: rgb(235,235,235);
+.left{
+    -webkit-transition-duration: 0.1s; /* Safari */
+    transition-duration: 0.1s;
+}
+.left:active{
+    transform: translateY(1px);
 }
 
 .container-focused{
@@ -297,7 +301,79 @@ input:hover{
     line-height: 1.1em;
     text-align: left;
 }
+.withadjust
+{
+    padding-bottom: 0px!important;
+}
+.adjust{
+    overflow: hidden;
+    text-align: center;
+    background: rgb(255,255,180);
+    padding: 2px;
+}
+.adjust>button
+{
+    border: none;
+    width: 30%;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+    margin-left: 0.5%;
+    margin-right: 0.5%;
+    background: rgb(255,255,180);
+    color: black;
+    outline: 1px solid rgb(255,255,180);
+    transition: 0.3s all;
+    cursor: pointer;
+    border-radius: 5px;
+}
+button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+button:hover span {
+  padding-right: 30px;
+}
+button span:after {
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -10%;
+  transition: 0.5s;
+}
+button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+button.reset:hover
+{
+  background: HSL(200,80%,85%);
+}
+button.reset span:after {
+  content: 'reset';
+}
 
+button.plus:hover
+{
+    background: HSL(130,90%,80%);
+    
+}
+button.plus span:after {
+  content: 'incrs';
+}
+
+button.minus:hover
+{
+    background: HSL(0,80%,85%);
+}
+button.minus span:after {
+  content: 'decrs';
+}
 .inactive
 {
     color:rgba(0,0,0,0.2);

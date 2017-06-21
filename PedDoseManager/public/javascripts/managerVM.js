@@ -268,19 +268,15 @@ var app=new Vue({
             for(var i = 0; i< this.drugList.length;i++)
             {
                 var thisDrug=this.drugList[i];
-                this.calculateDoseDrug(thisDrug);
+                for(var j = 0;j<thisDrug.content.length;j++)
+                {
+                    this.calculateDoseRow(thisDrug.content[j]);
+                }
             };
-        },calculateDoseDrug:function(thisDrug)
+        },
+        calculateDoseRow:function(row)
         {
-            for(var j = 0;j<thisDrug.content.length;j++)   
-            {
-                var thisDose=thisDrug.content[j];
-                this.calculateDoseThisDose(thisDose);
-            }
-        },calculateDoseThisDose:function(thisDose)
-        {
-            var prestring=thisDose.equation;
-            if(!prestring){ return;}
+            var prestring=row.equation;
             var match=prestring.match(/[\[].*?[\]]/g);
             if(match)
             {
@@ -293,16 +289,19 @@ var app=new Vue({
                     var bw_checked=this.bwForCalculation;
                     var result=bw_checked*multipier;
                     var isMax=false;
-                    if(max>0&&result>max) {result=max; isMax=true;}
+                    if(max>0&&result>max) {
+                        result=max;
+                        isMax=true;
+                    }
                     var digi = equation.split('*')[2]?equation.split('*')[2]:1;
                     result = parseFloat(Math.round(result/digi)*digi).toFixed(3)*1;
                     if(isMax) {
-                        result = "["+result+"]";
+                        result = "<span class='maxDose'>"+result+"</span>";
                     }
                     prestring=prestring.replace(match[k],result);
                 }
-                thisDose.calculated=prestring;
             }
+            row.calculated=prestring;
         },
         checkAge:function(item){
             var ageRange= this.ageRange;

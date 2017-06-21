@@ -87,34 +87,54 @@ var app = new Vue({
                 var thisDrug=this.drugList[i];
                 for(var j = 0;j<thisDrug.content.length;j++)
                 {
-                    var prestring=thisDrug.content[j].equation;
-                    var match=prestring.match(/[\[].*?[\]]/g);
-                    if(match)
-                    {
-                        for(var k=0; k<match.length;k++)
-                        {
-                            var equation=match[k].slice(1,match[k].length-1);
-                            var split = equation.split('*');
-                            var multipier=split[1]?split[1]:1;
-                            var max=split[3]?split[3]:-1;
-                            var bw_checked=this.bwForCalculation;
-                            var result=bw_checked*multipier;
-                            var isMax=false;
-                            if(max>0&&result>max) {
-                                result=max;
-                                isMax=true;
-                            }
-                            var digi = equation.split('*')[2]?equation.split('*')[2]:1;
-                            result = parseFloat(Math.round(result/digi)*digi).toFixed(3)*1;
-                            if(isMax) {
-                                result = "<span class='maxDose'>"+result+"</span>";
-                            }
-                            prestring=prestring.replace(match[k],result);
-                        }
-                    }
-                    thisDrug.content[j].calculated=prestring;
+                    this.calculateDoseRow(thisDrug.content[j]);
                 }
             };
+        },
+        calculateDoseRow:function(row)
+        {
+            var prestring=row.equation;
+            var match=prestring.match(/[\[].*?[\]]/g);
+            if(match)
+            {
+                for(var k=0; k<match.length;k++)
+                {
+                    var equation=match[k].slice(1,match[k].length-1);
+                    var split = equation.split('*');
+                    var multipier=split[1]?split[1]:1;
+                    var max=split[3]?split[3]:-1;
+                    var bw_checked=this.bwForCalculation;
+                    var result=bw_checked*multipier;
+                    if(row.adjustAmount) {result*=row.adjustAmount;}
+                    var isMax=false;
+                    if(max>0&&result>max) {
+                        result=max;
+                        isMax=true;
+                    }
+                    var digi = equation.split('*')[2]?equation.split('*')[2]:1;
+                    result = parseFloat(Math.round(result/digi)*digi).toFixed(3)*1;
+                    if(isMax) {
+                        result = "<span class='maxDose'>"+result+"</span>";
+                    }
+                    prestring=prestring.replace(match[k],result);
+                }
+            }
+            var match =prestring.match(/[\(].*?[\)]/g);
+            if(match)
+            {
+                for(var k=0; k<match.length;k++)
+                {
+                    var equation=match[k].slice(1,match[k].length-1);
+                    if(row.adjustAmount)
+                    {
+                        equation= (equation*row.adjustAmount).toFixed(0);
+                    }
+                    var result = equation;
+                    prestring=prestring.replace(match[k],result);
+                }
+            }
+            row.calculated=prestring;
+            console.log(prestring);
         },
         checkLastChar:function(s,c){
             if(s && typeof s === "string"){
@@ -257,6 +277,44 @@ var app = new Vue({
                     }
                 }
             }
+        },
+        adjustIncrease: function(row){
+            if(!row.adjustAmount) row.adjustAmount=1;
+            if(row.adjustAmount<1&&row.adjustAmount>0)
+            {
+                row.adjustAmount+=0.2
+            }
+            else if(row.adjustAmount>=1&&row.adjustAmount<5)
+            {
+                row.adjustAmount+=0.5
+            }
+            else
+            {
+                row.adjustAmount+=1
+            }
+            row.adjustAmount= Number(row.adjustAmount.toFixed(1));
+            this.calculateDoseRow(row);
+        },
+        adjustDecrease: function(row){
+            if(!row.adjustAmount) row.adjustAmount=1;
+            if(row.adjustAmount<=1&&row.adjustAmount>0.2)
+            {
+                row.adjustAmount-=0.2
+            }
+            else if(row.adjustAmount>1&&row.adjustAmount<=5)
+            {
+                row.adjustAmount-=0.5
+            }
+            else if(row.adjustAmount>5)
+            {
+                row.adjustAmount-=1
+            }
+            row.adjustAmount=Number(row.adjustAmount.toFixed(1));
+            this.calculateDoseRow(row);
+        },
+        adjustReset: function(row){
+            row.adjustAmount=1;
+            this.calculateDoseRow(row);
         }
     }
 });
@@ -432,6 +490,9 @@ $(function(){
     });
    
     $(".search").mousedown(function(){
+        return false;
+    });
+    $(".adjust").mousedown(function(){
         return false;
     });
     $(".menu").mousedown(function(){
