@@ -330,7 +330,7 @@ input:hover{
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 10px;
     margin-left: 0.5%;
     margin-right: 0.5%;
     background: rgb(255,255,180);
@@ -341,7 +341,6 @@ input:hover{
     border-radius: 5px;
 }
 button span {
-  font-size: 10px;
   cursor: pointer;
   display: inline-block;
   position: relative;
