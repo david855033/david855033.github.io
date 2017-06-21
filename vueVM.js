@@ -284,6 +284,7 @@ var app = new Vue({
                     }
                 }
             }
+            this.searchList.sort();
         },
         adjustIncrease: function(row,index,rowindex){
             if(!row.adjustAmount) row.adjustAmount=1;

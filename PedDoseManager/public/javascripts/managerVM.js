@@ -239,18 +239,19 @@ var app=new Vue({
                     if(item.tag.toLowerCase()==this.searchText.toLowerCase())
                     {
                         return true;
+                    }else
+                    {   
+                        var splited=item.tag.toLowerCase().split(',');
                     }
-                }
-                else
-                {
-                    for(var i = 0; i < item.tag.length ; i++)
+
+                    for(var i = 0; i < splited.length ; i++)
                     {
-                        if(item.tag[i].toLowerCase()==this.searchText.toLowerCase())
+                        if(splited[i].toLowerCase()==this.searchText.toLowerCase())
                         {
                             return true;
                         }
                     }
-               }
+                }
             }
         },
         makeSearchList:function(){
