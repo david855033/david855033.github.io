@@ -216,6 +216,10 @@ var app=new Vue({
         sort:function()
         {
             this.drugList.sort(function(a,b){
+                if(a.drugName.toLowerCase()==(b.drugName.toLowerCase()))
+                {
+                    return a.index>b.index;
+                }
                 return a.drugName.toLowerCase().localeCompare(b.drugName.toLowerCase())}
             );
         },
