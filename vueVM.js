@@ -422,17 +422,17 @@ function makeStyle(){
                 current.dosage = current.dosage.replaceAll("-12h","-q12h");
                 current.dosage = current.dosage.replaceAll("--","-");
 
-                current.dosage = current.dosage.replaceAll("q4h","<span class='q q4h'>q4h</span>");
-                current.dosage = current.dosage.replaceAll("q6h","<span class='q q6h'>q6h</span>");
-                current.dosage = current.dosage.replaceAll("q8h","<span class='q q8h'>q8h</span>");
-                current.dosage = current.dosage.replaceAll("q12h","<span class='q q12h'>q12h</span>");
-                current.dosage = current.dosage.replaceAll("qd","<span class='q qd'>qd</span>");
-                current.dosage = current.dosage.replaceAll("qod","<span class='q qod'>qod</span>");
-                current.dosage = current.dosage.replaceAll("st","<span class='q st'>st</span>");
-                current.dosage = current.dosage.replaceAll("cont","<span class='q cont'>cont</span>");
-                current.dosage = current.dosage.replaceAll("qw","<span class='q qw'>qw</span>");
-                current.dosage = current.dosage.replaceAll("biw","<span class='q biw'>biw</span>");
-                current.dosage = current.dosage.replaceAll("tiw","<span class='q tiw'>tiw</span>");
+                current.dosage = current.dosage.replaceAll(" q4h"," <span class='q q4h'>q4h</span>");
+                current.dosage = current.dosage.replaceAll(" q6h"," <span class='q q6h'>q6h</span>");
+                current.dosage = current.dosage.replaceAll(" q8h"," <span class='q q8h'>q8h</span>");
+                current.dosage = current.dosage.replaceAll(" q12h"," <span class='q q12h'>q12h</span>");
+                current.dosage = current.dosage.replaceAll(" qd"," <span class='q qd'>qd</span>");
+                current.dosage = current.dosage.replaceAll(" qod"," <span class='q qod'>qod</span>");
+                current.dosage = current.dosage.replaceAll(" st"," <span class='q st'>st</span>");
+                current.dosage = current.dosage.replaceAll(" cont"," <span class='q cont'>cont</span>");
+                current.dosage = current.dosage.replaceAll(" qw"," <span class='q qw'>qw</span>");
+                current.dosage = current.dosage.replaceAll(" biw"," <span class='q biw'>biw</span>");
+                current.dosage = current.dosage.replaceAll(" tiw"," <span class='q tiw'>tiw</span>");
 
                 current.dosage = current.dosage.replaceAll("[","<span class='emphasize'>");
                 current.dosage = current.dosage.replaceAll("]","</span>");
@@ -567,5 +567,16 @@ $(function(){
         app.showGuide=true;
         return false;
     });
-    
+    $(".bw").keyup(function(e){
+        if(e.keyCode==27||e.keyCode==13){
+            $(".bw").blur();
+        }
+        return false;
+    });
+     $(".age").keyup(function(e){
+        if(e.keyCode==27||e.keyCode==13){
+            $(".age").blur();
+        }
+        return false;
+    });
 });

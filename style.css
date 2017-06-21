@@ -440,7 +440,6 @@ button.minus span:after {
 {
     font-size: 0.5em;
     font-weight: 300;
-    white-space: nowrap;
 }
 .maxDose{
   background-color: pink;
