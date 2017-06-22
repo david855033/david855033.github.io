@@ -503,17 +503,6 @@ $(function(){
 });
 
 $(function(){
-    $(".search").keyup(function(e){
-        if(e.keyCode==13){
-            app.onSearchTextChange();
-            if(app.isMenuOnTop) app.isMenuShowed=false;
-            return false;
-        }else if(e.keyCode==27){
-            app.searchText="";
-            $("#searchText").blur();
-            return false;
-        }
-    });
     $('#app').mousedown(function(){
         if(app.isMenuOnTop){
             app.isMenuShowed=false;
@@ -591,16 +580,39 @@ $(function(){
         app.showGuide=true;
         return false;
     });
-    $(".bw").keyup(function(e){
-        if(e.keyCode==27||e.keyCode==13){
-            $(".bw").blur();
+    $(".search").keyup(function(e){
+        if(e.keyCode==13){
+            app.onSearchTextChange();
+            $("#searchText").blur();
+            if(app.isMenuOnTop) app.isMenuShowed=false;
+            return false;
+        }else if(e.keyCode==27){
+            app.searchText="";
+            $("#searchText").blur();
+            return false;
         }
-        return false;
+    });
+    $(".bw").keyup(function(e){
+        if(e.keyCode==13){
+            app.onBWValueChange();
+              $(".bw").blur();
+            return false;
+        }else if(e.keyCode==27){
+            app.bw="";
+              $(".bw").blur();
+            return false;
+        }
     });
      $(".age").keyup(function(e){
-        if(e.keyCode==27||e.keyCode==13){
-            $(".age").blur();
+          if(e.keyCode==13){
+            app.onAgeValueChange();
+                $(".age").blur();
+            return false;
+        }else if(e.keyCode==27){
+            app.age="";
+              $(".age").blur();
+            return false;
         }
-        return false;
     });
+   
 });
