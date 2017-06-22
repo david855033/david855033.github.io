@@ -228,7 +228,7 @@ var app = new Vue({
                 {
                     for(var i = 0; i < item.tag.length ; i++)
                     {
-                        if(item.tag[i].toLowerCase()==this.searchText_checked.toLowerCase())
+                        if(item.tag[i].toLowerCase().indexOf(this.searchText_checked.toLowerCase())>=0)
                         {
                             return true;
                         }
@@ -283,6 +283,10 @@ var app = new Vue({
                 if(this.drugList[i].tag){
                     for(var j = 0; j<this.drugList[i].tag.length;j++)
                     {
+                        if(this.checkLastChar(this.drugList[i].tag[j],'*'))
+                        {
+                            continue;
+                        }
                         if(this.searchList.indexOf(this.drugList[i].tag[j])<0)
                         {
                             this.searchList.push(this.drugList[i].tag[j]);

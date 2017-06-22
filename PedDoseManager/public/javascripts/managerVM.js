@@ -247,7 +247,7 @@ var app=new Vue({
 
                     for(var i = 0; i < splited.length ; i++)
                     {
-                        if(splited[i].toLowerCase()==this.searchText.toLowerCase())
+                        if(splited[i].toLowerCase().indexOf(this.searchText.toLowerCase())>=0)
                         {
                             return true;
                         }
@@ -258,13 +258,20 @@ var app=new Vue({
         makeSearchList:function(){
             for(var i = 0; i < this.drugList.length;i++)
             {
-                if(this.drugList[i].tag && this.searchList.indexOf(this.drugList[i].tag)<0){
-                    this.searchList.push(this.drugList[i].tag);
+                if(this.drugList[i].tag)
+                {
+                    var tagArray = this.drugList[i].tag.split(',');
+                    for(var j = 0; j < tagArray.length; j++)
+                    {
+                        if(tagArray[j]&& this.searchList.indexOf(tagArray[j])<0)
+                        {
+                            this.searchList.push(tagArray[j]);
+                        }
+                    }                   
                 }
             }
         },setSearchText:_.debounce(function(){
             this.searchText=this.searchTextInput;
-            console.log('set');
         },300),
         calculateDose:function(){
             for(var i = 0; i< this.drugList.length;i++)
@@ -345,7 +352,6 @@ var app=new Vue({
     },
     watch:{
         searchTextInput:function(){
-            console.log('watched');
            this.setSearchText();
         }
     },
