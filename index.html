@@ -69,7 +69,7 @@
                                         <div class="dosage" v-html="ind.dosage"></div>
                                         <div v-bind:id="['d'+index+'i'+rowindex]" class="calculated" :class="{withadjust:ind.adjustable}" v-if="showCaculated&&ind.calculated" v-html="ind.calculated" @click="toggleAdjust(ind)">
                                         </div>
-                                        <div class="adjustDrop" v-if="!ind.showAdjust&&ind.adjustable&&showCaculated&&ind.calculated" @click="toggleAdjust(ind)">...</div>
+                                        <div class="adjustDrop" v-if="!ind.showAdjust&&ind.adjustable&&showCaculated&&ind.calculated" @click="toggleAdjust(ind)">&#8801;</div>
                         
                                         <div class="adjust" v-if="ind.showAdjust&&showCaculated&&ind.calculated">
                                             <button class="plus" @click="adjustIncrease(ind,index,rowindex)"><span>▲</span></button>
