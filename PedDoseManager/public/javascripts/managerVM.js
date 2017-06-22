@@ -299,7 +299,7 @@ var app=new Vue({
                         result=max;
                         isMax=true;
                     }
-                    var digi = splt[2]?split[2]:1;
+                    var digi = split[2]?split[2]:1;
                     result = parseFloat(Math.round(result/digi)*digi).toFixed(3)*1;
                     if(isMax) {
                         result = "<span class='maxDose'>"+result+"</span>";
