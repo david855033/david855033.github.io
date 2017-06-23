@@ -134,15 +134,13 @@ var app = new Vue({
                     }
                     prestring=prestring.replace(match[k],result);
                 }
-                if(isMaxCount>=2)
+                if(isMaxCount>0)
                 {
-                    var matchMax=prestring.match(/(<span class='maxDose'>[\d]*(.[\d]*)?<\/span>)-\1/g);
+                    var matchMax=prestring.match(/(<span class='maxDose'>)?([\d]+(.[\d]+)?)(<\/span>)?-(<span class='maxDose'>)?\2(<\/span>)?/g);
                     if(matchMax){
                         for(var k=0; k<matchMax.length;k++){
                             var toBeReplaced = matchMax[k].toString();
-                            var toReplace = toBeReplaced.match(/<span class='maxDose'>[\d]*(.[\d]*)?<\/span>/g)[0].toString();
-                            console.log('to Be Replaced: ' + toBeReplaced);
-                            console.log('to Replaced: ' + toReplace);
+                            var toReplace = "<span class='maxDose'>"+toBeReplaced.match(/[\d]+(.[\d]+)?/g)[0].toString()+"<\/span>";
                             prestring=prestring.replace(toBeReplaced,toReplace);
                         }
                     }
