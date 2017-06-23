@@ -232,6 +232,7 @@ input:hover{
 .container-focused{
     box-shadow: 8px 8px 13px #333333;
     outline: 1px solid black;
+    transition: 0.2s;
 }
 
 .top

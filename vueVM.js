@@ -109,14 +109,16 @@ var app = new Vue({
                     var multipier=split[1]?split[1]:1;
                     var max=split[3]?split[3]:-1;
                     var bw_checked=this.bwForCalculation;
-                    var isDivider = false;
+                    var noAdjust = false;
                     if(split[0]&&split[0]=="1/bw")
                     {
                         bw_checked=1/bw_checked;
-                        isDivider=true;
+                        noAdjust=true;
+                    }else if(split[0]=="bw_") {
+                         noAdjust=true;
                     }
                     var result=bw_checked*multipier;
-                    if(row.adjustAmount&&!isDivider) {result*=row.adjustAmount;}
+                    if(row.adjustAmount&&!noAdjust) {result*=row.adjustAmount;}
                     var isMax=false;
                     if(max>0&&result>=max) {
                         result=max;
@@ -125,10 +127,11 @@ var app = new Vue({
                     }
                     var digi = split[2]?split[2]:1;
                     result = parseFloat(Math.round(result/digi)*digi).toFixed(3)*1;
+                    if(result==0) result = digi;
                     if(isMax) {
                         result = "<span class='maxDose'>"+result+"</span>";
                     }
-                    if(row.adjustAmount&&row.adjustAmount!=1&&!isDivider)
+                    if(row.adjustAmount&&row.adjustAmount!=1&&!noAdjust)
                     {
                         result="<span class='adjusted'>"+result+"</span>";
                     }
@@ -154,7 +157,7 @@ var app = new Vue({
                     var equation=match[k].slice(1,match[k].length-1);
                     if(row.adjustAmount)
                     {
-                        equation= (equation*row.adjustAmount).toFixed(0);
+                        equation= Number((equation*row.adjustAmount).toFixed(2));
                         if(row.adjustAmount!=1)
                         {
                             equation= "<span class='adjusted'>"+equation+"</span>";
