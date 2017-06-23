@@ -212,7 +212,10 @@ var app = new Vue({
         onBWValueChange: function (){
             this.bw_checked=this.bw?this.bw:0;
             this.isBwInGram=this.checkLastChar(this.bw_checked.toString(),"g");
-            this.calculateDose();
+            if(this.bwForCalculation<=120)
+            {
+                this.calculateDose();
+            }
             if( this.bw!=0 && this.bw == this.bw_checked)
             {
                 this.showCaculated=true;
@@ -628,6 +631,9 @@ $(function(){
     $(".bw").keyup(function(e){
         if(e.keyCode==13){
             app.onBWValueChange();
+            if(app.bwForCalculation>200){
+                app.bw=200;
+            }
               $(".bw").blur();
             return false;
         }else if(e.keyCode==27){

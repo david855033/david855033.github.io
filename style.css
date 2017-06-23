@@ -20,7 +20,12 @@ textarea:focus, input:focus{
     outline: none;
 }
 
-
+.bw-outrange{
+    background: pink !important;
+}
+.bw{
+    background: white;
+}
 .menuButton{
     height: 45px;
     width: 40px;
