@@ -19,6 +19,7 @@ var app = new Vue({
         showCaculated:false,
         showGuide:true,
         isAgeInDay:false,
+        isAgeInMonth:false,
         isBwInGram:false,
         searchText:"",
         searchList:[],
@@ -39,8 +40,11 @@ var app = new Vue({
             if(this.isAgeInDay)
             {
                 return Number(this.getDay(this.age_checked));
-            }else
+            }else if(this.isAgeInMonth)
             {
+                return Number(this.getMonth(this.age_checked)*30);
+            }
+            else{
                 return Number(this.age_checked*365);
             }
         }
@@ -97,6 +101,7 @@ var app = new Vue({
             var match=prestring.match(/[\[].*?[\]]/g);
             if(match)
             {
+                var isMaxCount=0;
                 for(var k=0; k<match.length;k++)
                 {
                     var equation=match[k].slice(1,match[k].length-1);
@@ -113,9 +118,10 @@ var app = new Vue({
                     var result=bw_checked*multipier;
                     if(row.adjustAmount&&!isDivider) {result*=row.adjustAmount;}
                     var isMax=false;
-                    if(max>0&&result>max) {
+                    if(max>0&&result>=max) {
                         result=max;
                         isMax=true;
+                        isMaxCount++;
                     }
                     var digi = split[2]?split[2]:1;
                     result = parseFloat(Math.round(result/digi)*digi).toFixed(3)*1;
@@ -127,6 +133,19 @@ var app = new Vue({
                         result="<span class='adjusted'>"+result+"</span>";
                     }
                     prestring=prestring.replace(match[k],result);
+                }
+                if(isMaxCount>=2)
+                {
+                    var matchMax=prestring.match(/(<span class='maxDose'>[\d]*(.[\d]*)?<\/span>)-\1/g);
+                    if(matchMax){
+                        for(var k=0; k<matchMax.length;k++){
+                            var toBeReplaced = matchMax[k].toString();
+                            var toReplace = toBeReplaced.match(/<span class='maxDose'>[\d]*(.[\d]*)?<\/span>/g)[0].toString();
+                            console.log('to Be Replaced: ' + toBeReplaced);
+                            console.log('to Replaced: ' + toReplace);
+                            prestring=prestring.replace(toBeReplaced,toReplace);
+                        }
+                    }
                 }
             }
             var match =prestring.match(/[\(].*?[\)]/g);
@@ -159,10 +178,13 @@ var app = new Vue({
         getDay:function(input){
             return parseInt(input.toString().match(/\d+[.]?\d*/));
         },
+        getMonth:function(input){
+            return parseInt(input.toString().match(/\d+[.]?\m*/));
+        },
         OnAgeChange:function(){
             if(this.age && typeof this.age ==="string")
             {
-                var matchValue = this.age.toString().match(/[1-9]\d*[dD]?/);
+                var matchValue = this.age.toString().match(/[1-9]\d*[dDmM]?/);
                 this.age=matchValue||"";
             }
             if(this.realTimeRender) {this.onAgeValueChange();}
@@ -170,6 +192,7 @@ var app = new Vue({
         onAgeValueChange: function (){
             this.age_checked=this.age?this.age:0;
             this.isAgeInDay=this.checkLastChar(this.age_checked.toString(),"d");
+            this.isAgeInMonth=this.checkLastChar(this.age_checked.toString(),"m");
             this.calculateDose();
         },
         onMenuButtonClick:function(){
@@ -204,6 +227,7 @@ var app = new Vue({
         },
         onSearchTextChange: function(){
             this.searchText_checked= this.searchText.trim();
+            this.focused="";
             window.scrollTo(0,0);
         },
         checkSearchText: function(item){
@@ -516,11 +540,15 @@ $(function(){
     });
     $("#searchText").mousedown(function(){
         $("#searchText").focus();
+        if(!app.realTimeRender)
+        {
+            app.searchText="";
+        }
         return false;
     });
    
     $(".search").mousedown(function(){
-        searchText="";
+        app.searchText="";
         return false;
     });
     $(".adjust").mousedown(function(){

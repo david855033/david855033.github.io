@@ -19,7 +19,7 @@
             <form id="ageForm" action="javascript:void(0);">
                 <div>
                     <input type="text" placeholder="Age" class="age" id="age" v-model="age" width="100px" @keyup="OnAgeChange" onchange="app.onAgeValueChange()" autocomplete="off">
-                <span v-if="!isAgeInDay">y</span>
+                <span v-if="!isAgeInDay&&!isAgeInMonth">y</span>
                 </div>
             </form>
             <form action="javascript:void(0);">
@@ -32,7 +32,7 @@
         </div>
         <div id="headspacer"></div>
         <transition name="guideAni" key="guide">
-            <div class="guide" v-if="showGuide" @click="showGuide=false">輸入"X"d表示"X"天大，"X"g表示"X"克重</div>
+            <div class="guide" v-if="showGuide" @click="showGuide=false">可輸入單位：d=天, m=月, g=克重 </div>
         </transition>
         <div class="wraper">
             <transition name="menu">    
@@ -53,7 +53,7 @@
             <div class="content" v-bind:class="{'content-menuShowed':isMenuShowed&&!isMenuOnTop}">
                <transition-group name="list" tag="div">
                   
-                    <div v-for="(item,index) in drugList" v-if="checkAgeAndBW(item)&&checkSearchText(item)&&(!focused||item.drugName==focused)" v-bind:key="item">
+                    <div v-for="(item,index) in drugList" v-if="checkAgeAndBW(item)&&checkSearchText(item)&&!focused||item.drugName==focused" v-bind:key="item">
                         <div v-bind:id="['d'+index]" class="container" v-bind:class="[item.drugName==focused?'container-focused':'']">
                             <div class="top">  
                                 <div class="left" @click="onContainerClick(item.drugName)">
@@ -89,7 +89,7 @@
                </transition-group>
                
                 <div class="disclaim">僅供研究參考用，作者不對任何因<br>使用本網站資訊所造成的損失負責</div>
-                <div class="disclaim">Authors:台北榮總 羅宇成 蔡宛蓉</div>
+                <div class="disclaim">Authors: 台北榮總兒醫部 羅宇成 蔡宛蓉</div>
                 <div class="disclaim">Contact: david855033@gmail.com</div>
                 <div class="disclaim">Copyright © 2017 喵姑studio All rights reserved.</div>
             </div>
