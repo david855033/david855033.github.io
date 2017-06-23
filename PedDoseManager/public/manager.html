@@ -167,15 +167,15 @@
                                     <div class="form-group row">
                                         <label for="Dosage" class="control-label col-sm-1">Dosage:</label>
                                         <div class="col-sm-3">
-                                            <textarea id="Dosage" v-model="row.dosage" class="form-control" ></textarea>
+                                            <textarea id="Dosage" v-model="row.dosage" class="form-control" rows="3" ></textarea>
                                         </div>
                                         <label for="Equation" class="control-label col-sm-1">Equation:</label>
                                         <div class="col-sm-3">
-                                            <textarea id="Equation" v-model="row.equation" class="form-control" @input="calculateDoseRow(row)"></textarea>
+                                            <textarea id="Equation" v-model="row.equation" class="form-control" @input="calculateDoseRow(row)" rows="3"></textarea>
                                         </div>
                                         <label for="Calculated" class="control-label col-sm-1">Calculated:</label>
                                         <div class="col-sm-2">
-                                            <textarea id="Calculated" v-model="row.calculated" class="form-control" readonly></textarea>
+                                            <textarea id="Calculated" v-model="row.calculated" class="form-control" readonly rows="3"></textarea>
                                         </div>
                                         <div class="col-sm-1">
                                             <label>
