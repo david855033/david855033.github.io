@@ -24,7 +24,7 @@ var app = new Vue({
         searchText:"",
         searchList:[],
         searchText_checked:"",
-        focused:"",
+        focused:-1,
     },
     computed:{
         bwForCalculation:function(){
@@ -225,7 +225,7 @@ var app = new Vue({
         },
         onSearchTextChange: function(){
             this.searchText_checked= this.searchText.trim();
-            this.focused="";
+            this.focused=-1;
             window.scrollTo(0,0);
         },
         checkSearchText: function(item){
@@ -272,16 +272,16 @@ var app = new Vue({
             }
             this.onSearchTextChange()
         },
-        onContainerClick:function(s){
+        onContainerClick:function(index){
             if(this.isMenuOnTop&&this.isMenuShowed){
                 this.isMenuShowed=false;
             }else
             {
-                if(this.focused==s)
+                if(this.focused==index)
                 {
-                    this.focused="";
+                    this.focused=-1;
                 }else{
-                    this.focused=s;
+                    this.focused=index;
                 }
             }
         },
@@ -291,7 +291,7 @@ var app = new Vue({
             this.bw="";
             this.onAgeValueChange();
             this.onBWValueChange();
-            this.focused="";
+            this.focused=-1;
         },
         focusSearchBox:function(){
             $('#searchText').focus();
