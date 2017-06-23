@@ -520,6 +520,7 @@ $(function(){
     });
    
     $(".search").mousedown(function(){
+        searchText="";
         return false;
     });
     $(".adjust").mousedown(function(){
@@ -565,6 +566,7 @@ $(function(){
                 if(!$("#searchText").is(":focus"))
                 {
                     $("#searchText").focus();
+                      app.searchText="";
                     if(e.key.length==1)
                     {
                         app.searchText+=e.key;
