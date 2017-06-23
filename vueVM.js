@@ -185,7 +185,7 @@ var app = new Vue({
         OnAgeChange:function(){
             if(this.age && typeof this.age ==="string")
             {
-                var matchValue = this.age.toString().match(/[1-9]\d*[dDmM]?/);
+                var matchValue = this.age.toString().match(/[1-9]\d{0,2}[dDmM]?/);
                 this.age=matchValue||"";
             }
             if(this.realTimeRender) {this.onAgeValueChange();}
@@ -212,7 +212,7 @@ var app = new Vue({
         onBWValueChange: function (){
             this.bw_checked=this.bw?this.bw:0;
             this.isBwInGram=this.checkLastChar(this.bw_checked.toString(),"g");
-            if(this.bwForCalculation<=120)
+            if(this.bwForCalculation<=200)
             {
                 this.calculateDose();
             }
@@ -631,15 +631,20 @@ $(function(){
     $(".bw").keyup(function(e){
         if(e.keyCode==13){
             app.onBWValueChange();
-            if(app.bwForCalculation>200){
-                app.bw=200;
-            }
-              $(".bw").blur();
+            $(".bw").blur();
             return false;
         }else if(e.keyCode==27){
             app.bw="";
               $(".bw").blur();
             return false;
+        }
+    });
+    $(".bw").blur(function(){
+        console.log('22');
+        if(app.bwForCalculation>200)
+        {
+            app.bw=200;
+            app.onBWValueChange();
         }
     });
      $(".age").keyup(function(e){

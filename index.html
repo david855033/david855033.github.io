@@ -24,7 +24,7 @@
             </form>
             <form action="javascript:void(0);">
                 <div>
-                    <input type="text" placeholder="BW" class="bw" id="bw" v-model="bw" width="100px" @keyup="OnBWChange" onchange="app.onBWValueChange()" autocomplete="off">
+                    <input type="text" placeholder="BW" class="bw" :class="[bw>200&&bwForCalculation>200?'bw-outrange':'']" id="bw" v-model="bw" width="100px" @keyup="OnBWChange" onchange="app.onBWValueChange()" autocomplete="off">
                     <span v-if="!isBwInGram">kg</span>
                 </div>
             </form>
