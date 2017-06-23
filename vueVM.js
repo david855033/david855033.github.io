@@ -548,7 +548,9 @@ $(function(){
             !$(".age").is(":focus")&&
             !e.ctrlKey&&!(e.keyCode==17))
             {
-                if(e.keyCode>=48&&e.keyCode<=57&&!$("#searchText").is(":focus")){
+                if(( (e.keyCode>=48&&e.keyCode<=57) ||
+                     (e.keyCode >= 96 && e.keyCode <= 105))  &&
+                 !$("#searchText").is(":focus")){
                      $(".bw").focus();
                     if(e.key.length==1)
                     {
