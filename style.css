@@ -200,7 +200,7 @@ input:hover{
 .container{
     background: white;
     box-shadow: 3px 3px 5px #AAAAAA;
-    margin-top: 10px; 
+    margin-top: 14px; 
     margin-bottom: 10px;  
     padding-top:10px; 
     border-radius: 3px;
@@ -561,15 +561,34 @@ span.rc
     background-color: hsla(50, 90%, 20%,0.5);
     color: #fff;
 }
+span.et
+{   
+    background-color: hsla(300, 70%, 50%,0.4);
+    color: #fff;
+}
 .notification{
     text-align: center;
     background: hsl(200,90%,25%);
-    color: white;
+    color: hsl(200,20%,95%);
     font-weight: 600;
     font-size: 0.7em;
     padding-bottom: 8px;
     line-height: 1.5em;
 }
+
+h1{line-height: 3em;}
+
+
 .example{
     background: white;
+
+}
+.example-ani-enter, .example-ani-leave-to{
+    opacity: 0.5;
+}
+.example-ani-enter-active,.example-ani-leave-active{
+    transition: 0.25s;
+}
+.greyout{
+    color:hsla(0,100%,100%,0.8)
 }

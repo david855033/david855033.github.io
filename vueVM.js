@@ -10,7 +10,7 @@ var app = new Vue({
         drugList:[],
         testmode:false,
         realTimeRender:true,
-        isMenuShowed:false,
+        isMenuShowed:true,
         isMenuOnTop:false,
         age:0,
         bw:0,
@@ -28,6 +28,7 @@ var app = new Vue({
         manualVol:100,
         manualAmount:40,
         manualFocused:false,
+        showExample:false,
     },
     computed:{
         bwForCalculation:function(){
@@ -200,7 +201,9 @@ var app = new Vue({
             this.calculateDose();
         },
         onMenuButtonClick:function(){
-            this.isMenuShowed=!this.isMenuShowed;
+            if(this.isMenuOnTop){
+                this.isMenuShowed=!this.isMenuShowed;
+            }
         },
         OnBWChange:function(){
             if(this.bw && typeof this.bw ==="string")
@@ -447,6 +450,7 @@ function makeStyle(){
             DataSource[i].drugName = DataSource[i].drugName.replaceAll(" IV"," <span class='r iv'>IV</span>");
             DataSource[i].drugName = DataSource[i].drugName.replaceAll(" PO"," <span class='r po'>PO</span>");
             DataSource[i].drugName = DataSource[i].drugName.replaceAll(" RC"," <span class='r rc'>RC</span>");
+            DataSource[i].drugName = DataSource[i].drugName.replaceAll(" ET"," <span class='r et'>ET</span>");
         }
         if(DataSource[i].info)
         {
@@ -510,38 +514,31 @@ function makeStyle(){
     }
 }
 
-
-$(window).resize(function() {
+var setLayout=function(resizing){
   var bodyWidth=$("body").width();
   if(bodyWidth<600){
+      if(resizing) {app.isMenuShowed=false;}
       if(!app.isMenuOnTop)
       {
         app.isMenuOnTop=true;
-        app.isMenuShowed=false;
       }
     $(".content").width(bodyWidth);
   }else
   {
+      app.isMenuShowed=true;
       if(app.isMenuOnTop)
       {
-            app.isMenuOnTop=false;
-            app.isMenuShowed=true;     
+          app.isMenuOnTop=false;
       }
       $(".content").width(bodyWidth-160);
+      $(".notification").css({'padding-right':'0px'});
   }
+}
+$(window).resize(function() {
+    setLayout(true);
 });
 $(function() {
-  var bodyWidth=$("body").width();
-  if(bodyWidth<600){
-    app.isMenuOnTop=true;
-    app.isMenuShowed=false;
-   $(".content").width(bodyWidth);
-  }else
-  {
-    app.isMenuOnTop=false;
-    app.isMenuShowed=true;
-    $(".content").width(bodyWidth-160);
-  }
+    setLayout();
 });
 $(function(){
     var isMobile = false; //initiate as false
@@ -555,8 +552,9 @@ $(function(){
 });
 
 $(function(){
-    $('#app').mousedown(function(){
-        if(app.isMenuOnTop){
+    $('#content').mousedown(function(){
+        if(app.isMenuOnTop)
+        {
             app.isMenuShowed=false;
         }
     });
@@ -629,7 +627,9 @@ $(function(){
                     if(app.isMenuShowed)
                     {
                         $("#searchText").focus();
-                        $("#searchText").val($("#searchText").val()+e.key);
+                        var newContent=$("#searchText").val()+e.key;
+                        $("#searchText").val(newContent);
+                        app.searchText=newContent;
                     }else
                     {
                         $("#searchText").val(e.key);
@@ -653,6 +653,8 @@ $(function(){
             return false;
         }else if(e.keyCode==27){
             app.searchText="";
+            $("#searchText").val('');
+            app.onSearchTextChange();
             $("#searchText").blur();
             return false;
         }
@@ -682,6 +684,8 @@ $(function(){
             return false;
         }else if(e.keyCode==27){
             app.age="";
+            $(".age").val('');
+            app.onAgeValueChange();
               $(".age").blur();
             return false;
         }
