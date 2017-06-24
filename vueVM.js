@@ -609,7 +609,7 @@ $(function(){
                 !$("#searchText").is(":focus"))
             {
                  $(".bw").focus();
-                app.bw=e.key;
+                $(".bw").val(e.key);
                 if(app.realTimeRender)
                 {
                     app.OnBWChange();
@@ -629,18 +629,17 @@ $(function(){
                     if(app.isMenuShowed)
                     {
                         $("#searchText").focus();
-                        app.searchText+=e.key;
+                        $("#searchText").val($("#searchText").val()+e.key);
                     }else
                     {
-                         app.isMenuShowed=true;
-                         app.searchText="";
-                         app.searchText+=e.key;
+                        $("#searchText").val(e.key);
+                        app.searchText=e.key;
+                        app.isMenuShowed=true;
                     }
                 }else
                 {
                         $("#searchText").focus();
-                        app.searchText="";
-                        app.searchText+=e.key;
+                        $("#searchText").val(e.key);
                 }
             }
             return false;
