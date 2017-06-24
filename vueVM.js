@@ -631,13 +631,10 @@ $(function(){
                     if(!$("#searchText").is(":focus"))
                     {
                         $("#searchText").focus();
-                        if(e.key.length==1)
+                        app.searchText+=e.key;
+                        if(app.realTimeRender)
                         {
-                            app.searchText+=e.key;
-                            if(app.realTimeRender)
-                            {
-                                app.onSearchTextChange();
-                            }
+                            app.onSearchTextChange();
                         }
                         return false;
                     }
