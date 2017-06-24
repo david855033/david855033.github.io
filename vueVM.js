@@ -298,6 +298,7 @@ var app = new Vue({
                     this.focused=-1;
                 }else{
                     this.focused=index;
+                    window.scrollTo(0,0);
                 }
             }
         },
