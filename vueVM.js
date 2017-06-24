@@ -574,7 +574,6 @@ $(function(){
         }
         return false;
     });
-   
     $(".search").mousedown(function(){
         app.searchText="";
         return false;
@@ -586,7 +585,7 @@ $(function(){
         return false;
     });
     $(document).keyup(function(e){
-        if (e.keyCode===27) {
+        if (e.keyCode==27) {
             if(app.isMenuOnTop){
                 app.isMenuShowed=false;
             }
@@ -596,53 +595,57 @@ $(function(){
             if(app.isMenuShowed)
             {
                 app.onSearchTextChange();
-                if(app.isMenuOnTop) app.isMenuShowed=false;
+                if(app.isMenuOnTop) 
+                {
+                    app.isMenuShowed=false;
+                }
                 return false;
             }
-        }else
+        }else if((e.keyCode>=48&&e.keyCode<=57) ||
+            (e.keyCode >= 96 && e.keyCode <= 105))
         {
             if(!$(".bw").is(":focus")&&
-            !$(".age").is(":focus")&&
-            !e.ctrlKey&&!(e.keyCode==17))
+                !$(".age").is(":focus")&&
+                !$("#searchText").is(":focus"))
             {
-                if(( (e.keyCode>=48&&e.keyCode<=57) ||
-                     (e.keyCode >= 96 && e.keyCode <= 105))  &&
-                 !$("#searchText").is(":focus")){
-                     $(".bw").focus();
-                    if(e.key.length==1)
-                    {
-                        app.bw=e.key;
-                        if(app.realTimeRender)
-                        {
-                            app.OnBWChange();
-                        }
-                    }
-                    return false;
-                }else if(e.keyCode>=41&&e.keyCode<=122)
+                 $(".bw").focus();
+                app.bw=e.key;
+                if(app.realTimeRender)
                 {
-                    var showStatus=app.isMenuShowed;
-                    if(app.isMenuOnTop)
-                    {
-                        app.isMenuShowed=true;
-                    }
-                    if(!showStatus){
-                        app.searchText="";
-                    }
-                    if(!$("#searchText").is(":focus"))
+                    app.OnBWChange();
+                }
+            }
+            return false;
+        }else if (!e.ctrlKey && 
+                     ((e.keyCode>= 65 && e.keyCode<=90 )||(e.keyCode>= 97 && e.keyCode<=122))
+                )
+        {
+            if(!$(".bw").is(":focus")&&
+                !$(".age").is(":focus")&&
+                !$("#searchText").is(":focus")&&e.key.length==1)
+            {
+                if(app.isMenuOnTop)
+                {
+                    if(app.isMenuShowed)
                     {
                         $("#searchText").focus();
                         app.searchText+=e.key;
-                        if(app.realTimeRender)
-                        {
-                            app.onSearchTextChange();
-                        }
-                        return false;
+                    }else
+                    {
+                         app.isMenuShowed=true;
+                         app.searchText="";
+                         app.searchText+=e.key;
                     }
+                }else
+                {
+                        $("#searchText").focus();
+                        app.searchText="";
+                        app.searchText+=e.key;
                 }
             }
+            return false;
         }
     });
-   
     $(".search").keyup(function(e){
         if(e.keyCode==13){
             app.onSearchTextChange();
