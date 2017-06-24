@@ -17,7 +17,6 @@ var app = new Vue({
         age_checked:0,
         bw_checked:0,
         showCaculated:false,
-        showGuide:true,
         isAgeInDay:false,
         isAgeInMonth:false,
         isBwInGram:false,
@@ -25,6 +24,9 @@ var app = new Vue({
         searchList:[],
         searchText_checked:"",
         focused:-1,
+        ManualShowAdjust_1:false,
+        manualVol:100,
+        manualAmount:40
     },
     computed:{
         bwForCalculation:function(){
@@ -379,6 +381,23 @@ var app = new Vue({
             else{
                 row.showAdjust=false;
             }
+        },
+        manualPlus:function()
+        {
+            this.manualAmount+=8;
+            this.manualVol+=20;
+        },
+        manualMinus:function()
+        {
+            if(this.manualAmount>8){
+                this.manualAmount-=8;
+                this.manualVol-=20;
+            }
+        },
+        manualReset:function()
+        {
+            this.manualAmount=40;
+            this.manualVol=100;
         }
     }
 });
@@ -608,14 +627,7 @@ $(function(){
             }
         }
     });
-    $(".age").dblclick(function(){
-        app.showGuide=true;
-        return false;
-    });
-    $(".bw").dblclick(function(){
-        app.showGuide=true;
-        return false;
-    });
+   
     $(".search").keyup(function(e){
         if(e.keyCode==13){
             app.onSearchTextChange();

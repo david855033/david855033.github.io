@@ -195,21 +195,6 @@ input:hover{
     height: 35px;
 }
 
-.guide{
-    font-size: 0.8em;
-    text-align: center;
-    color: rgba(0,0,0,0.5);
-    font-weight: 600;
-    margin-top:5px;
-    max-height: 15px;
-}
-.guideAni-enter-active, .guideAni-leave-active {
-    transition: all 0.2s;
-}
-.guideAni-enter, .guideAni-leave-to /* .fade-leave-active in <2.1.8 */ {
-    max-height: 0px;
-    opacity: 0px;
-}
 
 .container{
     background: white;
@@ -573,4 +558,13 @@ span.rc
 {   
     background-color: hsla(50, 90%, 20%,0.5);
     color: #fff;
+}
+.notification{
+    text-align: center;
+    background: hsl(200,90%,25%);
+    color: white;
+    font-weight: 600;
+    font-size: 0.7em;
+    padding-bottom: 8px;
+    line-height: 1.5em;
 }
