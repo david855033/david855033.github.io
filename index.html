@@ -59,7 +59,7 @@
                 <div class="container example" v-if="!searchText_checked" :class="[manualFocused?'container-focused':'']">
                     <div class="top">
                         <div class="left"  @click="manualFocused=!manualFocused">
-                            <div class="drugName">範例藥物<span class="r iv">劑型</span><br><span class="subtittle"> (包裝、商品名)</span></div>
+                            <div class="drugName">範例藥物 <span class="r iv">劑型</span><br><span class="subtittle"> (包裝、商品名)</span></div>
                             <div class="indication">「適應症」</div>
                         </div>
                     </div>  
@@ -67,7 +67,7 @@
                         <div class="row active">
                             <div class="description">「使用方法」(若該使用方法有限制年齡或體重，會自動篩選)</div>
                             <div class="dosage">「常用劑量」(ex: 100mg/kg/day <span class="q q8h"> q8h</span>)
-                            <br><span class="emphasize">若是pump，藍色框框代表該泡法的濃度</span> </div>
+                            <br>若是pump，會在<span class="emphasize">藍色框框</span>顯示濃度</div>
                             <div class="calculated withadjust" @click="ManualShowAdjust_1=!ManualShowAdjust_1">
                                 「計算結果」<br> (輸入體重後才會顯示)<br>
                                 - 若達最大劑量，會<span class="maxDose">紅底</span>表示。<br>

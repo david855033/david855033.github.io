@@ -235,7 +235,11 @@ var app = new Vue({
         onSearchTextChange: function(){
             this.searchText_checked= this.searchText.trim();
             this.focused=-1;
+            var focusStatus=$("#searchText").is(":focus");
             window.scrollTo(0,0);
+            if(focusStatus){
+                $('#searchText').focus();
+            }
         },
         checkSearchText: function(item){
             if(!this.searchText_checked)  {
@@ -608,22 +612,35 @@ $(function(){
                     if(e.key.length==1)
                     {
                         app.bw=e.key;
+                        if(app.realTimeRender)
+                        {
+                            app.OnBWChange();
+                        }
                     }
                     return false;
-                }
-                else if(app.isMenuOnTop)
+                }else if(e.keyCode>=41&&e.keyCode<=122)
                 {
-                    app.isMenuShowed=true;
-                }
-                if(!$("#searchText").is(":focus"))
-                {
-                    $("#searchText").focus();
-                      app.searchText="";
-                    if(e.key.length==1)
+                    var showStatus=app.isMenuShowed;
+                    if(app.isMenuOnTop)
                     {
-                        app.searchText+=e.key;
+                        app.isMenuShowed=true;
                     }
-                    return false;
+                    if(!showStatus){
+                        app.searchText="";
+                    }
+                    if(!$("#searchText").is(":focus"))
+                    {
+                        $("#searchText").focus();
+                        if(e.key.length==1)
+                        {
+                            app.searchText+=e.key;
+                            if(app.realTimeRender)
+                            {
+                                app.onSearchTextChange();
+                            }
+                        }
+                        return false;
+                    }
                 }
             }
         }
@@ -653,7 +670,6 @@ $(function(){
         }
     });
     $(".bw").blur(function(){
-        console.log('22');
         if(app.bwForCalculation>200)
         {
             app.bw=200;

@@ -1,6 +1,7 @@
 body{
     background: rgb(200,200,200);
     font-family: "Microsoft JhengHei","Helvetica Neue",Helvetica,Arial,sans-serif;
+     overflow-y:scroll;
 }
 input{font-family:inherit;}
 #header{
@@ -570,5 +571,5 @@ span.rc
     line-height: 1.5em;
 }
 .example{
-    background: hsl(200,25%,90%);
+    background: white;
 }
