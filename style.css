@@ -275,6 +275,7 @@ input:hover{
 }
 .description
 {
+    background: hsl(200,25%,90%);   
     font-weight: 600;
     font-size: 0.9em;
     padding: 4px;

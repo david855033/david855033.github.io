@@ -26,7 +26,8 @@ var app = new Vue({
         focused:-1,
         ManualShowAdjust_1:false,
         manualVol:100,
-        manualAmount:40
+        manualAmount:40,
+        manualFocused:false,
     },
     computed:{
         bwForCalculation:function(){

@@ -48,7 +48,7 @@
             </transition>
          
             <div class="content" v-bind:class="{'content-menuShowed':isMenuShowed&&!isMenuOnTop}">
-                <div class="container notification" v-if="!searchText_checked">
+                <div class="container notification"  v-if="!searchText_checked">
                     <div class="bot">
                         <h2>在右側選單輸入藥物名稱</h2>
                         <p>年紀、體重可用不同單位<br>
@@ -56,34 +56,35 @@
                         請參考下方範例</p>
                     </div>
                 </div>
-                <div class="container example" v-if="!searchText_checked">
+                <div class="container example" v-if="!searchText_checked" :class="[manualFocused?'container-focused':'']">
                     <div class="top">
-                        <div class="left">
-                            <div class="drugName">「範例藥物」<span class="r iv">劑型</span><br><span class="subtittle"> (包裝、商品名</br>點選可切換鎖定只顯示單筆藥物)</span></div>
+                        <div class="left"  @click="manualFocused=!manualFocused">
+                            <div class="drugName">範例藥物<span class="r iv">劑型</span><br><span class="subtittle"> (包裝、商品名)</span></div>
                             <div class="indication">「適應症」</div>
                         </div>
                     </div>  
                     <div class="right">
-                            <div class="row active">
-                                <div class="description">「使用方法」(若該使用方法有限制年齡或體重，會自動篩選)</div>
-                                <div class="dosage">「常用劑量」(ex: 100mg/kg/day <span class="q q8h"> q8h</span>)
-                                <br><span class="emphasize">若是pump，藍色框框代表該泡法的濃度</span> </div>
-                                <div class="calculated withadjust" @click="ManualShowAdjust_1=!ManualShowAdjust_1">
-                                    「計算結果」<br> (輸入體重後才會顯示)<br>
-                                    - 若達最大劑量，會<span class="maxDose">紅底</span>表示。<br>
-                                    - pump類藥物，下方會出現「&#8801」按鈕，展開後可以「等比例」調整泡製體積。</br>
-                                    Ex:<br><span class='adjusted'>{{manualAmount}}</span>mg in <span class="adjusted"> {{manualVol}}</span>ml
-                                </div>
-                                <div class="adjustDrop" v-if="!ManualShowAdjust_1"  @click="ManualShowAdjust_1=!ManualShowAdjust_1">&#8801;</div>
-                                <div class="adjust" v-if="ManualShowAdjust_1">
-                                    <button class="plus" @click="manualPlus"><span>▲</span></button>
-                                    <button class="minus" @click="manualMinus"><span>▼</span></button>
-                                    <button class="reset" @click="manualReset"><span>◉</span></button>
-                                </div>
+                        <div class="row active">
+                            <div class="description">「使用方法」(若該使用方法有限制年齡或體重，會自動篩選)</div>
+                            <div class="dosage">「常用劑量」(ex: 100mg/kg/day <span class="q q8h"> q8h</span>)
+                            <br><span class="emphasize">若是pump，藍色框框代表該泡法的濃度</span> </div>
+                            <div class="calculated withadjust" @click="ManualShowAdjust_1=!ManualShowAdjust_1">
+                                「計算結果」<br> (輸入體重後才會顯示)<br>
+                                - 若達最大劑量，會<span class="maxDose">紅底</span>表示。<br>
+                                - pump類藥物，下方會出現「&#8801」按鈕，展開後可以「等比例」調整泡製體積。</br>
+                                Ex:<br><span class='adjusted'>{{manualAmount}}</span>mg in <span class="adjusted"> {{manualVol}}</span>ml
                             </div>
+                            <div class="adjustDrop" v-if="!ManualShowAdjust_1"  @click="ManualShowAdjust_1=!ManualShowAdjust_1">&#8801;</div>
+                            <div class="adjust" v-if="ManualShowAdjust_1">
+                                <button class="plus" @click="manualPlus"><span>▲</span></button>
+                                <button class="minus" @click="manualMinus"><span>▼</span></button>
+                                <button class="reset" @click="manualReset"><span>◉</span></button>
+                            </div>
+                        </div>
                     </div>
                     <div class="bot">
                         <div class="info"></div>
+                            <br><li>點選藥名可切換一次只顯示一筆藥物</li>
                         <div class="ref"></div>
                     </div>
                 </div>
