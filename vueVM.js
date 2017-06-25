@@ -242,6 +242,10 @@ var app = new Vue({
             window.scrollTo(0,0);
             if(focusStatus){
                 $('#searchText').focus();
+            };
+            if(!this.realTimeRender&&this.isMenuOnTop)
+            {
+                this.isMenuShowed=false;
             }
         },
         checkSearchText: function(item){
