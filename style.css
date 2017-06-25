@@ -66,8 +66,7 @@ textarea:focus, input:focus{
     text-align: center;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
-    overflow-y: auto;;
-    height: 80%;
+    overflow-y: auto;
 }
 
 .menu-enter-active {
@@ -567,6 +566,16 @@ span.rc
 span.et
 {   
     background-color: hsla(300, 70%, 50%,0.6);
+    color: #fff;
+}
+span.im
+{   
+    background-color: hsla(30, 70%, 50%,0.6);
+    color: #fff;
+}
+span.ih
+{   
+    background-color: hsla(100, 70%, 50%,0.6);
     color: #fff;
 }
 .notification{

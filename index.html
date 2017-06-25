@@ -100,7 +100,7 @@
                         <div class="ref"></div>
                     </div>
                 </div>
-               <transition-group name="list" tag="div" v-if="searchText_checked">
+               <transition-group name="list" tag="div" v-if="searchText_checked" >
                     <div v-for="(item,index) in drugList" v-if="checkAgeAndBW(item)&&checkSearchText(item)&&(!(focused+1)||index==focused)" v-bind:key="index">
                         <div v-bind:id="['d'+index]" class="container" v-bind:class="[index==focused?'container-focused':'']">
                             <div class="top">  

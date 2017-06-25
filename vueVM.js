@@ -4,6 +4,7 @@ String.prototype.replaceAll = function(search, replacement) {
     return target.split(search).join(replacement);
 };
 
+
 var app = new Vue({
     el: '#app',
     data: {
@@ -24,6 +25,7 @@ var app = new Vue({
         searchList:[],
         searchText_checked:"",
         focused:-1,
+        preFocusedPosition:0,
         ManualShowAdjust_1:false,
         manualVol:100,
         manualAmount:40,
@@ -302,6 +304,7 @@ var app = new Vue({
                     this.focused=-1;
                 }else{
                     this.focused=index;
+                    this.preFocusedPosition=window.scrollX;
                     window.scrollTo(0,0);
                 }
             }
@@ -458,6 +461,8 @@ function makeStyle(){
             DataSource[i].drugName = DataSource[i].drugName.replaceAll(" PO"," <span class='r po'>PO</span>");
             DataSource[i].drugName = DataSource[i].drugName.replaceAll(" RC"," <span class='r rc'>RC</span>");
             DataSource[i].drugName = DataSource[i].drugName.replaceAll(" ET"," <span class='r et'>ET</span>");
+            DataSource[i].drugName = DataSource[i].drugName.replaceAll(" IM"," <span class='r im'>IM</span>");
+            DataSource[i].drugName = DataSource[i].drugName.replaceAll(" IH"," <span class='r ih'>IH</span>");
         }
         if(DataSource[i].info)
         {
@@ -521,7 +526,7 @@ function makeStyle(){
     }
 }
 
-var setLayout=function(resizing){
+var setLayout=function(){
   var bodyWidth=$("body").width();
   if(bodyWidth<600){
       app.isMenuShowed=false;
@@ -539,9 +544,10 @@ var setLayout=function(resizing){
       }
       $(".content").width(bodyWidth-160);
   }
+  $('.menu').css({'max-height':$(window).height()-65});
 }
 $(window).resize(function() {
-    setLayout(true);
+    setLayout();
 });
 $(function() {
     setLayout();
