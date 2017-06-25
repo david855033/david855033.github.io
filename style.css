@@ -66,6 +66,8 @@ textarea:focus, input:focus{
     text-align: center;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
+    overflow-y: auto;;
+    height: 80%;
 }
 
 .menu-enter-active {
