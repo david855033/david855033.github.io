@@ -203,7 +203,7 @@ input:hover{
     margin-top: 14px; 
     margin-bottom: 10px;  
     padding-top:10px; 
-    border-radius: 3px;
+    border-radius: 6px;
 }
 .menuButton, .clearButton{
     -webkit-transition-duration: 0.1s; /* Safari */
@@ -267,7 +267,8 @@ input:hover{
     background: rgb(248,250,255);
     margin-top: 10px;
     margin-bottom: 10px;
-    outline: 0.5px solid rgb(220,220,220);
+    border-radius: 5px;
+    border: 0.5px solid rgb(220,220,220);
 }
 .row>div
 {
@@ -276,7 +277,7 @@ input:hover{
 }
 .description
 {
-    background: hsl(200,25%,90%);   
+    background: hsl(200,40%,85%);   
     font-weight: 600;
     font-size: 0.9em;
     padding: 4px;
@@ -291,7 +292,7 @@ input:hover{
     overflow: hidden;
     font-weight: 600;
     font-size: 1.1em;
-    background: rgb(255,255,180);
+    background: hsl(60,70%,90%);
     padding: 8px;
     line-height: 1.4em;
     text-align: left;
@@ -303,15 +304,15 @@ input:hover{
 .adjust{
     overflow: hidden;
     text-align: center;
-    background: rgb(255,255,180);
+    background: hsl(60,70%,90%);
     padding: 2px;
     height: 20px;
 }
 .adjustDrop{
     position: relative;
     text-align: center;
-    font-size: 0.5em;
-    background: rgb(255,255,180);
+    font-size: 1em;
+    background: hsl(60,70%,90%);
     height: 15px;
 }
 .adjust>button
@@ -326,9 +327,9 @@ input:hover{
     font-size: 10px;
     margin-left: 0.5%;
     margin-right: 0.5%;
-    background: rgb(255,255,180);
     color: black;
-    outline: 1px solid rgb(255,255,180);
+    background: hsl(60,70%,90%);
+    outline: hsl(60,70%,90%);
     transition: 0.3s all;
     cursor: pointer;
     border-radius: 5px;
@@ -537,7 +538,7 @@ span.cont{
 span.r
 {   
     padding: 0em .2em;
-    font-size: 0.5em;
+    font-size: 0.7em;
     font-weight: 600;
     line-height: 1em;
     text-align: center;
@@ -548,22 +549,22 @@ span.r
 }
 span.iv
 {   
-    background-color: hsla(200, 70%, 50%,0.4);
+    background-color: hsla(200, 70%, 50%,0.6);
     color: #fff;
 }
 span.po
 {   
-    background-color: hsla(350, 90%, 40%,0.5);
+    background-color: hsla(350, 90%, 40%,0.6);
     color: #fff;
 }
 span.rc
 {   
-    background-color: hsla(50, 90%, 20%,0.5);
+    background-color: hsla(50, 90%, 20%,0.6);
     color: #fff;
 }
 span.et
 {   
-    background-color: hsla(300, 70%, 50%,0.4);
+    background-color: hsla(300, 70%, 50%,0.6);
     color: #fff;
 }
 .notification{
@@ -587,8 +588,14 @@ h1{line-height: 3em;}
     opacity: 0.5;
 }
 .example-ani-enter-active,.example-ani-leave-active{
-    transition: 0.25s;
+    transition: 0.1s;
 }
 .greyout{
     color:hsla(0,100%,100%,0.8)
+}
+.ExampleButton{
+    padding: 0.4em 0.6em;
+    background: hsl(200,90%,50%);
+    border-radius: 5px;
+    text-decoration: underline;
 }

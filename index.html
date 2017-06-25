@@ -58,8 +58,8 @@
                         </p>
                             <p @click="showExample=!showExample">
                                <transition name="example-ani" mode="out-in">
-                                    <span v-if="!showExample" key="show">顯示範例藥物</span>
-                                    <span v-if="showExample" key="hide">隱藏範例藥物</span>
+                                    <span class="ExampleButton" v-if="!showExample" key="show">顯示範例藥物</span>
+                                    <span class="ExampleButton" v-if="showExample" key="hide">隱藏範例藥物</span>
                                 </transition>
                             </p>
                     </div>
@@ -94,7 +94,7 @@
                     </div>
                     <div class="bot">
                         <div class="info">
-                            <br><li>點選藥名可切換一次只顯示一筆藥物</li>
+                            <br><li>點選藥名可切換鎖定模式&#128274;，一次只顯示一筆藥物，再次點擊可取消。</li>
                         </div>
                         <div class="ref"></div>
                     </div>
