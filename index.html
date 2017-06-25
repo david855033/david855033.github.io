@@ -79,7 +79,8 @@
                             <div class="dosage">「常用劑量」(ex: 100mg/kg/day <span class="q q8h"> q8h</span>)
                             <br>若是pump，會在<span class="emphasize">藍色框框</span>顯示濃度</div>
                             <div class="calculated withadjust" @click="ManualShowAdjust_1=!ManualShowAdjust_1">
-                                「計算結果」<br> (輸入體重後才會顯示)<br>
+                                「計算結果」<br> 
+                                - 輸入體重後才會顯示<br>
                                 - 若達最大劑量，會<span class="maxDose">紅底</span>表示。<br>
                                 - pump類藥物，下方會出現「&#8801」按鈕，展開後可以「等比例」調整泡製體積。</br>
                                 Ex:<br><span class='adjusted'>{{manualAmount}}</span>mg in <span class="adjusted"> {{manualVol}}</span>ml
