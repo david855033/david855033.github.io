@@ -443,7 +443,7 @@ function makeStyle(){
     {
         if( DataSource[i].indication )
         {
-            DataSource[i].indication = DataSource[i].indication.replaceAll("[","<span class='emphasize'>");
+            DataSource[i].indication = DataSource[i].indication.replaceAll("[","<span class='IndiEmphasize'>");
             DataSource[i].indication = DataSource[i].indication.replaceAll("]","</span>");
             DataSource[i].indication = DataSource[i].indication.replaceAll("\n","<br>");
         }
