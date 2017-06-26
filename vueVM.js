@@ -655,6 +655,33 @@ $(function(){
                 }
             }
             return false;
+        }else if(e.keyCode==8 && app.searchText)
+        {
+            if(!$(".bw").is(":focus")&&
+                !$(".age").is(":focus")&&
+                !$("#searchText").is(":focus"))
+            {
+                if(app.isMenuOnTop)
+                    {
+                    if(app.isMenuShowed)
+                    {
+                        $("#searchText").focus();
+                        var newContent=$("#searchText").val().slice(0,-1);
+                        $("#searchText").val(newContent);
+                        app.searchText=newContent;
+                    }else
+                    {
+                        $("#searchText").focus();
+                        app.isMenuShowed=true;
+                    }
+                }else
+                {
+                    $("#searchText").focus();
+                    var newContent=$("#searchText").val().slice(0,-1);
+                    $("#searchText").val(newContent);
+                    app.searchText=newContent;
+                }
+            }
         }
     });
     $(".search").keyup(function(e){
