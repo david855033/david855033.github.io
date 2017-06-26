@@ -50,11 +50,10 @@
             <div id="content" class="content" v-bind:class="{'content-menuShowed':isMenuShowed&&!isMenuOnTop}">
                 <div class="container notification" v-if="!searchText_checked" > 
                     <div class="bot">
-                        <span class="greyout">Ped Dose</span>
+                        <span class="greyout">Ped Dose 開發階段<br>僅供驗算劑量用</span>
                         <h1 id="welcomeTitle">請在選單輸入藥名</h1>
-                        <p>
-                            年紀、體重可用不同單位<br>
-                            如: 3d、2m、2500g
+                        <p>年齡體重可接受不同單位<br>
+                            如: 3d、2m、2500g<br>
                         </p>
                             <p @click="showExample=!showExample">
                                <transition name="example-ani" mode="out-in">
