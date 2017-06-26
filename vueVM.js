@@ -348,15 +348,15 @@ var app = new Vue({
             if(!row.adjustAmount) row.adjustAmount=1;
             if(row.adjustAmount<1&&row.adjustAmount>0)
             {
-                row.adjustAmount+=0.2
+                row.adjustAmount+=0.1
             }
-            else if(row.adjustAmount>=1&&row.adjustAmount<5)
+            else if(row.adjustAmount>=1&&row.adjustAmount<2)
             {
-                row.adjustAmount+=0.5
+                row.adjustAmount+=0.1
             }
             else
             {
-                row.adjustAmount+=1
+                row.adjustAmount+=0.2
             }
             row.adjustAmount= Number(row.adjustAmount.toFixed(1));
             this.calculateDoseRow(row);
@@ -365,17 +365,17 @@ var app = new Vue({
         },
         adjustDecrease: function(row,index,rowindex){
             if(!row.adjustAmount) row.adjustAmount=1;
-            if(row.adjustAmount<=1&&row.adjustAmount>0.2)
+            if(row.adjustAmount<=1&&row.adjustAmount>0.1)
+            {
+                row.adjustAmount-=0.1
+            }
+            else if(row.adjustAmount>1&&row.adjustAmount<=2)
+            {
+                row.adjustAmount-=0.1
+            }
+            else if(row.adjustAmount>2)
             {
                 row.adjustAmount-=0.2
-            }
-            else if(row.adjustAmount>1&&row.adjustAmount<=5)
-            {
-                row.adjustAmount-=0.5
-            }
-            else if(row.adjustAmount>5)
-            {
-                row.adjustAmount-=1
             }
             row.adjustAmount=Number(row.adjustAmount.toFixed(1));
             this.calculateDoseRow(row);
