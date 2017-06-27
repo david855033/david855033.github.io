@@ -103,7 +103,7 @@
                     <div v-for="(item,index) in drugList" v-if="checkAgeAndBW(item)&&checkSearchText(item)&&(!(focused+1)||index==focused)" v-bind:key="index">
                         <div v-bind:id="['d'+index]" class="container" v-bind:class="[index==focused?'container-focused':'']">
                             <div class="top">  
-                                <div class="left" @click="onContainerClick(index)">
+                                <div class="left" @click="onContainerClick(index)" v-bind:class="{phone:!realTimeRender}">
                                     <div class="drugName" v-html="item.drugName">
                                     </div>
                                     <div class="indication" v-html="item.indication">

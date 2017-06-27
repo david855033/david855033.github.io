@@ -242,6 +242,9 @@ input:hover{
     float:left;
     overflow: hidden;
 }
+.phone{
+    font-size: 0.8em !important;
+}
 .drugName{
     font-size: 1em;
     font-weight: 900;
@@ -249,6 +252,7 @@ input:hover{
     margin-bottom: 15px;
     line-height: 1.2em;
 }
+
 .subtittle
 {
     font-size: 0.6em;
