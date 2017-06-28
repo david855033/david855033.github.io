@@ -48,7 +48,7 @@
             </transition>
          
             <div id="content" class="content" v-bind:class="{'content-menuShowed':isMenuShowed&&!isMenuOnTop}">
-                <div class="container notification" v-if="!searchText_checked" > 
+                <div class="container notification" v-if="searchText_checked.length<=2" > 
                     <div class="bot">
                         <span class="greyout">Ped Dose for VGHTPE<br>開發階段 僅供驗算用</span>
                         <h1 id="welcomeTitle">請在選單輸入藥名</h1>
@@ -64,7 +64,7 @@
                     </div>
                 </div>
              
-                <div class="container example" v-if="!searchText_checked&&showExample" :class="[manualFocused?'container-focused':'']">
+                <div class="container example" v-if="searchText_checked.length<=2&&showExample" :class="[manualFocused?'container-focused':'']">
                     <div class="top">
                         <div class="left"  @click="manualFocused=!manualFocused">
                             <div class="drugName">範例藥物 <span class="r iv">劑型</span><br><span class="subtittle"> (包裝、商品名)</span></div>
@@ -99,7 +99,7 @@
                         <div class="ref"></div>
                     </div>
                 </div>
-               <transition-group name="list" tag="div" v-if="searchText_checked" >
+               <transition-group name="list" tag="div" v-if="searchText_checked.length>2" >
                     <div v-for="(item,index) in drugList" v-if="checkAgeAndBW(item)&&checkSearchText(item)&&(!(focused+1)||index==focused)" v-bind:key="index">
                         <div v-bind:id="['d'+index]" class="container" v-bind:class="[index==focused?'container-focused':'']">
                             <div class="top">  
