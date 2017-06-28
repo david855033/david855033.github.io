@@ -564,75 +564,93 @@ $(function(){
 });
 
 $(function(){
-    $('#content').mousedown(function(){
+    $('#content').click(function(){
         if(app.isMenuOnTop)
         {
             app.isMenuShowed=false;
+            return false;
         }
     });
-    $(".menuButton").mousedown(function(){
-        if(app.realTimeRender){ 
-            $("#searchText").focus(); 
-        }
-        return false;
-    });
-    $("#searchText").mousedown(function(){
+    $("#searchText").click(function(){
         $("#searchText").focus();
         if(!app.realTimeRender)
         {
             app.searchText="";
         }
-        return false;
     });
-    $(".search").mousedown(function(){
-        app.searchText="";
-        return false;
-    });
-    $(".adjust").mousedown(function(){
-        return false;
-    });
-    $(".menu").mousedown(function(){
-        return false;
-    });
-    $(document).keyup(function(e){
-        if (e.keyCode==27) {
-            if(app.isMenuOnTop){
-                app.isMenuShowed=false;
-            }
-            app.clearButton();
+    
+    $(".search").keyup(function(e){
+        if(e.keyCode==13){
+            app.onSearchTextChange();
+            $("#searchText").blur();
+            if(app.isMenuOnTop) app.isMenuShowed=false;
             return false;
-        }else if(e.keyCode==13) {
-            if(app.isMenuShowed)
-            {
-                app.onSearchTextChange();
-                if(app.isMenuOnTop) 
-                {
+        }else if(e.keyCode==27){
+            app.searchText="";
+            $("#searchText").val('');
+            app.onSearchTextChange();
+            $("#searchText").blur();
+            return false;
+        }
+    });
+    $(".bw").keyup(function(e){
+        if(e.keyCode==13){
+            app.bw= $(".bw").val();
+            app.onBWValueChange();
+            $(".bw").blur();
+            return false;
+        }else if(e.keyCode==27){
+            app.bw="";
+              $(".bw").blur();
+            return false;
+        }
+    });
+    $(".bw").blur(function(){
+        if(app.bwForCalculation>200)
+        {
+            app.bw=200;
+            $(".bw").val(200);
+            app.onBWValueChange();
+        }
+    });
+     $(".age").keyup(function(e){
+          if(e.keyCode==13){
+            app.onAgeValueChange();
+            $(".age").blur();
+            return false;
+        }else if(e.keyCode==27){
+            app.age="";
+            $(".age").val('');
+            app.onAgeValueChange();
+            $(".age").blur();
+            return false;
+        }
+    });
+   
+    $(document).keyup(function(e){
+        if(!$(".bw").is(":focus")&&!$(".age").is(":focus")&&!$("#searchText").is(":focus")&&!e.ctrlKey){
+            if (e.keyCode==27) {    //capture ESC
+                if(app.isMenuOnTop){
                     app.isMenuShowed=false;
                 }
+                app.clearButton();
                 return false;
-            }
-        }else if((e.keyCode>=48&&e.keyCode<=57) ||
-            (e.keyCode >= 96 && e.keyCode <= 105))
-        {
-            if(!$(".bw").is(":focus")&&
-                !$(".age").is(":focus")&&
-                !$("#searchText").is(":focus"))
+            }else if(e.keyCode==13)  //capture Enter
             {
-                 $(".bw").focus();
-                $(".bw").val(e.key);
-                if(app.realTimeRender)
+                if(app.isMenuOnTop) 
                 {
-                    app.OnBWChange();
+                    app.isMenuShowed=!app.isMenuShowed;
                 }
-            }
-            return false;
-        }else if (!e.ctrlKey && 
-                     ((e.keyCode>= 65 && e.keyCode<=90 )||(e.keyCode>= 97 && e.keyCode<=122))
-                )
-        {
-            if(!$(".bw").is(":focus")&&
-                !$(".age").is(":focus")&&
-                !$("#searchText").is(":focus")&&e.key.length==1)
+                return false;
+            } else if((e.keyCode>=48&&e.keyCode<=57) ||
+            (e.keyCode >= 96 && e.keyCode <= 105))  //capture numbers
+            {
+                $(".bw").focus();
+                app.bw=e.key;
+                $(".bw").val(e.key);
+                app.OnBWChange();
+                return false;
+            }else if((e.keyCode>= 65 && e.keyCode<=90 )) //capture Chars
             {
                 if(app.isMenuOnTop)
                 {
@@ -640,12 +658,12 @@ $(function(){
                     {
                         $("#searchText").focus();
                         var newContent=$("#searchText").val()+e.key;
-                        $("#searchText").val(newContent);
                         app.searchText=newContent;
+                        $("#searchText").val(newContent);
                     }else
                     {
-                        $("#searchText").val(e.key);
                         app.searchText=e.key;
+                        $("#searchText").val(e.key);
                         app.isMenuShowed=true;
                     }
                 }else
@@ -653,16 +671,10 @@ $(function(){
                         $("#searchText").focus();
                         $("#searchText").val(e.key);
                 }
-            }
-            return false;
-        }else if(e.keyCode==8 && app.searchText)
-        {
-            if(!$(".bw").is(":focus")&&
-                !$(".age").is(":focus")&&
-                !$("#searchText").is(":focus"))
+            }else if(e.keyCode==8 && app.searchText)
             {
                 if(app.isMenuOnTop)
-                    {
+                {
                     if(app.isMenuShowed)
                     {
                         $("#searchText").focus();
@@ -684,50 +696,5 @@ $(function(){
             }
         }
     });
-    $(".search").keyup(function(e){
-        if(e.keyCode==13){
-            app.onSearchTextChange();
-            $("#searchText").blur();
-            if(app.isMenuOnTop) app.isMenuShowed=false;
-            return false;
-        }else if(e.keyCode==27){
-            app.searchText="";
-            $("#searchText").val('');
-            app.onSearchTextChange();
-            $("#searchText").blur();
-            return false;
-        }
-    });
-    $(".bw").keyup(function(e){
-        if(e.keyCode==13){
-            app.onBWValueChange();
-            $(".bw").blur();
-            return false;
-        }else if(e.keyCode==27){
-            app.bw="";
-              $(".bw").blur();
-            return false;
-        }
-    });
-    $(".bw").blur(function(){
-        if(app.bwForCalculation>200)
-        {
-            app.bw=200;
-            app.onBWValueChange();
-        }
-    });
-     $(".age").keyup(function(e){
-          if(e.keyCode==13){
-            app.onAgeValueChange();
-                $(".age").blur();
-            return false;
-        }else if(e.keyCode==27){
-            app.age="";
-            $(".age").val('');
-            app.onAgeValueChange();
-              $(".age").blur();
-            return false;
-        }
-    });
-   
+
 });

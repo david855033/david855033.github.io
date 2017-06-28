@@ -19,6 +19,10 @@ input{font-family:inherit;}
 }
 textarea:focus, input:focus{
     outline: none;
+    background: hsl(60,90%,75%);
+}
+textarea:hover, input:hover{
+    background: hsl(60,90%,80%);
 }
 
 .bw-outrange{
