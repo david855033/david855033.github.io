@@ -145,11 +145,14 @@ var app = new Vue({
                 }
                 if(isMaxCount>0)
                 {
-                    var matchMax=prestring.match(/(<span class='maxDose'>)?([\d]+(.[\d]+)?)(<\/span>)?-(<span class='maxDose'>)?\2(<\/span>)?/g);
+                    var matchMax=prestring.match(/(<span class='maxDose'>)?([\d]+(.[\d]+)?)(<\/span>)?-(<span class='maxDose'>)\2(<\/span>)/g);
                     if(matchMax){
                         for(var k=0; k<matchMax.length;k++){
                             var toBeReplaced = matchMax[k].toString();
                             var toReplace = "<span class='maxDose'>"+toBeReplaced.match(/[\d]+(.[\d]+)?/g)[0].toString()+"<\/span>";
+                            console.log('prestring '+prestring);
+                            console.log('toBeReplaced '+toBeReplaced);
+                            console.log('toReplace '+toReplace);
                             prestring=prestring.replace(toBeReplaced,toReplace);
                         }
                     }
