@@ -490,6 +490,7 @@ function makeStyle(){
                 var current = DataSource[i].content[j];
                 current.showAdjust=false;
                 current.equation = current.equation.replaceAll("\n","<br>");
+                current.equation = current.equation.replaceAll("q4-","q4h-");
                 current.equation = current.equation.replaceAll("q6-","q6h-");
                 current.equation = current.equation.replaceAll("q8-","q8h-");
                 current.equation = current.equation.replaceAll("q12-","q12h");
@@ -500,6 +501,7 @@ function makeStyle(){
                 current.equation = current.equation.replaceAll("\n","<br>");
 
                 current.dosage = current.dosage.replaceAll("\n","<br>");
+                current.dosage = current.dosage.replaceAll("q4-","q4h-");
                 current.dosage = current.dosage.replaceAll("q6-","q6h-");
                 current.dosage = current.dosage.replaceAll("q8-","q8h-");
                 current.dosage = current.dosage.replaceAll("q12-","q12h");
