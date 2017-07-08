@@ -150,9 +150,6 @@ var app = new Vue({
                         for(var k=0; k<matchMax.length;k++){
                             var toBeReplaced = matchMax[k].toString();
                             var toReplace = "<span class='maxDose'>"+toBeReplaced.match(/[\d]+(.[\d]+)?/g)[0].toString()+"<\/span>";
-                            console.log('prestring '+prestring);
-                            console.log('toBeReplaced '+toBeReplaced);
-                            console.log('toReplace '+toReplace);
                             prestring=prestring.replace(toBeReplaced,toReplace);
                         }
                     }
