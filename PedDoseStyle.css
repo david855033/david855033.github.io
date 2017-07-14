@@ -318,16 +318,17 @@ input:hover{
 .dosage
 {
     padding: 4px;
+    line-height: 1.5em;
     font-size: 0.9em;
 }
 .calculated
 {
     overflow: hidden;
     font-weight: 600;
-    font-size: 1.1em;
+    font-size: 1em;
     background: hsl(60,70%,90%);
     padding: 8px;
-    line-height: 1.4em;
+    line-height: 1.5em;
     text-align: left;
 }
 .withadjust
