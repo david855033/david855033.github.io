@@ -1,0 +1,21 @@
+body{
+    background: hsl(50,70%,90%);
+    font-family: "Microsoft JhengHei","Helvetica Neue",Helvetica,Arial,sans-serif;
+    overflow-y:scroll;
+}
+.ga-wrapper{
+    background: hsl(50,70%,60%);
+    width: 95%;
+    margin: auto;
+}
+.ga{
+    float: left;
+    width: 50%;
+    text-align: center;
+}
+.ga.btn1{
+    background-color: hsl(100,50%,70%);
+}
+.ga.btn2{
+    background-color: hsl(150,50%,70%);
+}
