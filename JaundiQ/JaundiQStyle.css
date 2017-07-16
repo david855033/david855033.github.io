@@ -4,15 +4,18 @@ body{
     overflow-y:scroll;
     font-size: 12px;
 }
+h2{text-align: center;}
 .clear{clear:both;}
 .wrapper{
     width: 95%;
     margin: auto;
+    margin-top: 5px;
 }
 .ga.btn{
     float: left;
     width: 48%;
     text-align: center;
+    line-height: 2em;
 }
 .ga.btn.c1{
     background-color: hsl(100,50%,70%);
@@ -22,8 +25,12 @@ body{
 }
 .comp.btn{
     float:left;
-    width: 48%;
+    width: 48.5%;
+    margin-left: 0.5%;
+    margin-right: 0.5%;
     text-align: center;
+    line-height: 3em;
+    border-radius: 5px;
 }
 .comp.btn.c1{
     background-color: hsl(200,50%,70%);
@@ -31,10 +38,17 @@ body{
 .comp.btn.c2{
     background-color: hsl(200,50%,50%);
 }
+.selected{
+    box-shadow: 0px 0px 0px 2px #000 inset;
+}
 .age.btn{
     float:left;
-    width: 33%;
+    width: 32%;
+    margin-left: 0.5%;
+    margin-right: 0.5%;
     text-align: center;
+    line-height: 3em;
+    border-radius: 5px;
 }
 .age.btn.c1{
     background-color: hsl(300,50%,60%);
@@ -45,34 +59,46 @@ body{
 .age.btn.c3{
     background-color: hsl(300,50%,80%);
 }
-.selected{
-    background: white!important;
-}
+
 table.content{
     width:100%;
     text-align: center;
     border: 1px solid;
 }
 .col1{
-    width: 25%;
+    width: 20%;
 }
 .col2{
-    width: 40%;
+    width: 30%;
 }
 .col3{
-    width: 40%;
+    width: 30%;
 }
 
 .subtitle{
     font-size: 0.6em;
-    color: hsl(0,0%,50%);
+    color: hsl(0,0%,80%);
+    white-space: nowrap;
 }
-
+tr{
+    height: 2.5em;
+}
+th{
+    background: hsl(35,80%,20%);
+    color: white;
+    font-size: 0.8em;
+}
+tr:nth-child(even) td{
+    background-color: rgb(230,230,230);
+}
+tr:nth-child(odd) td{
+    background-color:rgb(255,255,255);
+}
 table {
   border-collapse: collapse;
 }
-table td, table th {
-  border: 1px solid black;
+table th {
+  border: 1px solid hsl(35,80%,10%);;
 }
 table tr:first-child th {
   border-top: 0;
@@ -87,4 +113,11 @@ table tr th:first-child {
 table tr td:last-child,
 table tr th:last-child {
   border-right: 0;
+}
+
+.disclaim{
+    font-size: 0.6em;
+    text-align: center;
+    color: rgba(0,0,0,0.5);
+    padding: 2px;
 }

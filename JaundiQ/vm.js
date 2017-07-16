@@ -57,7 +57,7 @@ var vm = new Vue({
             }
             else
             {
-                return '建議照光之TSB值<br><span class="subtitle">uncomplicated / complicated</span>';
+                return '建議照光之TSB值<br><span class="subtitle">uncomplicated/complicated</span>';
             }
         },
         headerPheresis:function(){
@@ -68,7 +68,7 @@ var vm = new Vue({
             }
             else
             {
-                return '建議換血之TSB值<br><span class="subtitle">uncomplicated / complicated</span>';
+                return '建議換血之TSB值<br><span class="subtitle">uncomplicated/complicated</span>';
             }
         }
     },
