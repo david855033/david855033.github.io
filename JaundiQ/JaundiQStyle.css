@@ -102,6 +102,9 @@ th{
     color: white;
     font-size: 0.8em;
 }
+td{
+    font-size: 0.8em;
+}
 tr:nth-child(even) td{
     background-color: rgb(230,230,230);
 }
