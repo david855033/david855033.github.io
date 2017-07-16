@@ -11,9 +11,58 @@
 <script type="text/javascript" src="jquery-3.2.1.js"></script>
 <body>
     <div id="vm">
-        <div class='ga-wrapper'>
-            <div class='ga btn1'>&#60;35週</div>
-            <div class='ga btn2'>≥35週</div>
+        <h2>新生兒黃疸臨界值查詢</h2>
+        <div class='ga wrapper'>
+            <div class='ga btn c1'>&#60;35週</div>
+            <div class='ga btn c2'>≥35週</div>
+            <div class="clear"></div>  
+        </div>
+        <div class='content'>
+            <div class="comp wrapper">
+                <div class="comp btn c1" @click="selectComp('uncomp')" :class="{selected:selectedComp=='uncomp'}">Uncomplicated</div>
+                <div class="comp btn c2" @click="selectComp('comp')" :class="{selected:selectedComp=='comp'}">Complicated</div>
+                <div class="clear"></div>  
+            </div>
+            <div class="age wrapper">
+                <div class="age btn c1" @click="selectAge('1')" :class="{selected:selectedAge=='1'}">&lt;48小時</div>
+                <div class="age btn c2" @click="selectAge('2')" :class="{selected:selectedAge=='2'}">48-96小時</div>
+                <div class="age btn c3" @click="selectAge('3')" :class="{selected:selectedAge=='3'}">&gt;96小時</div>
+                <div class="clear"></div>  
+            </div>
+            <div class="table wrapper">
+                <table class='content'>
+                    <tr>
+                        <th class="col1">出生體重(g)</th>
+                        <th class="col2">建議照光之TSB值</th>
+                        <th class="col3">建議換血之TSB值</th>
+                    </tr>
+                    <tr>
+                        <td class="col1">&lt;1000</td>
+                        <td class="col2" v-html="content[0].pt"></td>
+                        <td class="col3" v-html="content[0].pheresis"></td>
+                    </tr>
+                    <tr>
+                        <td class="col1">1000-1250</td>
+                        <td class="col2" v-html="content[1].pt"></td>
+                        <td class="col3" v-html="content[1].pheresis"></td>
+                    </tr>
+                    <tr>
+                        <td class="col1">1250-1499</td>
+                        <td class="col2" v-html="content[2].pt"></td>
+                        <td class="col3" v-html="content[2].pheresis"></td>
+                    </tr>
+                    <tr>
+                        <td class="col1">1500-1999</td>
+                        <td class="col2" v-html="content[3].pt"></td>
+                        <td class="col3" v-html="content[3].pheresis"></td>
+                    </tr>
+                    <tr>
+                        <td class="col1">&ge;2000</td>
+                        <td class="col2" v-html="content[4].pt"></td>
+                        <td class="col3" v-html="content[4].pheresis"></td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
 </body>

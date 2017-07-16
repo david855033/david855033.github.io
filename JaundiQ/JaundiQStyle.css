@@ -3,19 +3,92 @@ body{
     font-family: "Microsoft JhengHei","Helvetica Neue",Helvetica,Arial,sans-serif;
     overflow-y:scroll;
 }
-.ga-wrapper{
-    background: hsl(50,70%,60%);
+.clear{clear:both;}
+.wrapper{
     width: 95%;
     margin: auto;
 }
-.ga{
+.ga.wrapper{
+    background: hsl(50,70%,60%);
+}
+.ga.btn{
     float: left;
-    width: 50%;
+    width: 48%;
     text-align: center;
 }
-.ga.btn1{
+.ga.btn.c1{
     background-color: hsl(100,50%,70%);
 }
-.ga.btn2{
+.ga.btn.c2{
     background-color: hsl(150,50%,70%);
+}
+.comp.wrapper{
+    background: hsl(50,70%,60%);
+}
+.comp.btn{
+    float:left;
+    width: 48%;
+    text-align: center;
+}
+.comp.btn.c1{
+    background-color: hsl(200,50%,70%);
+}
+.comp.btn.c2{
+    background-color: hsl(200,50%,60%);
+}
+.age.wrapper{
+    background-color: hsl(150,50%,50%);
+}
+.age.btn{
+    float:left;
+    width: 33%;
+    text-align: center;
+}
+.age.btn.c1{
+    background-color: hsl(300,50%,50%);
+}
+.age.btn.c2{
+    background-color: hsl(300,50%,60%);
+}
+.age.btn.c3{
+    background-color: hsl(300,50%,80%);
+}
+.selected{
+    background: white!important;
+}
+table.content{
+    width:100%;
+    text-align: center;
+    border: 1px solid;
+}
+.col1{
+    width: 25%;
+}
+.col2{
+    width: 40%;
+}
+.col3{
+    width: 40%;
+}
+
+
+table {
+  border-collapse: collapse;
+}
+table td, table th {
+  border: 1px solid black;
+}
+table tr:first-child th {
+  border-top: 0;
+}
+table tr:last-child td {
+  border-bottom: 0;
+}
+table tr td:first-child,
+table tr th:first-child {
+  border-left: 0;
+}
+table tr td:last-child,
+table tr th:last-child {
+  border-right: 0;
 }
