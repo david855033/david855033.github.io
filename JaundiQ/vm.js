@@ -40,13 +40,15 @@ var vm = new Vue({
     data:{
         selectedAge:"",
         selectedComp:"",
+        selectedGroup:"",
         content:[
             {pt:"",pheresis:""},
             {pt:"",pheresis:""},
             {pt:"",pheresis:""},
             {pt:"",pheresis:""},
             {pt:"",pheresis:""}
-        ]
+        ],
+        order:""
     },
     computed:{
         headerPT:function(){
@@ -113,6 +115,16 @@ var vm = new Vue({
                     this.content[i].pheresis= uncompStringPheresis + " / "+ compStringPheresis;
                 }
             }
+            if(this.selectedComp&&this.selectedAge&&(this.selectedGroup!==""))
+            {
+                var PT1 = this.content[this.selectedGroup].pt;
+                var PT2 = Math.floor((this.content[this.selectedGroup].pt+this.content[this.selectedGroup].pheresis)/2);
+                var PT3 = this.content[this.selectedGroup].pheresis-1;
+                this.order="Bil>"+PT1+": PT x 1,<br>Bil>"+PT2+": PT x 2,<br>Bil>"+PT3+": PT x 3";
+            }else
+            {
+                this.order="選取參數後將會自動顯示治療處置<br>";
+            }
         },
         selectComp:function(comp){
             if(this.selectedComp==comp)
@@ -133,7 +145,17 @@ var vm = new Vue({
                 this.selectedAge=age;
             }
             this.renderContent();
-        },        
+        },
+        selectGroup:function(group){
+            if(this.selectedGroup===group)
+            {
+                this.selectedGroup="";
+            }
+            else{
+                this.selectedGroup=group;
+            }
+            this.renderContent();
+        }
     },
     mounted:function(){
         this.renderContent();

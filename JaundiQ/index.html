@@ -38,36 +38,40 @@
                         <th class="col2" v-html="headerPT"></th>
                         <th class="col3" v-html="headerPheresis"></th>
                     </tr>
-                    <tr>
+                    <tr @click="selectGroup(0)" :class="{selectedTR:selectedGroup===0}">
                         <td class="col1">&lt;1000</td>
                         <td class="col2" v-html="content[0].pt"></td>
                         <td class="col3" v-html="content[0].pheresis"></td>
                     </tr>
-                    <tr>
+                    <tr @click="selectGroup(1)" :class="{selectedTR:selectedGroup===1}">
                         <td class="col1">1000-1250</td>
                         <td class="col2" v-html="content[1].pt"></td>
                         <td class="col3" v-html="content[1].pheresis"></td>
                     </tr>
-                    <tr>
+                    <tr @click="selectGroup(2)" :class="{selectedTR:selectedGroup===2}">
                         <td class="col1">1250-1499</td>
                         <td class="col2" v-html="content[2].pt"></td>
                         <td class="col3" v-html="content[2].pheresis"></td>
                     </tr>
-                    <tr>
+                    <tr @click="selectGroup(3)" :class="{selectedTR:selectedGroup===3}">
                         <td class="col1">1500-1999</td>
                         <td class="col2" v-html="content[3].pt"></td>
                         <td class="col3" v-html="content[3].pheresis"></td>
                     </tr>
-                    <tr>
+                    <tr @click="selectGroup(4)" :class="{selectedTR:selectedGroup===4}">
                         <td class="col1">&ge;2000</td>
                         <td class="col2" v-html="content[4].pt"></td>
                         <td class="col3" v-html="content[4].pheresis"></td>
                     </tr>
                 </table>
             </div>
+
+            <div class="order wrapper">
+                <div class="order-content" v-html="order"></div>
+            </div>
         </div>
     </div>
-    <br>
+    
     <div class="disclaim">供專業人士研究參考用，作者不對任何<br>因使用本網站資訊所造成的損失負責</div>
     <div class="disclaim">Authors: 台北榮總兒醫部 羅宇成 蔡宛蓉</div>
     <div class="disclaim">Contact: david855033@gmail.com</div>

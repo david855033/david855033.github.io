@@ -1,15 +1,23 @@
 body{
-    background: hsl(50,70%,90%);
+    background: hsl(50,50%,90%);
     font-family: "Microsoft JhengHei","Helvetica Neue",Helvetica,Arial,sans-serif;
     overflow-y:scroll;
-    font-size: 12px;
+    font-size: 16px;
 }
-h2{text-align: center;}
+h2{
+    text-align: center;
+    margin-top:30px;
+    margin-bottom:30px;
+}
 .clear{clear:both;}
+.selected{
+    box-shadow: 0px 0px 0px 2px #000 inset!important;
+}
 .wrapper{
     width: 95%;
     margin: auto;
-    margin-top: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 .ga.btn{
     float: left;
@@ -31,15 +39,17 @@ h2{text-align: center;}
     text-align: center;
     line-height: 3em;
     border-radius: 5px;
+    transition: 0.3s;
 }
+
 .comp.btn.c1{
-    background-color: hsl(200,50%,70%);
+    background-color: hsl(100,60%,80%);
 }
 .comp.btn.c2{
-    background-color: hsl(200,50%,50%);
+    background-color: hsl(100,60%,80%);
 }
-.selected{
-    box-shadow: 0px 0px 0px 2px #000 inset;
+.comp.btn:hover{
+    background-color: hsl(100,35%,90%);
 }
 .age.btn{
     float:left;
@@ -49,17 +59,20 @@ h2{text-align: center;}
     text-align: center;
     line-height: 3em;
     border-radius: 5px;
+    transition: 0.2s;
 }
 .age.btn.c1{
-    background-color: hsl(300,50%,60%);
+    background-color: hsl(0,60%,80%);
 }
 .age.btn.c2{
-    background-color: hsl(300,50%,70%);
+    background-color: hsl(0,60%,80%);
 }
 .age.btn.c3{
-    background-color: hsl(300,50%,80%);
+    background-color: hsl(0,60%,80%);
 }
-
+.age.btn:hover{
+    background-color: hsl(0,60%,90%);
+}
 table.content{
     width:100%;
     text-align: center;
@@ -67,6 +80,7 @@ table.content{
 }
 .col1{
     width: 20%;
+    font-size:0.65em;
 }
 .col2{
     width: 30%;
@@ -94,8 +108,15 @@ tr:nth-child(even) td{
 tr:nth-child(odd) td{
     background-color:rgb(255,255,255);
 }
+tr:hover td{
+    background-color:hsl(50,70%,80%);
+}
+.selectedTR>td{
+    background:  hsl(50,70%,70%) !important;
+}
 table {
   border-collapse: collapse;
+  margin-top:20px;
 }
 table th {
   border: 1px solid hsl(35,80%,10%);;
@@ -114,6 +135,16 @@ table tr td:last-child,
 table tr th:last-child {
   border-right: 0;
 }
+.order.wrapper{
+    margin-top:10px;
+    margin-bottom:10px;
+    background: hsl(50,50%,80%);
+    border-radius: 10px;
+    padding-top:10px;
+    padding-bottom:10px;
+    text-align: center;
+}
+
 
 .disclaim{
     font-size: 0.6em;
