@@ -48,6 +48,30 @@ var vm = new Vue({
             {pt:"",pheresis:""}
         ]
     },
+    computed:{
+        headerPT:function(){
+            if(this.selectedComp=="uncomp"){
+                return '建議照光之TSB值<br><span class="subtitle">uncomplicated</span>';
+            }else if(this.selectedComp=="comp"){
+                return '建議照光之TSB值<br><span class="subtitle">complicated</span>';
+            }
+            else
+            {
+                return '建議照光之TSB值<br><span class="subtitle">uncomplicated / complicated</span>';
+            }
+        },
+        headerPheresis:function(){
+            if(this.selectedComp=="uncomp"){
+                return '建議換血之TSB值<br><span class="subtitle">uncomplicated</span>';
+            }else if(this.selectedComp=="comp"){
+                return '建議換血之TSB值<br><span class="subtitle">complicated</span>';
+            }
+            else
+            {
+                return '建議換血之TSB值<br><span class="subtitle">uncomplicated / complicated</span>';
+            }
+        }
+    },
     methods:{
         renderContent:function(){
             for(var i = 0; i < 5; i++)
@@ -55,25 +79,25 @@ var vm = new Vue({
                 var compStringPT, uncompStringPT, compStringPheresis, uncompStringPheresis;
                 if(this.selectedAge==1)
                 {
-                    compStringPT = dataBank.comp.pt[i].low;
                     uncompStringPT = dataBank.uncomp.pt[i].low;
-                    compStringPheresis = dataBank.comp.pheresis[i].low;
+                    compStringPT = dataBank.comp.pt[i].low;
                     uncompStringPheresis = dataBank.uncomp.pheresis[i].low;
+                    compStringPheresis = dataBank.comp.pheresis[i].low;
                 }else if(this.selectedAge==2){
-                    compStringPT = (dataBank.comp.pt[i].low + dataBank.comp.pt[i].high)/2;
                     uncompStringPT = (dataBank.uncomp.pt[i].low + dataBank.uncomp.pt[i].high)/2;
+                    compStringPT = (dataBank.comp.pt[i].low + dataBank.comp.pt[i].high)/2;
+                    uncompStringPheresis = (dataBank.uncomp.pheresis[i].low+dataBank.uncomp.pheresis[i].high)/2;
                     compStringPheresis = (dataBank.comp.pheresis[i].low+dataBank.comp.pheresis[i].high)/2;
-                    uncompStringPheresis = (dataBank.uncomp.pheresis[i].low+dataBank.comp.pheresis[i].high)/2;
                 }else if(this.selectedAge==3){
-                    compStringPT = dataBank.comp.pt[i].high;
                     uncompStringPT = dataBank.uncomp.pt[i].high;
-                    compStringPheresis = dataBank.comp.pheresis[i].high;
+                    compStringPT = dataBank.comp.pt[i].high;
                     uncompStringPheresis = dataBank.uncomp.pheresis[i].high;
+                    compStringPheresis = dataBank.comp.pheresis[i].high;
                 }else{
-                    compStringPT = dataBank.comp.pt[i].low+"-"+dataBank.comp.pt[i].high;
                     uncompStringPT = dataBank.uncomp.pt[i].low+"-"+dataBank.uncomp.pt[i].high;
-                    compStringPheresis = dataBank.comp.pheresis[i].low+"-"+dataBank.comp.pheresis[i].high;
+                    compStringPT = dataBank.comp.pt[i].low+"-"+dataBank.comp.pt[i].high;
                     uncompStringPheresis = dataBank.uncomp.pheresis[i].low+"-"+dataBank.uncomp.pheresis[i].high;
+                    compStringPheresis = dataBank.comp.pheresis[i].low+"-"+dataBank.comp.pheresis[i].high;
                 }
                 
                 if(this.selectedComp=="uncomp")

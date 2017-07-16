@@ -2,14 +2,12 @@ body{
     background: hsl(50,70%,90%);
     font-family: "Microsoft JhengHei","Helvetica Neue",Helvetica,Arial,sans-serif;
     overflow-y:scroll;
+    font-size: 12px;
 }
 .clear{clear:both;}
 .wrapper{
     width: 95%;
     margin: auto;
-}
-.ga.wrapper{
-    background: hsl(50,70%,60%);
 }
 .ga.btn{
     float: left;
@@ -22,9 +20,6 @@ body{
 .ga.btn.c2{
     background-color: hsl(150,50%,70%);
 }
-.comp.wrapper{
-    background: hsl(50,70%,60%);
-}
 .comp.btn{
     float:left;
     width: 48%;
@@ -34,10 +29,7 @@ body{
     background-color: hsl(200,50%,70%);
 }
 .comp.btn.c2{
-    background-color: hsl(200,50%,60%);
-}
-.age.wrapper{
-    background-color: hsl(150,50%,50%);
+    background-color: hsl(200,50%,50%);
 }
 .age.btn{
     float:left;
@@ -45,10 +37,10 @@ body{
     text-align: center;
 }
 .age.btn.c1{
-    background-color: hsl(300,50%,50%);
+    background-color: hsl(300,50%,60%);
 }
 .age.btn.c2{
-    background-color: hsl(300,50%,60%);
+    background-color: hsl(300,50%,70%);
 }
 .age.btn.c3{
     background-color: hsl(300,50%,80%);
@@ -71,6 +63,10 @@ table.content{
     width: 40%;
 }
 
+.subtitle{
+    font-size: 0.6em;
+    color: hsl(0,0%,50%);
+}
 
 table {
   border-collapse: collapse;
