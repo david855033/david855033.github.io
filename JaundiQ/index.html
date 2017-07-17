@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="format-detection" content="telephone=no">
     <title>Neonatal Jaundice Helper</title>
     <link rel="stylesheet" type="text/css" href="JaundiQStyle.css">
 </head>
@@ -71,9 +72,10 @@
                 <div class="order-content" v-html="order"></div>
             </div>
         </div>
+        <br>
         <div class="content" v-show='testMode'>
+            <center>&#9874;大寶bilirubin對照(以下內容測試中)&#9874;</center>
             <div class="graph wrapper">
-                <svg id="graph"></svg>
             </div>
         </div>
     </div>

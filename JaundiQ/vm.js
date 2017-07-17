@@ -169,19 +169,96 @@ JaundiceData.LowRisk = [
     {"hour": "12","level": "9"},
     {"hour": "24","level": "11.5"},
     {"hour": "36","level": "13.5"},
-    {"hour": "48","level": "15.25"}
+    {"hour": "48","level": "15.25"},
+    {"hour": "60","level": "16.5"},
+    {"hour": "72","level": "17.5"},
+    {"hour": "84","level": "18.8"},
+    {"hour": "96","level": "19.9"},
+    {"hour": "108","level": "20.5"},
+    {"hour": "120","level": "21"},
+    {"hour": "168","level": "21"},
 ];
+JaundiceData.MidRisk = [
+    {"hour": "0","level": "5"},
+    {"hour": "12","level": "7.5"},
+    {"hour": "24","level": "9.75"},
+    {"hour": "36","level": "11.5"},
+    {"hour": "48","level": "13"},
+    {"hour": "60","level": "14.25"},
+    {"hour": "72","level": "15.25"},
+    {"hour": "84","level": "16.4"},
+    {"hour": "96","level": "17"},
+    {"hour": "108","level": "18"},
+    {"hour": "168","level": "18"},
+];
+JaundiceData.HighRisk = [
+    {"hour": "0","level": "4"},
+    {"hour": "12","level": "5.8"},
+    {"hour": "24","level": "7.5"},
+    {"hour": "36","level": "9.5"},
+    {"hour": "48","level": "11.25"},
+    {"hour": "60","level": "12.4"},
+    {"hour": "72","level": "13.5"},
+    {"hour": "84","level": "14"},
+    {"hour": "96","level": "14.5"},
+    {"hour": "108","level": "15"},
+    {"hour": "168","level": "15"},
+];
+var $graphWrapper = $('.graph.wrapper');
+var drawGraph=function(){
+    $graphWrapper.empty();
+    // set the dimensions and margins of the graph
+    var margin = {top: 20, right: 20, bottom: 30, left: 50},
+        width = Math.min($graphWrapper.width() - margin.left - margin.right,400),
+        height = $graphWrapper.height() - margin.top - margin.bottom;
+    // set the ranges
+    var x = d3.scaleLinear().range([0, width]);
+    var y = d3.scaleLinear().range([height, 0]);
 
-var graph = d3.select("#graph");
-var width = $('#graph').width();
-console.log(width);
-var xScale = d3.scaleLinear().domain([0,168]).range([20, width - 20]);
-console.log(xScale(20));
+    // define the line
+    var valueline = d3.line()
+        .x(function(d) { return x(d.hour); })
+        .y(function(d) { return y(d.level); });
 
-var height =  $('#graph').height();
-console.log(height);
-var yScale = d3.scaleLinear().domain([0,25]).range([20, height - 20]);
-console.log(yScale(5));
+    // append the svg obgect to the body of the page
+    // appends a 'group' element to 'svg'
+    // moves the 'group' element to the top left margin
+    var svg = d3.select(".graph.wrapper").append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform",
+            "translate(" + margin.left + "," + margin.top + ")");
 
-var xAxis = d3.svg.axis().scale(xScale);
-var yAxis = d3.svg.axis().scale(yScale);
+    // Scale the range of the data
+    x.domain([0,180]);
+    y.domain([0,26]);
+
+    // Add the valueline path.
+    svg.append("path")
+        .data([JaundiceData.LowRisk])
+        .attr("class", "line")
+        .attr("d", valueline);
+
+    svg.append("path")
+        .data([JaundiceData.MidRisk])
+        .attr("class", "line")
+        .attr("d", valueline);
+
+        svg.append("path")
+        .data([JaundiceData.HighRisk])
+        .attr("class", "line")
+        .attr("d", valueline);
+
+    // Add the X Axis
+    svg.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x).tickValues(d3.range(0, 180, 24)));
+
+    // Add the Y Axis
+    svg.append("g")
+        .call(d3.axisLeft(y).tickValues(d3.range(0, 26, 5)));
+}
+
+$(drawGraph);
+$(window).resize(drawGraph);

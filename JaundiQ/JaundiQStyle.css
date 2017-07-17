@@ -146,12 +146,18 @@ table tr th:last-child {
     font-weight: 600;
 }
 
-#graph {
-  background-color: steelblue;
-  width: 100%;
-  height:200px;
+.graph.wrapper {
+    background: hsl(200,50%,80%);
+    height:300px;
+    border-radius: 10px;
+    text-align: center;
 }
 
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 2px;
+}
 
 
 .disclaim{
