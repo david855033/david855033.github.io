@@ -38,6 +38,7 @@ var dataBank=
 var vm = new Vue({
     el:'#vm',
     data:{
+        testMode:false,
         selectedAge:"",
         selectedComp:"",
         selectedGroup:"",
@@ -161,3 +162,26 @@ var vm = new Vue({
         this.renderContent();
     }
 })
+
+var JaundiceData={}
+JaundiceData.LowRisk = [
+    {"hour": "0","level": "6.5"},
+    {"hour": "12","level": "9"},
+    {"hour": "24","level": "11.5"},
+    {"hour": "36","level": "13.5"},
+    {"hour": "48","level": "15.25"}
+];
+
+var graph = d3.select("#graph");
+var width = $('#graph').width();
+console.log(width);
+var xScale = d3.scaleLinear().domain([0,168]).range([20, width - 20]);
+console.log(xScale(20));
+
+var height =  $('#graph').height();
+console.log(height);
+var yScale = d3.scaleLinear().domain([0,25]).range([20, height - 20]);
+console.log(yScale(5));
+
+var xAxis = d3.svg.axis().scale(xScale);
+var yAxis = d3.svg.axis().scale(yScale);

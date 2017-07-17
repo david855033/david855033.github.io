@@ -146,6 +146,13 @@ table tr th:last-child {
     font-weight: 600;
 }
 
+#graph {
+  background-color: steelblue;
+  width: 100%;
+  height:200px;
+}
+
+
 
 .disclaim{
     font-size: 0.6em;

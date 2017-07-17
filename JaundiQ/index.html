@@ -9,6 +9,7 @@
 </head>
 <script type="text/javascript" src="vue.js"></script>
 <script type="text/javascript" src="jquery-3.2.1.js"></script>
+<script type="text/javascript" src="d3.js"></script>
 <body>
     <div id="vm">
         <h2>NICU黃疸臨界值查詢</h2>
@@ -68,6 +69,11 @@
 
             <div class="order wrapper">
                 <div class="order-content" v-html="order"></div>
+            </div>
+        </div>
+        <div class="content" v-show='testMode'>
+            <div class="graph wrapper">
+                <svg id="graph"></svg>
             </div>
         </div>
     </div>
