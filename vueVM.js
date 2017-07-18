@@ -279,6 +279,11 @@ var app = new Vue({
                     }
                }
             }
+            if(item.drugName.replaceAll("<sub>","").replaceAll("</sub>","").toLowerCase()
+                .indexOf(this.searchText_checked.toLowerCase())>=0 )            
+            {
+                return true;
+            }
         },
         onSearchClear:function(){
             if(this.searchText!='')
