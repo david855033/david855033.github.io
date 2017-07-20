@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Shift Arrange</title>
+     <link rel="stylesheet" type="text/css" href="style.css">
+    <script type="text/javascript" src="vue.js"></script>
+    <script type="text/javascript" src="jquery-3.2.1.js"></script>
+    <script type="text/javascript" src="d3.js"></script>
+</head>
+<body>
+    <div id="app">
+        <form action="javascript:void(0);">
+            <label>firstWeekDay</label><input type="text" v-model="data.firstWeekDay">
+            <label>totalDay</label><input type="text" v-model="data.totalDay">
+            <button @click="initialize">Initialize</button>
+            <button @click="save">save</button>
+            <button @click="load">load</button>
+        </form>
+        <table>
+            <tr>
+               <td colspan="8">WeekDay</td>
+                <td v-for="day in data.weekDayList">{{day}}</td>
+            </tr>
+            <tr>
+                <th colspan="8">日期</th>
+                <th v-for="(day, index) in data.dayList" :class="[day?'holiday':'workday']">{{index+1}}</th>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td>G</td>
+                <td>M</td>
+                <td>PI</td>
+                <td>NI</td>
+                <td>91</td>
+                <td>93</td>
+                <td>NB</td>
+            </tr>
+            <tr v-for="(doctor,d) in data.doctorList">
+                <td><input type="text" class='cell' v-model="doctor.name"></td>
+                <td class='group' @click="clickGroup(d)">{{doctor.group}}</td>
+                <td class='main'  @click="clickMain(d)">{{doctor.main}}</td>
+                <td class='optional' v-html="doctor.PI?'V':''" @click="clickPosition(d,'PI')"></td>
+                <td class='optional' v-html="doctor.NI?'V':''" @click="clickPosition(d,'NI')"></td>
+                <td class='optional' v-html="doctor.A91?'V':''" @click="clickPosition(d,'A91')"></td>
+                <td class='optional' v-html="doctor.A93?'V':''" @click="clickPosition(d,'A93')"></td>
+                <td class='optional' v-html="doctor.NB?'V':''" @click="clickPosition(d,'NB')"></td>
+                <td class='duty' v-for="(dutySlot,i) in doctor.dayList">{{dutySlot}}</td>
+                <td class='up' v-if="d>0" @click="moveUp(d)">&#8593;</td>
+                <td class='up' v-else></td>
+                <td class='down' v-if="d<data.doctorList.length-1" @click="moveDown(d)">&#8595;</td>
+                <td class='down' v-else></td>
+                <td class='add' @click="addAt(d)">&#43;</td>
+                <td class='del'  @click="delAt(d)">&#8722;</td>
+            </tr>
+        </table>
+    </div>
+</body>
+    <script type="text/javascript" src="vm.js"></script>
+</html>

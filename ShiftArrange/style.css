@@ -1,0 +1,33 @@
+table{
+    width:95%;
+    text-align: center;
+}
+th,td{
+    width:20px;
+}
+th:first-of-type,td:first-of-type{
+    width:120px;
+}
+.cell{width: 95%; background-color: inherit;}
+.workday{
+    background: hsl(150,50%,50%)
+}
+.holiday{
+    background: hsl(20,50%,50%)
+}
+.group{
+    background: hsl(80,50%,50%)
+}
+.main{
+    background: hsl(100,50%,50%)
+}
+.optional{
+    background: hsl(150,50%,50%)
+}
+.duty{
+    background-color: hsl(250,30%,90%);
+}
+.add,.del,.up,.down{
+    width:10px;
+    background-color: hsl(0,60%,80%);
+}
