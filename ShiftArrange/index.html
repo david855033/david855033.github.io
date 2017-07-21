@@ -42,8 +42,8 @@
             </tr>
             <tr v-for="(doctor,d) in data.doctorList">
                 <td><input type="text" class='cell' v-model="doctor.name"></td>
-                <td class='workdayDuty'><input type="text" class='cell' @click="clickWorkdayDuty(d)" v-model="doctor.workdayDuty"></td>
-                <td class='holidayDuty'><input type="text" class='cell' @click="rightClickWorkdayDuty(d)" v-model="doctor.holidayDuty"></td>
+                <td class='workdayDuty'><input type="text" class='cell' @click="clickWorkdayDuty(d)" @contextmenu.prevent="rightClickWorkdayDuty(d)" v-model="doctor.workdayDuty"></td>
+                <td class='holidayDuty'><input type="text" class='cell' @click="clickHolidayDuty(d)" @contextmenu.prevent="rightClickHolidayDuty(d)" v-model="doctor.holidayDuty"></td>
                 <td class='group' @click="clickGroup(d)">{{doctor.group}}</td>
                 <td class='main'  @click="clickMain(d)">{{doctor.main}}</td>
                 <td class='optional' v-html="doctor.PI?'V':''" @click="clickPosition(d,'PI')"></td>

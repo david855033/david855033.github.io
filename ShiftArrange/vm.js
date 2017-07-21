@@ -37,10 +37,28 @@ var vm = new Vue({
                 {
                     this.data.doctorList[d].dayList.splice(this.data.totalDay,currentLength-this.data.totalDay);
                 }else{
-                    this.data.doctorList[d].dayList=Array(this.data.totalDay).fill('');
+                    for(var i = 0; i < this.data.totalDay - currentLength;i++){
+                        this.data.doctorList[d].dayList.pop('');
+                    }
                 }
             }
-        },//E=empty, D=duty, N=No, A=avoid
+        },//''=empty, D=duty, N=No, A=avoid
+        clickWorkdayDuty:function(d){
+            this.data.doctorList[d].workdayDuty+=1;
+        },
+        rightClickWorkdayDuty:function(d){
+            if(this.data.doctorList[d].workdayDuty>0){
+                this.data.doctorList[d].workdayDuty-=1;
+            }
+        },
+        clickHolidayDuty:function(d){
+            this.data.doctorList[d].holidayDuty+=1;
+        },
+        rightClickHolidayDuty:function(d){
+            if(this.data.doctorList[d].holidayDuty>0){
+                this.data.doctorList[d].holidayDuty-=1;
+            }
+        },
         clickGroup:function(d){
             if(this.data.doctorList[d].group==4) {this.data.doctorList[d].group=''}
             else{
