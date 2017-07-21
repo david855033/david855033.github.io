@@ -12,6 +12,10 @@
 </head>
 <body>
     <div id="app">
+        <form id='save' action="javascript:void(0);">
+            <label>save string</label><input  type="text" v-model="saveString">
+        </form>
+        <br>
         <form action="javascript:void(0);">
             <label>firstWeekDay</label><input type="text" v-model="data.firstWeekDay">
             <label>totalDay</label><input type="text" v-model="data.totalDay">
@@ -19,14 +23,44 @@
             <button @click="save">save</button>
             <button @click="load">load</button>
         </form>
-        <table>
+        <br>
+        <table id='count'>
+            <tr>
+                <th>病房</th>
+                <th v-html="'主要輪值人數'"></th>
+                <th>平日班數({{sumWorkday}})</th>
+                <th>假日班數({{sumHoliday}})</th>
+            </tr>
+            <tr>
+                <td>PICU</td>
+                <td v-for="num in PICounts">{{num}}</td>
+            </tr>
+            <tr>
+                <td>NICU</td>
+                <td v-for="num in NICounts">{{num}}</td>
+            </tr>
+            <tr>
+                <td>A091</td>
+                <td v-for="num in A91Counts">{{num}}</td>
+            </tr>
+            <tr>
+                <td>A093</td>
+                <td v-for="num in A93Counts">{{num}}</td>
+            </tr>
+            <tr>
+                <td>NBR</td>
+                <td v-for="num in NBCounts">{{num}}</td>
+            </tr>
+        </table>
+        <br>
+        <table id='doctor'>
             <tr>
                <td colspan="10">WeekDay</td>
                 <td v-for="day in data.weekDayList">{{day}}</td>
             </tr>
             <tr>
                 <th colspan="10">日期</th>
-                <th v-for="(day, index) in data.dayList" :class="[day?'holiday':'workday']">{{index+1}}</th>
+                <th v-for="(day, index) in data.dayList" :class="[day?'holiday':'workday']" @click="clickWeekday(index)" @contextmenu.prevent="clickWeekday(index)">{{index+1}}</th>
             </tr>
             <tr>
                 <td>Name</td>
@@ -41,17 +75,18 @@
                 <td>NB</td>
             </tr>
             <tr v-for="(doctor,d) in data.doctorList">
-                <td><input type="text" class='cell' v-model="doctor.name"></td>
+                <td class='name'><input type="text" class='cell' v-model="doctor.name"></td>
                 <td class='workdayDuty'><input type="text" class='cell' @click="clickWorkdayDuty(d)" @contextmenu.prevent="rightClickWorkdayDuty(d)" v-model="doctor.workdayDuty"></td>
                 <td class='holidayDuty'><input type="text" class='cell' @click="clickHolidayDuty(d)" @contextmenu.prevent="rightClickHolidayDuty(d)" v-model="doctor.holidayDuty"></td>
-                <td class='group' @click="clickGroup(d)">{{doctor.group}}</td>
-                <td class='main'  @click="clickMain(d)">{{doctor.main}}</td>
-                <td class='optional' v-html="doctor.PI?'V':''" @click="clickPosition(d,'PI')"></td>
-                <td class='optional' v-html="doctor.NI?'V':''" @click="clickPosition(d,'NI')"></td>
-                <td class='optional' v-html="doctor.A91?'V':''" @click="clickPosition(d,'A91')"></td>
-                <td class='optional' v-html="doctor.A93?'V':''" @click="clickPosition(d,'A93')"></td>
-                <td class='optional' v-html="doctor.NB?'V':''" @click="clickPosition(d,'NB')"></td>
-                <td class='duty' v-for="(dutySlot,i) in doctor.dayList">{{dutySlot}}</td>
+                <td class='group' @click="clickGroup(d)" @contextmenu.prevent="rightClickGroup(d)">{{doctor.group}}</td>
+                <td class='main' @click="clickMain(d)"  @contextmenu.prevent="rightClickMain(d)">{{doctor.main}}</td>
+                <td class='optional' v-html="doctor.PI?'V':''" @click="clickPosition(d,'PI')" @contextmenu.prevent="clickPosition(d,'PI')"></td>
+                <td class='optional' v-html="doctor.NI?'V':''" @click="clickPosition(d,'NI')" @contextmenu.prevent="clickPosition(d,'NI')"></td>
+                <td class='optional' v-html="doctor.A91?'V':''" @click="clickPosition(d,'A91')" @contextmenu.prevent="clickPosition(d,'A91')"></td>
+                <td class='optional' v-html="doctor.A93?'V':''" @click="clickPosition(d,'A93')" @contextmenu.prevent="clickPosition(d,'A93')"></td>
+                <td class='optional' v-html="doctor.NB?'V':''" @click="clickPosition(d,'NB')" @contextmenu.prevent="clickPosition(d,'NB')"></td>
+                <td class='duty' v-for="(dutySlot,i) in doctor.dayList" @click="clickSlot(d,i)" @contextmenu.prevent="rightClickSlot(d,i)">{{dutySlot}}</td>
+                <td class='clear' @click="clear(d)">C</td> 
                 <td class='up' v-if="d>0" @click="moveUp(d)">&#8593;</td>
                 <td class='up' v-else></td>
                 <td class='down' v-if="d<data.doctorList.length-1" @click="moveDown(d)">&#8595;</td>

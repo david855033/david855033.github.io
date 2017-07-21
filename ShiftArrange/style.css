@@ -1,14 +1,21 @@
-table{
+#save{
+    text-align: right;
+}
+table#count{
+    width:50%;
+    text-align: center;
+}
+table#doctor{
     width:100%;
     text-align: center;
 }
-th,td{
+#doctor th,#doctor td{
     width:20px;
 }
-th:first-of-type,td:first-of-type{
-    width:120px;
-}
 .cell{width: 95%; background-color: inherit;}
+.name{
+    width:120px!important;
+}
 .workday{
     background: hsl(150,50%,50%)
 }
@@ -33,7 +40,7 @@ th:first-of-type,td:first-of-type{
 .duty{
     background-color: hsl(250,30%,90%);
 }
-.add,.del,.up,.down{
+.clear,.add,.del,.up,.down{
     width:10px;
     background-color: hsl(0,60%,80%);
 }
