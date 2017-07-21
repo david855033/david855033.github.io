@@ -21,15 +21,17 @@
         </form>
         <table>
             <tr>
-               <td colspan="8">WeekDay</td>
+               <td colspan="10">WeekDay</td>
                 <td v-for="day in data.weekDayList">{{day}}</td>
             </tr>
             <tr>
-                <th colspan="8">日期</th>
+                <th colspan="10">日期</th>
                 <th v-for="(day, index) in data.dayList" :class="[day?'holiday':'workday']">{{index+1}}</th>
             </tr>
             <tr>
                 <td>Name</td>
+                <td>W</td>
+                <td>H</td>
                 <td>G</td>
                 <td>M</td>
                 <td>PI</td>
@@ -40,6 +42,8 @@
             </tr>
             <tr v-for="(doctor,d) in data.doctorList">
                 <td><input type="text" class='cell' v-model="doctor.name"></td>
+                <td class='workdayDuty'><input type="text" class='cell' @click="clickWorkdayDuty(d)" v-model="doctor.workdayDuty"></td>
+                <td class='holidayDuty'><input type="text" class='cell' @click="rightClickWorkdayDuty(d)" v-model="doctor.holidayDuty"></td>
                 <td class='group' @click="clickGroup(d)">{{doctor.group}}</td>
                 <td class='main'  @click="clickMain(d)">{{doctor.main}}</td>
                 <td class='optional' v-html="doctor.PI?'V':''" @click="clickPosition(d,'PI')"></td>

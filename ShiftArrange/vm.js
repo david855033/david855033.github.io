@@ -3,11 +3,11 @@ var vm = new Vue({
     el:'#app',
     data:{data:{
         doctorList:[
-            {name:"A",group:"",main:"PI",PI:true,NI:true,A91:true,A93:true,NB:true,dayList:[]},
-            {name:"B",group:"",main:"NI",PI:true,NI:true,A91:true,A93:true,NB:true,dayList:[]},
-            {name:"C",group:"",main:"91",PI:true,NI:true,A91:true,A93:true,NB:true,dayList:[]},
-            {name:"D",group:"",main:"93",PI:true,NI:true,A91:true,A93:true,NB:true,dayList:[]},
-            {name:"E",group:"",main:"NB",PI:true,NI:true,A91:true,A93:true,NB:true,dayList:[]}
+            {name:"A",workdayDuty:5,holidayDuty:1,group:"",main:"PI",PI:true,NI:true,A91:true,A93:true,NB:true,dayList:[]},
+            {name:"B",workdayDuty:5,holidayDuty:1,group:"",main:"NI",PI:true,NI:true,A91:true,A93:true,NB:true,dayList:[]},
+            {name:"C",workdayDuty:5,holidayDuty:1,group:"",main:"91",PI:true,NI:true,A91:true,A93:true,NB:true,dayList:[]},
+            {name:"D",workdayDuty:5,holidayDuty:1,group:"",main:"93",PI:true,NI:true,A91:true,A93:true,NB:true,dayList:[]},
+            {name:"E",workdayDuty:5,holidayDuty:1,group:"",main:"NB",PI:true,NI:true,A91:true,A93:true,NB:true,dayList:[]}
         ],
         dayList:[],
         weekDayList:[],
@@ -77,6 +77,8 @@ var vm = new Vue({
                 A91:this.data.doctorList[index].A91,
                 A93:this.data.doctorList[index].A93,
                 NB:this.data.doctorList[index].NB,
+                workdayDuty:this.data.doctorList[index].workdayDuty,
+                holidayDuty:this.data.doctorList[index].holidayDuty,
                 dayList:Array(this.data.totalDay).fill('')
             });
         },

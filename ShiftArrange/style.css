@@ -15,6 +15,12 @@ th:first-of-type,td:first-of-type{
 .holiday{
     background: hsl(20,50%,50%)
 }
+.workdayDuty{
+    background: hsl(150,50%,80%)
+}
+.holidayDuty{
+    background: hsl(20,50%,80%)
+}
 .group{
     background: hsl(80,50%,50%)
 }
