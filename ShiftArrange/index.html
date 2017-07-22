@@ -20,6 +20,7 @@
             <label>firstWeekDay</label><input type="text" v-model="data.firstWeekDay">
             <label>totalDay</label><input type="text" v-model="data.totalDay">
             <button @click="initialize">Initialize</button>
+            <button @click='dutyView=!dutyView'>toggle Duty view</button>
             <button @click="save">save</button>
             <button @click="load">load</button>
         </form>
@@ -85,7 +86,8 @@
                 <td class='optional' v-html="doctor.A91?'V':''" @click="clickPosition(d,'A91')" @contextmenu.prevent="clickPosition(d,'A91')"></td>
                 <td class='optional' v-html="doctor.A93?'V':''" @click="clickPosition(d,'A93')" @contextmenu.prevent="clickPosition(d,'A93')"></td>
                 <td class='optional' v-html="doctor.NB?'V':''" @click="clickPosition(d,'NB')" @contextmenu.prevent="clickPosition(d,'NB')"></td>
-                <td class='duty' v-for="(dutySlot,i) in doctor.dayList" @click="clickSlot(d,i)" @contextmenu.prevent="rightClickSlot(d,i)">{{dutySlot}}</td>
+                <td v-if="dutyView" :colspan="data.dayList.length">{{doctor.dutyString}}</td>
+                <td v-else class='duty' v-for="(dutySlot,i) in doctor.dayList" @click="clickSlot(d,i)" @contextmenu.prevent="rightClickSlot(d,i)">{{dutySlot}}</td>
                 <td class='clear' @click="clear(d)">C</td> 
                 <td class='up' v-if="d>0" @click="moveUp(d)">&#8593;</td>
                 <td class='up' v-else></td>

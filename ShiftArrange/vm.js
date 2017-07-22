@@ -13,56 +13,57 @@ var vm = new Vue({
     el:'#app',
     data:{
         saveString:"",
+        dutyView:false,
         data:{
             doctorList:[
-                {name:"A陳朝敏",workdayDuty:5,holidayDuty:2,group:"",main:"PI",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[]},
-                //{name:"B張家瑗",workdayDuty:5,holidayDuty:2,group:"",main:"PI",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[]},
-                {name:"C曾思穎",workdayDuty:5,holidayDuty:2,group:"",main:"PI",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[]},
-                {name:"D陳裕璇",workdayDuty:5,holidayDuty:2,group:"",main:"PI",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[]},
-                {name:"E唐翊軒",workdayDuty:5,holidayDuty:2,group:"",main:"PI",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[]},
-                {name:"F黃治綱",workdayDuty:5,holidayDuty:2,group:"",main:"NI",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[]},
-                //{name:"G范文博",workdayDuty:5,holidayDuty:2,group:"",main:"NI",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[]},
-                //{name:"H黃心慧",workdayDuty:5,holidayDuty:2,group:"",main:"NI",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[]},
-                {name:"I王亭皓",workdayDuty:5,holidayDuty:2,group:"",main:"NI",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[]},
-                //{name:"J宋亭璇",workdayDuty:5,holidayDuty:2,group:"",main:"NI",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[]},
-                {name:"K黃齡葳",workdayDuty:5,holidayDuty:2,group:"",main:"91",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[]},
-                {name:"L吳則霖",workdayDuty:5,holidayDuty:2,group:"",main:"91",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[]},
-                {name:"M黃映齊",workdayDuty:5,holidayDuty:2,group:"",main:"91",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[]},
-                {name:"N陳以恩",workdayDuty:5,holidayDuty:2,group:"",main:"91",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[]},
-                {name:"O何正尹",workdayDuty:5,holidayDuty:2,group:"",main:"91",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[]},
-                {name:"1",workdayDuty:5,holidayDuty:2,group:"",main:"93",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[]},
-                {name:"2",workdayDuty:5,holidayDuty:2,group:"",main:"93",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[]},
-                {name:"3",workdayDuty:5,holidayDuty:2,group:"",main:"93",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[]},
-                {name:"4",workdayDuty:5,holidayDuty:2,group:"",main:"93",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[]},
-                {name:"5",workdayDuty:5,holidayDuty:2,group:"",main:"93",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[]},
-                {name:"6",workdayDuty:5,holidayDuty:2,group:"",main:"NB",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[]},
-                {name:"7",workdayDuty:5,holidayDuty:2,group:"",main:"NB",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[]},
-                {name:"8",workdayDuty:5,holidayDuty:2,group:"",main:"NB",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[]},
-                {name:"9",workdayDuty:5,holidayDuty:2,group:"",main:"NB",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[]},
-                {name:"10",workdayDuty:5,holidayDuty:2,group:"",main:"NB",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[]},
-                {name:"11",workdayDuty:5,holidayDuty:2,group:"",main:"NB",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[]},
-                {name:"a",workdayDuty:5,holidayDuty:2,group:"",main:"NB",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[]}
+                {name:"A陳朝敏",workdayDuty:5,holidayDuty:2,group:"",main:"PI",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
+                //{name:"B張家瑗",workdayDuty:5,holidayDuty:2,group:"",main:"PI",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
+                {name:"C曾思穎",workdayDuty:5,holidayDuty:2,group:"",main:"PI",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
+                {name:"D陳裕璇",workdayDuty:5,holidayDuty:2,group:"",main:"PI",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
+                {name:"E唐翊軒",workdayDuty:5,holidayDuty:2,group:"",main:"PI",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
+                {name:"F黃治綱",workdayDuty:5,holidayDuty:2,group:"",main:"NI",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
+                //{name:"G范文博",workdayDuty:5,holidayDuty:2,group:"",main:"NI",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
+                //{name:"H黃心慧",workdayDuty:5,holidayDuty:2,group:"",main:"NI",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
+                {name:"I王亭皓",workdayDuty:5,holidayDuty:2,group:"",main:"NI",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
+                //{name:"J宋亭璇",workdayDuty:5,holidayDuty:2,group:"",main:"NI",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
+                {name:"K黃齡葳",workdayDuty:5,holidayDuty:2,group:"",main:"91",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
+                {name:"L吳則霖",workdayDuty:5,holidayDuty:2,group:"",main:"91",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
+                {name:"M黃映齊",workdayDuty:5,holidayDuty:2,group:"",main:"91",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
+                {name:"N陳以恩",workdayDuty:5,holidayDuty:2,group:"",main:"91",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
+                {name:"O何正尹",workdayDuty:5,holidayDuty:2,group:"",main:"91",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
+                {name:"1",workdayDuty:5,holidayDuty:2,group:"",main:"93",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
+                {name:"2",workdayDuty:5,holidayDuty:2,group:"",main:"93",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
+                {name:"3",workdayDuty:5,holidayDuty:2,group:"",main:"93",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
+                {name:"4",workdayDuty:5,holidayDuty:2,group:"",main:"93",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
+                {name:"5",workdayDuty:5,holidayDuty:2,group:"",main:"93",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
+                {name:"6",workdayDuty:5,holidayDuty:2,group:"",main:"NB",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
+                {name:"7",workdayDuty:5,holidayDuty:2,group:"",main:"NB",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
+                {name:"8",workdayDuty:5,holidayDuty:2,group:"",main:"NB",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
+                {name:"9",workdayDuty:5,holidayDuty:2,group:"",main:"NB",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
+                {name:"10",workdayDuty:5,holidayDuty:2,group:"",main:"NB",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
+                {name:"11",workdayDuty:5,holidayDuty:2,group:"",main:"NB",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
+                {name:"a",workdayDuty:5,holidayDuty:2,group:"",main:"NB",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""}
             ],
-            noDuty:[
-                {name:"A", day:[12,13]},
-                {name:"C", day:[19,20],avoid:[4,5,6,12]},
-                {name:"D", day:[18,19,20]},
-                {name:"E", day:[1,5]},
-                {name:"F", day:[5,6,20,21,26]},
-                {name:"I", day:[26]},
-                {name:"K", day:[26,31]},
-                {name:"L", day:[13,20],avoid:[26]},
-                {name:"M", day:[26]},
-                {name:"N", day:[11,27],avoid:[27]},
-                {name:"1", day:[26,27,30,31]},
-                {name:"2", day:[1,8], avoid:[15,22,29]},
-                {name:"3", day:[13]},
-                {name:"4", day:[12,13]},
-                {name:"7", day:[22]},
-                {name:"8", day:[5,26]},
-                {name:"9", day:[10,11]},
-                {name:"10", day:[20],avoid:[5,6,31]},
-                {name:"11", day:[26,27]}
+            dutyPrefer:[
+                {name:"A", noDuty:[12,13]},
+                {name:"C", noDuty:[19,20],avoid:[4,5,6,12]},
+                {name:"D", noDuty:[18,19,20]},
+                {name:"E", noDuty:[1,5]},
+                {name:"F", noDuty:[5,6,20,21,26]},
+                {name:"I", noDuty:[26]},
+                {name:"K", noDuty:[26,31]},
+                {name:"L", noDuty:[13,20],avoid:[26]},
+                {name:"M", noDuty:[26]},
+                {name:"N", noDuty:[11,27],avoid:[27]},
+                {name:"1", noDuty:[26,27,30,31]},
+                {name:"2", noDuty:[1,8], avoid:[15,22,29]},
+                {name:"3", noDuty:[13]},
+                {name:"4", noDuty:[12,13]},
+                {name:"7", noDuty:[22]},
+                {name:"8", noDuty:[5,26]},
+                {name:"9", noDuty:[10,11]},
+                {name:"10", noDuty:[20],avoid:[5,6,31]},
+                {name:"11", noDuty:[26,27]}
             ],
             dayList:[],
             weekDayList:[],
@@ -84,6 +85,7 @@ var vm = new Vue({
         initialize:function(){
             this.initializeDayList();
             this.initializeDoctorList();
+            this.updateDoctorListNoDuty();
         },
         initializeDayList:function(){
             this.data.dayList.length=0;
@@ -117,8 +119,13 @@ var vm = new Vue({
                 }
             }
         },//''=empty, D=duty, N=No, A=avoid
-        initializeNoDuty:function(){
-
+        updateDoctorListNoDuty:function(){
+            for(var i = 0; i < this.data.doctorList.length;i++)
+            {
+                var thisDoctor = this.data.doctorList[i];
+                var thisID = thisDoctor.name.match(/([A-Za-z]|[0-9]+)/)[0];
+                console.log( thisDoctor.name +","+ thisID);
+            }
         },
         clickWeekday:function(i){
             this.data.dayList.splice(i,1,!this.data.dayList[i]);
