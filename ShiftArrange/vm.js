@@ -16,15 +16,15 @@ var vm = new Vue({
         data:{
             doctorList:[
                 {name:"A陳朝敏",workdayDuty:5,holidayDuty:2,group:"",main:"PI",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[]},
-                {name:"B張家瑗",workdayDuty:5,holidayDuty:2,group:"",main:"PI",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[]},
+                //{name:"B張家瑗",workdayDuty:5,holidayDuty:2,group:"",main:"PI",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[]},
                 {name:"C曾思穎",workdayDuty:5,holidayDuty:2,group:"",main:"PI",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[]},
                 {name:"D陳裕璇",workdayDuty:5,holidayDuty:2,group:"",main:"PI",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[]},
                 {name:"E唐翊軒",workdayDuty:5,holidayDuty:2,group:"",main:"PI",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[]},
                 {name:"F黃治綱",workdayDuty:5,holidayDuty:2,group:"",main:"NI",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[]},
-                {name:"G范文博",workdayDuty:5,holidayDuty:2,group:"",main:"NI",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[]},
-                {name:"H黃心慧",workdayDuty:5,holidayDuty:2,group:"",main:"NI",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[]},
+                //{name:"G范文博",workdayDuty:5,holidayDuty:2,group:"",main:"NI",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[]},
+                //{name:"H黃心慧",workdayDuty:5,holidayDuty:2,group:"",main:"NI",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[]},
                 {name:"I王亭皓",workdayDuty:5,holidayDuty:2,group:"",main:"NI",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[]},
-                {name:"J宋亭璇",workdayDuty:5,holidayDuty:2,group:"",main:"NI",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[]},
+                //{name:"J宋亭璇",workdayDuty:5,holidayDuty:2,group:"",main:"NI",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[]},
                 {name:"K黃齡葳",workdayDuty:5,holidayDuty:2,group:"",main:"91",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[]},
                 {name:"L吳則霖",workdayDuty:5,holidayDuty:2,group:"",main:"91",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[]},
                 {name:"M黃映齊",workdayDuty:5,holidayDuty:2,group:"",main:"91",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[]},
@@ -42,6 +42,27 @@ var vm = new Vue({
                 {name:"10",workdayDuty:5,holidayDuty:2,group:"",main:"NB",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[]},
                 {name:"11",workdayDuty:5,holidayDuty:2,group:"",main:"NB",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[]},
                 {name:"a",workdayDuty:5,holidayDuty:2,group:"",main:"NB",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[]}
+            ],
+            noDuty:[
+                {name:"A", day:[12,13]},
+                {name:"C", day:[19,20],avoid:[4,5,6,12]},
+                {name:"D", day:[18,19,20]},
+                {name:"E", day:[1,5]},
+                {name:"F", day:[5,6,20,21,26]},
+                {name:"I", day:[26]},
+                {name:"K", day:[26,31]},
+                {name:"L", day:[13,20],avoid:[26]},
+                {name:"M", day:[26]},
+                {name:"N", day:[11,27],avoid:[27]},
+                {name:"1", day:[26,27,30,31]},
+                {name:"2", day:[1,8], avoid:[15,22,29]},
+                {name:"3", day:[13]},
+                {name:"4", day:[12,13]},
+                {name:"7", day:[22]},
+                {name:"8", day:[5,26]},
+                {name:"9", day:[10,11]},
+                {name:"10", day:[20],avoid:[5,6,31]},
+                {name:"11", day:[26,27]}
             ],
             dayList:[],
             weekDayList:[],
@@ -96,6 +117,9 @@ var vm = new Vue({
                 }
             }
         },//''=empty, D=duty, N=No, A=avoid
+        initializeNoDuty:function(){
+
+        },
         clickWeekday:function(i){
             this.data.dayList.splice(i,1,!this.data.dayList[i]);
         },
