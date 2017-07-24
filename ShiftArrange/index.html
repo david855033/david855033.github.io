@@ -9,6 +9,7 @@
     <script type="text/javascript" src="vue.js"></script>
     <script type="text/javascript" src="jquery-3.2.1.js"></script>
     <script type="text/javascript" src="d3.js"></script>
+    <script type="text/javascript" src="calculate.js"></script>
 </head>
 <body>
     <div id="app">
@@ -25,6 +26,10 @@
             <button @click="load">load</button>
         </form>
         <br>
+         <form action="javascript:void(0);">
+             <button @click="calculate">calculate</button>
+         </form>
+         <br>
         <table id='count'>
             <tr>
                 <th>病房</th>
@@ -63,6 +68,11 @@
                 <th colspan="10">日期</th>
                 <th v-for="(day, index) in data.dayList" :class="[day?'holiday':'workday']" @click="clickWeekday(index)" @contextmenu.prevent="clickWeekday(index)">{{index+1}}</th>
             </tr>
+            <tr v-for="duty in data.dutyList">
+                <th colspan="10">{{duty.ward}}</th>
+                <th class='dutyCell' v-for="dutyDay in duty.dayList">{{dutyDay}}</th>
+            </tr>
+
             <tr>
                 <td>Name</td>
                 <td>W</td>
@@ -74,6 +84,7 @@
                 <td>91</td>
                 <td>93</td>
                 <td>NB</td>
+                <th v-for="(day, index) in data.dayList" :class="[day?'holiday':'workday']" @click="clickWeekday(index)" @contextmenu.prevent="clickWeekday(index)">{{index+1}}</th>
             </tr>
             <tr v-for="(doctor,d) in data.doctorList">
                 <td class='name'><input type="text" class='cell' v-model="doctor.name"></td>
@@ -86,7 +97,7 @@
                 <td class='optional' v-html="doctor.A91?'V':''" @click="clickPosition(d,'A91')" @contextmenu.prevent="clickPosition(d,'A91')"></td>
                 <td class='optional' v-html="doctor.A93?'V':''" @click="clickPosition(d,'A93')" @contextmenu.prevent="clickPosition(d,'A93')"></td>
                 <td class='optional' v-html="doctor.NB?'V':''" @click="clickPosition(d,'NB')" @contextmenu.prevent="clickPosition(d,'NB')"></td>
-                <td v-if="dutyView" :colspan="data.dayList.length">{{doctor.dutyString}}</td>
+                <td v-if="dutyView" class='dutyString' :colspan="data.dayList.length">{{doctor.dutyString}}</td>
                 <td v-else class='duty' v-for="(dutySlot,i) in doctor.dayList" @click="clickSlot(d,i)" @contextmenu.prevent="rightClickSlot(d,i)">{{dutySlot}}</td>
                 <td class='clear' @click="clear(d)">C</td> 
                 <td class='up' v-if="d>0" @click="moveUp(d)">&#8593;</td>
@@ -94,7 +105,7 @@
                 <td class='down' v-if="d<data.doctorList.length-1" @click="moveDown(d)">&#8595;</td>
                 <td class='down' v-else></td>
                 <td class='add' @click="addAt(d)">&#43;</td>
-                <td class='del'  @click="delAt(d)">&#8722;</td>
+                <td class='del' @click="delAt(d)">&#8722;</td>
             </tr>
         </table>
     </div>
