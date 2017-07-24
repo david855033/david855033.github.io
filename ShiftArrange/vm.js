@@ -16,6 +16,7 @@ var vm = new Vue({
     data:{
         saveString:"",
         dutyView:false,
+        showResult:0,
         data:{
             doctorList:[
                 {name:"A陳朝敏",workdayDuty:5,holidayDuty:2,group:"",main:"NI",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
@@ -76,6 +77,7 @@ var vm = new Vue({
             ],
             dayList:[],
             resultPool:[],
+            deadEnd:{count:0},
             weekDayList:[],
             firstWeekDay:0,
             totalDay:31
@@ -89,6 +91,12 @@ var vm = new Vue({
         A91Counts:counter('91'),
         A93Counts:counter('93'),
         NBCounts:counter('NB')
+    },
+    watch:{
+        showResult:function(){
+            var newDutyList = this.data.resultPool[this.showResult];
+            if(newDutyList){this.data.dutyList=newDutyList;}
+        }
     },
     methods:
     {
@@ -298,9 +306,32 @@ var vm = new Vue({
         calculate:function(){
             var doctorList= JSON.parse(JSON.stringify(this.data.doctorList));
             var dutyList = JSON.parse(JSON.stringify(this.data.dutyList));
+            var dayList = JSON.parse(JSON.stringify(this.data.dayList)); 
             var totalDay = JSON.parse(JSON.stringify(this.data.totalDay));
+            for(var i = 0; i< doctorList.length;i++)
+            {
+                doctorList[i].index=i;
+            }
+            var groupedDoctorList = [];
+            for(var i = 0; i < dutyList.length ; i++)
+            {   
+                groupedDoctorList.push(doctorList.filter((x)=>x.main==dutyList[i].ward));
+                console.log("group:" + i + "doctor count: " + groupedDoctorList[i].length);
+            }
             var resultPool = this.data.resultPool;
-            nextDay(0, doctorList, dutyList, totalDay, resultPool);
+            resultPool.length=0;
+            var deadEnd = this.data.deadEnd;
+            deadEnd.count=0;
+            var param={};
+            param.doctorList=doctorList;
+            param.groupedDoctorList=groupedDoctorList;
+            param.dutyList= dutyList;
+            param.totalDay= totalDay;
+            param.resultPool=resultPool;
+            param.deadEnd=deadEnd;
+            param.dayList=dayList;
+            nextSlot(0, 0, param);
+            this.data.dutyList=resultPool[0];
         }
     },
     mounted:function(){
