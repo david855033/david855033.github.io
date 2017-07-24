@@ -75,6 +75,7 @@ var vm = new Vue({
                 {ward:"NB",dayList:[]}
             ],
             dayList:[],
+            resultPool:[],
             weekDayList:[],
             firstWeekDay:0,
             totalDay:31
@@ -295,7 +296,11 @@ var vm = new Vue({
             this.data=loadedData;
         },
         calculate:function(){
-            nextDay(0,this.data);
+            var doctorList= JSON.parse(JSON.stringify(this.data.doctorList));
+            var dutyList = JSON.parse(JSON.stringify(this.data.dutyList));
+            var totalDay = JSON.parse(JSON.stringify(this.data.totalDay));
+            var resultPool = this.data.resultPool;
+            nextDay(0, doctorList, dutyList, totalDay, resultPool);
         }
     },
     mounted:function(){

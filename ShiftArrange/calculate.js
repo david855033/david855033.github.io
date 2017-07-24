@@ -1,7 +1,5 @@
-var nextDay = function(day, data){
-    var doctorList = data.doctorList;
-    var dutyList = data.dutyList;
-    var totalDay = data.totalDay;
+var nextDay = function(day, doctorList, dutyList, totalDay, resultPool)
+{
     console.log("day:" + (day+1) +"/"+totalDay);
     for(var i = 0; i < dutyList.length ; i++)
     {
@@ -9,6 +7,10 @@ var nextDay = function(day, data){
         dayList.splice(day,1,"T");
     }
     if(day<totalDay-1){
-        nextDay(day+1,data);
+        
+        nextDay(day+1, doctorList, dutyList, totalDay, resultPool);
+    }else
+    {
+        resultPool.push(dutyList);
     }
 }
