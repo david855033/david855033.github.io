@@ -141,7 +141,7 @@ var vm = new Vue({
         initializeDutyList:function(){
             for(var i = 0;i<this.data.dutyList.length;i++)
             {
-                 this.data.dutyList[i].dayList.length=0;
+                this.data.dutyList[i].dayList.length=0;
                 for(var j = 0 ; j < this.data.totalDay;j++)
                 {
                     this.data.dutyList[i].dayList.push('');
@@ -305,7 +305,7 @@ var vm = new Vue({
         },
         calculate:function(){
             var doctorList= JSON.parse(JSON.stringify(this.data.doctorList));
-            var dutyList = JSON.parse(JSON.stringify(this.data.dutyList));
+            var dutyList = JSON.parse(JSON.stringify([{ward:"PI",dayList:[]},{ward:"NI",dayList:[]},{ward:"91",dayList:[]},{ward:"93",dayList:[]},{ward:"NB",dayList:[]}]));
             var dayList = JSON.parse(JSON.stringify(this.data.dayList)); 
             var totalDay = JSON.parse(JSON.stringify(this.data.totalDay));
             for(var i = 0; i< doctorList.length;i++)

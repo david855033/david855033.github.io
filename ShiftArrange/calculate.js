@@ -22,7 +22,8 @@ var nextSlot = function(ward, day, param)
         //--檢查連值
         availableDoctorForSlot = availableDoctorForSlot.filter((x)=> x.index != dutyList[ward].dayList[day-1].index);
         //--檢查假日值班數
-        availableDoctorForSlot = availableDoctorForSlot.filter((x)=>{
+        availableDoctorForSlot = availableDoctorForSlot.filter((x)=>
+        {
             var holidayCount= 0;
             dutyList[ward].dayList.slice(0,day).forEach((y, i)=>{
                 if(y.index==x.index && dayList[i]){
@@ -44,7 +45,7 @@ var nextSlot = function(ward, day, param)
     
     
     availableDoctorForSlot=d3.shuffle(availableDoctorForSlot);
-    var maxBranch=1;  //************ */
+    var maxBranch=2;  //************ */
     if( availableDoctorForSlot.length>maxBranch)
     {
         availableDoctorForSlot.length=maxBranch;            
@@ -63,7 +64,7 @@ var nextSlot = function(ward, day, param)
     {    
         if(branchDutyList.length>0)
         {
-            resultPool.push(branchDutyList[0]);
+            resultPool.push(branchDutyList[0]); //resulting
         }else
         {
               deadEnd.count++;
