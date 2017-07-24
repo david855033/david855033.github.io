@@ -21,7 +21,7 @@ var nextSlot = function(ward, day, param)
     if(day>0){
         //--檢查連值
         availableDoctorForSlot = availableDoctorForSlot.filter((x)=> x.index != dutyList[ward].dayList[day-1].index);
-        //--檢查假日值班數
+        //--檢查剩餘值班數
         availableDoctorForSlot = availableDoctorForSlot.filter((x)=>
         {
             var holidayCount= 0;
