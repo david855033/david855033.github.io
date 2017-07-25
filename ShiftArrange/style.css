@@ -16,6 +16,7 @@ table#doctor{
 .dutyCell{
     background: hsl(180,60%,80%);
 }
+.selected{background: hsl(30,70%,80%)!important;}
 .name{
     width:120px!important;
 }

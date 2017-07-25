@@ -3,60 +3,68 @@ var getID = function (x){
     return x.match(/([A-Za-z]|[0-9]+)/)[0];
 }
 
+var maxBranch=3;  //******分支數量上限****** */
+var maxResult=10;  //****結果數量上限 */
+var maxDeadend=2500; //****嘗試數量上限 */
+
 var nextSlot = function(ward, day, param)
 {
-    var doctorLis=param.doctorList;
+    var doctorList=param.doctorList;
     var groupedDoctorList=param.groupedDoctorList;
     var dutyList=param.dutyList;
     var totalDay=param.totalDay;
     var resultPool=param.resultPool;
     var deadEnd=param.deadEnd;
     var dayList=param.dayList;
+    var doctorBins=param.doctorBins;
 
     console.log("day:" + (day+1) +"/" +totalDay+", ward:"+ward);
     //Generate Available
-    var availableDoctorForSlot = groupedDoctorList[ward].slice();
-    //console.log(availableDoctorForSlot.map((x)=>x.name).join(','));
+    //console.log('workday bin:' + doctorBins[ward].WorkdayTokens.map((x)=>doctorList[x].name).join(','));
+    var availableDoctorForSlot = [];
+    var isHoliday = dayList[day]; 
+    //console.log("holiday: " + isHoliday);
+    var currrentBin = isHoliday ? doctorBins[ward].HolidayTokens : doctorBins[ward].WorkdayTokens;
+    for(var i = 0;i<currrentBin.length;i++)
+    {
+        if(availableDoctorForSlot.length==groupedDoctorList[ward].length){
+            break;
+        }
+        if(availableDoctorForSlot.indexOf(currrentBin[i])<0)
+        {
+            availableDoctorForSlot.push(currrentBin[i]);
+        }
+    }
+
+    //console.log("available for slot: "+availableDoctorForSlot.map((x)=>doctorList[x].name).join(','));
 
     if(day>0){
         //--檢查連值
-        availableDoctorForSlot = availableDoctorForSlot.filter((x)=> x.index != dutyList[ward].dayList[day-1].index);
-        //--檢查剩餘值班數
-        availableDoctorForSlot = availableDoctorForSlot.filter((x)=>
-        {
-            var holidayCount= 0;
-            dutyList[ward].dayList.slice(0,day).forEach((y, i)=>{
-                if(y.index==x.index && dayList[i]){
-                     holidayCount++;
-                }
-            });
-            var workdayCount= 0;
-            dutyList[ward].dayList.slice(0,day).forEach((y, i)=>{
-                if(y.index==x.index && !dayList[i]){
-                     workdayCount++;
-                }
-            });
-            console.log(x.name+", holiday:"+holidayCount);
-            return x.workdayDuty > workdayCount &&  x.holidayDuty > holidayCount;
+        availableDoctorForSlot = availableDoctorForSlot.filter((x)=> {
+            return dutyList.map((y) => y.dayList[day-1]).indexOf(x)<0;
         });
     }
 
-
-    
-    
-    availableDoctorForSlot=d3.shuffle(availableDoctorForSlot);
-    var maxBranch=2;  //************ */
-    if( availableDoctorForSlot.length>maxBranch)
+    //檢查運算數量
+    if(resultPool.length>=maxResult || deadEnd.count>=maxDeadend){
+        availableDoctorForSlot.length=0;
+    }
+    else if(availableDoctorForSlot.length>maxBranch)
     {
         availableDoctorForSlot.length=maxBranch;            
     }
 
     //makeBranch
-    var branchDutyList = [];
+    var branchDutyList = [], branchDoctorBins = [];
     for(var i = 0 ; i < availableDoctorForSlot.length ; i++){
         var copyDutyList = JSON.parse(JSON.stringify(dutyList));
+        var copyDoctorBins = JSON.parse(JSON.stringify(doctorBins));
         copyDutyList[ward].dayList.splice(day,1,availableDoctorForSlot[i]);
+        var theBin = isHoliday ? copyDoctorBins[ward].HolidayTokens : copyDoctorBins[ward].WorkdayTokens;
+        var indexToRemove = theBin.indexOf(availableDoctorForSlot[i]);
+        theBin.splice(indexToRemove,1);
         branchDutyList.push(copyDutyList);
+        branchDoctorBins.push(copyDoctorBins);
     }
 
     //iterating..
@@ -65,9 +73,12 @@ var nextSlot = function(ward, day, param)
         if(branchDutyList.length>0)
         {
             resultPool.push(branchDutyList[0]); //resulting
+            //console.log(JSON.stringify(branchDutyList[0]));
+            console.log("result/fail: "+resultPool.length+"/" + deadEnd.count);
         }else
         {
-              deadEnd.count++;
+            deadEnd.count++;
+            console.log("result/fail: "+resultPool.length+"/" + deadEnd.count);
         }
     }else{
         var nextWard, nextDay;
@@ -81,12 +92,14 @@ var nextSlot = function(ward, day, param)
         }
         if(branchDutyList.length>0)
         {
-            branchDutyList.forEach((x)=>{
-            param.dutyList=x;
-            nextSlot(nextWard, nextDay, param);
-        })
+            branchDutyList.forEach((x,index)=>{
+                param.dutyList=x;
+                param.doctorBins=branchDoctorBins[index];
+                nextSlot(nextWard, nextDay, param);
+            });
         }else{
             deadEnd.count++;
+            console.log("result/fail: "+resultPool.length+"/" + deadEnd.count);
         }
     }
 }

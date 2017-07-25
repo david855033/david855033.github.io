@@ -28,7 +28,7 @@
         <br>
          <form action="javascript:void(0);">
              <button @click="calculate">calculate</button>
-             結果數:<span>{{data.resultPool.length}}</span> 排除數:<span>{{data.deadEnd.count}}</span>
+             結果數:<span>{{data.resultPool.length}}</span>排除數:<span>{{data.deadEnd.count}}</span>
              <label>Show result:</label><input type="text" v-model="showResult">
          </form>
             
@@ -73,7 +73,9 @@
             </tr>
             <tr v-for="duty in data.dutyList">
                 <th colspan="10">{{duty.ward}}</th>
-                <th class='dutyCell' v-for="dutyDay in duty.dayList">{{dutyDay.name}}</th>
+                <th class='dutyCell' v-for="dutyDay in duty.dayList" @click="selected=dutyDay"
+                :class="[selected===dutyDay?'selected':'']"
+                v-html="data.doctorList[dutyDay]&&data.doctorList[dutyDay].name"></th>
             </tr>
 
             <tr>

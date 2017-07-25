@@ -9,7 +9,15 @@ var counter=function(ward){
     }
 };
 
-
+var insertSparsely=function(arrayOfArray){
+    var finalArray=[];
+    var positionArray=[];
+    arrayOfArray.forEach((x,i)=>{
+        var interval = 1/(x.length+1);
+    });
+    
+    return finalArray;
+}
 
 var vm = new Vue({
     el:'#app',
@@ -17,6 +25,7 @@ var vm = new Vue({
         saveString:"",
         dutyView:false,
         showResult:0,
+        selected:-1,
         data:{
             doctorList:[
                 {name:"A陳朝敏",workdayDuty:5,holidayDuty:2,group:"",main:"NI",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
@@ -69,6 +78,13 @@ var vm = new Vue({
                 {name:"11", noDuty:[26,27]}
             ],
             dutyList:[
+                {ward:"PI",dayList:[]},
+                {ward:"NI",dayList:[]},
+                {ward:"91",dayList:[]},
+                {ward:"93",dayList:[]},
+                {ward:"NB",dayList:[]}
+            ],
+            emptyDutyList:[
                 {ward:"PI",dayList:[]},
                 {ward:"NI",dayList:[]},
                 {ward:"91",dayList:[]},
@@ -139,14 +155,15 @@ var vm = new Vue({
             }
         },//''=empty, D=duty, N=No, A=avoid
         initializeDutyList:function(){
-            for(var i = 0;i<this.data.dutyList.length;i++)
+            for(var i = 0;i<this.data.emptyDutyList.length;i++)
             {
-                this.data.dutyList[i].dayList.length=0;
+                this.data.emptyDutyList[i].dayList.length=0;
                 for(var j = 0 ; j < this.data.totalDay;j++)
                 {
-                    this.data.dutyList[i].dayList.push('');
+                    this.data.emptyDutyList[i].dayList.push('');
                 }
             }
+            this.data.dutyList=JSON.parse(JSON.stringify(this.data.emptyDutyList));
         },
         updateDoctorListNoDuty:function(){
             for(var i = 0; i < this.data.doctorList.length;i++)
@@ -303,9 +320,9 @@ var vm = new Vue({
             var loadedData = JSON.parse(this.saveString);
             this.data=loadedData;
         },
-        calculate:function(){
+        calculate: function(){
             var doctorList= JSON.parse(JSON.stringify(this.data.doctorList));
-            var dutyList = JSON.parse(JSON.stringify([{ward:"PI",dayList:[]},{ward:"NI",dayList:[]},{ward:"91",dayList:[]},{ward:"93",dayList:[]},{ward:"NB",dayList:[]}]));
+            var dutyList = JSON.parse(JSON.stringify(this.data.emptyDutyList));
             var dayList = JSON.parse(JSON.stringify(this.data.dayList)); 
             var totalDay = JSON.parse(JSON.stringify(this.data.totalDay));
             for(var i = 0; i< doctorList.length;i++)
@@ -313,10 +330,23 @@ var vm = new Vue({
                 doctorList[i].index=i;
             }
             var groupedDoctorList = [];
+            var doctorBins = [];
             for(var i = 0; i < dutyList.length ; i++)
             {   
                 groupedDoctorList.push(doctorList.filter((x)=>x.main==dutyList[i].ward));
-                console.log("group:" + i + "doctor count: " + groupedDoctorList[i].length);
+                //console.log("group:" + i + " doctor count: " + groupedDoctorList[i].length);
+                var newBin = { ward:dutyList[i].ward, WorkdayTokens:[], HolidayTokens:[] };
+                var workdayDutyArray = [];
+                var holidayDutyArray = [];
+                groupedDoctorList[i].forEach((x)=>{
+                    workdayDutyArray.push(Array(x.workdayDuty).fill(x.index));
+                    holidayDutyArray.push(Array(x.holidayDuty).fill(x.index));
+                });
+                newBin.WorkdayTokens = insertSparsely(workdayDutyArray);
+                newBin.HolidayTokens = insertSparsely(holidayDutyArray);
+                console.log(newBin.WorkdayTokens.join(','));
+                console.log(newBin.HolidayTokens.join(','));
+                doctorBins.push(newBin);
             }
             var resultPool = this.data.resultPool;
             resultPool.length=0;
@@ -330,7 +360,10 @@ var vm = new Vue({
             param.resultPool=resultPool;
             param.deadEnd=deadEnd;
             param.dayList=dayList;
+            param.doctorBins=doctorBins;
+
             nextSlot(0, 0, param);
+            
             this.data.dutyList=resultPool[0];
         }
     },
