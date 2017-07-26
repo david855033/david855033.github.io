@@ -1,4 +1,4 @@
-this;'use strict';
+;'use strict';
 var counter=function(ward){
     return function(){
         var listOfWard = this.data.doctorList.filter(function(d){return d.main==ward;});
@@ -12,6 +12,7 @@ var counter=function(ward){
 var insertSparsely=function(arrayOfArray){
     var finalArray=[];
     var positionArrays=[];
+
     arrayOfArray.forEach((x)=>{
         var interval = 1/(x.length+1);
         var thisPositionArray=[];
@@ -20,7 +21,29 @@ var insertSparsely=function(arrayOfArray){
         });
         positionArrays.push(thisPositionArray);
     });
-    console.log(JSON.stringify(positionArrays));
+    var count=0;
+
+    //console.log("positionArrays"+JSON.stringify(positionArrays));
+
+    while(arrayOfArray.some((x)=>x.length>0) && count++<100)
+    {
+        var arrayIndexOfMin=0;
+        var currentMin=1;
+        arrayOfArray.forEach((x,index)=>{
+            //console.log("array x:"+x);
+            if(x.length>0 && positionArrays[index][0]<currentMin)
+            {
+                arrayIndexOfMin=index;
+                currentMin=positionArrays[index][0];
+            }
+        });
+        //console.log(arrayIndexOfMin+","+currentMin);
+        finalArray.push(arrayOfArray[arrayIndexOfMin].shift());
+        positionArrays[arrayIndexOfMin].shift();
+        
+    }
+
+    //console.log("final array"+finalArray);
     return finalArray;
 }
 
@@ -347,10 +370,10 @@ var vm = new Vue({
                     workdayDutyArray.push(Array(x.workdayDuty).fill(x.index));
                     holidayDutyArray.push(Array(x.holidayDuty).fill(x.index));
                 });
-                newBin.WorkdayTokens = insertSparsely(workdayDutyArray);
-                newBin.HolidayTokens = insertSparsely(holidayDutyArray);
-                console.log(newBin.WorkdayTokens.join(','));
-                console.log(newBin.HolidayTokens.join(','));
+                newBin.WorkdayTokens = insertSparsely(d3.shuffle(workdayDutyArray));
+                newBin.HolidayTokens = insertSparsely(d3.shuffle(holidayDutyArray));
+                //console.log(newBin.WorkdayTokens.join(','));
+                //console.log(newBin.HolidayTokens.join(','));
                 doctorBins.push(newBin);
             }
             var resultPool = this.data.resultPool;

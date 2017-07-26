@@ -4,7 +4,7 @@ var getID = function (x){
 }
 
 var maxBranch=3;  //******分支數量上限****** */
-var maxResult=10;  //****結果數量上限 */
+var maxResult=1;  //****結果數量上限 */
 var maxDeadend=2500; //****嘗試數量上限 */
 
 var nextSlot = function(ward, day, param)
@@ -38,12 +38,51 @@ var nextSlot = function(ward, day, param)
 
     //console.log("available for slot: "+availableDoctorForSlot.map((x)=>doctorList[x].name).join(','));
 
+    //--檢查要班
+    var newList=availableDoctorForSlot.filter((x)=>{
+        return (doctorList[x].dayList[day]=="D")
+    });
+    if(newList.length>0){availableDoctorForSlot=newList;}
+    
+    //--檢查不值班
+    availableDoctorForSlot = availableDoctorForSlot.filter((x)=>{
+        return !(doctorList[x].dayList[day]=="N")
+    });
+
+    //--檢查連值
     if(day>0){
-        //--檢查連值
         availableDoctorForSlot = availableDoctorForSlot.filter((x)=> {
             return dutyList.map((y) => y.dayList[day-1]).indexOf(x)<0;
         });
     }
+
+    //--檢查同組別
+    availableDoctorForSlot = availableDoctorForSlot.filter((x)=> {
+        var thisGroup = doctorList[x].group;
+        if(thisGroup=='') {
+            return true;
+        }else
+        {
+            return !dutyList.map((y)=>y.dayList[day]).filter((y=>y!="")).some((y)=>doctorList[y].group==thisGroup);
+        }
+    });
+    
+
+    //--排序希望不值班
+    availableDoctorForSlot.sort((x,y)=>{
+       if(doctorList[x].dayList[day]=="A" && doctorList[y].dayList[day]!=="A")
+        {
+            return 1;
+        }
+        else if(doctorList[x].dayList[day]!=="A" && doctorList[y].dayList[day]=="A")
+        {
+            return -1;
+        }else
+        {
+            return 0;
+        }
+    });
+    
 
     //檢查運算數量
     if(resultPool.length>=maxResult || deadEnd.count>=maxDeadend){
