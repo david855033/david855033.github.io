@@ -11,11 +11,16 @@ var counter=function(ward){
 
 var insertSparsely=function(arrayOfArray){
     var finalArray=[];
-    var positionArray=[];
-    arrayOfArray.forEach((x,i)=>{
+    var positionArrays=[];
+    arrayOfArray.forEach((x)=>{
         var interval = 1/(x.length+1);
+        var thisPositionArray=[];
+        x.forEach((y,i)=>{
+            thisPositionArray.push(interval*(i+1));
+        });
+        positionArrays.push(thisPositionArray);
     });
-    
+    console.log(JSON.stringify(positionArrays));
     return finalArray;
 }
 
