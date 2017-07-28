@@ -8,11 +8,20 @@ var counter=function(ward){
     }
 };
 
-var insertSparsely=function(arrayOfArray){
+var insertSparsely=function(arrayOfArray, data){
     var finalArray=[];
     var positionArrays=[];
-
+    var dutyPreference = data.dutyPreference;
+    //console.log(JSON.stringify(dutyPreference));
     arrayOfArray.forEach((x)=>{
+        var thisName = data.doctorList[x[0]].name;
+        var thisDutyPreference = dutyPreference.filter(y=>y.name==thisName)
+        console.log("thisDutyPreference: "+JSON.stringify(thisDutyPreference));
+        var thisNoDuty=[];
+        if(thisDutyPreference.length>0){thisNoDuty = thisDutyPreference[0].noDuty;}
+        //TODO***
+        console.log("thisNoDuty: "+JSON.stringify(thisNoDuty));
+
         var interval = 1/(x.length+1);
         var thisPositionArray=[];
         x.forEach((y,i)=>{
@@ -340,8 +349,8 @@ var vm = new Vue({
                     workdayDutyArray.push(Array(x[dutyList[i].ward].WD).fill(x.index));
                     holidayDutyArray.push(Array(x[dutyList[i].ward].HD).fill(x.index));
                 });
-                newBin.WorkdayTokens = insertSparsely(d3.shuffle(workdayDutyArray));
-                newBin.HolidayTokens = insertSparsely(d3.shuffle(holidayDutyArray));
+                newBin.WorkdayTokens = insertSparsely(d3.shuffle(workdayDutyArray), this.data);
+                newBin.HolidayTokens = insertSparsely(d3.shuffle(holidayDutyArray), this.data);
                 //console.log("bin W-Day: "+newBin.ward+"=>"+newBin.WorkdayTokens.join(','));
                 //console.log("bin H-Day: "+newBin.ward+"=>"+newBin.HolidayTokens.join(','));
                 doctorBins.push(newBin);
@@ -360,7 +369,7 @@ var vm = new Vue({
             param.dayList=dayList;
             param.doctorBins=doctorBins;
             param.firstWeekDay=this.data.firstWeekDay;
-            nextSlot(0, param);
+            //nextSlot(0, param);
             
             this.data.dutyList=resultPool[0];
             console.log('done');
