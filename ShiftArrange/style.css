@@ -17,21 +17,16 @@ table#doctor{
     background: hsl(180,60%,80%);
 }
 .selected{background: hsl(30,70%,80%)!important;}
-.name{
-    width:120px!important;
-}
 .workday{
     background: hsl(150,50%,50%)
 }
 .holiday{
     background: hsl(20,50%,50%)
 }
-.workdayDuty{
-    background: hsl(150,50%,80%)
+.name{
+    width:120px!important;
 }
-.holidayDuty{
-    background: hsl(20,50%,80%)
-}
+
 .group{
     background: hsl(80,50%,50%)
 }
@@ -39,7 +34,10 @@ table#doctor{
     background: hsl(100,50%,50%)
 }
 .optional{
-    background: hsl(150,50%,50%)
+    background: hsl(150,50%,90%)
+}
+.optional.have{
+    background: hsl(150,50%,70%)
 }
 .duty{
     background-color: hsl(250,30%,90%);

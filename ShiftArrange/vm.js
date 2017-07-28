@@ -1,10 +1,9 @@
 ;'use strict';
 var counter=function(ward){
     return function(){
-        var listOfWard = this.data.doctorList.filter(function(d){return d.main==ward;});
-            return [this.data.doctorList && listOfWard.length,
-            this.data.doctorList && d3.sum(listOfWard,function(d){return d.workdayDuty;} ),
-            this.data.doctorList && d3.sum(listOfWard,function(d){return d.holidayDuty;} )
+            return [
+                this.data.doctorList && d3.sum(this.data.doctorList.map(x=>x[ward].WD)) ,
+                this.data.doctorList && d3.sum(this.data.doctorList.map(x=>x[ward].HD))
             ];
     }
 };
@@ -56,33 +55,33 @@ var vm = new Vue({
         selected:-1,
         data:{
             doctorList:[
-                {name:"A陳朝敏",workdayDuty:5,holidayDuty:2,group:"",main:"NI",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
+                {name:"A陳朝敏",group:"",PI:{WD:0,HD:0},NI:{WD:5,HD:1},A91:{WD:0,HD:0},A93:{WD:0,HD:0},NB:{WD:0,HD:0},dayList:[],dutyString:""},
                 //{name:"B張家瑗",workdayDuty:5,holidayDuty:2,group:"",main:"PI",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
-                {name:"C曾思穎",workdayDuty:6,holidayDuty:2,group:"",main:"PI",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
-                {name:"D陳裕璇",workdayDuty:6,holidayDuty:2,group:"",main:"PI",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
-                {name:"E唐翊軒",workdayDuty:6,holidayDuty:2,group:"",main:"PI",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
-                {name:"F黃治綱",workdayDuty:6,holidayDuty:2,group:"",main:"NI",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
+                {name:"C曾思穎",group:"",PI:{WD:6,HD:2},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:0,HD:0},NB:{WD:0,HD:0},dayList:[],dutyString:""},
+                {name:"D陳裕璇",group:"",PI:{WD:0,HD:0},NI:{WD:6,HD:2},A91:{WD:0,HD:0},A93:{WD:0,HD:0},NB:{WD:0,HD:0},dayList:[],dutyString:""},
+                {name:"E唐翊軒",group:"",PI:{WD:6,HD:2},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:0,HD:0},NB:{WD:0,HD:0},dayList:[],dutyString:""},
+                {name:"F黃治綱",group:"",PI:{WD:0,HD:0},NI:{WD:6,HD:2},A91:{WD:0,HD:0},A93:{WD:0,HD:0},NB:{WD:0,HD:0},dayList:[],dutyString:""},
                 //{name:"G范文博",workdayDuty:5,holidayDuty:2,group:"",main:"NI",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
                 //{name:"H黃心慧",workdayDuty:5,holidayDuty:2,group:"",main:"NI",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
-                {name:"I王亭皓",workdayDuty:6,holidayDuty:3,group:"",main:"NI",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
+                {name:"I王亭皓",group:"",PI:{WD:6,HD:2},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:0,HD:0},NB:{WD:0,HD:0},dayList:[],dutyString:""},
                 //{name:"J宋亭璇",workdayDuty:5,holidayDuty:2,group:"",main:"NI",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
-                {name:"K黃齡葳",workdayDuty:6,holidayDuty:3,group:"",main:"PI",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
-                {name:"L吳則霖",workdayDuty:6,holidayDuty:3,group:"",main:"NI",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
-                {name:"M黃映齊",workdayDuty:6,holidayDuty:3,group:"",main:"PI",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
-                {name:"N陳以恩",workdayDuty:6,holidayDuty:3,group:"",main:"91",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
-                {name:"O何正尹",workdayDuty:6,holidayDuty:3,group:"",main:"91",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
-                {name:"1",workdayDuty:6,holidayDuty:3,group:"",main:"93",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
-                {name:"2",workdayDuty:6,holidayDuty:3,group:"",main:"93",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
-                {name:"3",workdayDuty:6,holidayDuty:3,group:"",main:"93",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
-                {name:"4",workdayDuty:6,holidayDuty:3,group:"",main:"93",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
-                {name:"5",workdayDuty:6,holidayDuty:3,group:"",main:"93",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
-                {name:"6",workdayDuty:6,holidayDuty:3,group:"",main:"91",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
-                {name:"7",workdayDuty:6,holidayDuty:3,group:"",main:"91",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
-                {name:"8",workdayDuty:6,holidayDuty:3,group:"",main:"NB",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
-                {name:"9",workdayDuty:6,holidayDuty:3,group:"",main:"NB",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
-                {name:"10",workdayDuty:6,holidayDuty:3,group:"",main:"NB",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
-                {name:"11",workdayDuty:6,holidayDuty:3,group:"",main:"NB",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""},
-                {name:"a",workdayDuty:6,holidayDuty:3,group:"",main:"NB",PI:false,NI:false,A91:false,A93:false,NB:false,dayList:[],dutyString:""}
+                {name:"K黃齡葳",group:"",PI:{WD:0,HD:0},NI:{WD:6,HD:2},A91:{WD:0,HD:0},A93:{WD:0,HD:0},NB:{WD:0,HD:0},dayList:[],dutyString:""},
+                {name:"L吳則霖",group:"",PI:{WD:0,HD:0},NI:{WD:6,HD:2},A91:{WD:0,HD:0},A93:{WD:0,HD:0},NB:{WD:0,HD:0},dayList:[],dutyString:""},
+                {name:"M黃映齊",group:"",PI:{WD:6,HD:2},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:0,HD:0},NB:{WD:0,HD:0},dayList:[],dutyString:""},
+                {name:"N陳以恩",group:"",PI:{WD:6,HD:2},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:0,HD:0},NB:{WD:0,HD:0},dayList:[],dutyString:""},
+                {name:"O何正尹",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:0,HD:0},NB:{WD:6,HD:2},dayList:[],dutyString:""},
+                {name:"1",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:0,HD:0},NB:{WD:6,HD:2},dayList:[],dutyString:""},
+                {name:"2",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:0,HD:0},NB:{WD:6,HD:2},dayList:[],dutyString:""},
+                {name:"3",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:0,HD:0},NB:{WD:6,HD:2},dayList:[],dutyString:""},
+                {name:"4",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:6,HD:2},NB:{WD:0,HD:0},dayList:[],dutyString:""},
+                {name:"5",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:6,HD:2},NB:{WD:0,HD:0},dayList:[],dutyString:""},
+                {name:"6",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:6,HD:2},NB:{WD:0,HD:0},dayList:[],dutyString:""},
+                {name:"7",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:6,HD:2},NB:{WD:0,HD:0},dayList:[],dutyString:""},
+                {name:"8",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:6,HD:2},A93:{WD:0,HD:0},NB:{WD:0,HD:0},dayList:[],dutyString:""},
+                {name:"9",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:6,HD:2},A93:{WD:0,HD:0},NB:{WD:0,HD:0},dayList:[],dutyString:""},
+                {name:"10",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:6,HD:2},A93:{WD:0,HD:0},NB:{WD:0,HD:0},dayList:[],dutyString:""},
+                {name:"11",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:6,HD:2},A93:{WD:0,HD:0},NB:{WD:0,HD:0},dayList:[],dutyString:""},
+                {name:"a",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:6,HD:2},A93:{WD:0,HD:0},NB:{WD:0,HD:0},dayList:[],dutyString:""}
             ],
             dutyPreference:[
                 {name:"A", noDuty:[12,13]},
@@ -108,15 +107,15 @@ var vm = new Vue({
             dutyList:[
                 {ward:"PI",dayList:[]},
                 {ward:"NI",dayList:[]},
-                {ward:"91",dayList:[]},
-                {ward:"93",dayList:[]},
+                {ward:"A91",dayList:[]},
+                {ward:"A93",dayList:[]},
                 {ward:"NB",dayList:[]}
             ],
             emptyDutyList:[
                 {ward:"PI",dayList:[]},
                 {ward:"NI",dayList:[]},
-                {ward:"91",dayList:[]},
-                {ward:"93",dayList:[]},
+                {ward:"A91",dayList:[]},
+                {ward:"A93",dayList:[]},
                 {ward:"NB",dayList:[]}
             ],
             dayList:[],
@@ -132,8 +131,8 @@ var vm = new Vue({
         sumHoliday:function(){ return this.data.dayList && this.data.dayList.filter(function(a){return a;}).length; },
         PICounts:counter('PI'),
         NICounts:counter('NI'),
-        A91Counts:counter('91'),
-        A93Counts:counter('93'),
+        A91Counts:counter('A91'),
+        A93Counts:counter('A93'),
         NBCounts:counter('NB')
     },
     watch:{
@@ -222,22 +221,6 @@ var vm = new Vue({
         clickWeekday:function(i){
             this.data.dayList.splice(i,1,!this.data.dayList[i]);
         },
-        clickWorkdayDuty:function(d){
-            this.data.doctorList[d].workdayDuty+=1;
-        },
-        rightClickWorkdayDuty:function(d){
-            if(this.data.doctorList[d].workdayDuty>0){
-                this.data.doctorList[d].workdayDuty-=1;
-            }
-        },
-        clickHolidayDuty:function(d){
-            this.data.doctorList[d].holidayDuty+=1;
-        },
-        rightClickHolidayDuty:function(d){
-            if(this.data.doctorList[d].holidayDuty>0){
-                this.data.doctorList[d].holidayDuty-=1;
-            }
-        },
         clickGroup:function(d){
             if(this.data.doctorList[d].group==4) {this.data.doctorList[d].group=''}
             else{
@@ -251,22 +234,9 @@ var vm = new Vue({
                 this.data.doctorList[d].group = Number(this.data.doctorList[d].group) -1;
             }
         },
-        clickMain:function(d){
-            if(this.data.doctorList[d].main=="PI") {this.data.doctorList[d].main='NI'}
-            else if(this.data.doctorList[d].main=="NI") {this.data.doctorList[d].main='91'}
-            else if(this.data.doctorList[d].main=="91") {this.data.doctorList[d].main='93'}
-            else if(this.data.doctorList[d].main=="93") {this.data.doctorList[d].main='NB'}
-            else if(this.data.doctorList[d].main=="NB") {this.data.doctorList[d].main='PI'}
-        },
-        rightClickMain:function(d){
-            if(this.data.doctorList[d].main=="PI") {this.data.doctorList[d].main='NB'}
-            else if(this.data.doctorList[d].main=="NI") {this.data.doctorList[d].main='PI'}
-            else if(this.data.doctorList[d].main=="91") {this.data.doctorList[d].main='NI'}
-            else if(this.data.doctorList[d].main=="93") {this.data.doctorList[d].main='91'}
-            else if(this.data.doctorList[d].main=="NB") {this.data.doctorList[d].main='93'}
-        },
-        clickPosition:function(d,pos){
-            this.data.doctorList[d][pos]=!this.data.doctorList[d][pos];
+        clickDutyCount:function(d,w,duty,modi){
+            this.data.doctorList[d][w][duty]+=modi;
+           if(this.data.doctorList[d][w][duty]<0) this.data.doctorList[d][w][duty]=0;
         },
         clickSlot:function(d,i)
         {
@@ -361,19 +331,19 @@ var vm = new Vue({
             var doctorBins = [];
             for(var i = 0; i < dutyList.length ; i++)
             {   
-                groupedDoctorList.push(doctorList.filter((x)=>x.main==dutyList[i].ward));
+                groupedDoctorList.push(doctorList.filter(x=>(x[dutyList[i].ward].WD+x[dutyList[i].ward].HD)>0));
                 //console.log("group:" + i + " doctor count: " + groupedDoctorList[i].length);
                 var newBin = { ward:dutyList[i].ward, WorkdayTokens:[], HolidayTokens:[] };
                 var workdayDutyArray = [];
                 var holidayDutyArray = [];
                 groupedDoctorList[i].forEach((x)=>{
-                    workdayDutyArray.push(Array(x.workdayDuty).fill(x.index));
-                    holidayDutyArray.push(Array(x.holidayDuty).fill(x.index));
+                    workdayDutyArray.push(Array(x[dutyList[i].ward].WD).fill(x.index));
+                    holidayDutyArray.push(Array(x[dutyList[i].ward].HD).fill(x.index));
                 });
                 newBin.WorkdayTokens = insertSparsely(d3.shuffle(workdayDutyArray));
                 newBin.HolidayTokens = insertSparsely(d3.shuffle(holidayDutyArray));
-                //console.log(newBin.WorkdayTokens.join(','));
-                //console.log(newBin.HolidayTokens.join(','));
+                //console.log("bin W-Day: "+newBin.ward+"=>"+newBin.WorkdayTokens.join(','));
+                //console.log("bin H-Day: "+newBin.ward+"=>"+newBin.HolidayTokens.join(','));
                 doctorBins.push(newBin);
             }
             var resultPool = this.data.resultPool;
@@ -389,10 +359,11 @@ var vm = new Vue({
             param.deadEnd=deadEnd;
             param.dayList=dayList;
             param.doctorBins=doctorBins;
-
-            nextSlot(0, 0, param);
+            param.firstWeekDay=this.data.firstWeekDay;
+            nextSlot(0, param);
             
             this.data.dutyList=resultPool[0];
+            console.log('done');
         }
     },
     mounted:function(){

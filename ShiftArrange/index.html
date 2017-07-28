@@ -36,7 +36,6 @@
         <table id='count'>
             <tr>
                 <th>病房</th>
-                <th v-html="'主要輪值人數'"></th>
                 <th>平日班數({{sumWorkday}})</th>
                 <th>假日班數({{sumHoliday}})</th>
             </tr>
@@ -64,44 +63,43 @@
         <br>
         <table id='doctor'>
             <tr>
-               <td colspan="10">WeekDay</td>
+               <td colspan="12">WeekDay</td>
                 <td v-for="day in data.weekDayList">{{day}}</td>
             </tr>
             <tr>
-                <th colspan="10">日期</th>
+                <th colspan="12">日期</th>
                 <th v-for="(day, index) in data.dayList" :class="[day?'holiday':'workday']" @click="clickWeekday(index)" @contextmenu.prevent="clickWeekday(index)">{{index+1}}</th>
             </tr>
             <tr v-for="duty in data.dutyList">
-                <th colspan="10">{{duty.ward}}</th>
+                <th colspan="12">{{duty.ward}}</th>
                 <th class='dutyCell' v-for="dutyDay in duty.dayList" @click="selected=dutyDay"
-                :class="[selected===dutyDay?'selected':'']"
+                :class="[(selected===dutyDay&&selected!=='')?'selected':'']"
                 v-html="data.doctorList[dutyDay]&&data.doctorList[dutyDay].name"></th>
             </tr>
 
             <tr>
                 <td>Name</td>
-                <td>W</td>
-                <td>H</td>
                 <td>G</td>
-                <td>M</td>
-                <td>PI</td>
-                <td>NI</td>
-                <td>91</td>
-                <td>93</td>
-                <td>NB</td>
+                <td colspan="2">PI</td>
+                <td colspan="2">NI</td>
+                <td colspan="2">A91</td>
+                <td colspan="2">A93</td>
+                <td colspan="2">NB</td>
                 <th v-for="(day, index) in data.dayList" :class="[day?'holiday':'workday']" @click="clickWeekday(index)" @contextmenu.prevent="clickWeekday(index)">{{index+1}}</th>
             </tr>
             <tr v-for="(doctor,d) in data.doctorList">
                 <td class='name'><input type="text" class='cell' v-model="doctor.name"></td>
-                <td class='workdayDuty'><input type="text" class='cell' @click="clickWorkdayDuty(d)" @contextmenu.prevent="rightClickWorkdayDuty(d)" v-model="doctor.workdayDuty"></td>
-                <td class='holidayDuty'><input type="text" class='cell' @click="clickHolidayDuty(d)" @contextmenu.prevent="rightClickHolidayDuty(d)" v-model="doctor.holidayDuty"></td>
                 <td class='group' @click="clickGroup(d)" @contextmenu.prevent="rightClickGroup(d)">{{doctor.group}}</td>
-                <td class='main' @click="clickMain(d)"  @contextmenu.prevent="rightClickMain(d)">{{doctor.main}}</td>
-                <td class='optional' v-html="doctor.PI?'V':''" @click="clickPosition(d,'PI')" @contextmenu.prevent="clickPosition(d,'PI')"></td>
-                <td class='optional' v-html="doctor.NI?'V':''" @click="clickPosition(d,'NI')" @contextmenu.prevent="clickPosition(d,'NI')"></td>
-                <td class='optional' v-html="doctor.A91?'V':''" @click="clickPosition(d,'A91')" @contextmenu.prevent="clickPosition(d,'A91')"></td>
-                <td class='optional' v-html="doctor.A93?'V':''" @click="clickPosition(d,'A93')" @contextmenu.prevent="clickPosition(d,'A93')"></td>
-                <td class='optional' v-html="doctor.NB?'V':''" @click="clickPosition(d,'NB')" @contextmenu.prevent="clickPosition(d,'NB')"></td>
+                <td class='optional' @click="clickDutyCount(d,'PI','WD',1)" @contextmenu.prevent="clickDutyCount(d,'PI','WD',-1)" :class="{have:doctor.PI.WD>0}" v-html="doctor.PI.WD>0?doctor.PI.WD:''"></td>
+                <td class='optional' @click="clickDutyCount(d,'PI','HD',1)" @contextmenu.prevent="clickDutyCount(d,'PI','HD',-1)" :class="{have:doctor.PI.HD>0}" v-html="doctor.PI.HD>0?doctor.PI.HD:''"></td>
+                <td class='optional' @click="clickDutyCount(d,'NI','WD',1)" @contextmenu.prevent="clickDutyCount(d,'NI','WD',-1)" :class="{have:doctor.NI.WD>0}" v-html="doctor.NI.WD>0?doctor.NI.WD:''"></td>
+                <td class='optional' @click="clickDutyCount(d,'NI','HD',1)" @contextmenu.prevent="clickDutyCount(d,'NI','HD',-1)" :class="{have:doctor.NI.HD>0}" v-html="doctor.NI.HD>0?doctor.NI.HD:''"></td>
+                <td class='optional' @click="clickDutyCount(d,'A91','WD',1)" @contextmenu.prevent="clickDutyCount(d,'A91','WD',-1)":class="{have:doctor.A91.WD>0}" v-html="doctor.A91.WD>0?doctor.A91.WD:''"></td>
+                <td class='optional' @click="clickDutyCount(d,'A91','HD',1)" @contextmenu.prevent="clickDutyCount(d,'A91','HD',-1)" :class="{have:doctor.A91.HD>0}" v-html="doctor.A91.HD>0?doctor.A91.HD:''"></td>
+                <td class='optional' @click="clickDutyCount(d,'A93','WD',1)" @contextmenu.prevent="clickDutyCount(d,'A93','WD',-1)":class="{have:doctor.A93.WD>0}" v-html="doctor.A93.WD>0?doctor.A93.WD:''"></td>
+                <td class='optional' @click="clickDutyCount(d,'A93','HD',1)" @contextmenu.prevent="clickDutyCount(d,'A93','HD',-1)" :class="{have:doctor.A93.HD>0}" v-html="doctor.A93.HD>0?doctor.A93.HD:''"></td>
+                <td class='optional' @click="clickDutyCount(d,'NB','WD',1)" @contextmenu.prevent="clickDutyCount(d,'NB','WD',-1)":class="{have:doctor.NB.WD>0}" v-html="doctor.NB.WD>0?doctor.NB.WD:''"></td>
+                <td class='optional' @click="clickDutyCount(d,'NB','HD',1)" @contextmenu.prevent="clickDutyCount(d,'NB','HD',-1)" :class="{have:doctor.NB.HD>0}" v-html="doctor.NB.HD>0?doctor.NB.HD:''"></td>
                 <td v-if="dutyView" class='dutyString' :colspan="data.dayList.length">{{doctor.dutyString}}</td>
                 <td v-else class='duty' v-for="(dutySlot,i) in doctor.dayList" @click="clickSlot(d,i)" @contextmenu.prevent="rightClickSlot(d,i)">{{dutySlot}}</td>
                 <td class='clear' @click="clear(d)">C</td> 
