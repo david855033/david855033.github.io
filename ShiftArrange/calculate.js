@@ -114,15 +114,25 @@ var nextSlot = function(day, param)
         for(var i = 0;i<maxBranch;i++) //重複maxBranch次
         {
             var thisCombination =[];
+            //製造組合
             for(var j = 0; j<availableDoctorsInADay.length;j++)
             {
+                //選取不重複的人
                 var nonDuplicatedAvailableDoctor = availableDoctorsInADay[j].filter(x=> {return thisCombination.indexOf(x)<0;} );
+                
+                //選取組別不重複的人
+                nonDuplicatedAvailableDoctor = nonDuplicatedAvailableDoctor.filter(x=>{
+                    return thisCombination.map(y=>doctorList[y].group).indexOf(doctorList[x].group)<0;
+                });
+
                 if(nonDuplicatedAvailableDoctor.length>0)
                 {
                     var randIndex = Math.floor(nonDuplicatedAvailableDoctor.length * Math.random());
                     thisCombination.push(nonDuplicatedAvailableDoctor[randIndex][0] || nonDuplicatedAvailableDoctor[randIndex]);
                 } 
             }
+
+            //如果人數正確，增加此組合
             if(thisCombination.length == dutyList.length){
                 doctorCombinationsInADay.push(thisCombination);
             }

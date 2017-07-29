@@ -369,7 +369,7 @@ var vm = new Vue({
             param.dayList=dayList;
             param.doctorBins=doctorBins;
             param.firstWeekDay=this.data.firstWeekDay;
-            //nextSlot(0, param);
+            nextSlot(0, param);
             
             this.data.dutyList=resultPool[0];
             console.log('done');
