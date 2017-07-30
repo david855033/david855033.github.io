@@ -8,27 +8,43 @@ var counter=function(ward){
     }
 };
 
-var insertSparsely=function(arrayOfArray, data){
+var insertSparsely=function(arrayOfArray, data, isHoliday){
     var finalArray=[];
     var positionArrays=[];
     var dutyPreference = data.dutyPreference;
     //console.log(JSON.stringify(dutyPreference));
     arrayOfArray.forEach((x)=>{
         var thisName = data.doctorList[x[0]].name;
-        var thisDutyPreference = dutyPreference.filter(y=>y.name==thisName)
-        console.log("thisDutyPreference: "+JSON.stringify(thisDutyPreference));
+        var thisDutyPreference = dutyPreference.filter(y=>y.name==getID(thisName));
         var thisNoDuty=[];
         if(thisDutyPreference.length>0){thisNoDuty = thisDutyPreference[0].noDuty;}
-        //TODO***
-        console.log("thisNoDuty: "+JSON.stringify(thisNoDuty));
+        var allDaysToSparse = data.dayList.map((y,index)=>y==isHoliday?index:-1).filter(y=>y>=0);
+        var availableDaysToSparse = allDaysToSparse.filter(y=>thisNoDuty.indexOf(y)<0);
 
-        var interval = 1/(x.length+1);
-        var thisPositionArray=[];
+        console.log("thisName: "+JSON.stringify(thisName));
+        console.log("thisNoDuty: "+JSON.stringify(thisNoDuty));
+        console.log("isHoliday:" + JSON.stringify(isHoliday));
+        console.log("allDaysToSparse:" + JSON.stringify(allDaysToSparse));
+        console.log("availableDaysToSparse:" + JSON.stringify(availableDaysToSparse));
+        
+        var interval = 1/(allDaysToSparse.length+1);
+        
+        var elementScale = 1/(availableDaysToSparse.length-1);
+        var elementInterval = 1/(x.length+1);
+        var elementScalePosition=[];  //availableday被選取的index
+        
         x.forEach((y,i)=>{
-            thisPositionArray.push(interval*(i+1));
+        
         });
+
+        console.log("elementScale:" + JSON.stringify(elementScale));
+        console.log("elementScalePosition:" + JSON.stringify(elementScalePosition));
+
+        var thisPositionArray=[];
+
         positionArrays.push(thisPositionArray);
     });
+
     var count=0;
 
     //console.log("positionArrays"+JSON.stringify(positionArrays));
@@ -48,7 +64,6 @@ var insertSparsely=function(arrayOfArray, data){
         //console.log(arrayIndexOfMin+","+currentMin);
         finalArray.push(arrayOfArray[arrayIndexOfMin].shift());
         positionArrays[arrayIndexOfMin].shift();
-        
     }
 
     //console.log("final array"+finalArray);
@@ -349,8 +364,8 @@ var vm = new Vue({
                     workdayDutyArray.push(Array(x[dutyList[i].ward].WD).fill(x.index));
                     holidayDutyArray.push(Array(x[dutyList[i].ward].HD).fill(x.index));
                 });
-                newBin.WorkdayTokens = insertSparsely(d3.shuffle(workdayDutyArray), this.data);
-                newBin.HolidayTokens = insertSparsely(d3.shuffle(holidayDutyArray), this.data);
+                newBin.WorkdayTokens = insertSparsely(d3.shuffle(workdayDutyArray), this.data, false);
+                newBin.HolidayTokens = insertSparsely(d3.shuffle(holidayDutyArray), this.data, true);
                 //console.log("bin W-Day: "+newBin.ward+"=>"+newBin.WorkdayTokens.join(','));
                 //console.log("bin H-Day: "+newBin.ward+"=>"+newBin.HolidayTokens.join(','));
                 doctorBins.push(newBin);
