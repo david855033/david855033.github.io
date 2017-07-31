@@ -20,13 +20,11 @@ var insertSparsely=function(arrayOfArray, data, isHoliday){
         if(thisDutyPreference.length>0){thisNoDuty = thisDutyPreference[0].noDuty;}
         var allDaysToSparse = data.dayList.map((y,index)=>y==isHoliday?index:-1).filter(y=>y>=0);
         var availableDaysToSparse = allDaysToSparse.filter(y=>thisNoDuty.indexOf(y)<0);
-
-        console.log("thisName: "+JSON.stringify(thisName));
-        console.log("thisNoDuty: "+JSON.stringify(thisNoDuty));
-        console.log("isHoliday:" + JSON.stringify(isHoliday));
-        console.log("allDaysToSparse:" + JSON.stringify(allDaysToSparse));
-        console.log("availableDaysToSparse:" + JSON.stringify(availableDaysToSparse));
-        
+        // console.log("thisName: "+JSON.stringify(thisName));
+        // console.log("thisNoDuty: "+JSON.stringify(thisNoDuty));
+        // console.log("isHoliday:" + JSON.stringify(isHoliday));
+        // console.log("allDaysToSparse:" + JSON.stringify(allDaysToSparse));
+        // console.log("availableDaysToSparse:" + JSON.stringify(availableDaysToSparse));
         var interval = 1/(data.dayList.length-1);
         
         var elementInterval= 1/(availableDaysToSparse.length-1);
@@ -36,17 +34,13 @@ var insertSparsely=function(arrayOfArray, data, isHoliday){
         x.forEach((y,i)=>{
             elemenePosition.push(Math.round((availableInterval*(i+0.5))/elementInterval,1));
         });
-
-        console.log("elementInterval:" + JSON.stringify(elementInterval));
-        console.log("elemenePosition:" + JSON.stringify(elemenePosition));
+        // console.log("elementInterval:" + JSON.stringify(elementInterval));
+        // console.log("elemenePosition:" + JSON.stringify(elemenePosition));
         //** */
         var selectedElement=elemenePosition.map(x=>availableDaysToSparse[x]);
-        console.log("selectedElement:" + JSON.stringify(selectedElement));
-
-        var thisPositionArray=[];
-
-
-        positionArrays.push(thisPositionArray);
+        // console.log("selectedElement:" + JSON.stringify(selectedElement));
+        //var thisPositionArray=[];
+        positionArrays.push(selectedElement);
     });
 
     var count=0;
@@ -56,7 +50,7 @@ var insertSparsely=function(arrayOfArray, data, isHoliday){
     while(arrayOfArray.some((x)=>x.length>0) && count++<100)
     {
         var arrayIndexOfMin=0;
-        var currentMin=1;
+        var currentMin=data.dayList.length;
         arrayOfArray.forEach((x,index)=>{
             //console.log("array x:"+x);
             if(x.length>0 && positionArrays[index][0]<currentMin)
@@ -70,7 +64,7 @@ var insertSparsely=function(arrayOfArray, data, isHoliday){
         positionArrays[arrayIndexOfMin].shift();
     }
 
-    //console.log("final array"+finalArray);
+    //console.log("final array: "+finalArray);
     return finalArray;
 }
 
@@ -436,6 +430,7 @@ var vm = new Vue({
             param.dayList=dayList;
             param.doctorBins=doctorBins;
             param.firstWeekDay=this.data.firstWeekDay;
+            //console.log("param doctorBins: "+JSON.stringify(param.doctorBins));
             nextSlot(0, param);
             
             this.data.dutyList=resultPool[0];

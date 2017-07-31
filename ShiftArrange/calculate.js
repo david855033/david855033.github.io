@@ -4,9 +4,9 @@ var getID = function (x){
 }
 
 var maxBranch=5;  //******分支數量上限****** */
-var doctorInclude=3; //排名前多少的會加入考量
+var doctorInclude=4; //排名前多少的會加入考量
 var maxResult=1;  //****結果數量上限 */
-var maxDeadend=1000; //****嘗試數量上限 */
+var maxDeadend=3000; //****嘗試數量上限 */
 
 var nextSlot = function(day, param)
 {
@@ -22,7 +22,6 @@ var nextSlot = function(day, param)
     
     var isHoliday = dayList[day]; 
     var availableDoctorsInADay = [];
-    
     for(var i = 0;i<dutyList.length;i++)
     {
         var availableDoctorForSlot = [];
@@ -105,12 +104,13 @@ var nextSlot = function(day, param)
         //將可以的醫師群傳入
         availableDoctorsInADay.push(availableDoctorForSlot);
     }
+    // console.log('nextSlot - availableDoctorsInADay before: '+JSON.stringify(availableDoctorsInADay));
 
     //製作組合
     var doctorCombinationsInADay =[];
     if(availableDoctorsInADay.every(x=>x.length>0) && resultPool.length < maxResult &&  deadEnd.count<maxDeadend)
     {
-        availableDoctorsInADay.forEach(x=>{x.length= Math.min(x.length,doctorInclude)});
+        availableDoctorsInADay.forEach(x=>{x.length = Math.min(x.length, doctorInclude)});
         for(var i = 0;i<maxBranch;i++) //重複maxBranch次
         {
             var thisCombination =[];
@@ -119,11 +119,13 @@ var nextSlot = function(day, param)
             {
                 //選取不重複的人
                 var nonDuplicatedAvailableDoctor = availableDoctorsInADay[j].filter(x=> {return thisCombination.indexOf(x)<0;} );
-                
+                //console.log('nonDuplicatedAvailableDoctor: '+JSON.stringify(nonDuplicatedAvailableDoctor));
                 //選取組別不重複的人
                 nonDuplicatedAvailableDoctor = nonDuplicatedAvailableDoctor.filter(x=>{
-                    return thisCombination.map(y=>doctorList[y].group).indexOf(doctorList[x].group)<0;
+                    var groupMap = thisCombination.map(y=>doctorList[y].group);
+                    return doctorList[x].group=="" || groupMap.indexOf(doctorList[x].group)<0;
                 });
+                // console.log('nonDuplicatedAvailableDoctor after same group exclude: '+JSON.stringify(nonDuplicatedAvailableDoctor));
 
                 if(nonDuplicatedAvailableDoctor.length>0)
                 {
@@ -131,15 +133,15 @@ var nextSlot = function(day, param)
                     thisCombination.push(nonDuplicatedAvailableDoctor[randIndex][0] || nonDuplicatedAvailableDoctor[randIndex]);
                 } 
             }
-
+            // console.log('nextSlot - thisCombination: '+JSON.stringify(thisCombination));
             //如果人數正確，增加此組合
             if(thisCombination.length == dutyList.length){
                 doctorCombinationsInADay.push(thisCombination);
             }
         }
     }
-    //console.log("availableDoctorsInADay"+JSON.stringify(availableDoctorsInADay));
-    //console.log("doctorCombinationsInADay"+JSON.stringify(doctorCombinationsInADay));
+    // console.log("availableDoctorsInADay after: "+JSON.stringify(availableDoctorsInADay));
+    // console.log("doctorCombinationsInADay: "+JSON.stringify(doctorCombinationsInADay));
 
     //makeBranch
     var branchDutyList = [], branchDoctorBins = [];
@@ -166,11 +168,11 @@ var nextSlot = function(day, param)
         {
             resultPool.push(branchDutyList[0]); //resulting
             //console.log(JSON.stringify(branchDutyList[0]));
-            console.log(resultPool.length+"/" + deadEnd.count);
+            //console.log(resultPool.length+"/" + deadEnd.count);
         }else
         {
             deadEnd.count++;
-            console.log(resultPool.length+"/" + deadEnd.count);
+            //console.log(resultPool.length+"/" + deadEnd.count);
         }
     }else{
         var nextDay;
@@ -184,7 +186,7 @@ var nextSlot = function(day, param)
             });
         }else{
             deadEnd.count++;
-            console.log(resultPool.length+"/" + deadEnd.count);
+            //console.log(resultPool.length+"/" + deadEnd.count);
         }
     }
 }
