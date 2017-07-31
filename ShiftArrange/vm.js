@@ -27,20 +27,24 @@ var insertSparsely=function(arrayOfArray, data, isHoliday){
         console.log("allDaysToSparse:" + JSON.stringify(allDaysToSparse));
         console.log("availableDaysToSparse:" + JSON.stringify(availableDaysToSparse));
         
-        var interval = 1/(allDaysToSparse.length+1);
+        var interval = 1/(data.dayList.length-1);
         
-        var elementScale = 1/(availableDaysToSparse.length-1);
-        var elementInterval = 1/(x.length+1);
-        var elementScalePosition=[];  //availableday被選取的index
+        var elementInterval= 1/(availableDaysToSparse.length-1);
+        var availableInterval = 1/(x.length);
+        var elemenePosition=[];  
         
         x.forEach((y,i)=>{
-        
+            elemenePosition.push(Math.round((availableInterval*(i+0.5))/elementInterval,1));
         });
 
-        console.log("elementScale:" + JSON.stringify(elementScale));
-        console.log("elementScalePosition:" + JSON.stringify(elementScalePosition));
+        console.log("elementInterval:" + JSON.stringify(elementInterval));
+        console.log("elemenePosition:" + JSON.stringify(elemenePosition));
+        //** */
+        var selectedElement=elemenePosition.map(x=>availableDaysToSparse[x]);
+        console.log("selectedElement:" + JSON.stringify(selectedElement));
 
         var thisPositionArray=[];
+
 
         positionArrays.push(thisPositionArray);
     });
@@ -265,7 +269,7 @@ var vm = new Vue({
         clickSlot:function(d,i)
         {
             var doctor=this.data.doctorList[d];
-            var slot= this.data.doctorList[d].dayList[i];
+            var slot= doctor.dayList[i];
             if(slot=='')
             {
                 doctor.dayList.splice(i,1,'D');
@@ -278,7 +282,55 @@ var vm = new Vue({
             }else
             {
                 doctor.dayList.splice(i,1,'');
+            };
+            
+            var currentID= getID(this.data.doctorList[d].name);
+            var thisDutyPreference = {name:currentID};
+            var noDuty = [];
+            var avoid = [];
+            var duty = [];
+            for(var i = 0 ; i < doctor.dayList.length; i++)
+            {
+                var currentSlot = doctor.dayList[i];
+                if(currentSlot=='A')
+                {
+                    avoid.splice(i,0,i+1);
+                }
+                else if(currentSlot=='D')
+                {
+                    duty.splice(i,0,i+1);
+                }
+                else if(currentSlot=='N')
+                {
+                    noDuty.splice(i,0,i+1);
+                }
+            };
+            if(avoid.length>0){
+                thisDutyPreference.avoid=avoid;
             }
+            if(duty.length>0){
+                thisDutyPreference.duty=duty;
+            }
+            if(noDuty.length>0){
+                thisDutyPreference.noDuty=noDuty;
+            }
+            var searchDutyPreference =-1;
+            this.data.dutyPreference.forEach((x,index)=>{
+                if(x.name==currentID){
+                    searchDutyPreference=index;
+                }
+            });
+            if(searchDutyPreference<0){
+                this.data.dutyPreference.splice(0,0,thisDutyPreference);
+            }else{
+                var selected = this.data.dutyPreference[searchDutyPreference];
+                selected.avoid = thisDutyPreference.avoid;
+                selected.noDuty = thisDutyPreference.noDuty;
+                selected.duty = thisDutyPreference.duty;
+            }
+            doctor.dutyString=(noDuty.length>0?("不值班:"+noDuty.join(",")):"")+"\t"
+            +(avoid.length>0?("希望不值班:"+avoid.join(",")):"")+"\t"
+            +(duty.length>0?("確定值班:"+duty.join(",")):"")+" ";
         },
         rightClickSlot:function(d,i)
         {
