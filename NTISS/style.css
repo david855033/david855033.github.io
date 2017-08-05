@@ -1,0 +1,48 @@
+body{
+    background: hsl(250,20%,95%);
+    font-family: "Microsoft JhengHei","Helvetica Neue",Helvetica,Arial,sans-serif;
+    overflow-y:scroll;
+    font-size: 16px;
+}
+h1{
+    text-align: center;
+    margin-top:5px;
+    margin-bottom:5px;
+}
+#app{
+    width:100%;
+}
+#leftCol{
+    float:left;
+    width:50%;
+}
+#rightCol{
+    float:left;
+    width:50%;
+}
+.clear{
+    clear:both;
+}
+table{
+    width: 95%;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.table1{
+    background: lightblue;
+}
+.table2{
+    background: lightgreen;
+}
+
+
+.disclaim{
+    font-size: 0.6em;
+    text-align: center;
+    color: rgba(0,0,0,0.5);
+    padding: 2px;
+}
