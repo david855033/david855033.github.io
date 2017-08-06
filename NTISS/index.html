@@ -9,46 +9,41 @@
     <script type="text/javascript" src="vue.js"></script>
     <script type="text/javascript" src="jquery-3.2.1.js"></script>
     <script type="text/javascript" src="d3.js"></script>
-    <script type="text/javascript" src="masonry.js"></script>
     
 </head>
 <body>
     <h1>NTISS快打高手</h1>
     <div id="app">
         <div id="leftCol">
-            <table class="table1">
+            <table v-for='(table,index) in leftCol' :class='"table"+index'>
                 <tr>
-                    <th colspan="2">Respiratory</th>
+                    <th colspan="4">{{table.tableName}}</th>
                 </tr>
-                <tr>
-                    <td>Supplemental Oxygen</td>
-                    <td>1</td>
+                <tr v-for='row in table.items' @click="checkSameGroup(table,row)" :class='{trSelected:row.selected,hoverable:row.name}'>
+                    <td class="spacing"></td>
+                    <td class='name'>{{row.name}}</td>
+                    <td :class='row.selected?"selectedScore":"nonSelectedScore"'>{{row.score}}</td>
+                    <td class="spacing"></td>
                 </tr>
-                    <td>Surfactant Administration</td>
-                    <td>1</td>
             </table>
         </div>
-        <div id="rightCol">
-            <table class="table2">
+       <div id="rightCol">
+            <table v-for='(table,index) in rightCol' :class='"table"+(index+4)'>
                 <tr>
-                    <th colspan="2">Respiratory</th>
+                    <th colspan="4">{{table.tableName}}</th>
                 </tr>
-                <tr>
-                    <td>Supplemental Oxygen</td>
-                    <td>1</td>
+                <tr v-for='row in table.items'  @click="checkSameGroup(table,row)"  :class='{trSelected:row.selected,hoverable:row.name}'>
+                    <td class="spacing"></td>
+                    <td class='name'>{{row.name}}</td>
+                    <td :class='row.selected?"selectedScore":"nonSelectedScore"'>{{row.score}}</td>
+                    <td class="spacing"></td>
                 </tr>
-                    <td>Surfactant Administration</td>
-                    <td>1</td>
             </table>
+            <div class='sum'>總分：{{totalScore}}</div>
         </div>
         <div class='clear'></div>
     </div>
     
-    <br><br>
-    <div class="disclaim">供專業人士研究參考用，作者不對任何<br>因使用本網站資訊所造成的損失負責</div>
-    <div class="disclaim">Authors: 台北榮總兒醫部 羅宇成 蔡宛蓉</div>
-    <div class="disclaim">Contact: david855033@gmail.com</div>
-    <div class="disclaim">Copyright © 2017 喵姑studio All rights reserved.</div>
 </body>
     <script type="text/javascript" src="vm.js"></script>
 </html>

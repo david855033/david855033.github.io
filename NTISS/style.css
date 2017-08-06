@@ -2,7 +2,7 @@ body{
     background: hsl(250,20%,95%);
     font-family: "Microsoft JhengHei","Helvetica Neue",Helvetica,Arial,sans-serif;
     overflow-y:scroll;
-    font-size: 16px;
+    font-size: 14px;
 }
 h1{
     text-align: center;
@@ -11,6 +11,8 @@ h1{
 }
 #app{
     width:100%;
+    max-width: 800px;
+    margin: auto;
 }
 #leftCol{
     float:left;
@@ -27,18 +29,73 @@ table{
     width: 95%;
     margin-left:auto;
     margin-right:auto;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    padding: 10px;
+    border-collapse: collapse;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-
+th{
+    font-size: 1.2em;
+    line-height: 1.5em;
+}
+tr>td.name{
+    width: 90%;
+}
+td.spacing{
+    width:5px;
+}
+tr{
+    height: 10px;
+}
+.table0{
+    background: hsl(0, 20%, 85%);
+}
 .table1{
-    background: lightblue;
+    background: hsl(45, 20%, 85%);
 }
 .table2{
-    background: lightgreen;
+    background: hsl(90, 20%, 85%);
+}
+.table3{
+    background: hsl(135, 20%, 85%);
+}
+.table4{
+    background: hsl(180, 20%, 85%);
+}
+.table5{
+    background: hsl(225, 20%, 85%);
+}
+.table6{
+    background: hsl(270, 20%, 85%);
+}
+.table7{
+    background: hsl(320, 20%, 85%);
 }
 
+
+.trSelected td{
+    background: white;
+}
+
+tr.hoverable:hover{
+    background: hsl(0,0%,90%);
+}
+
+.nonSelectedScore{
+    color:grey;
+}
+.selectedScore{
+    color:black;
+    font-weight: 900;
+}
+
+.sum{
+    margin-top:100px;
+    font-size: 5em;
+    text-align: center;
+}
 
 .disclaim{
     font-size: 0.6em;
