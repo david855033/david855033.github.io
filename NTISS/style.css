@@ -9,23 +9,60 @@ h1{
     margin-top:5px;
     margin-bottom:5px;
 }
+h2{
+    text-align: center;
+    margin-top:5px;
+    margin-bottom:5px;
+}
+.button {
+    background-color: hsl(200,60%,85%);
+    border: none;
+    color: black;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    position: absolute;
+    top:0px;
+    left:0px;
+    font-size: 16px;
+}
 #app{
-    width:100%;
-    max-width: 800px;
     margin: auto;
 }
-#leftCol{
+.cols{
     float:left;
-    width:50%;
+    min-height: 50px;
+    max-width: 400px;
+    margin:auto;
 }
-#rightCol{
-    float:left;
-    width:50%;
+#nav{
+    width: 200px;
+    margin-right:30px;
+}
+#nav>div{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.nameCard{
+    background-color: hsl(200,50%,85%);
+}
+.controls{
+    background-color: white;
+}
+.list{
+    background-color:  hsl(250,50%,85%);
+    text-align: center;
+}
+.list>table{
+    width:100%;
 }
 .clear{
     clear:both;
 }
-table{
+#col1>table,#col2>table,#col3>table{
     width: 95%;
     margin-left:auto;
     margin-right:auto;
@@ -41,13 +78,14 @@ th{
     line-height: 1.5em;
 }
 tr>td.name{
-    width: 90%;
+    width: 360px;
 }
 td.spacing{
     width:5px;
 }
 tr{
     height: 10px;
+    border: 1px solid transparent;
 }
 .table0{
     background: hsl(0, 20%, 85%);
@@ -85,10 +123,14 @@ tr.hoverable:hover{
 
 .nonSelectedScore{
     color:grey;
+    text-align: center;
 }
 .selectedScore{
     color:black;
     font-weight: 900;
+    text-align: center;
+    background-color: hsl(100,80%,80%)!important;
+    border: 1px solid black;
 }
 
 .sum{

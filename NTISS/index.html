@@ -12,10 +12,34 @@
     
 </head>
 <body>
-    <h1>NTISS快打高手</h1>
     <div id="app">
-        <div id="leftCol">
-            <table v-for='(table,index) in leftCol' :class='"table"+index'>
+        <h2>日期：{{currentDate}}</h2><h1> NTISS總分：{{totalScore}}</h1>
+        <div id="nav" class="cols">
+            <div class="nameCard">
+                <div>{{name}}</div>
+                <div>{{patientNo}}</div>
+                <div>{{birthday}}</div>
+            </div>
+            <div class="controls">
+                <div>新增</div>
+                <div>刪除</div>
+            </div>
+            <div class="list">
+                <table>
+                    <tr>
+                        <th>日期</th>
+                        <th>總分</th>
+                    </tr>
+                    <tr v-for='item in recordList'>
+                        <td>{{item.date}}</td>
+                        <td>{{item.score}}</td>
+                    </tr>
+                </table>
+                
+            </div>
+        </div>
+        <div id="col1" class="cols">
+            <table v-for='(table,index) in tables' v-if='index >= col1Table[0] && index <= col1Table[1]' :class='"table"+index'>
                 <tr>
                     <th colspan="4">{{table.tableName}}</th>
                 </tr>
@@ -27,20 +51,32 @@
                 </tr>
             </table>
         </div>
-       <div id="rightCol">
-            <table v-for='(table,index) in rightCol' :class='"table"+(index+4)'>
+       <div id="col2" class="cols">
+             <table v-for='(table,index) in tables' v-if='index >= col2Table[0] && index <= col2Table[1]' :class='"table"+index'>
                 <tr>
                     <th colspan="4">{{table.tableName}}</th>
                 </tr>
-                <tr v-for='row in table.items'  @click="checkSameGroup(table,row)"  :class='{trSelected:row.selected,hoverable:row.name}'>
+                <tr v-for='row in table.items' @click="checkSameGroup(table,row)" :class='{trSelected:row.selected,hoverable:row.name}'>
                     <td class="spacing"></td>
                     <td class='name'>{{row.name}}</td>
                     <td :class='row.selected?"selectedScore":"nonSelectedScore"'>{{row.score}}</td>
                     <td class="spacing"></td>
                 </tr>
             </table>
-            <div class='sum'>總分：{{totalScore}}</div>
-        </div>
+       </div>
+       <div id="col3" class="cols">
+             <table v-for='(table,index) in tables' v-if='index >= col3Table[0] && index <= col3Table[1]' :class='"table"+index'>
+                <tr>
+                    <th colspan="4">{{table.tableName}}</th>
+                </tr>
+                <tr v-for='row in table.items' @click="checkSameGroup(table,row)" :class='{trSelected:row.selected,hoverable:row.name}'>
+                    <td class="spacing"></td>
+                    <td class='name'>{{row.name}}</td>
+                    <td :class='row.selected?"selectedScore":"nonSelectedScore"'>{{row.score}}</td>
+                    <td class="spacing"></td>
+                </tr>
+            </table>
+       </div>
         <div class='clear'></div>
     </div>
     
