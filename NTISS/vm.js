@@ -3,8 +3,9 @@ var vm = new Vue(
     el:'#app',
     data:{
         name:'恩提斯之女',
-        patientNo:'40236547',
         birthday:'2017-08-07',
+        patientNo:'40236547',
+        adminNo:'2358736',
         currentDate:'2017-08-07',
         recordList:[
             {"date":'2017-08-07',"score":25},

@@ -48,16 +48,33 @@ h2{
 }
 .nameCard{
     background-color: hsl(200,50%,85%);
+    font-size: 1.2em;
+    font-weight: 600;
 }
 .controls{
     background-color: white;
+    font-size: 1.2em;
+    padding: 5px;
+}
+.control>div{
+    padding: 10px 0px;
+}
+.controls>div:hover{
+    background: hsl(200,40%,90%);
 }
 .list{
-    background-color:  hsl(250,50%,85%);
+    background-color:  hsl(250,50%,95%);
     text-align: center;
 }
 .list>table{
     width:100%;
+    border-collapse: collapse;
+}
+.list tr:first-child{
+    background-color:  hsl(250,50%,95%)!important;
+}
+.list tr:hover{
+    background: hsl(250,90%,90%);
 }
 .clear{
     clear:both;

@@ -9,19 +9,21 @@
     <script type="text/javascript" src="vue.js"></script>
     <script type="text/javascript" src="jquery-3.2.1.js"></script>
     <script type="text/javascript" src="d3.js"></script>
-    
+    <script type="text/javascript" src="jquery-ui.js"></script>
+    <link href="jquery-ui.css" rel="stylesheet">
 </head>
 <body>
     <div id="app">
-        <h2>日期：{{currentDate}}</h2><h1> NTISS總分：{{totalScore}}</h1>
+        <h2 id="date">日期：{{currentDate}}</h2><h1> NTISS總分：{{totalScore}}</h1>
         <div id="nav" class="cols">
             <div class="nameCard">
-                <div>{{name}}</div>
-                <div>{{patientNo}}</div>
-                <div>{{birthday}}</div>
+                <div>姓名：{{name}}</div>
+                <div>生日：{{birthday}}</div>
+                <div>病歷號：{{patientNo}}</div>
+                <div>住院號：{{adminNo}}</div>
             </div>
             <div class="controls">
-                <div>新增</div>
+                <div>新增/儲存</div>
                 <div>刪除</div>
             </div>
             <div class="list">
