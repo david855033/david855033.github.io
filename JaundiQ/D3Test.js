@@ -4,7 +4,9 @@ var data = [
 	{x: 0, y: 4, d:true},
 	{x: 1, y: 9, d:true},
 	{x: 2, y: 6, d:true},
-	{x: 4, y: 5, d:false},
+  {x: 4, y: 5, d:false},
+  {x: 5, y: 5, d:true},
+  {x: 5.5, y: 5, d:true},
 	{x: 6, y: 7, d:true},
 	{x: 7, y: 3, d:true},
 	{x: 9, y: 2, d:true}
@@ -14,6 +16,7 @@ var data2 = [
         {x: 2, y: 7},
         {x: 3, y: 4},
         {x: 4, y: 3},
+        {x: 5, y: 4.5},
         {x: 6, y: 3},
         {x: 8, y: 4},
         {x: 9, y: 1}

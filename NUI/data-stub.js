@@ -1,0 +1,23 @@
+var serverSideData=[
+    {
+        patientID:"43116789",
+        patientCaseNo:"7635628",
+        data:{
+            Patient:{
+                PatientName:'',
+                VSName:'',
+                residentName:'',
+                BirthDate:'',
+                AdmissionDate:'',
+                Gender:'',
+                CurrentBed:'',
+                CurrentSection:''
+            },
+            NIS:[
+               {
+                   date:''
+               }
+            ]
+        }
+    }
+];
