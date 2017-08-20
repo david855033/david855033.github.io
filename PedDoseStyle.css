@@ -221,9 +221,7 @@ input:hover{
     -webkit-transition-duration: 0.1s; /* Safari */
     transition-duration: 0.1s;
 }
-.left:active{
-    transform: translateY(1px);
-}
+
 
 .container-focused{
     box-shadow: 8px 8px 13px #333333;

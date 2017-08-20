@@ -25,7 +25,6 @@ var app = new Vue({
         searchList:[],
         searchText_checked:"",
         focused:-1,
-        preFocusedPosition:0,
         ManualShowAdjust_1:false,
         manualVol:100,
         manualAmount:40,
@@ -309,8 +308,6 @@ var app = new Vue({
                     this.focused=-1;
                 }else{
                     this.focused=index;
-                    this.preFocusedPosition=window.scrollX;
-                    window.scrollTo(0,0);
                 }
             }
         },
