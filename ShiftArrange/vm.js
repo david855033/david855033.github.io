@@ -94,7 +94,6 @@ var vm = new Vue({
                 {name:"P陳文音",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:0,HD:0},NB:{WD:6,HD:2},dayList:[],dutyString:""},
                 {name:"Q侯明欣",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:0,HD:0},NB:{WD:6,HD:2},dayList:[],dutyString:""},
                 {name:"R李苡萱",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:6,HD:2},A93:{WD:0,HD:0},NB:{WD:0,HD:0},dayList:[],dutyString:""},
-
                 {name:"1蘇稚庭",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:0,HD:0},NB:{WD:6,HD:2},dayList:[],dutyString:""},
                 {name:"2田德敏",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:0,HD:0},NB:{WD:6,HD:2},dayList:[],dutyString:""},
                 {name:"3呂亭緯",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:0,HD:0},NB:{WD:6,HD:2},dayList:[],dutyString:""},
