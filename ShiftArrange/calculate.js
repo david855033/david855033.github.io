@@ -29,7 +29,7 @@ var nextSlot = function(day, param)
         //從BIN中依序抓出可用的醫師，排除重複
         var currrentBin = isHoliday ? doctorBins[i].HolidayTokens : doctorBins[i].WorkdayTokens;
         for(var j = 0 ; j < currrentBin.length;j++){
-            if(availableDoctorForSlot.indexOf(currrentBin[j])<0)
+            if(currrentBin[j]&&availableDoctorForSlot.indexOf(currrentBin[j])<0)
             {
                 availableDoctorForSlot.push(currrentBin[j]);
             }
@@ -39,67 +39,70 @@ var nextSlot = function(day, param)
             return (doctorList[x].dayList[day]=="D")
         });
         if(newList.length>0){availableDoctorForSlot=newList;}
-        //--檢查不值班
-        availableDoctorForSlot = availableDoctorForSlot.filter((x)=>{
-            return !(doctorList[x].dayList[day]=="N")
-        });
-        //--檢查連值
-        if(day>0){
-            availableDoctorForSlot = availableDoctorForSlot.filter((x)=> {
-                return dutyList.map((y) => y.dayList[day-1]).indexOf(x)<0;
+        else{
+            //--檢查不值班
+            availableDoctorForSlot = availableDoctorForSlot.filter((x)=>{
+                return !(doctorList[x].dayList[day]=="N")
             });
-        }
-        //--檢查本周是否已經值兩班
-        if(day>=4){
-            var weekDayShift = firstWeekDay>1?(firstWeekDay-8):(firstWeekDay-1);
-            var lastMonday = (Math.floor((day/7))*7); 
-            console.log("day = "+(day+1) + ", last monday = "+ (lastMonday+1));
-            availableDoctorForSlot=  availableDoctorForSlot.filter((theDoctorIndex)=>{
-                var dutyCountThisWeek = 0 ;
-                for(var j = lastMonday; j < day;j++)
-                {
-                    var doctorsOftheDay = dutyList.map(y=>y.dayList[j]);
-                    // console.log("day:"+(j+1)+" doctor of the day: "+ doctorsOftheDay);
-                    if(doctorsOftheDay.indexOf(theDoctorIndex)>=0)
+            //--檢查連值
+            if(day>0){
+                availableDoctorForSlot = availableDoctorForSlot.filter((x)=> {
+                    return dutyList.map((y) => y.dayList[day-1]).indexOf(x)<0;
+                });
+            }
+            //--檢查本周是否已經值兩班
+            if(day>=4){
+                var weekDayShift = firstWeekDay>1?(firstWeekDay-8):(firstWeekDay-1);
+                var lastMonday = (Math.floor(((day-weekDayShift+1)/7))*7+weekDayShift-1 ); 
+            // console.log("day = "+(day+1) + ", last monday = "+ (lastMonday+1));
+                availableDoctorForSlot=  availableDoctorForSlot.filter((theDoctorIndex)=>{
+                    var dutyCountThisWeek = 0 ;
+                    for(var j = lastMonday; j < day;j++)
                     {
-                        dutyCountThisWeek++;
-                    }
-                    if(dutyCountThisWeek>=2) break;
-                };
-                // console.log("dutyCountThisWeek: "+ dutyCountThisWeek);
-                return dutyCountThisWeek<2;
-            });
-        }
-        //--排序希望不值班
-        availableDoctorForSlot.sort((x,y)=>{
-        if(doctorList[x].dayList[day]=="A" && doctorList[y].dayList[day]!=="A")
-            {
-                return 1;
+                        var doctorsOftheDay = dutyList.map(y=>y.dayList[j]);
+                        // console.log("day:"+(j+1)+" doctor of the day: "+ doctorsOftheDay);
+                        if(doctorsOftheDay.indexOf(theDoctorIndex)>=0)
+                        {
+                            dutyCountThisWeek++;
+                        }
+                        if(dutyCountThisWeek>=2) break;
+                    };
+                    // console.log("dutyCountThisWeek: "+ dutyCountThisWeek);
+                    return dutyCountThisWeek<2;
+                });
             }
-            else if(doctorList[x].dayList[day]!=="A" && doctorList[y].dayList[day]=="A")
-            {
-                return -1;
-            }else
-            {
-                return 0;
-            }
-        });
-        //將QOD值班排到最後
-        if(day>=4)
-        {
-            var initialLength =  availableDoctorForSlot.length;
-            for(var j = 0; j < initialLength; j++)
-            {
-                var twoDaysAgo = dutyList.map(y=>y.dayList[day-2]).indexOf(availableDoctorForSlot[j])>=0;
-                var fourDaysAgo = dutyList.map(y=>y.dayList[day-4]).indexOf(availableDoctorForSlot[j])>=0;
-                if(twoDaysAgo&&fourDaysAgo)
+            //--排序希望不值班
+            availableDoctorForSlot.sort((x,y)=>{
+            if(doctorList[x].dayList[day]=="A" && doctorList[y].dayList[day]!=="A")
                 {
-                    availableDoctorForSlot.push(availableDoctorForSlot.splice(j,1));
-                    j--;
-                    initialLength--;
+                    return 1;
+                }
+                else if(doctorList[x].dayList[day]!=="A" && doctorList[y].dayList[day]=="A")
+                {
+                    return -1;
+                }else
+                {
+                    return 0;
+                }
+            });
+            //將QOD值班排到最後
+            if(day>=4)
+            {
+                var initialLength =  availableDoctorForSlot.length;
+                for(var j = 0; j < initialLength; j++)
+                {
+                    var twoDaysAgo = dutyList.map(y=>y.dayList[day-2]).indexOf(availableDoctorForSlot[j])>=0;
+                    var fourDaysAgo = dutyList.map(y=>y.dayList[day-4]).indexOf(availableDoctorForSlot[j])>=0;
+                    if(twoDaysAgo&&fourDaysAgo)
+                    {
+                        availableDoctorForSlot.push(availableDoctorForSlot.splice(j,1));
+                        j--;
+                        initialLength--;
+                    }
                 }
             }
         }
+      
 
         //將可以的醫師群傳入
         availableDoctorsInADay.push(availableDoctorForSlot);

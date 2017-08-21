@@ -15,6 +15,8 @@ var insertSparsely=function(arrayOfArray, data, isHoliday){
     //console.log(JSON.stringify(dutyPreference));
     
     arrayOfArray.forEach((x)=>{
+        if(!x){return;}
+        if(!x.length>0){return;}
         var thisName = data.doctorList[x[0]].name;
         var thisDutyPreference = dutyPreference.filter(y=>y.name==getID(thisName));
         var thisNoDuty=[];
@@ -54,6 +56,7 @@ var insertSparsely=function(arrayOfArray, data, isHoliday){
         var currentMin=data.dayList.length;
         arrayOfArray.forEach((x,index)=>{
             //console.log("array x:"+x);
+            //console.log(JSON.stringify(positionArrays));
             if(x.length>0 && positionArrays[index][0]<currentMin)
             {
                 arrayIndexOfMin=index;
@@ -89,23 +92,28 @@ var vm = new Vue({
                 {name:"L黃映齊",group:"",PI:{WD:6,HD:2},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:0,HD:0},NB:{WD:0,HD:0},dayList:[],dutyString:""},
                 {name:"M陳以恩上",group:"",PI:{WD:6,HD:2},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:0,HD:0},NB:{WD:0,HD:0},dayList:[],dutyString:""},
                 {name:"m陳以恩下",group:"",PI:{WD:6,HD:2},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:0,HD:0},NB:{WD:0,HD:0},dayList:[],dutyString:""},
-                {name:"N何正尹",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:0,HD:0},NB:{WD:6,HD:2},dayList:[],dutyString:""},
-                {name:"O吳政宏",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:0,HD:0},NB:{WD:6,HD:2},dayList:[],dutyString:""},
-                {name:"P陳文音",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:0,HD:0},NB:{WD:6,HD:2},dayList:[],dutyString:""},
-                {name:"Q侯明欣",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:0,HD:0},NB:{WD:6,HD:2},dayList:[],dutyString:""},
-                {name:"R李苡萱",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:6,HD:2},A93:{WD:0,HD:0},NB:{WD:0,HD:0},dayList:[],dutyString:""},
-                {name:"1蘇稚庭",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:0,HD:0},NB:{WD:6,HD:2},dayList:[],dutyString:""},
-                {name:"2田德敏",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:0,HD:0},NB:{WD:6,HD:2},dayList:[],dutyString:""},
-                {name:"3呂亭緯",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:0,HD:0},NB:{WD:6,HD:2},dayList:[],dutyString:""},
-                {name:"4李晏廷",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:6,HD:2},NB:{WD:0,HD:0},dayList:[],dutyString:""},
-                {name:"5丘薰儀",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:6,HD:2},NB:{WD:0,HD:0},dayList:[],dutyString:""},
-                {name:"6凌儀芝",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:6,HD:2},NB:{WD:0,HD:0},dayList:[],dutyString:""},
-                {name:"7張祐翰",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:6,HD:2},NB:{WD:0,HD:0},dayList:[],dutyString:""},
-                {name:"8蔡欣璉",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:6,HD:2},A93:{WD:0,HD:0},NB:{WD:0,HD:0},dayList:[],dutyString:""},
-                {name:"9呂高安",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:6,HD:2},NB:{WD:0,HD:0},dayList:[],dutyString:""},
-                {name:"S黃皓軒",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:6,HD:2},A93:{WD:0,HD:0},NB:{WD:0,HD:0},dayList:[],dutyString:""},
-                {name:"T廖廣榆",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:6,HD:2},A93:{WD:0,HD:0},NB:{WD:0,HD:0},dayList:[],dutyString:""},
-                {name:"U子德",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:6,HD:2},A93:{WD:0,HD:0},NB:{WD:0,HD:0},dayList:[],dutyString:""}
+                {name:"N何正尹",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:0,HD:0},NB:{WD:3,HD:2},dayList:[],dutyString:""},
+                {name:"O吳政宏",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:0,HD:0},NB:{WD:0,HD:0},dayList:[],dutyString:""},
+                {name:"o吳政宏NB",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:0,HD:0},NB:{WD:1,HD:1},dayList:[],dutyString:""},
+                {name:"P陳文音",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:0,HD:0},NB:{WD:0,HD:0},dayList:[],dutyString:""},
+                {name:"Q侯明欣",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:5,HD:1},NB:{WD:0,HD:0},dayList:[],dutyString:""},
+                {name:"R李苡萱",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:0,HD:0},NB:{WD:3,HD:2},dayList:[],dutyString:""},
+                {name:"1蘇稚庭",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:0,HD:0},NB:{WD:0,HD:0},dayList:[],dutyString:""},
+                {name:"21田德敏NB",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:0,HD:0},NB:{WD:2,HD:1},dayList:[],dutyString:""},
+                {name:"22田德敏93",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:3,HD:0},NB:{WD:0,HD:0},dayList:[],dutyString:""},
+                {name:"31呂亭緯NB",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:0,HD:0},NB:{WD:2,HD:1},dayList:[],dutyString:""},
+                {name:"32呂亭緯93",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:3,HD:0},NB:{WD:0,HD:0},dayList:[],dutyString:""},
+                {name:"4李晏廷",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:5,HD:1},NB:{WD:0,HD:0},dayList:[],dutyString:""},
+                {name:"5丘薰儀",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:0,HD:0},NB:{WD:0,HD:0},dayList:[],dutyString:""},
+                {name:"61凌儀芝91",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:3,HD:0},A93:{WD:0,HD:0},NB:{WD:0,HD:0},dayList:[],dutyString:""},
+                {name:"62凌儀芝NB",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:0,HD:0},NB:{WD:2,HD:1},dayList:[],dutyString:""},
+                {name:"71張祐翰91",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:3,HD:0},A93:{WD:0,HD:0},NB:{WD:0,HD:0},dayList:[],dutyString:""},
+                {name:"72張祐翰NB",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:0,HD:0},NB:{WD:2,HD:1},dayList:[],dutyString:""},
+                {name:"8蔡欣璉",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:5,HD:1},NB:{WD:0,HD:0},dayList:[],dutyString:""},
+                {name:"9呂高安",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:0,HD:0},NB:{WD:0,HD:0},dayList:[],dutyString:""},
+                {name:"S黃皓軒",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:0,HD:0},NB:{WD:0,HD:0},dayList:[],dutyString:""},
+                {name:"T廖廣榆",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:0,HD:0},NB:{WD:0,HD:0},dayList:[],dutyString:""},
+                {name:"U子德",group:"",PI:{WD:0,HD:0},NI:{WD:0,HD:0},A91:{WD:0,HD:0},A93:{WD:0,HD:0},NB:{WD:0,HD:0},dayList:[],dutyString:""}
             ],
             dutyPreference:[
                 {name:"A", noDuty:[1,2,3]},
@@ -122,10 +130,16 @@ var vm = new Vue({
                 {name:"Q", noDuty:[2,3]},
                 {name:"R", noDuty:[1]},
                 {name:"1", noDuty:[9,10]},
-                {name:"2", noDuty:[16,17]},
+                {name:"21", noDuty:[16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]},
+                {name:"22", noDuty:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]},
+                //{name:"2", noDuty:[16,17]},
+                {name:"31", noDuty:[16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]},
+                {name:"32", noDuty:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]},
                 {name:"5", noDuty:[7,14],avoid:[21,28]},
-                {name:"6", noDuty:[30]},
-                {name:"7", noDuty:[29,30]},
+                {name:"61", noDuty:[16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]},
+                {name:"62", noDuty:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,30]},
+                {name:"71", noDuty:[16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]},
+                {name:"72", noDuty:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,29,30]},
                 {name:"8", noDuty:[22,30]},
                 {name:"9", noDuty:[1,2,3,29,30]},
                 {name:"S", noDuty:[6,7,8]},
