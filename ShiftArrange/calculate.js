@@ -51,9 +51,9 @@ var nextSlot = function(day, param)
         }
         //--檢查本周是否已經值兩班
         if(day>=4){
-            var weekDayShift = firstWeekDay==0?7:(weekDayShift);
-            var lastMonday = (Math.floor((day-1)/7)*7 + weekDayShift-6);
-            //console.log("day = "+(day+1) + ", last monday = "+ (lastMonday+1));
+            var weekDayShift = firstWeekDay>1?(firstWeekDay-8):(firstWeekDay-1);
+            var lastMonday = (Math.floor((day/7))*7); 
+            console.log("day = "+(day+1) + ", last monday = "+ (lastMonday+1));
             availableDoctorForSlot=  availableDoctorForSlot.filter((theDoctorIndex)=>{
                 var dutyCountThisWeek = 0 ;
                 for(var j = lastMonday; j < day;j++)
@@ -64,7 +64,7 @@ var nextSlot = function(day, param)
                     {
                         dutyCountThisWeek++;
                     }
-                    if(dutyCountThisWeek==2) break;
+                    if(dutyCountThisWeek>=2) break;
                 };
                 // console.log("dutyCountThisWeek: "+ dutyCountThisWeek);
                 return dutyCountThisWeek<2;
