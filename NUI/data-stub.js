@@ -7,13 +7,14 @@ var getAdmissionList = function(ward){
     ];
 };
 
-//取得某病患的住院清單 可從NIHSS或APACHE頁面抓資料
+//取得某病患的住院清單
 var getAdmissionList = function(patientID){
     return [
-        {admissionDate:"2017-01-01",dischargeDate:"2017-01-02",caseNo:"1234567"}, 
+        {admissionDate:"2017-01-01",dischargeDate:"2017-01-02",caseNo:"1234567"},
         {admissionDate:"2017-01-01",dischargeDate:"2017-01-02",caseNo:"2234567"}
     ];
 };
+
 //病患資料
 var getPatientData = function(patientID){
     return {
@@ -112,7 +113,7 @@ var getOrder = function(patientID)
         {dateTime:"2017-08-14 09:24:15",item:"CEL",specimen:"PLASMA_GN3",REQNO:"2012349",unit:"CEL",status:"已簽收"}
     ];
 };
-//一般報告 (一、二、三、四、六個月)
+//一般報告 (是否有查詢時間限制?)
 var getReport = function(patientID)
 {
     return [
@@ -120,7 +121,7 @@ var getReport = function(patientID)
         {dateTimeRecieve:"2017-08-13 09:24:15",dateTimeReport:"2017-08-16 09:40:30",item:"CRP",specimen:"BLOOD",REQNO:"2345679",content:"...報告內容..."}
     ];
 };
-//累積報告 (一周內、一、二、三、四、六個月)
+//累積報告 (是否有查詢時間限制?)
 var getCummulativeReport = {};
 getCummulativeReport.SMAC = function(patientID)
 {
@@ -246,13 +247,14 @@ getBirthSheet.birthHistory = function(patientID, caseNo)
         PedDoctor:""
     };
 };
+
 //NIS系統
 var getNIS = {};
 //入院評估
 getNIS.admssionAssessment = function(patientID, caseNo){
     return {
-        birthLocation:"",
         admissionReason:"",
+        birthLocation:"",
         BL:"",
         BW:"",
         HC:"",
@@ -295,36 +297,13 @@ getNIS.bodyLength=function(patientID,caseNo)
         {dateTime:"2017-01-01 13:00", part:"頭圍", length:"23.5"}
     ];
 };
-//更換管路(等於列出現有管路)
-getNIS.changeLine=function(patientID,caseNo)
+//管路
+getNIS.line=function(patientID,caseNo)
 {
-    return {dateTime:"2017-01-01 12:30",name:"A-line",type:"vessel", bodyPart:"身體部位"};
-};
-//移除管路(等於列出所有管路紀錄，已經移除的才有時間)
-getNIS.removeLine=function(patientID,caseNo){
-    return {dateTime:"2017-01-01 12:30",name:"A-line",type:"vessel", bodyPart:"身體部位",status:""};
-};
-//從護理交班紀錄取得的管路紀錄(住院病人才能用)
-getNIS.currentLine=function(patientID,caseNo){
     return {dateTime:"2017-01-01 12:30",name:"A-line",type:"vessel", bodyPart:"身體部位",changeDateTime:"",content:""};
-}
-//輸出入量 以班為單位抓(mon=白 aft=小夜 nit=大夜, data應為八個元素的陣列)
-getNIS.getIO=function(patientID, caseNo, date, shift){
-    return [
-        {class:"輸液",content:"[PICC] D5W+Fentanyl 剩餘量:0",data:[,,{amount:""},,,,,]},
-        {class:"血品",content:"[IV] pRBC 剩餘量...",data:[,,{amount:""},,,,,]},
-        {class:"進食",content:"進食總量",data:[,,{route:"",type:"",amount:"",feedDuration:"",RV:""},,,,,]},
-        {class:"排尿",content:"排尿總量",data:[,,{method:"",present:"",color:"",quanty:"",amount:"",lost:""},,,,,]},
-        {class:"排便",content:"排便總量",data:[,,{selfPassTime:"",selfPassGram:"",enemaTime:"",enemaGram:"",lost:"",enemaAmount:"",digitalTime:"",digitalAmount:"",color:"",present:""},,,,,]},
-        {class:"失血",content:"失血總量",data:[{amount:""},,,,,,,]},
-        {class:"滲液",content:"滲液總量",data:[{amount:""},,,,,,,]},
-        {class:"嘔吐",content:"嘔吐總量",data:[{amount:"",present:"",color:""},,,,,,,]},
-        {class:"引流",content:"引流總量",data:[{amount:"",present:"",color:"",rounte:""},,,,,,,]},
-        {class:"透析",content:"透析總量",data:[{inAmount:"",outAmount:""},,,,,,,]},
-        {class:"沖洗",content:"沖洗總量",data:[{inAmount:"",outAmount:""},,,,,,,]},
-        {class:"穿刺",content:"穿刺總量",data:[{inAmount:"",outAmount:"",part:""},,,,,,,]}
-    ];
 };
+//輸出入量 每一筆都有timestamp(dateTime)
+getNIS.getIO={};
 //輸出入量-輸液 (成分、管路(別名、部位))
 //輸出入量-血品 (成分、管路(別名、部位))
 //輸出入量-進食 (途徑(口服、灌食、親餵、瓶餵)、類別(水、藥、食物、母奶、配方奶(配方奶選項))、親餵時間、RV)
@@ -339,16 +318,6 @@ getNIS.getIO=function(patientID, caseNo, date, shift){
 //輸出入量-沖洗 (排出量+輸入量、管路(別名、部位))
 
 //護理交班-限住院中
-//重要病史
-getNIS.importantHistory=function(patientID,caseNo)
-{
-    return "...重要病史...";
-};
-//健康問題-備註
-getNIS.info=function(patientID,caseNo)
-{
-    return "...備註內容...";
-};
 //代辦事項
 getNIS.todo=function(patientID,caseNo)
 {
@@ -356,4 +325,14 @@ getNIS.todo=function(patientID,caseNo)
         {date:"2017-01-01",content:"代辦事項內容..."},
         {date:"2017-01-02",content:"代辦事項內容..."}
     ];
+};
+//健康問題-備註
+getNIS.info=function(patientID,caseNo)
+{
+    return "...備註內容...";
+};
+//重要病史
+getNIS.importantHistory=function(patientID,caseNo)
+{
+    return "...重要病史...";
 };
