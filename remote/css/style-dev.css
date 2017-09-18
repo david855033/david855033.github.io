@@ -1,0 +1,213 @@
+#dev{
+    font-size: 12px;
+}
+table#wardList{
+    width:100%;
+}
+#wardList th,#wardList td{
+    padding:5px;
+    border:1px solid black;
+}
+
+table#patientList{
+    width:100%;
+}
+#patientList th,#patientList td{
+    padding:5px;
+    border:1px solid black;
+}
+
+#dev {
+    height:100%;
+    overflow-y: scroll;
+}
+
+table#admissionList{
+    width:100%;
+    margin:3px 0 3px 0;
+}
+#admissionList th,#admissionList td{
+    padding:5px;
+    border:1px solid black;
+}
+
+table#patientData{
+    width:100%;
+    margin:3px 0 3px 0;
+}
+#patientData th,#patientData td{
+    padding:5px;
+    border:1px solid black;
+}
+
+table#changebed{
+    width:100%;
+    margin:3px 0 3px 0;
+}
+#changebed th,#changebed td{
+    padding:5px;
+    border:1px solid black;
+}
+
+table#changeSection{
+    width:100%;
+    margin:3px 0 3px 0;
+}
+#changeSection th,#changeSection td{
+    padding:5px;
+    border:1px solid black;
+}
+
+table#consultation{
+    width:100%;
+    margin:3px 0 3px 0;
+}
+#consultation th,#consultation td{
+    padding:5px;
+    border:1px solid black;
+}
+
+table#consultationReply{
+    width:100%;
+    margin:3px 0 3px 0;
+}
+#consultationReply th,#consultationReply td{
+    padding:5px;
+    border:1px solid black;
+}
+
+table#consultationPending{
+    width:100%;
+    margin:3px 0 3px 0;
+}
+#consultationPending th,#consultationPending td{
+    padding:5px;
+    border:1px solid black;
+}
+
+table#surgery{
+    width:100%;
+    margin:3px 0 3px 0;
+}
+#surgery th,#surgery td{
+    padding:5px;
+    border:1px solid black;
+}
+
+table#order{
+    width:100%;
+    margin:3px 0 3px 0;
+}
+#order th,#order td{
+    padding:5px;
+    border:1px solid black;
+}
+
+table#report{
+    width:100%;
+    margin:3px 0 3px 0;
+}
+#report th,#report td{
+    padding:5px;
+    border:1px solid black;
+}
+
+.cummulativeButton{
+    float:left;
+    padding:5px;
+    margin:3px;
+    background: hsl(300,40%,85%);
+}
+
+table#cummulative{
+    width:100%;
+    margin:3px 0 3px 0;
+}
+#cummulative th,#cummulative td{
+    padding:5px;
+    border:1px solid black;
+}
+
+.vitalSignButton{
+    float:left;
+    padding:5px;
+    margin:3px;
+    background: hsl(150,40%,85%);
+}
+table#vitalSign{
+    width:100%;
+    margin:3px 0 3px 0;
+}
+#vitalSign th,#vitalSign td{
+    padding:5px;
+    border:1px solid black;
+}
+
+table#treatment{
+    width:100%;
+    margin:3px 0 3px 0;
+}
+#treatment th,#treatment td{
+    padding:5px;
+    border:1px solid black;
+}
+
+table#transfusion{
+    width:100%;
+    margin:3px 0 3px 0;
+}
+#transfusion th,#transfusion td{
+    padding:5px;
+    border:1px solid black;
+}
+
+table#medication{
+    width:100%;
+    margin:3px 0 3px 0;
+}
+#medication th,#medication td{
+    padding:5px;
+    border:1px solid black;
+}
+
+table#medicationInfo{
+    width:100%;
+    margin:3px 0 3px 0;
+}
+#medicationInfo th,#medicationInfo td{
+    padding:5px;
+    border:1px solid black;
+}
+
+table#birthSheet{
+    width:100%;
+    margin:3px 0 3px 0;
+}
+#birthSheet th,#birthSheet td{
+    padding:5px;
+    border:1px solid black;
+}
+
+table#NISHandOver{
+    width:100%;
+    margin:3px 0 3px 0;
+}
+#NISHandOver th,#NISHandOver td{
+    padding:5px;
+    border:1px solid black;
+}
+#NISHandOver th:first-child{
+    width: 200px;
+}
+
+table#FLOWSHEET{
+    width:100%;
+    margin:3px 0 3px 0;
+}
+#FLOWSHEET th,#NISIO td{
+    padding:5px;
+    border:1px solid black;
+}
+#FLOWSHEET th:first-child{
+    width: 100px;
+}

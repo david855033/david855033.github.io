@@ -1,0 +1,573 @@
+#flow-sheet{
+    background: hsl(0,0%,80%);
+}
+
+#flow-sheet {
+    height:100%;
+}
+
+#flow-sheet #content, #flow-sheet #footbar, #flow-sheet .footbar-sub, .footbar-sub-inner{
+    transition: all 0.2s ease;
+}
+
+
+#flow-sheet #header{
+    background: hsl(0,0%,80%);
+    height:80px;
+    padding-top:5px;
+    padding-bottom:5px;
+}
+#flow-sheet #date,#flow-sheet #previous-day,#flow-sheet #next-day{
+    cursor: pointer;
+}
+#flow-sheet #date{
+    padding-left:5px;
+    padding-right:5px;
+}
+#flow-sheet #date:hover{
+    background-color: hsl(40,30%,85%);
+    border-radius: 5px
+}
+#flow-sheet #datepicker{
+    position: absolute;
+    z-index: 100;
+    border-radius: 10px;
+    margin-left:8px;
+}
+#flow-sheet #datepicker>.ui-corner-all{
+    border-radius: 10px;
+}
+#flow-sheet #previous-day,#flow-sheet #next-day{
+    color: hsl(0,0%,80%);
+}
+#flow-sheet #previous-day:hover,#flow-sheet #next-day:hover{
+    color: hsl(0,0%,20%)
+}
+#flow-sheet .header-card{
+    height:70px;
+    background-color: hsl(40,30%,95%);
+    margin: 0 3px 0 3px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 5px;
+}
+
+#flow-sheet #content{
+    padding-top: 3px;
+    padding-bottom: 5px;
+}
+
+#flow-sheet .chart{
+    width: 97%;
+    margin-left:1%;
+    border-radius: 10px;
+}
+#flow-sheet .chart table{
+    width:100.2%;
+    padding-top:1px;
+    padding-bottom:1px;
+    border-spacing: 3.5px;
+    border-collapse: separate;
+    empty-cells: show;
+    table-layout:fixed
+}
+#flow-sheet .chart table:first-child{
+    padding-top:3px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+#flow-sheet .chart table:last-child{
+    padding-bottom:3px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+#flow-sheet .chart table td{
+    vertical-align: middle;
+    text-align: center;
+    font-size: 14px;
+    height: 22px;
+    line-height: 18px;
+    overflow: hidden;
+}
+#flow-sheet .chart table td:first-child{
+    width: 150px;
+    text-align: left;
+    padding-left: 0.5%;
+    font-size: 14px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+#flow-sheet .chart table:last-child tr:last-child td:last-child{
+    border-bottom-right-radius: 8px;
+}
+#flow-sheet .chart td:first-child{
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 15px;
+}
+#flow-sheet .chart table td.spacer{
+    height: 0px;
+}
+
+#flow-sheet .chart table .title{
+    font-size: 14px;
+}
+#flow-sheet .chart table .unit{
+    font-size: 10px;
+}
+#flow-sheet .chart table .content, #flow-sheet .chart table .limit{
+    font-size: 12px;
+}
+/*sets of chart color : TPR*/
+#flow-sheet .chart table.tpr{
+    background-color: hsl(160,25%,55%);
+}
+#flow-sheet .chart table.tpr .shift-name{
+    background-color: hsl(160,25%,80%);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    width:auto;
+}
+#flow-sheet .chart table.tpr .shift-name,
+#flow-sheet .chart table.tpr td:nth-child(8n+2),
+#flow-sheet .chart table.tpr td:first-child{
+    border-left:2.5px solid hsl(160,25%,55%);
+}
+#flow-sheet .chart table.tpr td:last-child{
+    border-right:2.5px solid hsl(160,25%,65%);
+}
+#flow-sheet .chart table.tpr .title-color{
+    background-color: hsl(160,25%,80%);
+}
+#flow-sheet .chart table.tpr .header-color{
+    background-color: hsl(160,25%,80%);
+}
+#flow-sheet .chart table.tpr .data-color{
+    background-color: hsl(160,25%,90%);
+}
+#flow-sheet .chart table.tpr .no-data-color{
+    background-color: hsl(160,25%,65%)
+}
+#flow-sheet .chart table.tpr .title{
+    font-weight: 800;
+}
+#flow-sheet .chart table.tpr .unit{
+    color: hsl(0,0%,40%);
+}
+#flow-sheet .chart table.tpr .limit{
+    color: hsl(160,40%,30%)
+}
+/*sets of chart color : infusion*/
+#flow-sheet .chart table.infusion{
+    background-color: hsl(200,25%,55%);
+}
+#flow-sheet .chart table.infusion td:first-child,
+#flow-sheet .chart table.infusion td:nth-child(8n+2){
+    border-left:2.5px solid hsl(200,25%,55%);
+}
+#flow-sheet .chart table.infusion td:last-child{
+    border-right:2.5px solid hsl(200,25%,65%);
+}
+#flow-sheet .chart table.infusion .title-color{
+    background-color: hsl(200,25%,80%);
+}
+#flow-sheet .chart table.infusion .header-color{
+    background-color: hsl(200,25%,80%);
+}
+#flow-sheet .chart table.infusion .data-color{
+    background-color: hsl(200,25%,90%);
+}
+#flow-sheet .chart table.infusion .no-data-color{
+    background-color: hsl(200,25%,65%)
+}
+#flow-sheet .chart table.infusion .title{
+    font-weight: 800;
+}
+#flow-sheet .chart table.infusion .unit{
+    color: hsl(0,0%,40%);
+}
+#flow-sheet .chart table.infusion .content{
+    color: hsl(200,40%,30%)
+}
+/*sets of chart color*/
+#flow-sheet .chart table.transfusion{
+    background-color: hsl(10,25%,55%);
+}
+#flow-sheet .chart table.transfusion td:first-child,
+#flow-sheet .chart table.transfusion td:nth-child(8n+2){
+    border-left:2.5px solid hsl(10,25%,55%);
+}
+#flow-sheet .chart table.transfusion td:last-child{
+    border-right:2.5px solid hsl(10,25%,65%);
+}
+#flow-sheet .chart table.transfusion .title-color{
+    background-color: hsl(10,25%,80%);
+}
+#flow-sheet .chart table.transfusion .header-color{
+    background-color: hsl(10,25%,80%);
+}
+#flow-sheet .chart table.transfusion .data-color{
+    background-color: hsl(10,25%,90%);
+}
+#flow-sheet .chart table.transfusion .no-data-color{
+    background-color: hsl(10,25%,65%)
+}
+#flow-sheet .chart table.transfusion .title{
+    font-weight: 800;
+}
+#flow-sheet .chart table.transfusion .unit{
+    color: hsl(0,0%,40%);
+}
+#flow-sheet .chart table.transfusion .content{
+    color: hsl(10,40%,30%)
+}
+/*sets of chart color : feedning*/
+#flow-sheet .chart table.feeding{
+    background-color: hsl(50,25%,55%);
+}
+#flow-sheet .chart table.feeding td:first-child,
+#flow-sheet .chart table.feeding td:nth-child(8n+2){
+    border-left:2.5px solid hsl(50,25%,55%);
+}
+#flow-sheet .chart table.feeding td:last-child{
+    border-right:2.5px solid hsl(50,25%,65%);
+}
+#flow-sheet .chart table.feeding .title-color{
+    background-color: hsl(50,25%,80%);
+}
+#flow-sheet .chart table.feeding .header-color{
+    background-color: hsl(50,25%,80%);
+}
+#flow-sheet .chart table.feeding .data-color{
+    background-color: hsl(50,25%,90%);
+}
+#flow-sheet .chart table.feeding .no-data-color{
+    background-color: hsl(50,25%,65%)
+}
+#flow-sheet .chart table.feeding .title{
+    font-weight: 800;
+}
+#flow-sheet .chart table.feeding .unit{
+    color: hsl(0,0%,40%);
+}
+#flow-sheet .chart table.feeding .content{
+    color: hsl(50,40%,30%)
+}
+/*sets of chart color :excretion*/
+#flow-sheet .chart table.excretion{
+    background-color: hsl(100,25%,55%);
+}
+#flow-sheet .chart table.excretion td:first-child,
+#flow-sheet .chart table.excretion td:nth-child(8n+2){
+    border-left:2.5px solid hsl(100,25%,55%);
+}
+#flow-sheet .chart table.excretion td:last-child{
+    border-right:2.5px solid hsl(100,25%,65%);
+}
+#flow-sheet .chart table.excretion .title-color{
+    background-color: hsl(100,25%,80%);
+}
+#flow-sheet .chart table.excretion .header-color{
+    background-color: hsl(100,25%,80%);
+}
+#flow-sheet .chart table.excretion .data-color{
+    background-color: hsl(100,25%,90%);
+}
+#flow-sheet .chart table.excretion .no-data-color{
+    background-color: hsl(100,25%,65%)
+}
+#flow-sheet .chart table.excretion .title{
+    font-weight: 800;
+}
+#flow-sheet .chart table.excretion .unit{
+    color: hsl(0,0%,40%);
+}
+#flow-sheet .chart table.excretion .content{
+    color: hsl(100,40%,30%)
+}
+
+/*sets of chart color :drain*/
+#flow-sheet .chart table.drain{
+    background-color: hsl(280,25%,55%);
+}
+#flow-sheet .chart table.drain td:first-child,
+#flow-sheet .chart table.drain td:nth-child(8n+2){
+    border-left:2.5px solid hsl(280,25%,55%);
+}
+#flow-sheet .chart table.drain td:last-child{
+    border-right:2.5px solid hsl(280,25%,65%);
+}
+#flow-sheet .chart table.drain .title-color{
+    background-color: hsl(280,25%,80%);
+}
+#flow-sheet .chart table.drain .header-color{
+    background-color: hsl(280,25%,80%);
+}
+#flow-sheet .chart table.drain .data-color{
+    background-color: hsl(280,25%,90%);
+}
+#flow-sheet .chart table.drain .no-data-color{
+    background-color: hsl(280,25%,65%)
+}
+#flow-sheet .chart table.drain .title{
+    font-weight: 800;
+}
+#flow-sheet .chart table.drain .unit{
+    color: hsl(0,0%,40%);
+}
+#flow-sheet .chart table.drain .content{
+    color: hsl(280,40%,30%)
+}
+
+
+/*footar*/
+#flow-sheet #footbar{
+    background-color: hsl(0,0%,90%);
+    position: relative;
+}
+#flow-sheet #footbarMenu{
+    border-top: 1px solid hsl(40,20%,60%);
+    background-color: hsl(40,20%,80%);
+    height: 30px;
+    cursor: pointer;
+    font-weight: 900;
+}
+
+#flow-sheet .footbar-fn-button.selected{
+    background-color: hsl(40,10%,90%);
+    box-shadow: 3px 3px 3px 3px rgba(0,0,0,0.05), 1px 1px 1px 1px rgba(0,0,0,0.16);
+}
+
+#flow-sheet .footbar-fn-button:hover{
+    background-color: hsl(40,10%,95%);
+    box-shadow: 3px 3px 3px 3px rgba(0,0,0,0.05), 1px 1px 1px 1px rgba(0,0,0,0.16);
+}
+
+#flow-sheet #footbar-toggle-buttons{
+    width: 120px;
+}
+#flow-sheet #footbar-toggle-buttons #min:hover{
+    background-color: hsl(100,20%,70%);
+}
+#flow-sheet #footbar-toggle-buttons #max:hover{
+    background-color: hsl(200,20%,70%);
+}
+#flow-sheet #footbar-toggle-buttons #close:hover{
+    background-color: hsl(0,20%,70%);
+}
+
+#flow-sheet .footbar-fn-page{
+    background-color: hsl(40,10%,90%);
+    position: relative;
+}
+
+.footbar-sub{
+    background-color: hsl(40,10%,90%);
+    padding-left: 0.5%;
+    padding-right: 0.5%;
+    padding-top:0.5%;
+    padding-bottom:0.5%;
+}
+
+#flow-sheet #fnOverview .footbar-sub#sub-io
+{
+    width: 20%;
+    font-size: 12px;
+}
+#flow-sheet #fnOverview .footbar-sub#sub-io .shift:first-child
+{
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    /* -webkit-box-shadow:inset 0px 0px 0px 0.5px hsl(0,0%,70%);
+    -moz-box-shadow:inset 0px 0px 0px 0.5px hsl(0,0%,70%);
+    box-shadow:inset 0px 0px 0px 0.5px hsl(0,0%,70%)*/
+}
+#flow-sheet #fnOverview .footbar-sub#sub-io .shift:last-child
+{
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+#flow-sheet #fnOverview .footbar-sub#sub-io #morning{
+    background-color: hsl(40,50%,95%);
+    -webkit-box-shadow:inset 0px 0px 0px 0.5px hsl(40,20%,60%);
+    -moz-box-shadow:inset 0px 0px 0px 0.5px hsl(40,20%,60%);
+    box-shadow:inset 0px 0px 0px 0.5px hsl(40,20%,60%);
+}
+#flow-sheet #fnOverview .footbar-sub#sub-io #afternoon{
+    background-color: hsl(40,50%,90%);
+    -webkit-box-shadow:inset 0px 0px 0px 0.5px hsl(40,20%,60%);
+    -moz-box-shadow:inset 0px 0px 0px 0.5px hsl(40,20%,60%);
+    box-shadow:inset 0px 0px 0px 0.5px hsl(40,20%,60%);
+}
+#flow-sheet #fnOverview .footbar-sub#sub-io #night{
+    background-color: hsl(40,50%,85%);
+    -webkit-box-shadow:inset 0px 0px 0px 0.5px hsl(40,20%,60%);
+    -moz-box-shadow:inset 0px 0px 0px 0.5px hsl(40,20%,60%);
+    box-shadow:inset 0px 0px 0px 0.5px hsl(40,20%,60%);
+}
+#flow-sheet #fnOverview .footbar-sub#sub-io #day1{
+    background-color: hsl(60,20%,80%);
+    -webkit-box-shadow:inset 0px 0px 0px 0.5px hsl(60,20%,60%);
+    -moz-box-shadow:inset 0px 0px 0px 0.5px hsl(60,20%,60%);
+    box-shadow:inset 0px 0px 0px 0.5px hsl(60,20%,60%);
+}
+#flow-sheet #fnOverview .footbar-sub#sub-io #day2{
+    background-color: hsl(60,20%,75%);
+    -webkit-box-shadow:inset 0px 0px 0px 0.5px hsl(60,20%,60%);
+    -moz-box-shadow:inset 0px 0px 0px 0.5px hsl(60,20%,60%);
+    box-shadow:inset 0px 0px 0px 0.5px hsl(60,20%,60%);
+}
+#flow-sheet #fnOverview .footbar-sub#sub-io #day3{
+    background-color: hsl(60,20%,70%);
+    -webkit-box-shadow:inset 0px 0px 0px 0.5px hsl(60,20%,60%);
+    -moz-box-shadow:inset 0px 0px 0px 0.5px hsl(60,20%,60%);
+    box-shadow:inset 0px 0px 0px 0.5px hsl(60,20%,60%);
+}
+
+
+#flow-sheet #fnOverview .footbar-sub#sub-ventilation
+{
+    width:31%;
+}
+#flow-sheet #fnOverview .footbar-sub#sub-ventilation .day-card{
+    height: 20px;
+    background-color: hsl(120,15%,50%);
+    color: hsl(0,0%,90%);
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    margin-top:5px;
+    /* -webkit-box-shadow:inset 0px 0px 0px 0.5px hsl(0,0%,80%);
+    -moz-box-shadow:inset 0px 0px 0px 0.5px hsl(0,0%,80%);
+    box-shadow:inset 0px 0px 0px 0.5px hsl(0,0%,80%); */
+}
+#flow-sheet #fnOverview .footbar-sub#sub-ventilation .day-card:first-child{
+    margin-top:0px;
+}
+#flow-sheet #fnOverview .footbar-sub#sub-ventilation .gas-card{
+    height: 40px;
+    background-color: hsl(120,30%,90%);
+    -webkit-box-shadow:inset 0px 0px 0px 0.5px hsl(120,20%,60%);
+    -moz-box-shadow:inset 0px 0px 0px 0.5px hsl(120,20%,60%);
+    box-shadow:inset 0px 0px 0px 0.5px hsl(120,20%,60%);
+}
+#flow-sheet #fnOverview .footbar-sub#sub-ventilation .gasfull-card{
+    height: 80px;
+    background-color: hsl(120,30%,90%);
+    -webkit-box-shadow:inset 0px 0px 0px 0.5px hsl(120,20%,60%);
+    -moz-box-shadow:inset 0px 0px 0px 0.5px hsl(120,20%,60%);
+    box-shadow:inset 0px 0px 0px 0.5px hsl(120,20%,60%);
+}
+#flow-sheet #fnOverview .footbar-sub#sub-ventilation .vent-card{
+    height: 40px;
+    background-color: hsl(200,50%,80%);
+    -webkit-box-shadow:inset 0px 0px 0px 0.5px hsl(200,20%,60%);
+    -moz-box-shadow:inset 0px 0px 0px 0.5px hsl(200,20%,60%);
+    box-shadow:inset 0px 0px 0px 0.5px hsl(200,20%,60%);
+}
+#flow-sheet #fnOverview .footbar-sub#sub-ventilation .warn{
+    background-color: hsl(0,30%,90%);
+    -webkit-box-shadow:inset 0px 0px 0px 0.5px hsl(0,20%,60%);
+    -moz-box-shadow:inset 0px 0px 0px 0.5px hsl(0,20%,60%);
+    box-shadow:inset 0px 0px 0px 0.5px hsl(0,20%,60%);
+}
+
+#flow-sheet #fnOverview .footbar-sub#sub-ventilation .upper
+{
+    padding-top:3px;
+    height:10px;
+}
+#flow-sheet #fnOverview .footbar-sub#sub-ventilation .lower
+{
+    padding-top:4px;
+    height:30px;
+}
+/*LAB*/
+#flow-sheet #fnOverview .footbar-sub#sub-lab
+{
+    width:31%;
+}
+#flow-sheet #fnOverview .footbar-sub#sub-lab .lab-group{
+    float: left;
+    height: 100%;
+    background-color: hsl(120,30%,85%);
+    border-radius: 8px;
+    -webkit-box-shadow:inset 0px 0px 0px 0.5px hsl(120,20%,60%);
+    -moz-box-shadow:inset 0px 0px 0px 0.5px hsl(120,20%,60%);
+    box-shadow:inset 0px 0px 0px 0.5px hsl(120,20%,60%);
+}
+
+#flow-sheet #fnOverview .footbar-sub#sub-lab .lab-item{
+    float: left;
+    height: 100%;
+}
+#flow-sheet #fnOverview .footbar-sub#sub-lab .lab-item.warn{
+    background-color: hsl(0,30%,90%);
+    -webkit-box-shadow:inset 0px 0px 0px 0.5px hsl(0,20%,60%);
+    -moz-box-shadow:inset 0px 0px 0px 0.5px hsl(0,20%,60%);
+    box-shadow:inset 0px 0px 0px 0.5px hsl(0,20%,60%);
+}
+#flow-sheet #fnOverview .footbar-sub#sub-lab .lab-group .lab-item:first-child{
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+#flow-sheet #fnOverview .footbar-sub#sub-lab .lab-group .lab-item:last-child{
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+/*飲食醫囑與事件*/
+#flow-sheet #fnOverview .footbar-sub#sub-nutrition-event
+{
+    width:14%;
+}
+#flow-sheet #fnOverview .footbar-sub#sub-nutrition-event #nutrition{
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: hsl(40, 50%, 90%);
+    -webkit-box-shadow:inset 0px 0px 0px 0.5px hsl(40,20%,60%);
+    -moz-box-shadow:inset 0px 0px 0px 0.5px hsl(40,20%,60%);
+    box-shadow:inset 0px 0px 0px 0.5px hsl(40,20%,60%);
+}
+#flow-sheet #fnOverview .footbar-sub#sub-nutrition-event #nutrition .title{
+    background-color: hsl(40, 50%, 70%);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+#flow-sheet #fnOverview .footbar-sub#sub-nutrition-event #nutrition .nutrition-group{
+    -webkit-box-shadow:inset 0px 0px 0px 0.5px hsl(40,20%,80%);
+    -moz-box-shadow:inset 0px 0px 0px 0.5px hsl(40,20%,80%);
+    box-shadow:inset 0px 0px 0px 0.5px hsl(40,20%,80%);
+}
+#flow-sheet #fnOverview .footbar-sub#sub-nutrition-event #nutrition .nutrition-group.latest{
+    -webkit-box-shadow:inset 0px 0px 0px 0.5px hsl(40,20%,80%);
+    -moz-box-shadow:inset 0px 0px 0px 0.5px hsl(40,20%,80%);
+    box-shadow:inset 0px 0px 0px 0.5px hsl(40,20%,80%);
+    background-color: hsl(40, 60%, 80%);
+}
+
+#flow-sheet #fnOverview .footbar-sub#sub-nutrition-event #event{
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: hsl(280, 50%, 90%);
+    -webkit-box-shadow:inset 0px 0px 0px 0.5px hsl(280,20%,60%);
+    -moz-box-shadow:inset 0px 0px 0px 0.5px hsl(280,20%,60%);
+    box-shadow:inset 0px 0px 0px 0.5px hsl(280,20%,60%);
+}
+#flow-sheet #fnOverview .footbar-sub#sub-nutrition-event #event .title{
+    background-color: hsl(280, 50%, 70%);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+#flow-sheet #fnOverview .footbar-sub#sub-nutrition-event #event .event-group{
+    -webkit-box-shadow:inset 0px 0px 0px 0.5px hsl(280,20%,80%);
+    -moz-box-shadow:inset 0px 0px 0px 0.5px hsl(280,20%,80%);
+    box-shadow:inset 0px 0px 0px 0.5px hsl(280,20%,80%);
+}
+
+#flow-sheet #fnOverview .footbar-sub#sub-nutrition-event #nutrition .date-card,
+#flow-sheet #fnOverview .footbar-sub#sub-nutrition-event #event .date-card{
+    padding-top:4px;padding-bottom:1px;
+}
+#flow-sheet #fnOverview .footbar-sub#sub-nutrition-event #nutrition .content-card,
+#flow-sheet #fnOverview .footbar-sub#sub-nutrition-event #event .content-card{
+    padding-bottom:4px;
+}

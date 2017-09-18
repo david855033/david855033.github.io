@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>NeoVue local dev</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="NeoVue">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript" src="libraries/jquery-3.2.1.js"></script>
+	<link rel="stylesheet" type="text/css" href="libraries/jquery-ui-1.12.1/jquery-ui.min.css">    
+    <script type="text/javascript" src="libraries/jquery-ui-1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="libraries/jquery.scrollbar.js"></script>
+    <script type="text/javascript" src="libraries/vue.js"></script>
+    <script type="text/javascript" src="libraries/d3.js"></script>
+    <script type="text/javascript" src="polyfill.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/style-dev.css">
+    <link rel="stylesheet" type="text/css" href="css/style-flow-sheet.css">
+    <link rel="stylesheet" type="text/css" href="css/scroll.css">
+</head>
+<body>
+    <div id="view">
+        <div id="left" class="shadow">        
+            <div class="leftbox" @click="signIn">
+                login
+            </div>
+            <div class="leftbox">
+                select view
+            </div>
+            <div class="view">
+                <div class=viewButton v-for="v in viewList" @click="selectedView=v">{{v}}</div>
+                <div class="clear"></div>
+            </div>
+            <div class="leftbox">
+                selectWard
+            </div>
+            <table id="wardList">
+                <tr v-for="row in wardList" @click="updatePatientList(row)">
+                    <td>{{row}}</td>
+                </tr>
+            </table>
+            <div class="leftbox">
+                selectPatient {{patientList.timeStamp}}
+            </div>
+            <table id="patientList">
+                <tr v-show="patientList.content&&patientList.content.length>0">
+                    <th>床號</th>
+                    <th>姓名</th>
+                </tr>
+                <tr v-for="row in patientList.content" @click="updatePatient(row.patientID)">
+                    <td>{{row.bed}}</td>
+                    <td>{{row.name}}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="main" id="dev" v-show="selectedView=='dev'">
+            <div class="rightbox">
+                patientData {{dev.patientData.timeStamp}}
+            </div>
+            <table id="patientData">
+                <tr><th>欄位</th><th>內容</th></tr>
+                <tr v-show="dev.patientData.content.currentBed"><td>現在床號</td><td>{{dev.patientData.content.currentBed}}</td></tr>
+                <tr v-show="dev.patientData.content.patientName"><td>姓名</td><td>{{dev.patientData.content.patientName}}</td></tr>
+                <tr v-show="dev.patientData.content.birthDate"><td>生日</td><td>{{dev.patientData.content.birthDate}}</td></tr>
+                <tr v-show="dev.patientData.content.gender"><td>性別</td><td>{{dev.patientData.content.gender}}</td></tr>
+                <tr v-show="dev.patientData.content.bloodType"><td>血型</td><td>{{dev.patientData.content.bloodType}}</td></tr>
+                <tr v-show="dev.patientData.content.currentSection"><td>科別</td><td>{{dev.patientData.content.currentSection}}</td></tr>
+                <tr v-show="dev.patientData.content.visitingStaff.name"><td>主治醫師</td><td>{{dev.patientData.content.visitingStaff.name}}</td></tr>
+                <tr v-show="dev.patientData.content.visitingStaff.code"><td>燈號</td><td>{{dev.patientData.content.visitingStaff.code}}</td></tr>
+                <tr v-show="dev.patientData.content.resident.name"><td>住院醫師</td><td>{{dev.patientData.content.resident.name}}</td></tr>
+                <tr v-show="dev.patientData.content.resident.code"><td>燈號</td><td>{{dev.patientData.content.resident.code}}</td></tr>
+            </table>
+            <div class="rightbox">
+                admissionList {{admissionList.timeStamp}}
+            </div>
+            <table id="admissionList">
+                <tr v-show="admissionList.content&&admissionList.content.length>0">
+                    <th>住院日期</th>
+                    <th>出院日期</th>
+                    <th>住院號</th>
+                    <th>科部</th>
+                </tr>
+                <tr v-for="row in admissionList.content" @click="updateCase('',row.caseNo)">
+                    <td>{{row.admissionDate}}</td>
+                    <td>{{row.dischargeDate}}</td>
+                    <td>{{row.caseNo}}</td>
+                    <td>{{row.section}}</td>
+                </tr>
+            </table>
+            <div class="rightbox">
+                    changeBedSection(last admission) {{dev.changeBedSection.timeStamp}}
+            </div>
+            <table id="changebed">
+                <tr v-show="dev.changeBedSection.content.changeBed&&dev.changeBedSection.content.changeBed.length>0">
+                    <th>轉床日期</th>
+                    <th>床位</th>
+                </tr>
+                <tr v-for="row in dev.changeBedSection.content.changeBed">
+                    <td>{{row.dateTime}}</td>
+                    <td>{{row.bed}}</td>
+                </tr>
+            </table>
+            <table id="changeSection">
+                <tr v-show="dev.changeBedSection.content.changeSection&&dev.changeBedSection.content.changeSection.length>0">
+                    <th>轉科日期</th>
+                    <th>科別</th>
+                </tr>
+                <tr v-for="row in dev.changeBedSection.content.changeSection">
+                    <td>{{row.dateTime}}</td>
+                    <td>{{row.section}}</td>
+                </tr>
+            </table>
+            <div class="rightbox">
+                consultation {{dev.consultation.timeStamp}}
+            </div>
+             <table id="consultation">
+                <tr v-show="dev.consultation.content&&dev.consultation.content.length>0">
+                    <th>住院號</th>
+                    <th>序號</th>
+                    <th>床位</th>
+                    <th>會診科別</th>
+                    <th>會診時間</th>
+                    <th>完成時間</th>
+                    <th>狀態</th>
+                    <th>會診醫師</th>
+                </tr>
+                <tr v-for="row in dev.consultation.content"  @click="updateConsultationReply(selectedPatientID,row.caseNo,row.oseq)">
+                    <td>{{row.caseNo}}</td>
+                    <td>{{row.oseq}}</td>
+                    <td>{{row.bed}}</td>
+                    <td>{{row.consultSection}}</td>
+                    <td>{{row.consultDateTime}}</td>
+                    <td>{{row.completeDateTime}}</td>
+                    <td>{{row.status}}</td>
+                    <td>{{row.doctors}}</td>
+                </tr>
+            </table>
+            <div class="rightbox">
+                consultation Reply {{dev.consultationReply.timeStamp}}
+            </div>
+             <table id="dev.consultationReply" v-show="dev.consultationReply.content">
+                <tr>
+                    <th>回覆內容</th>
+                </tr>
+                <tr>
+                    <td v-html="dev.consultationReply.content"></td>
+                </tr>
+            </table>
+            <div class="rightbox">
+                consultation pending {{dev.consultationPending.timeStamp}}
+            </div>
+             <table id="dev.consultationPending">
+                <tr v-show="dev.consultationPending.content&&dev.consultationPending.content.length>0">
+                    <th>床位</th>
+                    <th>會診科別</th>
+                    <th>會診時間</th>
+                    <th>狀態</th>
+                    <th>會診醫師</th>
+                </tr>
+                <tr v-for="row in dev.consultationPending.content">
+                    <td>{{row.bed}}</td>
+                    <td>{{row.consultSection}}</td>
+                    <td>{{row.consultDateTime}}</td>
+                    <td>{{row.status}}</td>
+                    <td>{{row.doctors}}</td>
+                </tr>
+            </table>
+            <div class="rightbox">
+                surgery {{dev.surgery.timeStamp}}
+            </div>
+            <table id="surgery">
+                <tr v-show="dev.surgery.content&&dev.surgery.content.length>0">
+                    <th>手術日期</th>
+                    <th>手術名稱</th>
+                    <th>醫師名稱</th>
+                    <th>醫師燈號</th>
+                </tr>
+                <tr v-for="row in dev.surgery.content">
+                    <td>{{row.date}}</td>
+                    <td v-html="row.surgeryName"></td>
+                    <td>{{row.doctor.name}}</td>
+                    <td>{{row.doctor.code}}</td>
+                </tr>
+            </table>
+            <div class="rightbox">
+                7天內order {{dev.order.timeStamp}}
+            </div>
+            <table id="order">
+                <tr v-show="dev.order.content&&dev.order.content.length>0">
+                    <th>序號</th>
+                    <th>項目</th>
+                    <th>檢體</th>
+                    <th>REQ</th>
+                    <th>開立時間</th>
+                    <th>單位</th>
+                    <th>狀態</th>
+                </tr>
+                <tr v-for="row in dev.order.content">
+                    <td>{{row.seq}}</td>
+                    <td>{{row.item}}</td>
+                    <td>{{row.specimen}}</td>
+                    <td>{{row.req}}</td>
+                    <td>{{row.dateTime}}</td>
+                    <td>{{row.unit}}</td>
+                    <td>{{row.status}}</td>
+                </tr>
+            </table>
+            <div class="rightbox">
+                1月內報告 {{dev.report.timeStamp}}
+            </div>
+            <table id="report">
+                <tr v-show="dev.report.content&&dev.report.content.length>0">
+                    <th>partNo</th>
+                    <th>病歷號</th>
+                    <th>住院號</th>
+                    <th>orderSeq</th>
+                    <th>項目</th>
+                    <th>檢體</th>
+                    <th>REQ</th>
+                    <th>簽收日期</th>
+                    <th>報告日期</th>
+                </tr>
+                <tr v-for="row in dev.report.content" @click="updateReportContent(row.patientID,row.partNo,row.caseNo,row.orderSeq)">
+                    <td>{{row.partNo}}</td>
+                    <td>{{row.patientID}}</td>
+                    <td>{{row.caseNo}}</td>
+                    <td>{{row.orderSeq}}</td>
+                    <td>{{row.item}}</td>
+                    <td>{{row.specimen}}</td>
+                    <td>{{row.req}}</td>
+                    <td>{{row.signDate}}</td>
+                    <td>{{row.reportDate}}</td>
+                </tr>
+            </table>
+            <div class="rightbox">
+                report content {{dev.reportContent.timeStamp}}
+            </div>
+            <table id="reportContent" v-show="dev.reportContent.content.htmlText">
+                <tr>
+                    <th>報告內容</th>
+                </tr>
+                <tr>
+                    <td v-html="'<pre>'+dev.reportContent.content.htmlText+'</pre>'"></td>
+                </tr>
+            </table>
+            <div class="rightbox">
+                cummulative {{dev.cummulative.timeStamp}}
+            </div>
+            <div v-show="selectedPatientID">
+                <div class="cummulativeButton" v-for="button in dev.availableCummulativeList" @click="dev.selectedCummulativeList=button.queryString; updateCummulative(selectedPatientID,3,dev.selectedCummulativeList);">{{button.item}}</div>
+            </div>
+            <table id="cummulative" v-show="dev.cummulative.content.colNames">
+                <tr>
+                    <th v-for="col in dev.cummulative.content.colNames">{{col}}</th>
+                </tr>
+                <tr v-for="row in dev.cummulative.content.data">
+                    <td v-for="col in row">{{col}}</td>
+                </tr>
+            </table>
+            <div class="rightbox">
+                生命徵象 {{dev.vitalSign.timeStamp}}
+            </div>
+             <div v-show="selectedPatientID&&selectedCaseNo">
+                <div class="vitalSignButton" v-for="button in dev.availableVitalSignList" @click="dev.selectedVitalSignList=button.queryString; updateVitalSign(selectedPatientID,selectedCaseNo,dev.selectedVitalSignList);">{{button.item}}</div>
+            </div>
+            <table id="vitalSign" v-show="dev.vitalSign.content.colNames">
+                <tr>
+                    <th v-for="col in dev.vitalSign.content.colNames">{{col}}</th>
+                </tr>
+                <tr v-for="row in dev.vitalSign.content.data">
+                    <td v-for="col in row">{{col}}</td>
+                </tr>
+            </table>
+            <div class="rightbox">
+                治療處置 {{dev.treatment.timeStamp}}
+            </div>
+            <table id="treatment"  v-show="dev.treatment.content&&dev.treatment.content.length>0">
+                <tr>
+                    <th>醫令名稱</th>
+                    <th>註記</th>
+                    <th>子項</th>
+                    <th>頻次</th>
+                    <th>數量</th>
+                    <th>天數</th>
+                    <th>生效日</th>
+                    <th>終止日</th>
+                    <th>狀態</th>
+                </tr>
+                <tr v-for="row in dev.treatment.content">
+                    <td>{{row.item}}</td>
+                    <td>{{row.info}}</td>
+                    <td>{{row.class}}</td>
+                    <td>{{row.freq}}</td>
+                    <td>{{row.qty}}</td>
+                    <td>{{row.duration}}</td>
+                    <td>{{row.startDate}}</td>
+                    <td>{{row.endData}}</td>
+                    <td>{{row.status}}</td>
+                </tr>
+            </table>
+            <div class="rightbox">
+                    輸血 {{dev.transfusion.timeStamp}}
+            </div>
+            <table id="transfusion"  v-show="dev.transfusion.content&&dev.transfusion.content.length>0">
+                <tr>
+                    <th>項目名稱</th>
+                    <th>REQ</th>
+                    <th>生效日期(非輸血日期)</th>
+                </tr>
+                <tr v-for="row in dev.transfusion.content">
+                    <td>{{row.item}}</td>
+                    <td>{{row.req}}</td>
+                    <td>{{row.date}}</td>
+                </tr>
+            </table>
+            <div class="rightbox">
+                用藥紀錄 {{dev.medication.timeStamp}}
+            </div>
+            <table id="medication"  v-show="dev.medication.content&&dev.medication.content.length>0">
+                <tr>
+                    <th>藥名</th>
+                    <th>商品名</th>
+                    <th>開始</th>
+                    <th>結束</th>
+                    <th>劑量</th>
+                    <th>單位</th>
+                    <th>途徑</th>
+                    <th>頻次</th>
+                    <th>狀態</th>
+                    <th>自費</th>
+                    <th>seq</th>
+                    <th>註記</th>
+                </tr>
+                <tr v-for="row in dev.medication.content" @click="updateMedicationInfo(selectedPatientID, selectedCaseNo, row.seq)">
+                    <td>{{row.drugName}}</td>
+                    <td>{{row.tradeName}}</td>
+                    <td>{{row.startDateTime}}</td>
+                    <td>{{row.endDateTime}}</td>
+                    <td>{{row.dosage}}</td>
+                    <td>{{row.unit}}</td>
+                    <td>{{row.route}}</td>
+                    <td>{{row.freq}}</td>
+                    <td>{{row.status}}</td>
+                    <td>{{row.selfPaid}}</td>
+                    <td>{{row.seq}}</td>
+                    <td>{{row.info}}</td>
+                </tr>
+            </table>
+            <div class="rightbox">
+                用藥註記 {{dev.medicationInfo.timeStamp}}
+            </div>
+            <table id="medicationInfo" v-show="dev.medicationInfo.content.caseNo">
+                <tr>
+                    <th>欄位</th>
+                    <th>內容</th>
+                </tr>
+                <tr>
+                    <td>caseNo</td>
+                    <td>{{dev.medicationInfo.content.caseNo}}</td>
+                </tr>
+                <tr>
+                    <td>seq</td>
+                    <td>{{dev.medicationInfo.content.seq}}</td>
+                </tr>
+                <tr>
+                    <td>content</td>
+                    <td>{{dev.medicationInfo.content.content}}</td>
+                </tr>
+            </table>
+            <div class="rightbox">
+                產單 {{dev.birthSheet.timeStamp}}
+            </div>
+            <table id="birthSheet" v-show="dev.birthSheet.content.hasBirthSheet">
+                <tr><th>欄位</th><th>內容</th></tr>
+                <tr><td>母親病歷號</td><td>{{dev.birthSheet.content.mother.ID}}</td></tr>
+                <tr><td>母親姓名</td><td>{{dev.birthSheet.content.mother.name}}</td></tr>
+                <tr><td>住院原因</td><td>{{dev.birthSheet.content.mother.admissionReason}}</td></tr>
+                <tr><td>GA week</td><td>{{dev.birthSheet.content.child.GAweek}}</td></tr>
+                <tr><td>GA day</td><td>{{dev.birthSheet.content.child.GAday}}</td></tr>
+                <tr><td>破水時間</td><td>{{dev.birthSheet.content.child.ROMDateTime}}</td></tr>
+                <tr><td>分娩時間</td><td>{{dev.birthSheet.content.child.deliverDateTime}}</td></tr>
+                <tr><td>Apgar Score</td><td>{{dev.birthSheet.content.child.ApgarScore}}</td></tr>
+                <tr><td>生產方式</td><td>{{dev.birthSheet.content.child.deliverMethod}}</td></tr>
+                <tr><td>急救處置</td><td>{{dev.birthSheet.content.child.management}}</td></tr>
+            </table>
+            <div class="rightbox">
+                護理交班 {{dev.NISHandOver.timeStamp}}
+            </div>
+            <table id="NISHandOver">
+                <tr><th>欄位</th><th>內容</th></tr>
+                <tr v-for="row in dev.NISHandOver.content.patientInfo"><td>{{row.key}}</td><td>{{row.value}}</td></tr>
+                <tr v-for="row in dev.NISHandOver.content.history"><td>{{row.key}}</td><td>{{row.value}}</td></tr>
+                <tr v-for="row in dev.NISHandOver.content.health"><td>{{row.key}}</td><td>{{row.value}}</td></tr>
+                <tr v-for="row in dev.NISHandOver.content.line"><td>{{row.key}}</td><td>{{row.value}}</td></tr>
+                <tr v-for="row in dev.NISHandOver.content.note"><td>{{row.key}}</td><td>{{row.value}}</td></tr>
+            </table>
+            <div class="rightbox">
+                FLOWSHEET 
+            </div>
+            <table id="FLOWSHEET">
+                <tr><th>日期</th><th>內容</th><th>timeStamp</th></tr>
+                <tr v-for="row in dev.flowSheet"><td>{{row.date}}</td>
+                    <td>
+                        <div v-for="(data, propertyName) in row.content">
+                            <div>{{propertyName}}</div>
+                            <span v-for="e in data">{{e}} </span>
+                        </div>
+                    </td>
+                    <td>{{row.timeStamp}}</td></tr>
+            </table>
+        </div>
+        <div class="main" id="flow-sheet" v-show="selectedView=='flow-sheet'">
+            <div id="header" class="w1-1 nowrap h-center"><div class="header-card inline-block shadow">
+                <div class="h1-5"><div class='s-word grey-40-font v-center'>資料日期</div></div>
+                    <div class="h3-5">
+                        <div class='xl-word heavy-weight v-center'>
+                            <span id="previous-day">&#9204;</span>
+                            <span id="date">2017-05-15</span>
+                            <span id="next-day">&#9205;</span>
+                        </div>
+                    </div>
+                    <div class="h1-5"><div class='s-word grey-40-font v-center'>星期六 / 一天前</div></div>
+                </div><div v-for="card in flowSheet.headerCards" class="header-card inline-block shadow">
+                    <div class="h1-5"><div class='s-word grey-40-font v-center'>{{card.top}}</div></div>
+                    <div class="h3-5"><div class='xl-word heavy-weight v-center'>{{card.mid}}</div></div>
+                    <div class="h1-5"><div class='s-word grey-40-font v-center'>{{card.bottom}}</div></div>
+                </div><div class="header-card inline-block shadow">
+                    <div class="h1-5"><div class='s-word grey-40-font v-center'>NICU-１</div></div>
+                    <div class="h3-5"><div class='xl-word heavy-weight v-center'>好早生之女</div></div>
+                    <div class="h1-5"><div class='s-word grey-40-font v-center'>主治醫師：曹大大</div></div>
+                </div><div class="header-card inline-block shadow">
+                    <div class="h1-5"><div class='s-word grey-40-font v-center'>病歷號</div></div>
+                    <div class="h3-5"><div class='xl-word heavy-weight v-center'>41237362</div></div>
+                    <div class="h1-5"><div class='s-word grey-40-font v-center'>住院日：2017-05-12</div></div>
+                </div><div class="header-card inline-block shadow">
+                    <div class="h1-5"><div class='s-word grey-40-font v-center'>實際年齡</div></div>
+                    <div class="h3-5"><div class='xl-word heavy-weight v-center'>5 d/o</div></div>
+                    <div class="h1-5"><div class='s-word grey-40-font v-center'>生日：2017-05-11</div></div>
+                </div><div class="header-card inline-block shadow">
+                    <div class="h1-5"><div class='s-word grey-40-font v-center'>矯正週數</div></div>
+                    <div class="h3-5"><div class='xl-word heavy-weight v-center'>35+2</div></div>
+                    <div class="h1-5"><div class='s-word grey-40-font v-center'>出生週數：35+1</div></div>
+                </div><div class="header-card inline-block shadow">
+                    <div class="h1-5"><div class='s-word grey-40-font v-center'>體重</div></div>
+                    <div class="h3-5"><div class='xl-word heavy-weight v-center'>2400g <span class="s-word">(+20)</span></div></div>
+                    <div class="h1-5"><div class='s-word grey-40-font v-center'>出生體重：2400g</div></div>
+                </div>
+            </div>
+            <div id="datepicker">   </div>
+            <div id="content">
+                <div class="scrollbar-inner h1-1">
+                    <div class="chart shadow">
+                        <table v-for="(table,i) in flowSheet.chart" :class="table.classes">
+                            <tr v-if="i==0"><td></td><td colspan="8" class="shift-name">白班</td><td colspan="8" class="shift-name">小夜</td><td colspan="8" class="shift-name">大夜</td></tr>
+                            <tr v-for="row in table.rows">
+                                <td v-for = "col in row" v-html="col.htmlText" :class="col.classes" :title="col.tooltip"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div id="footbar">
+                <div id="footbarMenu" class="nowrap">
+                    <div class="footbar-fn-button h1-1 inline-block" v-for="b in flowSheet.footbarMenuList" @click="selectFlowSheetFn(b.key)" :class="{selected:flowSheet.selectedfootbarMenu==b.key}">
+                        <div class="h1-1"><div class="v-center">{{b.title}}</div></div>
+                    </div><div id="footbar-toggle-buttons" class="h1-1 inline-block">
+                        <div id="min" class='h1-1 w1-3 inline-block' @click="flowSheet.footbarStatus='min'"><div class="h-center v-center">&#95;</div>
+                        </div><div id="max" class='h1-1 w1-3 inline-block' @click="flowSheet.footbarStatus='max'"><div class="h-center v-center">&#128470;</div>
+                        </div><div id="close" class='h1-1 w1-3 inline-block' @click="flowSheet.footbarStatus='close'"><div class="h-center v-center">&times;</div></div>
+                    </div>
+                </div>
+                <div id="fnOverview" class="footbar-fn-page" v-show="flowSheet.selectedfootbarMenu=='fnOverview'&&flowSheet.footbarStatus!='close'">
+                    <div id="sub-io" class="footbar-sub float-left">
+                        <div class="footbar-sub-inner h1-1">
+                            <div id="morning" class='shift' :class="[flowSheet.footbarStatus=='max'?'h1-6':'h1-4']">
+                                <div class="w2-13 h1-1 float-left">
+                                    <div class="v-center h-center ms-word nowrap heavy-weight">白班</div>
+                                </div>
+                                <div class="w11-13 h1-1 float-left h-center">
+                                    <div class="h1-2 w1-1">
+                                        <div class="h1-1 w1-3 float-left">
+                                            <div class="h1-3 w1-1 xs-word grey-40-font"><div class="v-center">IV</div></div>
+                                            <div class="h2-3 w1-1 ms-word heavy-weight"><div class="v-center">20</div></div>
+                                        </div>
+                                        <div class="h1-1 w1-3 float-left">
+                                            <div class="h1-3 w1-1 xs-word grey-40-font"><div class="v-center">Feed</div></div>
+                                            <div class="h2-3 w1-1 ms-word heavy-weight"><div class="v-center">30</div></div>
+                                        </div>
+                                        <div class="h1-1 w1-3 float-left">
+                                            <div class="h1-3 w1-1 xs-word grey-40-font"><div class="v-center">ml/kg</div></div>
+                                            <div class="h2-3 w1-1 ms-word heavy-weight"><div class="v-center">25</div></div>
+                                        </div>
+                                    </div>
+                                    <div class="h1-2 w1-1">
+                                        <div class="h1-1 w1-3 float-left">
+                                            <div class="h1-3 w1-1 xs-word grey-40-font"><div class="v-center">UO</div></div>
+                                            <div class="h2-3 w1-1 ms-word heavy-weight"><div class="v-center">25</div></div>
+                                        </div>
+                                        <div class="h1-1 w1-3 float-left">
+                                            <div class="h1-3 w1-1 xs-word grey-40-font"><div class="v-center">ml/kg/h</div></div>
+                                            <div class="h2-3 w1-1 ms-word heavy-weight"><div class="v-center"><span class="red">0.5</span></div></div>
+                                        </div>
+                                        <div class="h1-1 w1-3 float-left">
+                                            <div class="h1-3 w1-1 xs-word grey-40-font"><div class="v-center">IO</div></div>
+                                            <div class="h2-3 w1-1 ms-word heavy-weight"><div class="v-center">+21</div></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="afternoon" class='shift' :class="[flowSheet.footbarStatus=='max'?'h1-6':'h1-4']">
+                                <div class="w2-13 h1-1 float-left">
+                                    <div class="v-center h-center ms-word nowrap heavy-weight">小夜</div>
+                                </div>
+                                <div class="w11-13 h1-1 float-left h-center">
+                                    <div class="h1-2 w1-1">
+                                        <div class="h1-1 w1-3 float-left">
+                                            <div class="h1-3 w1-1 xs-word grey-40-font"><div class="v-center">IV</div></div>
+                                            <div class="h2-3 w1-1 ms-word heavy-weight"><div class="v-center">20</div></div>
+                                        </div>
+                                        <div class="h1-1 w1-3 float-left">
+                                            <div class="h1-3 w1-1 xs-word grey-40-font"><div class="v-center">Feed</div></div>
+                                            <div class="h2-3 w1-1 ms-word heavy-weight"><div class="v-center">30</div></div>
+                                        </div>
+                                        <div class="h1-1 w1-3 float-left">
+                                            <div class="h1-3 w1-1 xs-word grey-40-font"><div class="v-center">ml/kg</div></div>
+                                            <div class="h2-3 w1-1 ms-word heavy-weight"><div class="v-center">25</div></div>
+                                        </div>
+                                    </div>
+                                    <div class="h1-2 w1-1">
+                                        <div class="h1-1 w1-3 float-left">
+                                            <div class="h1-3 w1-1 xs-word grey-40-font"><div class="v-center">UO</div></div>
+                                            <div class="h2-3 w1-1 ms-word heavy-weight"><div class="v-center">25</div></div>
+                                        </div>
+                                        <div class="h1-1 w1-3 float-left">
+                                            <div class="h1-3 w1-1 xs-word grey-40-font"><div class="v-center">ml/kg/h</div></div>
+                                            <div class="h2-3 w1-1 ms-word heavy-weight"><div class="v-center">3</div></div>
+                                        </div>
+                                        <div class="h1-1 w1-3 float-left">
+                                            <div class="h1-3 w1-1 xs-word grey-40-font"><div class="v-center">IO</div></div>
+                                            <div class="h2-3 w1-1 ms-word heavy-weight"><div class="v-center">+21</div></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="night" class='shift' :class="[flowSheet.footbarStatus=='max'?'h1-6':'h1-4']">
+                                <div class="w2-13 h1-1 float-left">
+                                    <div class="v-center h-center ms-word nowrap heavy-weight">大夜</div>
+                                </div>
+                                <div class="w11-13 h1-1 float-left h-center">
+                                    <div class="h1-2 w1-1">
+                                        <div class="h1-1 w1-3 float-left">
+                                            <div class="h1-3 w1-1 xs-word grey-40-font"><div class="v-center">IV</div></div>
+                                            <div class="h2-3 w1-1 ms-word heavy-weight"><div class="v-center">20</div></div>
+                                        </div>
+                                        <div class="h1-1 w1-3 float-left">
+                                            <div class="h1-3 w1-1 xs-word grey-40-font"><div class="v-center">Feed</div></div>
+                                            <div class="h2-3 w1-1 ms-word heavy-weight"><div class="v-center">30</div></div>
+                                        </div>
+                                        <div class="h1-1 w1-3 float-left">
+                                            <div class="h1-3 w1-1 xs-word grey-40-font"><div class="v-center">ml/kg</div></div>
+                                            <div class="h2-3 w1-1 ms-word heavy-weight"><div class="v-center">25</div></div>
+                                        </div>
+                                    </div>
+                                    <div class="h1-2 w1-1">
+                                        <div class="h1-1 w1-3 float-left">
+                                            <div class="h1-3 w1-1 xs-word grey-40-font"><div class="v-center">UO</div></div>
+                                            <div class="h2-3 w1-1 ms-word heavy-weight"><div class="v-center">25</div></div>
+                                        </div>
+                                        <div class="h1-1 w1-3 float-left">
+                                            <div class="h1-3 w1-1 xs-word grey-40-font"><div class="v-center">ml/kg/h</div></div>
+                                            <div class="h2-3 w1-1 ms-word heavy-weight"><div class="v-center">3</div></div>
+                                        </div>
+                                        <div class="h1-1 w1-3 float-left">
+                                            <div class="h1-3 w1-1 xs-word grey-40-font"><div class="v-center">IO</div></div>
+                                            <div class="h2-3 w1-1 ms-word heavy-weight"><div class="v-center">+21</div></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="day1" class='shift' :class="[flowSheet.footbarStatus=='max'?'h1-6':'h1-4']">
+                                <div class="w2-13 h1-1 float-left">
+                                    <div class="h1-2 v-center h-center">
+                                        <div class="h1-10"></div>
+                                        <div class="h4-10 ms-word nowrap heavy-weight">今日</div>
+                                        <div class="h2-10"></div>
+                                        <div class="h2-10 xs-word grey-40-font">+20g</div>
+                                        <div class="h1-10"></div>
+                                    </div>
+                                </div>
+                                <div class="w11-13 h1-1 float-left h-center">
+                                    <div class="h1-2 w1-1">
+                                        <div class="h1-1 w1-3 float-left">
+                                            <div class="h1-3 w1-1 xs-word grey-40-font"><div class="v-center">IV</div></div>
+                                            <div class="h2-3 w1-1 ms-word heavy-weight"><div class="v-center">20</div></div>
+                                        </div>
+                                        <div class="h1-1 w1-3 float-left">
+                                            <div class="h1-3 w1-1 xs-word grey-40-font"><div class="v-center">Feed</div></div>
+                                            <div class="h2-3 w1-1 ms-word heavy-weight"><div class="v-center">30</div></div>
+                                        </div>
+                                        <div class="h1-1 w1-3 float-left">
+                                            <div class="h1-3 w1-1 xs-word grey-40-font"><div class="v-center">ml/kg</div></div>
+                                            <div class="h2-3 w1-1 ms-word heavy-weight"><div class="v-center">25</div></div>
+                                        </div>
+                                    </div>
+                                    <div class="h1-2 w1-1">
+                                        <div class="h1-1 w1-3 float-left">
+                                            <div class="h1-3 w1-1 xs-word grey-40-font"><div class="v-center">UO</div></div>
+                                            <div class="h2-3 w1-1 ms-word heavy-weight"><div class="v-center">25</div></div>
+                                        </div>
+                                        <div class="h1-1 w1-3 float-left">
+                                            <div class="h1-3 w1-1 xs-word grey-40-font"><div class="v-center">ml/kg/h</div></div>
+                                            <div class="h2-3 w1-1 ms-word heavy-weight"><div class="v-center">3</div></div>
+                                        </div>
+                                        <div class="h1-1 w1-3 float-left">
+                                            <div class="h1-3 w1-1 xs-word grey-40-font"><div class="v-center">IO</div></div>
+                                            <div class="h2-3 w1-1 ms-word heavy-weight"><div class="v-center">+21</div></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="day2" class='shift h1-6' v-if="flowSheet.footbarStatus=='max'">
+                                    <div class="w2-13 h1-1 float-left">
+                                        <div class="h1-2 v-center h-center">
+                                            <div class="h1-10"></div>
+                                            <div class="h4-10 ms-word nowrap heavy-weight">昨日</div>
+                                            <div class="h2-10"></div>
+                                            <div class="h2-10 xs-word grey-40-font">+20g</div>
+                                            <div class="h1-10"></div>
+                                        </div>
+                                    </div>
+                                    <div class="w11-13 h1-1 float-left h-center">
+                                        <div class="h1-2 w1-1">
+                                            <div class="h1-1 w1-3 float-left">
+                                                <div class="h1-3 w1-1 xs-word grey-40-font"><div class="v-center">IV</div></div>
+                                                <div class="h2-3 w1-1 ms-word heavy-weight"><div class="v-center">20</div></div>
+                                            </div>
+                                            <div class="h1-1 w1-3 float-left">
+                                                <div class="h1-3 w1-1 xs-word grey-40-font"><div class="v-center">Feed</div></div>
+                                                <div class="h2-3 w1-1 ms-word heavy-weight"><div class="v-center">30</div></div>
+                                            </div>
+                                            <div class="h1-1 w1-3 float-left">
+                                                <div class="h1-3 w1-1 xs-word grey-40-font"><div class="v-center">ml/kg</div></div>
+                                                <div class="h2-3 w1-1 ms-word heavy-weight"><div class="v-center">25</div></div>
+                                            </div>
+                                        </div>
+                                        <div class="h1-2 w1-1">
+                                            <div class="h1-1 w1-3 float-left">
+                                                <div class="h1-3 w1-1 xs-word grey-40-font"><div class="v-center">UO</div></div>
+                                                <div class="h2-3 w1-1 ms-word heavy-weight"><div class="v-center">25</div></div>
+                                            </div>
+                                            <div class="h1-1 w1-3 float-left">
+                                                <div class="h1-3 w1-1 xs-word grey-40-font"><div class="v-center">ml/kg/h</div></div>
+                                                <div class="h2-3 w1-1 ms-word heavy-weight"><div class="v-center">3</div></div>
+                                            </div>
+                                            <div class="h1-1 w1-3 float-left">
+                                                <div class="h1-3 w1-1 xs-word grey-40-font"><div class="v-center">IO</div></div>
+                                                <div class="h2-3 w1-1 ms-word heavy-weight"><div class="v-center">+21</div></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="day3" class='shift h1-6' v-if="flowSheet.footbarStatus=='max'">
+                                        <div class="w2-13 h1-1 float-left">
+                                            <div class="h1-2 v-center h-center">
+                                                <div class="h1-10"></div>
+                                                <div class="h4-10 ms-word nowrap heavy-weight">前日</div>
+                                                <div class="h2-10"></div>
+                                                <div class="h2-10 xs-word grey-40-font">-15g</div>
+                                                <div class="h1-10"></div>
+                                            </div>
+                                        </div>
+                                        <div class="w11-13 h1-1 float-left h-center">
+                                            <div class="h1-2 w1-1">
+                                                <div class="h1-1 w1-3 float-left">
+                                                    <div class="h1-3 w1-1 xs-word grey-40-font"><div class="v-center">IV</div></div>
+                                                    <div class="h2-3 w1-1 ms-word heavy-weight"><div class="v-center">20</div></div>
+                                                </div>
+                                                <div class="h1-1 w1-3 float-left">
+                                                    <div class="h1-3 w1-1 xs-word grey-40-font"><div class="v-center">Feed</div></div>
+                                                    <div class="h2-3 w1-1 ms-word heavy-weight"><div class="v-center">30</div></div>
+                                                </div>
+                                                <div class="h1-1 w1-3 float-left">
+                                                    <div class="h1-3 w1-1 xs-word grey-40-font"><div class="v-center">ml/kg</div></div>
+                                                    <div class="h2-3 w1-1 ms-word heavy-weight"><div class="v-center">25</div></div>
+                                                </div>
+                                            </div>
+                                            <div class="h1-2 w1-1">
+                                                <div class="h1-1 w1-3 float-left">
+                                                    <div class="h1-3 w1-1 xs-word grey-40-font"><div class="v-center">UO</div></div>
+                                                    <div class="h2-3 w1-1 ms-word heavy-weight"><div class="v-center">25</div></div>
+                                                </div>
+                                                <div class="h1-1 w1-3 float-left">
+                                                    <div class="h1-3 w1-1 xs-word grey-40-font"><div class="v-center">ml/kg/h</div></div>
+                                                    <div class="h2-3 w1-1 ms-word heavy-weight"><div class="v-center">3</div></div>
+                                                </div>
+                                                <div class="h1-1 w1-3 float-left">
+                                                    <div class="h1-3 w1-1 xs-word grey-40-font"><div class="v-center">IO</div></div>
+                                                    <div class="h2-3 w1-1 ms-word heavy-weight"><div class="v-center">+21</div></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                        </div>
+                    </div>
+                    <div id="sub-ventilation" class="footbar-sub float-left h-center">
+                        <div class="footbar-sub-inner h1-1 scrollbar-outer">
+                            <div class='h1-1 w1-1'>
+                                <div class="day-card w1-1 h-center s-word">
+                                        <div class="v-center">5/12</div>
+                                </div>
+                                <div class='gas-card w1-1 nowrap'>
+                                    <div class="w1-7 h1-1 s-word grey-20-font inline-block"><div class="v-center">10:30</div>
+                                    </div><div class="w6-7 h1-1 inline-block">
+                                        <div class="w1-6 h1-1 inline-block"><div class="upper xs-word grey-40-font">pH</div><div class="lower ms-word heavy-weight">7.25</div>
+                                        </div><div class="w1-6 h1-1 inline-block"><div class="upper xs-word grey-40-font">pCO<sub>2</sub></div><div class="lower ms-word heavy-weight">54</div>
+                                        </div><div class="w1-6 h1-1 inline-block"><div class="upper xs-word grey-40-font">HCO<sub>3</sub></div><div class="lower ms-word heavy-weight">16</div>
+                                        </div><div class="w1-6 h1-1 inline-block"><div class="upper xs-word grey-40-font">BE</div><div class="lower ms-word heavy-weight">-5.2</div>
+                                        </div><div class="w1-6 h1-1 inline-block"><div class="upper xs-word grey-40-font">pO<sub>2</sub></div><div class="lower ms-word heavy-weight">44</div>
+                                        </div><div class="w1-6 h1-1 inline-block"><div class="upper xs-word grey-40-font">Sat</div><div class="lower ms-word heavy-weight">65<span class="xs-word">%</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class='gasfull-card w1-1'>
+                                    <div class="w1-7 h1-1 s-word grey-20-font inline-block"><div class="v-center">11:30</div>
+                                    </div><div class="w6-7 h1-1 inline-block">
+                                        <div class="w1-1 h1-2 nowrap">
+                                            <div class="w1-6 h1-1 inline-block"><div class="upper xs-word grey-40-font">pH</div><div class="lower ms-word heavy-weight">7.25</div>
+                                            </div><div class="w1-6 h1-1 inline-block"><div class="upper xs-word grey-40-font">pCO<sub>2</sub></div><div class="lower ms-word heavy-weight">54</div>
+                                            </div><div class="w1-6 h1-1 inline-block"><div class="upper xs-word grey-40-font">HCO<sub>3</sub></div><div class="lower ms-word heavy-weight">16</div>
+                                            </div><div class="w1-6 h1-1 inline-block"><div class="upper xs-word grey-40-font">BE</div><div class="lower ms-word heavy-weight">-5.2</div>
+                                            </div><div class="w1-6 h1-1 inline-block"><div class="upper xs-word grey-40-font">pO<sub>2</sub></div><div class="lower ms-word heavy-weight">44</div>
+                                            </div><div class="w1-6 h1-1 inline-block"><div class="upper xs-word grey-40-font">Sat</div><div class="lower ms-word heavy-weight">70<span class="xs-word">%</span></div>
+                                            </div>
+                                        </div>
+                                        <div class="w1-1 h1-2 nowrap">
+                                            <div class="w1-3 h1-1 inline-block">
+                                                <div class="w1-2 h1-1 inline-block"><div class="upper xs-word grey-40-font">Hb</div><div class="lower s-word heavy-weight">12.1</div>
+                                                </div><div class="w1-2 h1-1 inline-block"><div class="upper xs-word grey-40-font">Hct</div><div class="lower s-word heavy-weight">32<span class="xs-word">%</span></div>
+                                                </div>
+                                            </div><div class="w2-3 h1-1 inline-block">
+                                                <div class="w1-5 h1-1 inline-block"><div class="upper xs-word grey-40-font">Na</div><div class="lower s-word heavy-weight">140</div>
+                                                </div><div class="w1-5 h1-1 inline-block"><div class="upper xs-word grey-40-font">K</div><div class="lower s-word heavy-weight">3.5</div>
+                                                </div><div class="w1-5 h1-1 inline-block"><div class="upper xs-word grey-40-font">Ca<sup>2+</sup></div><div class="lower s-word heavy-weight">1.02</div>
+                                                </div><div class="w1-5 h1-1 inline-block"><div class="upper xs-word grey-40-font">BUN</div><div class="lower s-word heavy-weight">21</div>
+                                                </div><div class="w1-5 h1-1 inline-block"><div class="upper xs-word grey-40-font">Cr</div><div class="lower s-word heavy-weight">0.89</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class='vent-card w1-1'>
+                                    <div class="w1-7 h1-1 s-word grey-20-font inline-block"><div class="v-center">12:00</div>
+                                    </div><div class="w6-7 h1-1 inline-block nowrap">
+                                        <div class="w1-6 h1-1 inline-block"><div class="v-center s-word heavy-weight wrap">PS SIMV</div>
+                                        </div><div class="w1-6 h1-1 inline-block"><div class="upper xs-word grey-40-font">FiO<sub>2</sub></div><div class="lower ms-word heavy-weight">21<span class="xs-word">%</span></div>
+                                        </div><div class="w1-6 h1-1 inline-block"><div class="upper xs-word grey-40-font">Rate</div><div class="lower ms-word heavy-weight">20</div>
+                                        </div><div class="w1-6 h1-1 inline-block"><div class="upper xs-word grey-40-font">PIP</div><div class="lower ms-word heavy-weight">18</div>
+                                        </div><div class="w1-6 h1-1 inline-block"><div class="upper xs-word grey-40-font">PEEP</div><div class="lower ms-word heavy-weight">5</div>
+                                        </div><div class="w1-6 h1-1 inline-block"><div class="upper xs-word grey-40-font">PS</div><div class="lower ms-word heavy-weight">13</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="day-card w1-1 h-center s-word">
+                                    <div class="v-center">5/13</div>
+                                </div>
+                                <div class='gas-card w1-1 nowrap'>
+                                    <div class="w1-7 h1-1 s-word grey-20-font inline-block"><div class="v-center">06:30</div>
+                                    </div><div class="w6-7 h1-1 inline-block">
+                                        <div class="w1-6 h1-1 inline-block warn"><div class="upper xs-word grey-40-font">pH</div><div class="lower ms-word heavy-weight"><span class="red">6.95</span></div>
+                                        </div><div class="w1-6 h1-1 inline-block"><div class="upper xs-word grey-40-font">pCO<sub>2</sub></div><div class="lower ms-word heavy-weight">54</div>
+                                        </div><div class="w1-6 h1-1 inline-block"><div class="upper xs-word grey-40-font">HCO<sub>3</sub></div><div class="lower ms-word heavy-weight">16</div>
+                                        </div><div class="w1-6 h1-1 inline-block"><div class="upper xs-word grey-40-font">BE</div><div class="lower ms-word heavy-weight">-5.2</div>
+                                        </div><div class="w1-6 h1-1 inline-block"><div class="upper xs-word grey-40-font">pO<sub>2</sub></div><div class="lower ms-word heavy-weight">44</div>
+                                        </div><div class="w1-6 h1-1 inline-block"><div class="upper xs-word grey-40-font">Sat</div><div class="lower ms-word heavy-weight">65<span class="xs-word">%</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class='vent-card w1-1'>
+                                    <div class="w1-7 h1-1 s-word grey-20-font inline-block"><div class="v-center">12:00</div>
+                                    </div><div class="w6-7 h1-1 inline-block nowrap">
+                                        <div class="w1-6 h1-1 inline-block"><div class="v-center s-word heavy-weight wrap">RA</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="sub-lab" class="footbar-sub float-left h-center nowrap">
+                        <div class="footbar-sub-inner h1-1">
+                            <div id="glucose-cbc" class='lab-row' :class="[flowSheet.footbarStatus=='max'?'h1-6':'h1-4']">
+                                <div class='lab-group w1-5'>
+                                    <div id="glu" class='lab-item w1-1 h1-1'>
+                                        <div class="lab-tittle h1-4 xs-word  grey-40-font">
+                                            <div class="v-center">Glu</div>
+                                        </div>
+                                        <div class="lab-data h1-2 lm-word heavy-weight">
+                                            <div class="v-center">88</div>
+                                        </div>
+                                        <div class="lab-timeStamp h1-4 xs-word grey-60-font">
+                                            <div class="v-center">8/9</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class='lab-group w4-5'>
+                                    <div id='wbc' class='lab-item w1-4'>
+                                        <div class="lab-tittle h1-4 xs-word  grey-40-font">
+                                            <div class="v-center">WBC</div>
+                                        </div>
+                                        <div class="lab-data h1-2 lm-word heavy-weight">
+                                            <div class="v-center">14.3<span class="xs-word">k</span></div>
+                                        </div>
+                                        <div class="lab-timeStamp h1-4 xs-word grey-60-font">
+                                            <div class="v-center">12/14</div>
+                                        </div>
+                                    </div>
+                                    <div id='dc' class='lab-item w1-4'>
+                                        <div class="h1-4">
+                                            <div class="w1-3 h1-1 inline-block xs-word grey-40-font h-right"><div class="v-center">Sg</div>
+                                            </div><div class="w2-3 h1-1 inline-block s-word heavy-weight"><div class="v-center">23<span class="xs-word">%</span></div></div>
+                                        </div>
+                                        <div class="h1-4">
+                                            <div class="w1-3 h1-1 inline-block xs-word grey-40-font h-right"><div class="v-center">Ly</div>
+                                            </div><div class="w2-3 h1-1 inline-block s-word heavy-weight"><div class="v-center">56<span class="xs-word">%</span></div></div>
+                                        </div>
+                                        <div class="h1-4">
+                                            <div class="w1-3 h1-1 inline-block xs-word grey-40-font h-right"><div class="v-center">Bd</div>
+                                            </div><div class="w2-3 h1-1 inline-block s-word heavy-weight"><div class="v-center">0.1<span class="xs-word">%</span></div></div>
+                                        </div>
+                                        <div class="lab-timeStamp h1-4 xs-word grey-60-font">
+                                            <div class="v-center">12/14</div>
+                                        </div>
+                                    </div>
+                                    <div id='Hb' class='lab-item w1-4'>
+                                        <div class="lab-tittle h1-4 xs-word  grey-40-font">
+                                            <div class="v-center">Hb</div>
+                                        </div>
+                                        <div class="lab-data h1-2 lm-word heavy-weight">
+                                            <div class="v-center">10.5</div>
+                                        </div>
+                                        <div class="lab-timeStamp h1-4 xs-word grey-60-font">
+                                            <div class="v-center">12/14</div>
+                                        </div>
+                                    </div>
+                                    <div id='plt' class='lab-item w1-4'>
+                                        <div class="lab-tittle h1-4 xs-word  grey-40-font">
+                                            <div class="v-center">Plt</div>
+                                        </div>
+                                        <div class="lab-data h1-2 lm-word heavy-weight">
+                                            <div class="v-center">233<span class="xs-word">k</span></div>
+                                        </div>
+                                        <div class="lab-timeStamp h1-4 xs-word grey-60-font">
+                                            <div class="v-center">12/14</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="electrolyte" class='lab-row' :class="[flowSheet.footbarStatus=='max'?'h1-6':'h1-4']">
+                                <div class='lab-group w1-1'>
+                                    <div id='na' class='lab-item w1-5'>
+                                        <div class="lab-tittle h1-4 xs-word  grey-40-font">
+                                            <div class="v-center">Na</div>
+                                        </div>
+                                        <div class="lab-data h1-2 lm-word heavy-weight">
+                                            <div class="v-center">145</div>
+                                        </div>
+                                        <div class="lab-timeStamp h1-4 xs-word grey-60-font">
+                                            <div class="v-center">12/14</div>
+                                        </div>
+                                    </div>
+                                    <div id='k' class='lab-item w1-5 warn'>
+                                        <div class="lab-tittle h1-4 xs-word  grey-40-font">
+                                            <div class="v-center">K</div>
+                                        </div>
+                                        <div class="lab-data h1-2 lm-word heavy-weight">
+                                            <div class="v-center"><span class="red">8.0</span></div>
+                                        </div>
+                                        <div class="lab-timeStamp h1-4 xs-word grey-60-font">
+                                            <div class="v-center">12/14</div>
+                                        </div>
+                                    </div>
+                                    <div id='ca' class='lab-item w1-5'>
+                                        <div class="lab-tittle h1-4 xs-word  grey-40-font">
+                                            <div class="v-center">Ca<sup>2+</sup></div>
+                                        </div>
+                                        <div class="lab-data h1-2 lm-word heavy-weight">
+                                            <div class="v-center">0.98</div>
+                                        </div>
+                                        <div class="lab-timeStamp h1-4 xs-word grey-60-font">
+                                            <div class="v-center">12/14</div>
+                                        </div>
+                                    </div>
+                                    <div id='p' class='lab-item w1-5'>
+                                        <div class="lab-tittle h1-4 xs-word  grey-40-font">
+                                            <div class="v-center">P</div>
+                                        </div>
+                                        <div class="lab-data h1-2 lm-word heavy-weight">
+                                            <div class="v-center">4.5</div>
+                                        </div>
+                                        <div class="lab-timeStamp h1-4 xs-word grey-60-font">
+                                            <div class="v-center">12/14</div>
+                                        </div>
+                                    </div>
+                                    <div id='mg' class='lab-item w1-5'>
+                                        <div class="lab-tittle h1-4 xs-word  grey-40-font">
+                                            <div class="v-center">Mg</div>
+                                        </div>
+                                        <div class="lab-data h1-2 lm-word heavy-weight">
+                                            <div class="v-center">1.7</div>
+                                        </div>
+                                        <div class="lab-timeStamp h1-4 xs-word grey-60-font">
+                                            <div class="v-center">12/14</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="liver-renal" class='lab-row' :class="[flowSheet.footbarStatus=='max'?'h1-6':'h1-4']">
+                                <div class='lab-group w2-5'>
+                                    <div id='bun' class='lab-item w1-2'>
+                                        <div class="lab-tittle h1-4 xs-word  grey-40-font">
+                                            <div class="v-center">BUN</div>
+                                        </div>
+                                        <div class="lab-data h1-2 lm-word heavy-weight">
+                                            <div class="v-center">21</div>
+                                        </div>
+                                        <div class="lab-timeStamp h1-4 xs-word grey-60-font">
+                                            <div class="v-center">12/14</div>
+                                        </div>
+                                    </div>
+                                    <div id='cr' class='lab-item w1-2'>
+                                        <div class="lab-tittle h1-4 xs-word  grey-40-font">
+                                            <div class="v-center">Cr</div>
+                                        </div>
+                                        <div class="lab-data h1-2 lm-word heavy-weight">
+                                            <div class="v-center">1.2</div>
+                                        </div>
+                                        <div class="lab-timeStamp h1-4 xs-word grey-60-font">
+                                            <div class="v-center">12/14</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class='lab-group w3-5' :class="[flowSheet.footbarStatus=='max'?'h1-6':'h1-4']"> 
+                                    <div id='alt' class='lab-item w1-3'>
+                                        <div class="lab-tittle h1-4 xs-word  grey-40-font">
+                                            <div class="v-center">ALT</div>
+                                        </div>
+                                        <div class="lab-data h1-2 lm-word heavy-weight">
+                                            <div class="v-center">24</div>
+                                        </div>
+                                        <div class="lab-timeStamp h1-4 xs-word grey-60-font">
+                                            <div class="v-center">12/14</div>
+                                        </div>
+                                    </div>
+                                    <div id='ast' class='lab-item w1-3'>
+                                        <div class="lab-tittle h1-4 xs-word  grey-40-font">
+                                            <div class="v-center">AST</div>
+                                        </div>
+                                        <div class="lab-data h1-2 lm-word heavy-weight">
+                                            <div class="v-center">33</div>
+                                        </div>
+                                        <div class="lab-timeStamp h1-4 xs-word grey-60-font">
+                                            <div class="v-center">12/14</div>
+                                        </div>
+                                    </div>
+                                    <div id='ggt' class='lab-item w1-3'>
+                                        <div class="lab-tittle h1-4 xs-word  grey-40-font">
+                                            <div class="v-center">gGT</div>
+                                        </div>
+                                        <div class="lab-data h1-2 lm-word heavy-weight">
+                                            <div class="v-center">-</div>
+                                        </div>
+                                        <div class="lab-timeStamp h1-4 xs-word grey-60-font">
+                                            <div class="v-center"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="crp-pct-bil" class='lab-row' :class="[flowSheet.footbarStatus=='max'?'h1-6':'h1-4']">
+                                <div class='lab-group w1-5'>
+                                    <div id='crp' class='lab-item w1-1 warn'>
+                                        <div class="lab-tittle h1-4 xs-word grey-40-font">
+                                            <div class="v-center ">CRP</div>
+                                        </div>
+                                        <div class="lab-data h1-2 lm-word heavy-weight">
+                                            <div class="v-center"><span class="red">6.2</span></div>
+                                        </div>
+                                        <div class="lab-timeStamp h1-4 xs-word grey-60-font">
+                                            <div class="v-center">11/10</div>
+                                        </div>
+                                   </div>
+                                </div>
+                                <div class='lab-group w1-5'>
+                                    <div class="lab-tittle h1-4 xs-word  grey-40-font">
+                                        <div class="v-center">PCT</div>
+                                    </div>
+                                    <div class="lab-data h1-2 lm-word heavy-weight">
+                                        <div class="v-center">0.45</div>
+                                    </div>
+                                    <div class="lab-timeStamp h1-4 xs-word grey-60-font">
+                                        <div class="v-center">11/10</div>
+                                    </div>
+                                </div>
+                                <div class='lab-group w3-5'>
+                                    <div id='tcb-mb' class='lab-item w1-3'>
+                                        <div class="lab-tittle h1-4 xs-word  grey-40-font">
+                                            <div class="v-center">micro/TCB</div>
+                                        </div>
+                                        <div class="lab-data h1-2 lm-word heavy-weight">
+                                            <div class="v-center">12.4</div>
+                                        </div>
+                                        <div class="lab-timeStamp h1-4 xs-word grey-60-font">
+                                            <div class="v-center">11/10</div>
+                                        </div>
+                                    </div>
+                                    <div id='Tbil' class='lab-item w1-3'>
+                                        <div class="lab-tittle h1-4 xs-word  grey-40-font">
+                                            <div class="v-center">T.Bil</div>
+                                        </div>
+                                        <div class="lab-data h1-2 lm-word heavy-weight">
+                                            <div class="v-center">13.1</div>
+                                        </div>
+                                        <div class="lab-timeStamp h1-4 xs-word grey-60-font">
+                                            <div class="v-center">11/10</div>
+                                        </div>
+                                    </div>
+                                    <div id='Dbil' class='lab-item w1-3'>
+                                        <div class="lab-tittle h1-4 xs-word  grey-40-font">
+                                            <div class="v-center">D.Bil</div>
+                                        </div>
+                                        <div class="lab-data h1-2 lm-word heavy-weight">
+                                            <div class="v-center">0.5</div>
+                                        </div>
+                                        <div class="lab-timeStamp h1-4 xs-word grey-60-font">
+                                            <div class="v-center">11/10</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="heart-alb" class='lab-row h1-6' v-show="flowSheet.footbarStatus=='max'">
+                                <div class='lab-group w1-5'>
+                                     <div id='alb' class='lab-item w1-1'>
+                                        <div class="lab-tittle h1-4 xs-word grey-40-font">
+                                            <div class="v-center">Alb</div>
+                                        </div>
+                                        <div class="lab-data h1-2 lm-word heavy-weight">
+                                            <div class="v-center">3.2</div>
+                                        </div>
+                                        <div class="lab-timeStamp h1-4 xs-word grey-60-font">
+                                            <div class="v-center">11/10</div>
+                                        </div>
+                                     </div>
+                                </div>
+                                <div class='lab-group w4-5'>
+                                    <div id='ck' class='lab-item w1-4'>
+                                        <div class="lab-tittle h1-4 xs-word  grey-40-font">
+                                            <div class="v-center">CK</div>
+                                        </div>
+                                        <div class="lab-data h1-2 lm-word heavy-weight">
+                                            <div class="v-center">-</div>
+                                        </div>
+                                        <div class="lab-timeStamp h1-4 xs-word grey-60-font">
+                                            <div class="v-center"></div>
+                                        </div>
+                                    </div>
+                                    <div id='ckmb' class='lab-item w1-4'>
+                                        <div class="lab-tittle h1-4 xs-word  grey-40-font">
+                                            <div class="v-center">CKMB</div>
+                                        </div>
+                                        <div class="lab-data h1-2 lm-word heavy-weight">
+                                            <div class="v-center">-</div>
+                                        </div>
+                                        <div class="lab-timeStamp h1-4 xs-word grey-60-font">
+                                            <div class="v-center"></div>
+                                        </div>
+                                    </div>
+                                    <div id='tropi' class='lab-item w1-4'>
+                                        <div class="lab-tittle h1-4 xs-word  grey-40-font">
+                                            <div class="v-center">Trp-I</div>
+                                        </div>
+                                        <div class="lab-data h1-2 lm-word heavy-weight">
+                                            <div class="v-center">-</div>
+                                        </div>
+                                        <div class="lab-timeStamp h1-4 xs-word grey-60-font">
+                                            <div class="v-center"></div>
+                                        </div>
+                                    </div>
+                                    <div id='bnp' class='lab-item w1-4'>
+                                        <div class="lab-tittle h1-4 xs-word  grey-40-font">
+                                            <div class="v-center">BNP</div>
+                                        </div>
+                                        <div class="lab-data h1-2 lm-word heavy-weight">
+                                            <div class="v-center">-</div>
+                                        </div>
+                                        <div class="lab-timeStamp h1-4 xs-word grey-60-font">
+                                            <div class="v-center"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="iron-bone" class='lab-row h1-6' v-show="flowSheet.footbarStatus=='max'">
+                                <div class='lab-group w4-6'>
+                                    <div id='iron' class='lab-item w1-4'>
+                                        <div class="lab-tittle h1-4 xs-word  grey-40-font">
+                                            <div class="v-center">Iron</div>
+                                        </div>
+                                        <div class="lab-data h1-2 lm-word heavy-weight">
+                                            <div class="v-center">80</div>
+                                        </div>
+                                        <div class="lab-timeStamp h1-4 xs-word grey-60-font">
+                                            <div class="v-center">12/20 05:33</div>
+                                        </div>
+                                    </div>
+                                    <div id='tibc' class='lab-item w1-4'>
+                                        <div class="lab-tittle h1-4 xs-word  grey-40-font">
+                                            <div class="v-center">TIBC</div>
+                                        </div>
+                                        <div class="lab-data h1-2 lm-word heavy-weight">
+                                            <div class="v-center">200</div>
+                                        </div>
+                                        <div class="lab-timeStamp h1-4 xs-word grey-60-font">
+                                            <div class="v-center">12/20 05:33</div>
+                                        </div>
+                                    </div>
+                                    <div id='isat' class='lab-item w1-4'>
+                                        <div class="lab-tittle h1-4 xs-word  grey-40-font">
+                                            <div class="v-center">FeSat</div>
+                                        </div>
+                                        <div class="lab-data h1-2 lm-word heavy-weight">
+                                            <div class="v-center">40<span class="xs-word">%</span></div>
+                                        </div>
+                                    </div>
+                                    <div id='ferritin' class='lab-item w1-4'>
+                                    <div class="lab-tittle h1-4 xs-word  grey-40-font">
+                                        <div class="v-center">Ferritin</div>
+                                    </div>
+                                    <div class="lab-data h1-2 lm-word heavy-weight">
+                                        <div class="v-center">122</div>
+                                    </div>
+                                    <div class="lab-timeStamp h1-4 xs-word grey-60-font">
+                                        <div class="v-center">12/20 05:33</div>
+                                    </div></div>
+                                </div>
+                                <div class='lab-group w2-6'>
+                                    <div id='ca' class='lab-item w1-2'>
+                                        <div class="lab-tittle h1-4 xs-word grey-40-font">
+                                            <div class="v-center">Total Ca</div>
+                                        </div>
+                                        <div class="lab-data h1-2 lm-word heavy-weight">
+                                            <div class="v-center">9.3</div>
+                                        </div>
+                                        <div class="lab-timeStamp h1-4 xs-word grey-60-font">
+                                            <div class="v-center">11/10</div>
+                                        </div>
+                                    </div>
+                                    <div id='alkp' class='lab-item w1-2'>
+                                        <div class="lab-tittle h1-4 xs-word grey-40-font">
+                                            <div class="v-center">Alkp</div>
+                                        </div>
+                                        <div class="lab-data h1-2 lm-word heavy-weight">
+                                            <div class="v-center">350</div>
+                                        </div>
+                                        <div class="lab-timeStamp h1-4 xs-word grey-60-font">
+                                            <div class="v-center">11/10</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="sub-nutrition-event" class="footbar-sub float-left">
+                        <div class="footbar-sub-inner h1-1">
+                            <div id="nutrition" :class="[flowSheet.footbarStatus=='max'?'h22-45':'h15-31']">
+                                <div class="h-center ms-word title h1-7"><div class="v-center">飲食醫囑</div></div>
+                                <div class="scrollbar-outer h6-7">
+                                    <div class="w1-1 nutrition-group">
+                                        <div class="w1-1 s-word grey-60-font date-card">5/12 10:30</div>
+                                        <div class="w1-1 s-word content-card">SSC24 BMF 20ml q3h</div>
+                                    </div>
+                                    <div class="w1-1 nutrition-group">
+                                        <div class="w1-1 s-word grey-60-font date-card">5/13 9:30</div>
+                                        <div class="w1-1 s-word content-card">SSC24 BMF 22ml q3h</div>
+                                    </div>
+                                    <div class="w1-1 nutrition-group">
+                                        <div class="w1-1 s-word grey-60-font date-card">5/14 9:30</div>
+                                        <div class="w1-1 s-word content-card">SSC24 BMF 22ml q3h</div>
+                                    </div>
+                                    <div class="w1-1 nutrition-group latest">
+                                        <div class="w1-1 s-word grey-20-font date-card">5/15 9:30 (最新)</div>
+                                        <div class="w1-1 s-word content-card heavy-weight">SSC24 BMF 25ml q3h</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div :class="[flowSheet.footbarStatus=='max'?'h1-45':'h1-31']"></div>
+                            <div id="event" :class="[flowSheet.footbarStatus=='max'?'h22-45':'h15-31']">
+                                <div class="h-center ms-word title h1-7"><div class="v-center">特殊事件</div></div>
+                                <div class="scrollbar-outer h6-7">
+                                    <div class="w1-1 event-group">
+                                        <div class="w1-1 s-word grey-60-font date-card">5/12 10:30</div>
+                                        <div class="w1-1 s-word content-card">特殊事件1</div>
+                                    </div>
+                                    <div class="w1-1 event-group">
+                                        <div class="w1-1 s-word grey-60-font date-card">5/13 9:30</div>
+                                        <div class="w1-1 s-word content-card">特殊事件2</div>
+                                    </div>
+                                    <div class="w1-1 event-group">
+                                        <div class="w1-1 s-word grey-60-font date-card">5/14 9:30</div>
+                                        <div class="w1-1 s-word content-card">特殊事件3</div>
+                                    </div>
+                                    <div class="w1-1 event-group">
+                                        <div class="w1-1 s-word grey-60-font date-card">5/15 9:30</div>
+                                        <div class="w1-1 s-word content-card">特殊事件4</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="fnIO" class="footbar-fn-page" v-show="flowSheet.selectedfootbarMenu=='fnIO'">
+                    fnIO
+                </div>
+                <div id="fnVentilation" class="footbar-fn-page" v-show="flowSheet.selectedfootbarMenu=='fnVentilation'">
+                        ventilation
+                </div>
+                <div id="fnNutrition" class="footbar-fn-page" v-show="flowSheet.selectedfootbarMenu=='fnNutrition'">
+                    fnNutrition
+                </div>
+                <div id="fnLab" class="footbar-fn-page" v-show="flowSheet.selectedfootbarMenu=='fnLab'">
+                    fnLab
+                </div>
+                <div id="fnInfection" class="footbar-fn-page" v-show="flowSheet.selectedfootbarMenu=='fnInfection'">
+                    fnInfection
+                </div>
+                <div id="fnMedication" class="footbar-fn-page" v-show="flowSheet.selectedfootbarMenu=='fnMedication'">
+                    fnMedication
+                </div>
+                <div id="fnConsult" class="footbar-fn-page" v-show="flowSheet.selectedfootbarMenu=='fnConsult'">
+                    fnConsult
+                </div>
+                <div id="fnTransfusion" class="footbar-fn-page" v-show="flowSheet.selectedfootbarMenu=='fnTransfusion'">
+                    fnTransfusion
+                </div>
+                <div id="fnSurgery" class="footbar-fn-page" v-show="flowSheet.selectedfootbarMenu=='fnSurgery'">
+                    fnSurgery
+                </div>
+                <div id="fnNurse" class="footbar-fn-page" v-show="flowSheet.selectedfootbarMenu=='fnNurse'">
+                    fnNurse
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script type="text/javascript" src="server.js"></script>
+<!-- <script type="text/javascript" src="fake-server.js"></script>    -->
+<script type="text/javascript" src="parser.js"></script>
+<script type="text/javascript" src="parser-html.js"></script>
+<script type="text/javascript" src="data-manager.js"></script>
+<script type="text/javascript" src="model.js"></script>
+<script type="text/javascript" src="view-model.js"></script>
+<script type="text/javascript" src="view.js"></script>
+<script type="text/javascript" src="layout.js"></script>
+</html>

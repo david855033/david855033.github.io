@@ -1,0 +1,272 @@
+html{
+    height:100%;
+    font-size:16px;
+}
+body{
+    background: hsl(0,0%,90%);
+    font-family: "Microsoft JhengHei","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size:16px;
+    height: 100%;
+    overflow: hidden;
+    -ms-overflow-style: none;
+    -ms-scroll-limit: 0 0 0 0;
+}
+.clear{
+    clear: both;
+}
+.float-left{
+    float: left;
+}
+.inline-block{
+    display: inline-block;
+    vertical-align: bottom;
+}
+.nowrap{
+    white-space: nowrap;
+}
+.wrap{
+    white-space: pre-line
+}
+
+/*apply shadow*/
+.shadow{   
+    box-shadow: 3px 3px 3px 3px rgba(0,0,0,0.05), 1px 1px 1px 1px rgba(0,0,0,0.16);
+}
+/* v-align */
+.v-center{
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.h-center{
+    text-align: center;
+}
+.h-left{
+    text-align: left;
+}
+.h-right{
+    text-align: right;
+}
+
+/* word-size */
+.xl-word{
+    font-size: 24px;    
+}
+.l-word{
+    font-size: 20px;
+}
+.lm-word{
+    font-size: 18px;
+}
+.m-word{
+    font-size: 16px;
+}
+.ms-word{
+    font-size: 14px;
+}
+.s-word{
+    font-size: 12px;
+}
+.xs-word{
+    font-size: 10px;
+}
+/* weight */
+.heavy-weight{
+    font-weight: 900;
+}
+.mid-weight{
+    font-weight: 500;
+}
+.normal-weight{
+    font-weight: 400;
+}
+
+/* word color */
+.grey-20-font{
+    color: hsl(0,0%,20%);
+}
+.grey-40-font{
+    color: hsl(0,0%,40%);
+}
+.grey-60-font{
+    color: hsl(0,0%,60%);
+}
+.red{
+    color: hsl(0,90%,50%);
+}
+/* scroll */
+.y-scroll{
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+
+/* grids */
+.h1-1{height:100%;}
+.h1-2{height:50%;}
+.h1-3{height:33.33%;}
+.h2-3{height:66.67%;}
+.h1-4{height:25%;}
+.h2-4{height:50%;}
+.h3-4{height:75%;}
+.h1-5{height:20%;}
+.h2-5{height:40%;}
+.h3-5{height:60%;}
+.h4-5{height:80%;}
+.h1-6{height:16.67%;}
+.h2-6{height:33.33%;}
+.h3-6{height:50%;}
+.h4-6{height:66.67%;}
+.h5-6{height:83.33%;}
+.h1-7{height:14.29%;}
+.h2-7{height:28.57%;}
+.h3-7{height:42.86%;}
+.h4-7{height:57.14%;}
+.h5-7{height:71.43%;}
+.h6-7{height:85.71%;}
+.h1-8{height:12.5%;}
+.h2-8{height:25%;}
+.h3-8{height:37.5%;}
+.h4-8{height:50%;}
+.h5-8{height:62.5%;}
+.h6-8{height:75%;}
+.h7-8{height:87.5%;}
+.h1-9{height:11.11%;}
+.h2-9{height:22.22%;}
+.h3-9{height:33.33%;}
+.h4-9{height:44.44%;}
+.h5-9{height:55.56%;}
+.h6-9{height:66.67%;}
+.h7-9{height:77.78%;}
+.h8-9{height:88.89%;}
+.h1-10{height:10%;}
+.h2-10{height:20%;}
+.h3-10{height:30%;}
+.h4-10{height:40%;}
+.h5-10{height:50%;}
+.h6-10{height:60%;}
+.h7-10{height:70%;}
+.h8-10{height:80%;}
+.h9-10{height:90%;}
+.h15-31{height:48.39%;}
+.h1-31{height:3.23%;}
+.h22-45{height:48.89%;}
+.h1-45{height:2.22%;}
+
+.w1-1{width:100%;}
+.w1-2{width:50%;}
+.w1-3{width:33.33%;}
+.w2-3{width:66.67%;}
+.w1-4{width:25%;}
+.w2-4{width:50%;}
+.w3-4{width:75%;}
+.w1-5{width:20%;}
+.w2-5{width:40%;}
+.w3-5{width:60%;}
+.w4-5{width:80%;}
+.w1-6{width:16.67%;}
+.w2-6{width:33.33%;}
+.w3-6{width:50%;}
+.w4-6{width:66.67%;}
+.w5-6{width:83.33%;}
+.w1-7{width:14.29%;}
+.w2-7{width:28.57%;}
+.w3-7{width:42.86%;}
+.w4-7{width:57.14%;}
+.w5-7{width:71.43%;}
+.w6-7{width:85.71%;}
+.w1-8{width:12.5%;}
+.w2-8{width:25%;}
+.w3-8{width:37.5%;}
+.w4-8{width:50%;}
+.w5-8{width:62.5%;}
+.w6-8{width:75%;}
+.w7-8{width:87.5%;}
+.w1-9{width:11.11%;}
+.w2-9{width:22.22%;}
+.w3-9{width:33.33%;}
+.w4-9{width:44.44%;}
+.w5-9{width:55.56%;}
+.w6-9{width:66.67%;}
+.w7-9{width:77.78%;}
+.w8-9{width:88.89%;}
+.w1-10{width:10%;}
+.w2-10{width:20%;}
+.w3-10{width:30%;}
+.w4-10{width:40%;}
+.w5-10{width:50%;}
+.w6-10{width:60%;}
+.w7-10{width:70%;}
+.w8-10{width:80%;}
+.w9-10{width:90%;}
+.w1-11{width:9.09%;}
+.w2-11{width:18.18%;}
+.w3-11{width:27.27%;}
+.w4-11{width:36.36%;}
+.w5-11{width:45.45%;}
+.w6-11{width:54.55%;}
+.w7-11{width:63.64%;}
+.w8-11{width:72.73%;}
+.w9-11{width:81.82%;}
+.w10-11{width:90.91%;}
+.w1-12{width:8.33%;}
+.w2-12{width:16.67%;}
+.w3-12{width:25%;}
+.w4-12{width:33.33%;}
+.w5-12{width:41.67%;}
+.w6-12{width:50%;}
+.w7-12{width:58.33%;}
+.w8-12{width:66.67%;}
+.w9-12{width:75%;}
+.w10-12{width:83.33%;}
+.w11-12{width:91.67%;}
+.w1-13{width:7.69%;}
+.w2-13{width:15.38%;}
+.w3-13{width:23.08%;}
+.w4-13{width:30.77%;}
+.w5-13{width:38.46%;}
+.w6-13{width:46.15%;}
+.w7-13{width:53.85%;}
+.w8-13{width:61.54%;}
+.w9-13{width:69.23%;}
+.w10-13{width:76.92%;}
+.w11-13{width:84.62%;}
+.w12-13{width:92.31%;}
+
+/* main */
+#view{
+    width: 100%;
+    height: 100%;
+}
+
+#left {
+	width: 160px;
+    float: left;
+    background-color: #9DBEA5;
+    height:100%;
+}
+.main{
+    margin-left:160px;
+}
+.leftbox{
+    padding:10px 5px 10px 5px;
+    background-color: hsl(20,40%,85%);
+    margin:5px 0 5px 0;
+}
+#left .view{
+    padding:10px 5px 10px 5px;
+    margin:5px 0 5px 0;
+}
+.viewButton
+{
+    float:left;
+    padding:5px;
+    margin: 5px;
+    background-color: hsl(250,40%,85%);
+}
+
+.rightbox{
+    padding:10px 5px 10px 5px;
+    background-color: hsl(200,40%,85%);
+    margin:5px 0 5px 0;
+}
