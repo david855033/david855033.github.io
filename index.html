@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-125511105-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-125511105-1');
+    </script>
     <title>Ped Dose for VGHTPE</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,13 +28,15 @@
             <div class="menuButton" v-show="isMenuOnTop" @click="onMenuButtonClick();focusSearchBox();">&#8801;</div>
             <form id="ageForm" action="javascript:void(0);">
                 <div>
-                    <input type="text" placeholder="Age" class="age" id="age" v-model="age" width="100px" @keyup="OnAgeChange" onchange="app.onAgeValueChange()" autocomplete="off">
-                <span v-if="!isAgeInDay&&!isAgeInMonth">y</span>
+                    <input type="text" placeholder="Age" class="age" id="age" v-model="age" width="100px" @keyup="OnAgeChange" onchange="app.onAgeValueChange()"
+                        autocomplete="off">
+                    <span v-if="!isAgeInDay&&!isAgeInMonth">y</span>
                 </div>
             </form>
             <form action="javascript:void(0);">
                 <div>
-                    <input type="text" placeholder="BW" class="bw" :class="[bw>200&&bwForCalculation>200?'bw-outrange':'']" id="bw" v-model="bw" width="100px" @keyup="OnBWChange" onchange="app.onBWValueChange()" autocomplete="off">
+                    <input type="text" placeholder="BW" class="bw" :class="[bw>200&&bwForCalculation>200?'bw-outrange':'']" id="bw" v-model="bw"
+                        width="100px" @keyup="OnBWChange" onchange="app.onBWValueChange()" autocomplete="off">
                     <span v-if="!isBwInGram">kg</span>
                 </div>
             </form>
@@ -32,59 +44,57 @@
         </div>
         <div id="headspacer"></div>
         <div class="wraper">
-            <transition name="menu">    
+            <transition name="menu">
                 <div class="menu" v-show="isMenuShowed">
                     <div class="searchWrap">
                         <form id="searchForm" action="javascript:void(0);">
-                            <input type="text" id="searchText" class="search" placeholder="Search"　v-model="searchText"  @keyup="onSearchKeyUp" onchange="app.onSearchTextChange()" autocomplete="off">
+                            <input type="text" id="searchText" class="search" placeholder="Search" 　v-model="searchText" @keyup="onSearchKeyUp" onchange="app.onSearchTextChange()"
+                                autocomplete="off">
                         </form>
                         <div class="clearSearch" @click="onSearchClear()">x</div>
                         <div class="clearboth"></div>
                     </div>
                     <ul>
-                        <li v-for="item in searchList" v-bind:class="[item==searchText?'li-focused':'']" @click="isMenuShowed=!(searchText==item&&isMenuOnTop);searchText=item;focused='';onSearchTextChange();blurSearchBox();"><span v-html="item"></span></li>
+                        <li v-for="item in searchList" v-bind:class="[item==searchText?'li-focused':'']" @click="isMenuShowed=!(searchText==item&&isMenuOnTop);searchText=item;focused='';onSearchTextChange();blurSearchBox();"><span
+                                v-html="item"></span></li>
                     </ul>
                 </div>
             </transition>
-         
+
             <div id="content" class="content" v-bind:class="{'content-menuShowed':isMenuShowed&&!isMenuOnTop}">
-                <div class="container notification" v-if="searchText_checked.length<=2" > 
+                <div class="container notification" v-if="searchText_checked.length<=2">
                     <div class="bot">
                         <span class="greyout">Ped Dose for VGHTPE<br>開發階段 僅供驗算用</span>
                         <h1 id="welcomeTitle">請在選單輸入藥名</h1>
-                        <p>年齡體重可接受不同單位<br>
-                            如: 3d、2m、2500g<br>
+                        <p>年齡體重可接受不同單位<br> 如: 3d、2m、2500g<br>
                         </p>
-                            <p @click="showExample=!showExample">
-                               <transition name="example-ani" mode="out-in">
-                                    <span class="ExampleButton" v-if="!showExample" key="show">顯示範例藥物</span>
-                                    <span class="ExampleButton" v-if="showExample" key="hide">隱藏範例藥物</span>
-                                </transition>
-                            </p>
+                        <p @click="showExample=!showExample">
+                            <transition name="example-ani" mode="out-in">
+                                <span class="ExampleButton" v-if="!showExample" key="show">顯示範例藥物</span>
+                                <span class="ExampleButton" v-if="showExample" key="hide">隱藏範例藥物</span>
+                            </transition>
+                        </p>
                     </div>
                 </div>
-             
+
                 <div class="container example" v-if="searchText_checked.length<=2&&showExample" :class="[manualFocused?'container-focused':'']">
                     <div class="top">
-                        <div class="left"  @click="manualFocused=!manualFocused">
+                        <div class="left" @click="manualFocused=!manualFocused">
                             <div class="drugName">範例藥物 <span class="r iv">劑型</span><br><span class="subtittle"> (包裝、商品名)</span></div>
                             <div class="indication">「適應症」</div>
                             <div v-if="manualFocused">&#128274;</div>
                         </div>
-                    </div>  
+                    </div>
                     <div class="right">
                         <div class="row active">
                             <div class="description">「使用方法」(若該使用方法有限制年齡或體重，會自動篩選)</div>
                             <div class="dosage">「常用劑量」(ex: 100mg/kg/day <span class="q q8h"> q8h</span>)
-                            <br>若是pump，會在<span class="emphasize">藍色框框</span>顯示濃度</div>
+                                <br>若是pump，會在<span class="emphasize">藍色框框</span>顯示濃度</div>
                             <div class="calculated withadjust" @click="ManualShowAdjust_1=!ManualShowAdjust_1">
-                                「計算結果」<br> 
-                                - 輸入體重後才會顯示<br>
-                                - 若達最大劑量，會<span class="maxDose">紅底</span>表示。<br>
-                                - pump類藥物，下方會出現「&#8801」按鈕，展開後可以「等比例」調整泡製體積。</br>
+                                「計算結果」<br> - 輸入體重後才會顯示<br> - 若達最大劑量，會<span class="maxDose">紅底</span>表示。<br> - pump類藥物，下方會出現「&#8801」按鈕，展開後可以「等比例」調整泡製體積。</br>
                                 Ex:<br><span class='adjusted'>{{manualAmount}}</span>mg in <span class="adjusted"> {{manualVol}}</span>ml
                             </div>
-                            <div class="adjustDrop" v-if="!ManualShowAdjust_1"  @click="ManualShowAdjust_1=!ManualShowAdjust_1">&#8801;</div>
+                            <div class="adjustDrop" v-if="!ManualShowAdjust_1" @click="ManualShowAdjust_1=!ManualShowAdjust_1">&#8801;</div>
                             <div class="adjust" v-if="ManualShowAdjust_1">
                                 <button class="plus" @click="manualPlus"><span>▲</span></button>
                                 <button class="minus" @click="manualMinus"><span>▼</span></button>
@@ -99,10 +109,10 @@
                         <div class="ref"></div>
                     </div>
                 </div>
-               <transition-group name="list" tag="div" v-if="searchText_checked.length>2" >
+                <transition-group name="list" tag="div" v-if="searchText_checked.length>2">
                     <div v-for="(item,index) in drugList" v-if="checkAgeAndBW(item)&&checkSearchText(item)&&(!(focused+1)||index==focused)" v-bind:key="index">
                         <div v-bind:id="['d'+index]" class="container" v-bind:class="[index==focused?'container-focused':'']">
-                            <div class="top">  
+                            <div class="top">
                                 <div class="left" @click="onContainerClick(index)" v-bind:class="{phone:!realTimeRender}">
                                     <div class="drugName" v-html="item.drugName">
                                     </div>
@@ -110,21 +120,22 @@
                                     </div>
                                     <div v-if="index==focused">&#128274;</div>
                                 </div>
-                                
+
                                 <div class="right">
-                                    <div class="row" v-if="checkAgeAndBW(ind)" v-bind:class="[checkAgeAndBW(ind)?'active':'inactive']" v-for="(ind,rowindex) in item.content" >
+                                    <div class="row" v-if="checkAgeAndBW(ind)" v-bind:class="[checkAgeAndBW(ind)?'active':'inactive']" v-for="(ind,rowindex) in item.content">
                                         <div class="description" v-html="ind.description"></div>
                                         <div class="dosage" v-html="ind.dosage"></div>
-                                        <div v-bind:id="['d'+index+'i'+rowindex]" class="calculated" :class="{withadjust:ind.adjustable}" v-if="showCaculated&&ind.calculated" v-html="ind.calculated" @click="toggleAdjust(ind)">
+                                        <div v-bind:id="['d'+index+'i'+rowindex]" class="calculated" :class="{withadjust:ind.adjustable}" v-if="showCaculated&&ind.calculated"
+                                            v-html="ind.calculated" @click="toggleAdjust(ind)">
                                         </div>
                                         <div class="adjustDrop" v-if="!ind.showAdjust&&ind.adjustable&&showCaculated&&ind.calculated" @click="toggleAdjust(ind)">&#8801;</div>
-                        
+
                                         <div class="adjust" v-if="ind.showAdjust&&showCaculated&&ind.calculated">
                                             <button class="plus" @click="adjustIncrease(ind,index,rowindex)"><span>▲</span></button>
                                             <button class="minus" @click="adjustDecrease(ind,index,rowindex)"><span>▼</span></button>
                                             <button class="reset" @click="adjustReset(ind,index,rowindex)"><span>◉</span></button>
                                         </div>
-                                       
+
                                     </div>
                                 </div>
                             </div>
@@ -134,8 +145,8 @@
                             </div>
                         </div>
                     </div>
-               </transition-group>
-               
+                </transition-group>
+
                 <div class="disclaim">供專業人士研究參考用，作者不對任何<br>因使用本網站資訊所造成的損失負責</div>
                 <div class="disclaim">Authors: 台北榮總兒醫部 羅宇成 蔡宛蓉</div>
                 <div class="disclaim">Contact: david855033@gmail.com</div>
@@ -143,7 +154,8 @@
             </div>
         </div>
     </div>
-    
+
 </body>
 <script type="text/javascript" src="vueVM.js"></script>
+
 </html>
