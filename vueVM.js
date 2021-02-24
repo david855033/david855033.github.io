@@ -480,7 +480,7 @@ function makeStyle(){
         }
         if(DataSource[i].tag)
         {
-            DataSource[i].tag=DataSource[i].tag.split(',');
+            DataSource[i].tag=String(DataSource[i].tag).split(',');
         }
         if(DataSource[i].content)
         {
